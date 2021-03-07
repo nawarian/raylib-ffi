@@ -1,4 +1,5 @@
 composer.phar
+*.swp
 
 /vendor/
 .phpunit.cache
