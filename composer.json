@@ -26,6 +26,11 @@
             "Nawarian\\Raylib\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Nawarian\\Tests\\Raylib\\": "tests/"
+        }
+    },
     "scripts": {
         "phpunit": "phpunit",
         "phpcs": "phpcs --standard=PSR12 src/",
