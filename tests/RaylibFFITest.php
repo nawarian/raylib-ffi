@@ -30,5 +30,12 @@ final class RaylibFFITest extends TestCase
         self::assertEquals(0, $vec->y);
         self::assertEquals(0, $vec->z);
     }
-}
 
+    public function test_InitWindow_sets_screen_size(): void
+    {
+        RaylibFFI::InitWindow(800, 600, 'Any Title');
+
+        self::assertEquals(800, RaylibFFI::GetScreenWidth());
+        self::assertEquals(600, RaylibFFI::GetScreenHeight());
+    }
+}

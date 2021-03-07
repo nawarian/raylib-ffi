@@ -603,3 +603,10 @@ typedef void (*SaveFileDataCallback)(const char *fileName, void *data, unsigned 
 typedef char *(*LoadFileTextCallback)(const char* fileName);
 typedef void (*SaveFileTextCallback)(const char *fileName, char *text);
 
+// Module: core
+// Window functions
+
+void InitWindow(int width, int height, const char *title);
+void CloseWindow(void);
+int GetScreenWidth(void);
+int GetScreenHeight(void);
