@@ -38,4 +38,11 @@ final class RaylibFFITest extends TestCase
         self::assertEquals(800, RaylibFFI::GetScreenWidth());
         self::assertEquals(600, RaylibFFI::GetScreenHeight());
     }
+
+    public function test_GetClipboardtext(): void
+    {
+        RaylibFFI::SetClipboardText('Some text');
+
+        self::assertEquals('Some text', RaylibFFI::GetClipboardText());
+    }
 }

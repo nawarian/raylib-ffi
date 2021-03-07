@@ -605,8 +605,41 @@ typedef void (*SaveFileTextCallback)(const char *fileName, char *text);
 
 // Module: core
 // Window functions
-
 void InitWindow(int width, int height, const char *title);
+bool WindowShouldClose(void);
 void CloseWindow(void);
+bool IsWindowReady(void);
+bool IsWindowFullscreen(void);
+bool IsWindowHidden(void);
+bool IsWindowMinimized(void);
+bool IsWindowMaximized(void);
+bool IsWindowFocused(void);
+bool IsWindowResized(void);
+bool IsWindowState(unsigned int flag);
+void SetWindowState(unsigned int flags);
+void ClearWindowState(unsigned int flags);
+void ToggleFullscreen(void);
+void MaximizeWindow(void);
+void MinimizeWindow(void);
+void RestoreWindow(void);
+void SetWindowIcon(Image image);
+void SetWindowTitle(const char *title);
+void SetWindowPosition(int x, int y);
+void SetWindowMonitor(int monitor);
+void SetWindowMinSize(int width, int height);
+void SetWindowSize(int width, int height);
+void *GetWindowHandle(void);
 int GetScreenWidth(void);
 int GetScreenHeight(void);
+int GetMonitorCount(void);
+Vector2 GetMonitorPosition(int monitor);
+int GetMonitorWidth(int monitor);
+int GetMonitorHeight(int monitor);
+int GetMonitorPhysicalWidth(int monitor);
+int GetMonitorPhysicalHeight(int monitor);
+int GetMonitorRefreshRate(int monitor);
+Vector2 GetWindowPosition(void);
+Vector2 GetWindowScaleDPI(void);
+const char *GetMonitorName(int monitor);
+void SetClipboardText(const char *text);
+const char *GetClipboardText(void);
