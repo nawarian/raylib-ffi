@@ -643,3 +643,126 @@ Vector2 GetWindowScaleDPI(void);
 const char *GetMonitorName(int monitor);
 void SetClipboardText(const char *text);
 const char *GetClipboardText(void);
+
+// Cursor functions
+void ShowCursor(void);
+void HideCursor(void);
+bool IsCursorHidden(void);
+void EnableCursor(void);
+void DisableCursor(void);
+bool IsCursorOnScreen(void);
+
+// Drawing functions
+void ClearBackground(Color color);
+void BeginDrawing(void);
+void EndDrawing(void);
+void BeginMode2D(Camera2D camera);
+void EndMode2D(void);
+void BeginMode3D(Camera3D camera);
+void EndMode3D(void);
+void BeginTextureMode(RenderTexture2D target);
+void EndTextureMode(void);
+void BeginScissorMode(int x, int y, int width, int height);
+void EndScissorMode(void);
+
+// Screen-space functions
+Ray GetMouseRay(Vector2 mousePosition, Camera camera);
+Matrix GetCameraMatrix(Camera camera);
+Matrix GetCameraMatrix2D(Camera2D camera);
+Vector2 GetWorldToScreen(Vector3 position, Camera camera);
+Vector2 GetWorldToScreenEx(Vector3 position, Camera camera, int width, int height);
+Vector2 GetWorldToScreen2D(Vector2 position, Camera2D camera);
+Vector2 GetScreenToWorld2D(Vector2 position, Camera2D camera);
+
+// Timing functions
+void SetTargetFPS(int fps);
+int GetFPS(void);
+float GetFrameTime(void);
+double GetTime(void);
+
+// Misc functions
+void SetConfigFlags(unsigned int flags);
+
+void SetTraceLogLevel(int logType);
+void SetTraceLogExit(int logType);
+void SetTraceLogCallback(TraceLogCallback callback);
+void TraceLog(int logType, const char *text, ...);
+
+void *MemAlloc(int size);
+void MemFree(void *ptr);
+void TakeScreenshot(const char *fileName);
+int GetRandomValue(int min, int max);
+
+// Files management
+unsigned char *LoadFileData(const char *fileName, unsigned int *bytesRead);
+void UnloadFileData(unsigned char *data);
+bool SaveFileData(const char *fileName, void *data, unsigned int bytesToWrite);
+char *LoadFileText(const char *fileName);
+void UnloadFileText(unsigned char *text);
+bool SaveFileText(const char *fileName, char *text);
+bool FileExists(const char *fileName);
+bool DirectoryExists(const char *dirPath);
+bool IsFileExtension(const char *fileName, const char *ext);
+const char *GetFileExtension(const char *fileName);
+const char *GetFileName(const char *filePath);
+const char *GetFileNameWithoutExt(const char *filePath);
+const char *GetDirectoryPath(const char *filePath);
+const char *GetPrevDirectoryPath(const char *dirPath);
+const char *GetWorkingDirectory(void);
+char **GetDirectoryFiles(const char *dirPath, int *count);
+void ClearDirectoryFiles(void);
+bool ChangeDirectory(const char *dir);
+bool IsFileDropped(void);
+char **GetDroppedFiles(int *count);
+void ClearDroppedFiles(void);
+long GetFileModTime(const char *fileName);
+
+unsigned char *CompressData(unsigned char *data, int dataLength, int *compDataLength);
+unsigned char *DecompressData(unsigned char *compData, int compDataLength, int *dataLength);
+
+// Persistent storage management
+bool SaveStorageValue(unsigned int position, int value);
+int LoadStorageValue(unsigned int position);
+
+void OpenURL(const char *url);
+
+// Keyboard Input functions
+bool IsKeyPressed(int key);
+bool IsKeyDown(int key);
+bool IsKeyReleased(int key);
+bool IsKeyUp(int key);
+void SetExitKey(int key);
+int GetKeyPressed(void);
+int GetCharPressed(void);
+
+// Gamepad Input functions
+bool IsGamepadAvailable(int gamepad);
+bool IsGamepadName(int gamepad, const char *name);
+const char *GetGamepadName(int gamepad);
+bool IsGamepadButtonPressed(int gamepad, int button);
+bool IsGamepadButtonDown(int gamepad, int button);
+bool IsGamepadButtonReleased(int gamepad, int button);
+bool IsGamepadButtonUp(int gamepad, int button);
+int GetGamepadButtonPressed(void);
+int GetGamepadAxisCount(int gamepad);
+float GetGamepadAxisMovement(int gamepad, int axis);
+
+// Mouse Input functions
+bool IsMouseButtonPressed(int button);
+bool IsMouseButtonDown(int button);
+bool IsMouseButtonReleased(int button);
+bool IsMouseButtonUp(int button);
+int GetMouseX(void);
+int GetMouseY(void);
+Vector2 GetMousePosition(void);
+void SetMousePosition(int x, int y);
+void SetMouseOffset(int offsetX, int offsetY);
+void SetMouseScale(float scaleX, float scaleY);
+float GetMouseWheelMove(void);
+int GetMouseCursor(void);
+void SetMouseCursor(int cursor);
+
+// Touch Input functions
+int GetTouchX(void);
+int GetTouchY(void);
+Vector2 GetTouchPosition(int index);
