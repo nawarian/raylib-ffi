@@ -21,5 +21,14 @@ final class RaylibFFITest extends TestCase
         self::assertEquals(0, $vec->x);
         self::assertEquals(0, $vec->y);
     }
+
+    public function test_build_vector3_struct(): void
+    {
+        $vec = RaylibFFI::new('Vector3');
+
+        self::assertEquals(0, $vec->x);
+        self::assertEquals(0, $vec->y);
+        self::assertEquals(0, $vec->z);
+    }
 }
 

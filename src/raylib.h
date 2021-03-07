@@ -5,3 +5,8 @@ typedef struct Vector2 {
     float y;
 } Vector2;
 
+typedef struct Vector3 {
+    float x;
+    float y;
+    float z;
+} Vector3;
