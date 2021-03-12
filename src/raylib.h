@@ -766,3 +766,10 @@ void SetMouseCursor(int cursor);
 int GetTouchX(void);
 int GetTouchY(void);
 Vector2 GetTouchPosition(int index);
+
+void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color);
+void DrawRectangle(int posX, int posY, int width, int height, Color color);
+void DrawRectangleLines(int posX, int posY, int width, int height, Color color);
+void DrawRectangleRec(Rectangle rec, Color color);
+void DrawText(const char *text, int posX, int posY, int fontSize, Color color);
+Color Fade(Color color, float alpha);

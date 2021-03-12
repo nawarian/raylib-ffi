@@ -16,15 +16,19 @@ $screenHeight = 450;
 Raylib::InitWindow($screenWidth, $screenHeight, "raylib [core] example - 2d camera");
 
 $player = Raylib::Rectangle(400, 280, 40, 40);
-$buildings = array_fill(0, MAX_BUILDINGS, Raylib::Rectangle(0, 0, 0, 0));
-$buildColors = array_fill(0, MAX_BUILDINGS, Raylib::Rectangle(0, 0, 0, 0));
+$buildings = [];
+$buildColors = [];
 
 $spacing = 0;
 
 for ($i = 0; $i < MAX_BUILDINGS; $i++)
 {
-    $buildings[$i]->width = Raylib::GetRandomValue(50, 200);
-    $buildings[$i]->height = Raylib::GetRandomValue(100, 800);
+    $buildings[$i] = Raylib::Rectangle(
+        0,
+        0,
+        Raylib::GetRandomValue(50, 200),
+        Raylib::GetRandomValue(100, 800),
+    );
     $buildings[$i]->y = $screenHeight - 130 - $buildings[$i]->height;
     $buildings[$i]->x = -6000 + $spacing;
 
@@ -143,7 +147,7 @@ while (!Raylib::WindowShouldClose())        // Detect window close button or ESC
         Raylib::DrawRectangle($screenWidth - 5, 5, 5, $screenHeight - 10, Raylib::Color(230, 41, 55, 255));
         Raylib::DrawRectangle(0, $screenHeight - 5, $screenWidth, 5, Raylib::Color(230, 41, 55, 255));
 
-        Raylib::DrawRectangle( 10, 10, 250, 113, Raylib::Fade(Raylib::Color(102, 191, 255, 255), 0.5));
+        Raylib::DrawRectangle(10, 10, 250, 113, Raylib::Fade(Raylib::Color(102, 191, 255, 255), 0.5));
         Raylib::DrawRectangleLines( 10, 10, 250, 113, Raylib::Color(0, 121, 241, 255));
 
         Raylib::DrawText("Free 2d camera controls:", 20, 20, 10, Raylib::Color(0, 0, 0, 255));
