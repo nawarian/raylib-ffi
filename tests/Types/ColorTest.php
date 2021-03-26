@@ -6,6 +6,7 @@ namespace Nawarian\Tests\Raylib\Types;
 
 use FFI;
 use InvalidArgumentException;
+use Nawarian\Raylib\RaylibFFIProxy;
 use Nawarian\Raylib\Types\Color;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +20,7 @@ class ColorTest extends TestCase
 
         self::expectExceptionMessage('Object $ffi does not provide the type "struct Color"');
         self::expectException(InvalidArgumentException::class);
-        $color->toCData($ffi);
+        $color->toCData(new RaylibFFIProxy($ffi));
     }
 
     public function test_toCData_withValidFFIStructDef_returnsCDataValidObject(): void
@@ -36,7 +37,7 @@ class ColorTest extends TestCase
         CDEF
         );
 
-        $cdata = $color->toCData($ffi);
+        $cdata = $color->toCData(new RaylibFFIProxy($ffi));
 
         self::assertEquals(255, $cdata->r);
         self::assertEquals(255, $cdata->g);

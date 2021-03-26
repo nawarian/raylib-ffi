@@ -7,6 +7,7 @@ namespace Nawarian\Raylib\Types;
 use FFI;
 use FFI\CData;
 use InvalidArgumentException;
+use Nawarian\Raylib\RaylibFFIProxy;
 
 final class Camera2D
 {
@@ -27,7 +28,7 @@ final class Camera2D
      * @psalm-suppress MixedPropertyAssignment
      * @psalm-suppress UndefinedPropertyAssignment
      */
-    public function toCData(FFI $ffi): CData
+    public function toCData(RaylibFFIProxy $ffi): CData
     {
         try {
             /** @var CData $camera */

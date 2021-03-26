@@ -3,9 +3,19 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use Nawarian\Raylib\Raylib;
+use Nawarian\Raylib\RaylibFFIProxy;
 use Nawarian\Raylib\Types;
 
-$raylib = new Raylib();
+$raylibHeader = __DIR__ . '/../../resources/raylib.h';
+
+/** @var FFI|null $ffi */
+$ffi = FFI::load($raylibHeader);
+
+if ($ffi === null) {
+    throw new RuntimeException("Could not load header file '{$raylibHeader}'.");
+}
+
+$raylib = new Raylib(new RaylibFFIProxy($ffi));
 
 const MAX_BUILDINGS = 100;
 

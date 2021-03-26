@@ -6,6 +6,7 @@ namespace Nawarian\Tests\Raylib\Types;
 
 use FFI;
 use InvalidArgumentException;
+use Nawarian\Raylib\RaylibFFIProxy;
 use Nawarian\Raylib\Types\Rectangle;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +20,7 @@ class RectangleTest extends TestCase
 
         self::expectExceptionMessage('Object $ffi does not provide the type "struct Rectangle"');
         self::expectException(InvalidArgumentException::class);
-        $rectangle->toCData($ffi);
+        $rectangle->toCData(new RaylibFFIProxy($ffi));
     }
 
     public function test_toCData_withValidFFIStructDef_returnsCDataValidObject(): void
@@ -36,7 +37,7 @@ class RectangleTest extends TestCase
         CDEF
         );
 
-        $cdata = $rectangle->toCData($ffi);
+        $cdata = $rectangle->toCData(new RaylibFFIProxy($ffi));
 
         self::assertEquals(1.0, $cdata->x);
         self::assertEquals(2.0, $cdata->y);

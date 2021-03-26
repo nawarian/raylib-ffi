@@ -4,25 +4,12 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib;
 
-use FFI;
-use RuntimeException;
-
 final class Raylib implements HasRaylibKeysConstants
 {
-    private FFI $ffi;
+    private RaylibFFIProxy $ffi;
 
-    public function __construct()
+    public function __construct(RaylibFFIProxy $ffi)
     {
-        // TODO: make it multi platform
-        $raylibHeader = __DIR__ . '/raylib.h';
-
-        /** @var FFI|null $ffi */
-        $ffi = FFI::load($raylibHeader);
-
-        if ($ffi === null) {
-            throw new RuntimeException("Could not load header file '{$raylibHeader}'.");
-        }
-
         $this->ffi = $ffi;
     }
 
@@ -38,7 +25,7 @@ final class Raylib implements HasRaylibKeysConstants
     // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function GetRandomValue(int $min, int $max): int
     {
-        return (int) $this->ffi->GetRandomValue($min, $max);
+        return $this->ffi->GetRandomValue($min, $max);
     }
 
     /**
@@ -63,13 +50,8 @@ final class Raylib implements HasRaylibKeysConstants
      * @psalm-suppress UndefinedMethod
      */
     // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function DrawLine(
-        int $x0,
-        int $y0,
-        int $x1,
-        int $y1,
-        Types\Color $color
-    ): void {
+    public function DrawLine(int $x0, int $y0, int $x1, int $y1, Types\Color $color): void
+    {
         $this->ffi->DrawLine($x0, $y0, $x1, $y1, $color->toCData($this->ffi));
     }
 
@@ -77,72 +59,40 @@ final class Raylib implements HasRaylibKeysConstants
      * @psalm-suppress UndefinedMethod
      */
     // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function DrawRectangle(
-        float $x,
-        float $y,
-        float $width,
-        float $height,
-        Types\Color $color
-    ): void {
-        $this->ffi->DrawRectangle(
-            $x,
-            $y,
-            $width,
-            $height,
-            $color->toCData($this->ffi),
-        );
+    public function DrawRectangle(float $x, float $y, float $width, float $height, Types\Color $color): void
+    {
+        $this->ffi->DrawRectangle($x, $y, $width, $height, $color->toCData($this->ffi));
     }
 
     /**
      * @psalm-suppress UndefinedMethod
      */
     // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function DrawRectangleLines(
-        float $x,
-        float $y,
-        float $width,
-        float $height,
-        Types\Color $color
-    ): void {
-        $this->ffi->DrawRectangleLines(
-            $x,
-            $y,
-            $width,
-            $height,
-            $color->toCData($this->ffi),
-        );
+    public function DrawRectangleLines(float $x, float $y, float $width, float $height, Types\Color $color): void
+    {
+        $this->ffi->DrawRectangleLines($x, $y, $width, $height, $color->toCData($this->ffi));
     }
 
     /**
      * @psalm-suppress UndefinedMethod
      */
     // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function DrawRectangleRec(
-        Types\Rectangle $rec,
-        Types\Color $color
-    ): void {
-        $this->ffi->DrawRectangleRec(
-            $rec->toCData($this->ffi),
-            $color->toCData($this->ffi),
-        );
+    public function DrawRectangleRec(Types\Rectangle $rec, Types\Color $color): void
+    {
+        $this->ffi->DrawRectangleRec($rec->toCData($this->ffi), $color->toCData($this->ffi));
     }
 
     /**
      * @psalm-suppress UndefinedMethod
      */
     // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function DrawText(
-        string $text,
-        int $x,
-        int $y,
-        int $fontSize,
-        Types\Color $color
-    ): void {
+    public function DrawText(string $text, int $x, int $y, int $fontSize, Types\Color $color): void
+    {
         $this->ffi->DrawText($text, $x, $y, $fontSize, $color->toCData($this->ffi));
     }
 
     /**
-     * @psalm-suppress MixedPropertyFetch
+     * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
      * @psalm-suppress MixedAssignment
      * @psalm-suppress UndefinedMethod
@@ -152,11 +102,6 @@ final class Raylib implements HasRaylibKeysConstants
     {
         $colorStruct = $this->ffi->Fade($color->toCData($this->ffi), $alpha);
 
-        return new Types\Color(
-            $colorStruct->r,
-            $colorStruct->g,
-            $colorStruct->b,
-            $colorStruct->a,
-        );
+        return new Types\Color($colorStruct->r, $colorStruct->g, $colorStruct->b, $colorStruct->a);
     }
 }

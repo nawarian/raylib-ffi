@@ -7,6 +7,7 @@ namespace Nawarian\Raylib\Types;
 use FFI;
 use FFI\CData;
 use InvalidArgumentException;
+use Nawarian\Raylib\RaylibFFIProxy;
 
 final class Rectangle
 {
@@ -27,7 +28,7 @@ final class Rectangle
      * @psalm-suppress MixedPropertyAssignment
      * @psalm-suppress UndefinedPropertyAssignment
      */
-    public function toCData(FFI $ffi): CData
+    public function toCData(RaylibFFIProxy $ffi): CData
     {
         try {
             /** @var CData $rec */

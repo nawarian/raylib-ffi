@@ -6,6 +6,7 @@ namespace Nawarian\Tests\Raylib\Types;
 
 use FFI;
 use InvalidArgumentException;
+use Nawarian\Raylib\RaylibFFIProxy;
 use Nawarian\Raylib\Types\Camera2D;
 use Nawarian\Raylib\Types\Vector2;
 use PHPUnit\Framework\TestCase;
@@ -22,7 +23,7 @@ class Camera2DTest extends TestCase
 
         self::expectExceptionMessage('Object $ffi does not provide the type "struct Camera2D"');
         self::expectException(InvalidArgumentException::class);
-        $camera->toCData($ffi);
+        $camera->toCData(new RaylibFFIProxy($ffi));
     }
 
     public function test_toCData_withValidFFIStructDef_returnsCDataValidObject(): void
@@ -46,7 +47,7 @@ class Camera2DTest extends TestCase
         CDEF
         );
 
-        $cdata = $camera->toCData($ffi);
+        $cdata = $camera->toCData(new RaylibFFIProxy($ffi));
 
         self::assertEquals(10, $cdata->offset->x);
         self::assertEquals(10, $cdata->offset->y);

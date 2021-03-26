@@ -6,6 +6,7 @@ namespace Nawarian\Tests\Raylib\Types;
 
 use FFI;
 use InvalidArgumentException;
+use Nawarian\Raylib\RaylibFFIProxy;
 use Nawarian\Raylib\Types\Vector2;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +20,7 @@ class Vector2Test extends TestCase
 
         self::expectExceptionMessage('Object $ffi does not provide the type "struct Vector2"');
         self::expectException(InvalidArgumentException::class);
-        $vec->toCData($ffi);
+        $vec->toCData(new RaylibFFIProxy($ffi));
     }
 
     public function test_toCData_withValidFFIStructDef_returnsCDataValidObject(): void
@@ -34,7 +35,7 @@ class Vector2Test extends TestCase
         CDEF
         );
 
-        $cdata = $vec->toCData($ffi);
+        $cdata = $vec->toCData(new RaylibFFIProxy($ffi));
 
         self::assertEquals(1.0, $cdata->x);
         self::assertEquals(2.0, $cdata->y);
