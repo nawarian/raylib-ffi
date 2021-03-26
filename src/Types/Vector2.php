@@ -25,10 +25,10 @@ final class Vector2
      */
     public function toCData(FFI $ffi): CData
     {
-        /** @var CData|null $vec */
-        $vec = $ffi->new('Vector2');
-
-        if ($vec === null) {
+        try {
+            /** @var CData $vec */
+            $vec = $ffi->new('Vector2');
+        } catch (FFI\ParserException $e) {
             throw new InvalidArgumentException(
                 'Object $ffi does not provide the type "struct Vector2"'
             );

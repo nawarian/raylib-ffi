@@ -29,10 +29,10 @@ final class Camera2D
      */
     public function toCData(FFI $ffi): CData
     {
-        /** @var CData|null $camera */
-        $camera = $ffi->new('Camera2D');
-
-        if ($camera === null) {
+        try {
+            /** @var CData $camera */
+            $camera = $ffi->new('Camera2D');
+        } catch (FFI\ParserException $e) {
             throw new InvalidArgumentException(
                 'Object $ffi does not provide the type "struct Camera2D"'
             );

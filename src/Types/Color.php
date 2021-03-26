@@ -29,10 +29,10 @@ final class Color
      */
     public function toCData(FFI $ffi): CData
     {
-        /** @var CData|null $color */
-        $color = $ffi->new('Color');
-
-        if ($color === null) {
+        try {
+            /** @var CData $color */
+            $color = $ffi->new('Color');
+        } catch (FFI\ParserException $e) {
             throw new InvalidArgumentException(
                 'Object $ffi does not provide the type "struct Color"'
             );

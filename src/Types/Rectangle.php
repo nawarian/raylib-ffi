@@ -29,14 +29,15 @@ final class Rectangle
      */
     public function toCData(FFI $ffi): CData
     {
-        /** @var CData|null $rec */
-        $rec = $ffi->new('Rectangle');
-
-        if ($rec === null) {
+        try {
+            /** @var CData $rec */
+            $rec = $ffi->new('Rectangle');
+        } catch (FFI\ParserException $e) {
             throw new InvalidArgumentException(
                 'Object $ffi does not provide the type "struct Rectangle"'
             );
         }
+
         $rec->x = $this->x;
         $rec->y = $this->y;
         $rec->width = $this->width;
