@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib;
 
-use FFI\CData;
 use FFI;
 use RuntimeException;
 
-final class RaylibFFI
+final class Raylib
 {
-    private const RAYLIB_H = __DIR__ . '/raylib.h';
+    private FFI $ffi;
 
     public const KEY_APOSTROPHE      = 39;
     public const KEY_COMMA           = 44;
@@ -118,68 +117,152 @@ final class RaylibFFI
     public const KEY_KP_ENTER        = 335;
     public const KEY_KP_EQUAL        = 336;
 
-    private static FFI $ffi;
-
-    public static function boot(): void
+    public function __construct()
     {
-        /** @var FFI|null $ffi */
-        $ffi = FFI::load(self::RAYLIB_H);
+        // TODO: make it multi platform
+        $raylibHeader = __DIR__ . '/raylib.h';
 
-        // TODO: find a way to test this exception
-        if (is_null($ffi)) {
-            throw new RuntimeException(
-                'Could not load header file ' . self::RAYLIB_H,
-            );
+        /** @var FFI|null $ffi */
+        $ffi = FFI::load($raylibHeader);
+
+        if ($ffi === null) {
+            throw new RuntimeException("Could not load header file '{$raylibHeader}'.");
         }
 
-        self::$ffi = $ffi;
+        $this->ffi = $ffi;
     }
 
-    public static function __callStatic(string $method, array $args)
+    public function __call(string $method, array $args)
     {
-        $callable = [self::$ffi, $method];
+        $callable = [$this->ffi, $method];
         return $callable(...$args);
     }
 
-    public static function Rectangle(float $x, float $y, float $width, float $height): CData
+    /**
+     * @psalm-suppress UndefinedMethod
+     */
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    public function GetRandomValue(int $min, int $max): int
     {
-        $rec = self::new('Rectangle');
-        $rec->x = $x;
-        $rec->y = $y;
-        $rec->width = $width;
-        $rec->height = $height;
-
-        return $rec;
+        return (int) $this->ffi->GetRandomValue($min, $max);
     }
 
-    public static function Color(int $r, int $g, int $b, int $a): CData
+    /**
+     * @psalm-suppress UndefinedMethod
+     */
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    public function BeginMode2D(Types\Camera2D $camera): void
     {
-        $color = self::new('Color');
-        $color->r = $r;
-        $color->g = $g;
-        $color->b = $b;
-        $color->a = $a;
-
-        return $color;
+        $this->ffi->BeginMode2D($camera->toCData($this->ffi));
     }
 
-    public static function Vector2(float $x, float $y): CData
+    /**
+     * @psalm-suppress UndefinedMethod
+     */
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    public function ClearBackground(Types\Color $color): void
     {
-        $vec = self::new('Vector2');
-        $vec->x = $x;
-        $vec->y = $y;
-
-        return $vec;
+        $this->ffi->ClearBackground($color->toCData($this->ffi));
     }
 
-    public static function Camera2D(CData $offset, CData $target, float $rotation, float $zoom): CData
-    {
-        $camera = self::new('Camera2D');
-        $camera->offset = $offset;
-        $camera->target = $target;
-        $camera->rotation = $rotation;
-        $camera->zoom = $zoom;
+    /**
+     * @psalm-suppress UndefinedMethod
+     */
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    public function DrawLine(
+        int $x0,
+        int $y0,
+        int $x1,
+        int $y1,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawLine($x0, $y0, $x1, $y1, $color->toCData($this->ffi));
+    }
 
-        return $camera;
+    /**
+     * @psalm-suppress UndefinedMethod
+     */
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    public function DrawRectangle(
+        float $x,
+        float $y,
+        float $width,
+        float $height,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawRectangle(
+            $x,
+            $y,
+            $width,
+            $height,
+            $color->toCData($this->ffi),
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedMethod
+     */
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    public function DrawRectangleLines(
+        float $x,
+        float $y,
+        float $width,
+        float $height,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawRectangleLines(
+            $x,
+            $y,
+            $width,
+            $height,
+            $color->toCData($this->ffi),
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedMethod
+     */
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    public function DrawRectangleRec(
+        Types\Rectangle $rec,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawRectangleRec(
+            $rec->toCData($this->ffi),
+            $color->toCData($this->ffi),
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedMethod
+     */
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    public function DrawText(
+        string $text,
+        int $x,
+        int $y,
+        int $fontSize,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawText($text, $x, $y, $fontSize, $color->toCData($this->ffi));
+    }
+
+    /**
+     * @psalm-suppress MixedPropertyFetch
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedMethod
+     */
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    public function Fade(Types\Color $color, float $alpha): Types\Color
+    {
+        $colorStruct = $this->ffi->Fade($color->toCData($this->ffi), $alpha);
+
+        return new Types\Color(
+            $colorStruct->r,
+            $colorStruct->g,
+            $colorStruct->b,
+            $colorStruct->a,
+        );
     }
 }
