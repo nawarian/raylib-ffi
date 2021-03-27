@@ -31,8 +31,7 @@ $buildColors = [];
 
 $spacing = 0;
 
-for ($i = 0; $i < MAX_BUILDINGS; $i++)
-{
+for ($i = 0; $i < MAX_BUILDINGS; $i++) {
     $buildings[$i] = new Rectangle(
         0,
         0,
@@ -63,15 +62,14 @@ $raylib->setTargetFPS(60);                   // Set our game to run at 60 frames
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!$raylib->windowShouldClose())        // Detect window close button or ESC key
-{
-    // Update
+while (!$raylib->windowShouldClose()) {        // Detect window close button or ESC key
+// Update
     //----------------------------------------------------------------------------------
 
     // Player movement
     if ($raylib->isKeyDown(Raylib::KEY_RIGHT)) {
         $player->x += 2;
-    } else if ($raylib->isKeyDown(Raylib::KEY_LEFT)) {
+    } elseif ($raylib->isKeyDown(Raylib::KEY_LEFT)) {
         $player->x -= 2;
     }
 
@@ -81,14 +79,14 @@ while (!$raylib->windowShouldClose())        // Detect window close button or ES
     // Camera rotation controls
     if ($raylib->isKeyDown(Raylib::KEY_A)) {
         $camera->rotation--;
-    } else if ($raylib->isKeyDown(Raylib::KEY_S)) {
+    } elseif ($raylib->isKeyDown(Raylib::KEY_S)) {
         $camera->rotation++;
     }
 
     // Limit camera rotation to 80 degrees (-40 to 40)
     if ($camera->rotation > 40) {
         $camera->rotation = 40;
-    } else if ($camera->rotation < -40) {
+    } elseif ($camera->rotation < -40) {
         $camera->rotation = -40;
     }
 
@@ -97,13 +95,12 @@ while (!$raylib->windowShouldClose())        // Detect window close button or ES
 
     if ($camera->zoom > 3.0) {
         $camera->zoom = 3.0;
-    } else if ($camera->zoom < 0.1) {
+    } elseif ($camera->zoom < 0.1) {
         $camera->zoom = 0.1;
     }
 
     // Camera reset (zoom and rotation)
-    if ($raylib->isKeyPressed(Raylib::KEY_R))
-    {
+    if ($raylib->isKeyPressed(Raylib::KEY_R)) {
         $camera->zoom = 1.0;
         $camera->rotation = 0.0;
     }
@@ -127,9 +124,9 @@ while (!$raylib->windowShouldClose())        // Detect window close button or ES
                 new Color(80, 80, 80, 255),
             );
 
-            for ($i = 0; $i < MAX_BUILDINGS; $i++) {
-                $raylib->drawRectangleRec($buildings[$i], $buildColors[$i]);
-            }
+    for ($i = 0; $i < MAX_BUILDINGS; $i++) {
+        $raylib->drawRectangleRec($buildings[$i], $buildColors[$i]);
+    }
 
             $raylib->drawRectangleRec($player, new Color(230, 41, 55, 255));
 
@@ -174,4 +171,3 @@ while (!$raylib->windowShouldClose())        // Detect window close button or ES
 //--------------------------------------------------------------------------------------
 $raylib->closeWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------
-
