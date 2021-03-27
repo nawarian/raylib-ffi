@@ -26,8 +26,8 @@ $white = new \Nawarian\Raylib\Types\Color(255, 255, 255, 255);
 $red = new \Nawarian\Raylib\Types\Color(255, 0, 0, 255);
 while (!$raylib->WindowShouldClose()) {
     $raylib->BeginDrawing();
-        $raylib->ClearBackground($white);
-        $raylib->DrawText('Hello from raylib-ffi!', 400, 300, 20, $red);
+        $raylib->clearBackground($white);
+        $raylib->drawText('Hello from raylib-ffi!', 400, 300, 20, $red);
     $raylib->EndDrawing();
 }
 
@@ -41,7 +41,7 @@ Below you'll find the list of things to be developed in this project.
 ### Project
 
 - [ ] Automatic checks on `main` and Pull Requests: compile raylib and test FFI against Linux, Windows and MacOS
-- [ ] Rename methods in `Raylib` to follow No Camel Caps convention (PSR-1)
+- [x] Rename methods in `Raylib` to follow No Camel Caps convention (PSR-1)
 - [ ] Make `RaylibFactory` detect current OS and load `raylib.h` accordingly
 - [ ] Create a `functions.php` file that will mimic Raylib by registering global functions
 

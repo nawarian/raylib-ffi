@@ -36,8 +36,8 @@ for ($i = 0; $i < MAX_BUILDINGS; $i++)
     $buildings[$i] = new Rectangle(
         0,
         0,
-        $raylib->GetRandomValue(50, 200),
-        $raylib->GetRandomValue(100, 800),
+        $raylib->getRandomValue(50, 200),
+        $raylib->getRandomValue(100, 800),
     );
     $buildings[$i]->y = $screenHeight - 130 - $buildings[$i]->height;
     $buildings[$i]->x = -6000 + $spacing;
@@ -45,9 +45,9 @@ for ($i = 0; $i < MAX_BUILDINGS; $i++)
     $spacing += $buildings[$i]->width;
 
     $buildColors[$i] = new Color(
-        $raylib->GetRandomValue(200, 240),
-        $raylib->GetRandomValue(200, 240),
-        $raylib->GetRandomValue(200, 250),
+        $raylib->getRandomValue(200, 240),
+        $raylib->getRandomValue(200, 240),
+        $raylib->getRandomValue(200, 250),
         255
     );
 }
@@ -113,13 +113,13 @@ while (!$raylib->WindowShouldClose())        // Detect window close button or ES
     //----------------------------------------------------------------------------------
     $raylib->BeginDrawing();
 
-        $raylib->ClearBackground(
+        $raylib->clearBackground(
             new Color(245, 245, 245, 255)
         );
 
-        $raylib->BeginMode2D($camera);
+        $raylib->beginMode2D($camera);
 
-            $raylib->DrawRectangle(
+            $raylib->drawRectangle(
                 -6000,
                 320,
                 13000,
@@ -128,19 +128,19 @@ while (!$raylib->WindowShouldClose())        // Detect window close button or ES
             );
 
             for ($i = 0; $i < MAX_BUILDINGS; $i++) {
-                $raylib->DrawRectangleRec($buildings[$i], $buildColors[$i]);
+                $raylib->drawRectangleRec($buildings[$i], $buildColors[$i]);
             }
 
-            $raylib->DrawRectangleRec($player, new Color(230, 41, 55, 255));
+            $raylib->drawRectangleRec($player, new Color(230, 41, 55, 255));
 
-            $raylib->DrawLine(
+            $raylib->drawLine(
                 (int) $camera->target->x,
                 (int) (-$screenHeight * 10),
                 (int) $camera->target->x,
                 (int) ($screenHeight * 10),
                 new Color(0, 228, 48, 255),
             );
-            $raylib->DrawLine(
+            $raylib->drawLine(
                 (int) (-$screenWidth * 10),
                 (int) $camera->target->y,
                 (int) ($screenWidth * 10),
@@ -150,21 +150,21 @@ while (!$raylib->WindowShouldClose())        // Detect window close button or ES
 
         $raylib->EndMode2D();
 
-        $raylib->DrawText("SCREEN AREA", 640, 10, 20, new Color(230, 41, 55, 255));
+        $raylib->drawText("SCREEN AREA", 640, 10, 20, new Color(230, 41, 55, 255));
 
-        $raylib->DrawRectangle(0, 0, $screenWidth, 5, new Color(230, 41, 55, 255));
-        $raylib->DrawRectangle(0, 5, 5, $screenHeight - 10, new Color(230, 41, 55, 255));
-        $raylib->DrawRectangle($screenWidth - 5, 5, 5, $screenHeight - 10, new Color(230, 41, 55, 255));
-        $raylib->DrawRectangle(0, $screenHeight - 5, $screenWidth, 5, new Color(230, 41, 55, 255));
+        $raylib->drawRectangle(0, 0, $screenWidth, 5, new Color(230, 41, 55, 255));
+        $raylib->drawRectangle(0, 5, 5, $screenHeight - 10, new Color(230, 41, 55, 255));
+        $raylib->drawRectangle($screenWidth - 5, 5, 5, $screenHeight - 10, new Color(230, 41, 55, 255));
+        $raylib->drawRectangle(0, $screenHeight - 5, $screenWidth, 5, new Color(230, 41, 55, 255));
 
-        $raylib->DrawRectangle(10, 10, 250, 113, $raylib->Fade(new Color(102, 191, 255, 255), 0.5));
-        $raylib->DrawRectangleLines(10, 10, 250, 113, new Color(0, 121, 241, 255));
+        $raylib->drawRectangle(10, 10, 250, 113, $raylib->fade(new Color(102, 191, 255, 255), 0.5));
+        $raylib->drawRectangleLines(10, 10, 250, 113, new Color(0, 121, 241, 255));
 
-        $raylib->DrawText("Free 2d camera controls:", 20, 20, 10, new Color(0, 0, 0, 255));
-        $raylib->DrawText("- Right/Left to move Offset", 40, 40, 10, new Color(80, 80, 80, 255));
-        $raylib->DrawText("- Mouse Wheel to Zoom in-out", 40, 60, 10, new Color(80, 80, 80, 255));
-        $raylib->DrawText("- A / S to Rotate", 40, 80, 10, new Color(80, 80, 80, 255));
-        $raylib->DrawText("- R to reset Zoom and Rotation", 40, 100, 10, new Color(80, 80, 80, 255));
+        $raylib->drawText("Free 2d camera controls:", 20, 20, 10, new Color(0, 0, 0, 255));
+        $raylib->drawText("- Right/Left to move Offset", 40, 40, 10, new Color(80, 80, 80, 255));
+        $raylib->drawText("- Mouse Wheel to Zoom in-out", 40, 60, 10, new Color(80, 80, 80, 255));
+        $raylib->drawText("- A / S to Rotate", 40, 80, 10, new Color(80, 80, 80, 255));
+        $raylib->drawText("- R to reset Zoom and Rotation", 40, 100, 10, new Color(80, 80, 80, 255));
 
     $raylib->EndDrawing();
     //----------------------------------------------------------------------------------

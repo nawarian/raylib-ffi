@@ -49,7 +49,7 @@ class RaylibTest extends TestCase
         $this->ffiProxy->BeginMode2D($this->sameCDataCamera2DArgument($expectedStruct))
             ->shouldBeCalledOnce();
 
-        $this->raylib->BeginMode2D($camera);
+        $this->raylib->beginMode2D($camera);
     }
 
     public function test_ClearBackground_convertsColorToCData(): void
@@ -60,7 +60,7 @@ class RaylibTest extends TestCase
         $this->ffiProxy->ClearBackground($this->sameCDataColorArgument($expectedStruct))
             ->shouldBeCalledOnce();
 
-        $this->raylib->ClearBackground($color);
+        $this->raylib->clearBackground($color);
     }
 
     public function test_DrawLine_respectsParameterOrderAndConvertsColorToCData(): void
@@ -71,7 +71,7 @@ class RaylibTest extends TestCase
         $this->ffiProxy->DrawLine(10, 20,30, 40, $this->sameCDataColorArgument($expectedStruct))
             ->shouldBeCalledOnce();
 
-        $this->raylib->DrawLine(10, 20, 30 ,40, $color);
+        $this->raylib->drawLine(10, 20, 30 ,40, $color);
     }
 
     public function test_DrawRectangle_respectsParameterOrderAndConvertsColorToCData(): void
@@ -82,7 +82,7 @@ class RaylibTest extends TestCase
         $this->ffiProxy->DrawRectangle(10, 20, 30, 40, $this->sameCDataColorArgument($expectedStruct))
             ->shouldBeCalledOnce();
 
-        $this->raylib->DrawRectangle(10, 20, 30, 40, $color);
+        $this->raylib->drawRectangle(10, 20, 30, 40, $color);
     }
 
     public function test_DrawRectangleLines_respectsParameterOrderAndConvertsColorToCData(): void
@@ -93,7 +93,7 @@ class RaylibTest extends TestCase
         $this->ffiProxy->DrawRectangleLines(10, 20, 30, 40, $this->sameCDataColorArgument($expectedStruct))
             ->shouldBeCalledOnce();
 
-        $this->raylib->DrawRectangleLines(10, 20, 30, 40, $color);
+        $this->raylib->drawRectangleLines(10, 20, 30, 40, $color);
     }
 
     public function test_DrawRectangleRec_respectsParameterOrderAndConvertsObjectsToCData(): void
@@ -108,7 +108,7 @@ class RaylibTest extends TestCase
             $this->sameCDataColorArgument($expectedColorStruct),
         )->shouldBeCalledOnce();
 
-        $this->raylib->DrawRectangleRec($rectangle, $color);
+        $this->raylib->drawRectangleRec($rectangle, $color);
     }
 
     public function test_DrawText_respectsParameterOrderAndConvertsObjectsToCData(): void
@@ -119,7 +119,7 @@ class RaylibTest extends TestCase
         $this->ffiProxy->DrawText('abc', 10, 20, 30, $this->sameCDataColorArgument($expectedStruct))
             ->shouldBeCalledOnce();
 
-        $this->raylib->DrawText('abc', 10, 20, 30, $color);
+        $this->raylib->drawText('abc', 10, 20, 30, $color);
     }
 
     /**
@@ -133,7 +133,7 @@ class RaylibTest extends TestCase
             ->shouldBeCalledOnce()
             ->willReturn(15);
 
-        self::assertEquals(15, $this->raylib->GetRandomValue(10, 20));
+        self::assertEquals(15, $this->raylib->getRandomValue(10, 20));
     }
 
     private function sameCDataCamera2DArgument(CData $expectedStruct): Argument\Token\CallbackToken

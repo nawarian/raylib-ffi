@@ -16,7 +16,7 @@ class RaylibFactoryTest extends TestCase
 
         $raylib = $factory->newInstance();
 
-        $color = $raylib->Fade(new Color(255, 0, 0, 100), .20);
+        $color = $raylib->fade(new Color(255, 0, 0, 100), .20);
         self::assertEquals(255, $color->red);
         self::assertEquals(0, $color->green);
         self::assertEquals(0, $color->blue);

@@ -19,74 +19,42 @@ final class Raylib implements HasRaylibKeysConstants
         return $callable(...$args);
     }
 
-    /**
-     * @psalm-suppress UndefinedMethod
-     */
-    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function GetRandomValue(int $min, int $max): int
+    public function getRandomValue(int $min, int $max): int
     {
         return $this->ffi->GetRandomValue($min, $max);
     }
 
-    /**
-     * @psalm-suppress UndefinedMethod
-     */
-    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function BeginMode2D(Types\Camera2D $camera): void
+    public function beginMode2D(Types\Camera2D $camera): void
     {
         $this->ffi->BeginMode2D($camera->toCData($this->ffi));
     }
 
-    /**
-     * @psalm-suppress UndefinedMethod
-     */
-    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function ClearBackground(Types\Color $color): void
+    public function clearBackground(Types\Color $color): void
     {
         $this->ffi->ClearBackground($color->toCData($this->ffi));
     }
 
-    /**
-     * @psalm-suppress UndefinedMethod
-     */
-    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function DrawLine(int $x0, int $y0, int $x1, int $y1, Types\Color $color): void
+    public function drawLine(int $x0, int $y0, int $x1, int $y1, Types\Color $color): void
     {
         $this->ffi->DrawLine($x0, $y0, $x1, $y1, $color->toCData($this->ffi));
     }
 
-    /**
-     * @psalm-suppress UndefinedMethod
-     */
-    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function DrawRectangle(float $x, float $y, float $width, float $height, Types\Color $color): void
+    public function drawRectangle(float $x, float $y, float $width, float $height, Types\Color $color): void
     {
         $this->ffi->DrawRectangle($x, $y, $width, $height, $color->toCData($this->ffi));
     }
 
-    /**
-     * @psalm-suppress UndefinedMethod
-     */
-    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function DrawRectangleLines(float $x, float $y, float $width, float $height, Types\Color $color): void
+    public function drawRectangleLines(float $x, float $y, float $width, float $height, Types\Color $color): void
     {
         $this->ffi->DrawRectangleLines($x, $y, $width, $height, $color->toCData($this->ffi));
     }
 
-    /**
-     * @psalm-suppress UndefinedMethod
-     */
-    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function DrawRectangleRec(Types\Rectangle $rec, Types\Color $color): void
+    public function drawRectangleRec(Types\Rectangle $rec, Types\Color $color): void
     {
         $this->ffi->DrawRectangleRec($rec->toCData($this->ffi), $color->toCData($this->ffi));
     }
 
-    /**
-     * @psalm-suppress UndefinedMethod
-     */
-    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function DrawText(string $text, int $x, int $y, int $fontSize, Types\Color $color): void
+    public function drawText(string $text, int $x, int $y, int $fontSize, Types\Color $color): void
     {
         $this->ffi->DrawText($text, $x, $y, $fontSize, $color->toCData($this->ffi));
     }
@@ -94,11 +62,8 @@ final class Raylib implements HasRaylibKeysConstants
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
-     * @psalm-suppress MixedAssignment
-     * @psalm-suppress UndefinedMethod
      */
-    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-    public function Fade(Types\Color $color, float $alpha): Types\Color
+    public function fade(Types\Color $color, float $alpha): Types\Color
     {
         $colorStruct = $this->ffi->Fade($color->toCData($this->ffi), $alpha);
 
