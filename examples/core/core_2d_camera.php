@@ -23,7 +23,7 @@ const MAX_BUILDINGS = 100;
 $screenWidth = 800;
 $screenHeight = 450;
 
-$raylib->InitWindow($screenWidth, $screenHeight, "raylib [core] example - 2d camera");
+$raylib->initWindow($screenWidth, $screenHeight, "raylib [core] example - 2d camera");
 
 $player = new Rectangle(400, 280, 40, 40);
 $buildings = [];
@@ -59,19 +59,19 @@ $camera = new Camera2D(
     1.0,
 );
 
-$raylib->SetTargetFPS(60);                   // Set our game to run at 60 frames-per-second
+$raylib->setTargetFPS(60);                   // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!$raylib->WindowShouldClose())        // Detect window close button or ESC key
+while (!$raylib->windowShouldClose())        // Detect window close button or ESC key
 {
     // Update
     //----------------------------------------------------------------------------------
 
     // Player movement
-    if ($raylib->IsKeyDown(Raylib::KEY_RIGHT)) {
+    if ($raylib->isKeyDown(Raylib::KEY_RIGHT)) {
         $player->x += 2;
-    } else if ($raylib->IsKeyDown(Raylib::KEY_LEFT)) {
+    } else if ($raylib->isKeyDown(Raylib::KEY_LEFT)) {
         $player->x -= 2;
     }
 
@@ -79,9 +79,9 @@ while (!$raylib->WindowShouldClose())        // Detect window close button or ES
     $camera->target = new Vector2($player->x + 20, $player->y + 20);
 
     // Camera rotation controls
-    if ($raylib->IsKeyDown(Raylib::KEY_A)) {
+    if ($raylib->isKeyDown(Raylib::KEY_A)) {
         $camera->rotation--;
-    } else if ($raylib->IsKeyDown(Raylib::KEY_S)) {
+    } else if ($raylib->isKeyDown(Raylib::KEY_S)) {
         $camera->rotation++;
     }
 
@@ -93,7 +93,7 @@ while (!$raylib->WindowShouldClose())        // Detect window close button or ES
     }
 
     // Camera zoom controls
-    $camera->zoom += ((float) $raylib->GetMouseWheelMove()*0.05);
+    $camera->zoom += $raylib->getMouseWheelMove() * 0.05;
 
     if ($camera->zoom > 3.0) {
         $camera->zoom = 3.0;
@@ -102,7 +102,7 @@ while (!$raylib->WindowShouldClose())        // Detect window close button or ES
     }
 
     // Camera reset (zoom and rotation)
-    if ($raylib->IsKeyPressed(Raylib::KEY_R))
+    if ($raylib->isKeyPressed(Raylib::KEY_R))
     {
         $camera->zoom = 1.0;
         $camera->rotation = 0.0;
@@ -111,7 +111,7 @@ while (!$raylib->WindowShouldClose())        // Detect window close button or ES
 
     // Draw
     //----------------------------------------------------------------------------------
-    $raylib->BeginDrawing();
+    $raylib->beginDrawing();
 
         $raylib->clearBackground(
             new Color(245, 245, 245, 255)
@@ -148,7 +148,7 @@ while (!$raylib->WindowShouldClose())        // Detect window close button or ES
                 new Color(0, 228, 48, 255),
             );
 
-        $raylib->EndMode2D();
+        $raylib->endMode2D();
 
         $raylib->drawText("SCREEN AREA", 640, 10, 20, new Color(230, 41, 55, 255));
 
@@ -166,12 +166,12 @@ while (!$raylib->WindowShouldClose())        // Detect window close button or ES
         $raylib->drawText("- A / S to Rotate", 40, 80, 10, new Color(80, 80, 80, 255));
         $raylib->drawText("- R to reset Zoom and Rotation", 40, 100, 10, new Color(80, 80, 80, 255));
 
-    $raylib->EndDrawing();
+    $raylib->endDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-$raylib->CloseWindow();        // Close window and OpenGL context
+$raylib->closeWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------
 

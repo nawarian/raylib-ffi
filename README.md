@@ -20,18 +20,18 @@ $raylib = $factory->newInstance();
 /**
  * You may normally call Raylib functions from the $raylib object now
  */
-$raylib->InitWindow(800, 600, 'My raylib Window');
+$raylib->initWindow(800, 600, 'My raylib Window');
 
 $white = new \Nawarian\Raylib\Types\Color(255, 255, 255, 255);
 $red = new \Nawarian\Raylib\Types\Color(255, 0, 0, 255);
-while (!$raylib->WindowShouldClose()) {
-    $raylib->BeginDrawing();
+while (!$raylib->windowShouldClose()) {
+    $raylib->beginDrawing();
         $raylib->clearBackground($white);
         $raylib->drawText('Hello from raylib-ffi!', 400, 300, 20, $red);
-    $raylib->EndDrawing();
+    $raylib->endDrawing();
 }
 
-$raylib->CloseWindow();
+$raylib->closeWindow();
 ```
 
 ## Roadmap

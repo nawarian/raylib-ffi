@@ -19,9 +19,9 @@ final class Raylib implements HasRaylibKeysConstants
         return $callable(...$args);
     }
 
-    public function getRandomValue(int $min, int $max): int
+    public function beginDrawing(): void
     {
-        return $this->ffi->GetRandomValue($min, $max);
+        $this->ffi->BeginDrawing();
     }
 
     public function beginMode2D(Types\Camera2D $camera): void
@@ -32,6 +32,11 @@ final class Raylib implements HasRaylibKeysConstants
     public function clearBackground(Types\Color $color): void
     {
         $this->ffi->ClearBackground($color->toCData($this->ffi));
+    }
+
+    public function closeWindow(): void
+    {
+        $this->ffi->CloseWindow();
     }
 
     public function drawLine(int $x0, int $y0, int $x1, int $y1, Types\Color $color): void
@@ -59,6 +64,16 @@ final class Raylib implements HasRaylibKeysConstants
         $this->ffi->DrawText($text, $x, $y, $fontSize, $color->toCData($this->ffi));
     }
 
+    public function endDrawing(): void
+    {
+        $this->ffi->EndDrawing();
+    }
+
+    public function endMode2D(): void
+    {
+        $this->ffi->EndMode2D();
+    }
+
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
@@ -68,5 +83,40 @@ final class Raylib implements HasRaylibKeysConstants
         $colorStruct = $this->ffi->Fade($color->toCData($this->ffi), $alpha);
 
         return new Types\Color($colorStruct->r, $colorStruct->g, $colorStruct->b, $colorStruct->a);
+    }
+
+    public function getMouseWheelMove(): float
+    {
+        return $this->ffi->GetMouseWheelMove();
+    }
+
+    public function getRandomValue(int $min, int $max): int
+    {
+        return $this->ffi->GetRandomValue($min, $max);
+    }
+
+    public function initWindow(int $width, int $height, string $title): void
+    {
+        $this->ffi->InitWindow($width, $height, $title);
+    }
+
+    public function isKeyDown(int $key): bool
+    {
+        return $this->ffi->IsKeyDown($key);
+    }
+
+    public function isKeyPressed(int $key): bool
+    {
+        return $this->ffi->IsKeyPressed($key);
+    }
+
+    public function setTargetFPS(int $fps): void
+    {
+        $this->ffi->SetTargetFPS($fps);
+    }
+
+    public function windowShouldClose(): bool
+    {
+        return $this->ffi->WindowShouldClose();
     }
 }
