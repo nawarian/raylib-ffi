@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @phpcs:disable PSR1.Files.SideEffects
+ * @phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
+ * @phpcs:disable PSR1.Classes.ClassDeclaration.MultipleClasses
+ */
+
 declare(strict_types=1);
 
 require_once __DIR__ . '/../../vendor/autoload.php';
@@ -322,7 +328,15 @@ while (!$raylib->windowShouldClose()) {
     }
 
     // Call update camera function by its pointer
-    $cameraUpdateFunctions[$cameraOption]($raylib, $camera, $player, $envItems, $deltaTime, $screenWidth, $screenHeight);
+    $cameraUpdateFunctions[$cameraOption](
+        $raylib,
+        $camera,
+        $player,
+        $envItems,
+        $deltaTime,
+        $screenWidth,
+        $screenHeight,
+    );
     //----------------------------------------------------------------------------------
 
     // Draw
@@ -334,9 +348,11 @@ while (!$raylib->windowShouldClose()) {
         $raylib->beginMode2D($camera);
 
             /** @var EnvItem $ei */
+            // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
             foreach ($envItems as $ei) {
                 $raylib->drawRectangleRec($ei->rect, $ei->color);
             }
+            // phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact
 
             $playerRect = new Rectangle(
                 $player->position->x - 20,

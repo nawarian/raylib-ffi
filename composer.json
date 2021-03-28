@@ -34,7 +34,7 @@
     },
     "scripts": {
         "phpunit": "phpunit",
-        "phpcs": "phpcs --standard=PSR12 src/",
+        "phpcs": "phpcs --standard=PSR12 -s src/ examples/",
         "psalm": "psalm",
         "checks": ["@psalm", "@phpcs", "@phpunit"]
     }
