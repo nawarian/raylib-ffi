@@ -20,18 +20,18 @@ $raylib = $factory->newInstance();
 /**
  * You may normally call Raylib functions from the $raylib object now
  */
-$raylib->InitWindow(800, 600, 'My raylib Window');
+$raylib->initWindow(800, 600, 'My raylib Window');
 
 $white = new \Nawarian\Raylib\Types\Color(255, 255, 255, 255);
 $red = new \Nawarian\Raylib\Types\Color(255, 0, 0, 255);
-while (!$raylib->WindowShouldClose()) {
-    $raylib->BeginDrawing();
+while (!$raylib->windowShouldClose()) {
+    $raylib->beginDrawing();
         $raylib->clearBackground($white);
         $raylib->drawText('Hello from raylib-ffi!', 400, 300, 20, $red);
-    $raylib->EndDrawing();
+    $raylib->endDrawing();
 }
 
-$raylib->CloseWindow();
+$raylib->closeWindow();
 ```
 
 ## Roadmap
@@ -47,9 +47,9 @@ Below you'll find the list of things to be developed in this project.
 
 ### FFI Proxy
 
-- [ ] `void InitWindow(int width, int height, const char *title)`
-- [ ] `bool WindowShouldClose(void)`
-- [ ] `void CloseWindow(void)`
+- [x] `void InitWindow(int width, int height, const char *title)`
+- [x] `bool WindowShouldClose(void)`
+- [x] `void CloseWindow(void)`
 - [ ] `bool IsWindowReady(void)`
 - [ ] `bool IsWindowFullscreen(void)`
 - [ ] `bool IsWindowHidden(void)`
@@ -92,10 +92,10 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void DisableCursor(void)`
 - [ ] `bool IsCursorOnScreen(void)`
 - [x] `void ClearBackground(Color color)`
-- [ ] `void BeginDrawing(void)`
-- [ ] `void EndDrawing(void)`
+- [x] `void BeginDrawing(void)`
+- [x] `void EndDrawing(void)`
 - [x] `void BeginMode2D(Camera2D camera)`
-- [ ] `void EndMode2D(void)`
+- [x] `void EndMode2D(void)`
 - [ ] `void BeginMode3D(Camera3D camera)`
 - [ ] `void EndMode3D(void)`
 - [ ] `void BeginTextureMode(RenderTexture2D target)`
@@ -109,7 +109,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `Vector2 GetWorldToScreenEx(Vector3 position, Camera camera, int width, int height)`
 - [ ] `Vector2 GetWorldToScreen2D(Vector2 position, Camera2D camera)`
 - [ ] `Vector2 GetScreenToWorld2D(Vector2 position, Camera2D camera)`
-- [ ] `void SetTargetFPS(int fps)`
+- [x] `void SetTargetFPS(int fps)`
 - [ ] `int GetFPS(void)`
 - [ ] `float GetFrameTime(void)`
 - [ ] `double GetTime(void)`
@@ -149,8 +149,8 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `bool SaveStorageValue(unsigned int position, int value)`
 - [ ] `int LoadStorageValue(unsigned int position)`
 - [ ] `void OpenURL(const char *url)`
-- [ ] `bool IsKeyPressed(int key)`
-- [ ] `bool IsKeyDown(int key)`
+- [x] `bool IsKeyPressed(int key)`
+- [x] `bool IsKeyDown(int key)`
 - [ ] `bool IsKeyReleased(int key)`
 - [ ] `bool IsKeyUp(int key)`
 - [ ] `void SetExitKey(int key)`
@@ -176,7 +176,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void SetMousePosition(int x, int y)`
 - [ ] `void SetMouseOffset(int offsetX, int offsetY)`
 - [ ] `void SetMouseScale(float scaleX, float scaleY)`
-- [ ] `float GetMouseWheelMove(void)`
+- [x] `float GetMouseWheelMove(void)`
 - [ ] `int GetMouseCursor(void)`
 - [ ] `void SetMouseCursor(int cursor)`
 - [ ] `int GetTouchX(void)`
