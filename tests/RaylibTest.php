@@ -41,7 +41,15 @@ class RaylibTest extends TestCase
         );
     }
 
-    public function test_BeginMode2D_convertsCamera2DToCData(): void
+    public function test_beginDrawing(): void
+    {
+        $this->ffiProxy->BeginDrawing()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->beginDrawing();
+    }
+
+    public function test_beginMode2D_convertsCamera2DToCData(): void
     {
         $camera = new Camera2D(new Vector2(0, 0), new Vector2(0, 0), 0.0, 0.0);
 
@@ -52,7 +60,7 @@ class RaylibTest extends TestCase
         $this->raylib->beginMode2D($camera);
     }
 
-    public function test_ClearBackground_convertsColorToCData(): void
+    public function test_clearBackground_convertsColorToCData(): void
     {
         $color = new Color(0, 0, 0, 0);
         $expectedStruct = $this->ffi->new('Color');
@@ -63,7 +71,7 @@ class RaylibTest extends TestCase
         $this->raylib->clearBackground($color);
     }
 
-    public function test_DrawLine_respectsParameterOrderAndConvertsColorToCData(): void
+    public function test_drawLine_respectsParameterOrderAndConvertsColorToCData(): void
     {
         $color = new Color(0, 0, 0, 0);
 
@@ -74,7 +82,15 @@ class RaylibTest extends TestCase
         $this->raylib->drawLine(10, 20, 30 ,40, $color);
     }
 
-    public function test_DrawRectangle_respectsParameterOrderAndConvertsColorToCData(): void
+    public function test_closeWindow(): void
+    {
+        $this->ffiProxy->CloseWindow()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->closeWindow();
+    }
+
+    public function test_drawRectangle_respectsParameterOrderAndConvertsColorToCData(): void
     {
         $color = new Color(0, 0, 0, 0);
 
@@ -85,7 +101,7 @@ class RaylibTest extends TestCase
         $this->raylib->drawRectangle(10, 20, 30, 40, $color);
     }
 
-    public function test_DrawRectangleLines_respectsParameterOrderAndConvertsColorToCData(): void
+    public function test_drawRectangleLines_respectsParameterOrderAndConvertsColorToCData(): void
     {
         $color = new Color(0, 0, 0, 0);
 
@@ -96,7 +112,7 @@ class RaylibTest extends TestCase
         $this->raylib->drawRectangleLines(10, 20, 30, 40, $color);
     }
 
-    public function test_DrawRectangleRec_respectsParameterOrderAndConvertsObjectsToCData(): void
+    public function test_drawRectangleRec_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $rectangle = new Rectangle(0, 0, 0, 0);
         $color = new Color(0, 0, 0, 0);
@@ -111,7 +127,7 @@ class RaylibTest extends TestCase
         $this->raylib->drawRectangleRec($rectangle, $color);
     }
 
-    public function test_DrawText_respectsParameterOrderAndConvertsObjectsToCData(): void
+    public function test_drawText_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $color = new Color(0, 0, 0, 0);
 
@@ -122,18 +138,99 @@ class RaylibTest extends TestCase
         $this->raylib->drawText('abc', 10, 20, 30, $color);
     }
 
+    public function test_endDrawing(): void
+    {
+        $this->ffiProxy->EndDrawing()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->endDrawing();
+    }
+
+    public function test_endMode2D(): void
+    {
+        $this->ffiProxy->EndMode2D()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->endMode2D();
+    }
+
+    public function test_fade_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $color = new Color(255, 0, 0, 155);
+        $expectedStruct = $this->ffi->new('Color');
+        $this->ffiProxy->Fade($expectedStruct, 20)
+            ->shouldBeCalledOnce()
+            ->willReturn($expectedStruct);
+
+        self::assertEquals(
+            new Color(0, 0, 0, 0),
+            $this->raylib->fade($color, 20),
+        );
+    }
+
+    public function test_getMouseWheelMove(): void
+    {
+        $this->ffiProxy->GetMouseWheelMove()
+            ->shouldBeCalledOnce()
+            ->willReturn(1.0);
+
+        self::assertEquals(1.0, $this->raylib->getMouseWheelMove());
+    }
+
     /**
      * @method DrawText(string $text, int $x, int $y, int $fontSize, FFI\CData $color): void
      * @method Fade(FFI\CData $color, float $alpha): FFI\CData
      */
-
-    public function test_GetRandomValue_respectsParameterOrder(): void
+    public function test_getRandomValue_respectsParameterOrder(): void
     {
         $this->ffiProxy->GetRandomValue(10, 20)
             ->shouldBeCalledOnce()
             ->willReturn(15);
 
         self::assertEquals(15, $this->raylib->getRandomValue(10, 20));
+    }
+
+    public function test_initWindow_respectsParameterOrder(): void
+    {
+        $this->ffiProxy->InitWindow(800, 600, 'My Test')
+            ->shouldBeCalledOnce();
+
+        $this->raylib->initWindow(800, 600, 'My Test');
+    }
+
+    public function test_isKeyDown(): void
+    {
+        $this->ffiProxy->IsKeyDown(10)
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isKeyDown(10));
+    }
+
+    public function test_isKeyPressed(): void
+    {
+        $this->ffiProxy->IsKeyPressed(10)
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isKeyPressed(10));
+    }
+
+    public function test_setTargetFPS_respectsParameterOrder(): void
+    {
+        $this->ffiProxy->SetTargetFPS(45)
+            ->shouldBeCalledOnce();
+
+        $this->raylib->setTargetFPS(45);
+    }
+
+    public function test_windowShouldClose(): void
+    {
+        $this->ffiProxy->WindowShouldClose()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->windowShouldClose());
     }
 
     private function sameCDataCamera2DArgument(CData $expectedStruct): Argument\Token\CallbackToken
