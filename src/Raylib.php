@@ -13,12 +13,6 @@ final class Raylib implements HasRaylibKeysConstants
         $this->ffi = $ffi;
     }
 
-    public function __call(string $method, array $args)
-    {
-        $callable = [$this->ffi, $method];
-        return $callable(...$args);
-    }
-
     public function beginDrawing(): void
     {
         $this->ffi->BeginDrawing();
