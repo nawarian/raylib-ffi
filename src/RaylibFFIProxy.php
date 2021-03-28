@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nawarian\Raylib;
 
 use FFI;
+use Nawarian\Raylib\Types\Vector2;
 
 /**
  * @method FFI\CData new(string $type)
@@ -20,8 +21,11 @@ use FFI;
  * @method void EndDrawing()
  * @method void EndMode2D()
  * @method FFI\CData Fade(FFI\CData $color, float $alpha)
+ * @method float GetFrameTime()
  * @method float GetMouseWheelMove()
  * @method int GetRandomValue(int $min, int $max)
+ * @method FFI\CData GetScreenToWorld2D(FFI\CData $position, FFI\CData $camera)
+ * @method FFI\CData GetWorldToScreen2D(FFI\CData $position, FFI\CData $camera)
  * @method void InitWindow(int $width, int $height, string $title)
  * @method bool IsKeyDown(int $key)
  * @method bool IsKeyPressed(int $key)
