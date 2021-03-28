@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib;
 
+use Nawarian\Raylib\Types\Camera2D;
+use Nawarian\Raylib\Types\Vector2;
+
 final class Raylib implements HasRaylibKeysConstants
 {
     private RaylibFFIProxy $ffi;
@@ -79,6 +82,11 @@ final class Raylib implements HasRaylibKeysConstants
         return new Types\Color($colorStruct->r, $colorStruct->g, $colorStruct->b, $colorStruct->a);
     }
 
+    public function getFrameTime(): float
+    {
+        return $this->ffi->GetFrameTime();
+    }
+
     public function getMouseWheelMove(): float
     {
         return $this->ffi->GetMouseWheelMove();
@@ -87,6 +95,28 @@ final class Raylib implements HasRaylibKeysConstants
     public function getRandomValue(int $min, int $max): int
     {
         return $this->ffi->GetRandomValue($min, $max);
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function getScreenToWorld2D(Vector2 $position, Camera2D $camera): Vector2
+    {
+        $vec = $this->ffi->GetScreenToWorld2D($position->toCData($this->ffi), $camera->toCData($this->ffi));
+
+        return new Vector2($vec->x, $vec->y);
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function getWorldToScreen2D(Vector2 $position, Camera2D $camera): Vector2
+    {
+        $vec = $this->ffi->GetWorldToScreen2D($position->toCData($this->ffi), $camera->toCData($this->ffi));
+
+        return new Vector2($vec->x, $vec->y);
     }
 
     public function initWindow(int $width, int $height, string $title): void
@@ -112,5 +142,25 @@ final class Raylib implements HasRaylibKeysConstants
     public function windowShouldClose(): bool
     {
         return $this->ffi->WindowShouldClose();
+    }
+
+    public function vector2Add(Vector2 $v1, Vector2 $v2): Vector2
+    {
+        return $v1->add($v2);
+    }
+
+    public function vector2Length(Vector2 $vec): float
+    {
+        return $vec->length();
+    }
+
+    public function vector2Scale(Vector2 $vec, float $scale): Vector2
+    {
+        return $vec->scale($scale);
+    }
+
+    public function vector2Subtract(Vector2 $v1, Vector2 $v2): Vector2
+    {
+        return $v1->subtract($v2);
     }
 }

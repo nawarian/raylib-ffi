@@ -168,6 +168,15 @@ class RaylibTest extends TestCase
         );
     }
 
+    public function test_getFrameTime(): void
+    {
+        $this->ffiProxy->GetFrameTime()
+            ->shouldBeCalledOnce()
+            ->willReturn(10.0);
+
+        self::assertEquals(10.0, $this->raylib->getFrameTime());
+    }
+
     public function test_getMouseWheelMove(): void
     {
         $this->ffiProxy->GetMouseWheelMove()
@@ -188,6 +197,46 @@ class RaylibTest extends TestCase
             ->willReturn(15);
 
         self::assertEquals(15, $this->raylib->getRandomValue(10, 20));
+    }
+
+    public function test_getScreenToWorld2D_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $expectedPosition = $this->ffi->new('Vector2');
+        $expectedPosition->x = 5;
+        $expectedPosition->y = 5;
+
+        $expectedStruct = $this->ffi->new('Vector2');
+        $expectedStruct->x = 10;
+        $expectedStruct->y = 20;
+
+        $this->ffiProxy->GetScreenToWorld2D(
+            $this->sameCDataVector2Argument($expectedPosition),
+            $this->sameCDataCamera2DArgument($this->ffi->new('Camera2D')),
+            )->shouldBeCalledOnce()->willReturn($expectedStruct);
+
+        $position = new Vector2(5, 5);
+        $camera = new Camera2D(new Vector2(0, 0), new Vector2(0, 0), 0, 0);
+        self::assertEquals(new Vector2(10, 20), $this->raylib->getScreenToWorld2D($position, $camera));
+    }
+
+    public function test_getWorldToScreen2D_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $expectedPosition = $this->ffi->new('Vector2');
+        $expectedPosition->x = 5;
+        $expectedPosition->y = 5;
+
+        $expectedStruct = $this->ffi->new('Vector2');
+        $expectedStruct->x = 10;
+        $expectedStruct->y = 20;
+
+        $this->ffiProxy->GetWorldToScreen2D(
+            $this->sameCDataVector2Argument($expectedPosition),
+            $this->sameCDataCamera2DArgument($this->ffi->new('Camera2D')),
+        )->shouldBeCalledOnce()->willReturn($expectedStruct);
+
+        $position = new Vector2(5, 5);
+        $camera = new Camera2D(new Vector2(0, 0), new Vector2(0, 0), 0, 0);
+        self::assertEquals(new Vector2(10, 20), $this->raylib->getWorldToScreen2D($position, $camera));
     }
 
     public function test_initWindow_respectsParameterOrder(): void
@@ -231,6 +280,16 @@ class RaylibTest extends TestCase
             ->willReturn(true);
 
         self::assertTrue($this->raylib->windowShouldClose());
+    }
+
+    private function sameCDataVector2Argument(CData $expectedStruct): Argument\Token\CallbackToken
+    {
+        return Argument::that(function (CData $vector2) use ($expectedStruct) {
+            self::assertEquals($expectedStruct->x, $vector2->x);
+            self::assertEquals($expectedStruct->y, $vector2->y);
+
+            return true;
+        });
     }
 
     private function sameCDataCamera2DArgument(CData $expectedStruct): Argument\Token\CallbackToken

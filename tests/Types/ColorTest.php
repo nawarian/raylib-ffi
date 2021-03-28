@@ -12,6 +12,31 @@ use PHPUnit\Framework\TestCase;
 
 class ColorTest extends TestCase
 {
+    public function test_lightGray(): void
+    {
+        self::assertEquals(Color::lightGray(), new Color(200, 200, 200, 255));
+    }
+
+    public function test_gray(): void
+    {
+        self::assertEquals(Color::gray(), new Color(130, 130, 130, 255));
+    }
+
+    public function test_darkGray(): void
+    {
+        self::assertEquals(Color::darkGray(), new Color(80, 80, 80, 255));
+    }
+
+    public function test_red(): void
+    {
+        self::assertEquals(Color::red(), new Color(230, 41, 55, 255));
+    }
+
+    public function test_black(): void
+    {
+        self::assertEquals(Color::black(), new Color(0, 0, 0, 255));
+    }
+
     public function test_toCData_withInvalidFFIStructDef_throwsInvalidArgumentException(): void
     {
         $color = new Color(255, 255, 150, 110);

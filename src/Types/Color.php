@@ -24,6 +24,31 @@ final class Color
         $this->alpha = $alpha;
     }
 
+    public static function lightGray(): Color
+    {
+        return new self(200, 200, 200, 255);
+    }
+
+    public static function gray(): Color
+    {
+        return new self(130, 130, 130, 255);
+    }
+
+    public static function darkGray(): Color
+    {
+        return new self(80, 80, 80, 255);
+    }
+
+    public static function red(): Color
+    {
+        return new self(230, 41, 55, 255);
+    }
+
+    public static function black(): Color
+    {
+        return new self(0, 0, 0, 255);
+    }
+
     /**
      * @psalm-suppress MixedPropertyAssignment
      * @psalm-suppress UndefinedPropertyAssignment
