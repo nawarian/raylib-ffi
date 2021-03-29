@@ -9,9 +9,11 @@ use FFI\CData;
 use Nawarian\Raylib\Raylib;
 use Nawarian\Raylib\RaylibFFIProxy;
 use Nawarian\Raylib\Types\Camera2D;
+use Nawarian\Raylib\Types\Camera3D;
 use Nawarian\Raylib\Types\Color;
 use Nawarian\Raylib\Types\Rectangle;
 use Nawarian\Raylib\Types\Vector2;
+use Nawarian\Raylib\Types\Vector3;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -60,6 +62,33 @@ class RaylibTest extends TestCase
         $this->raylib->beginMode2D($camera);
     }
 
+    public function test_beginMode3D_convertsCamera3DToCData(): void
+    {
+        $camera = new Camera3D(
+            new Vector3(0, 0, 0),
+            new Vector3(1, 1, 1),
+            new Vector3(2, 2, 2),
+            10.0,
+            5,
+        );
+
+        $expectedStruct = $this->ffi->new('Camera3D');
+        $expectedStruct->target->x = 1;
+        $expectedStruct->target->y = 1;
+        $expectedStruct->target->z = 1;
+        $expectedStruct->up->x = 2;
+        $expectedStruct->up->y = 2;
+        $expectedStruct->up->z = 2;
+        $expectedStruct->fovy = 10.0;
+        $expectedStruct->type = 5;
+
+        $this->ffiProxy->BeginMode3D(
+            $this->sameCDataCamera3DArgument($expectedStruct)
+        )->shouldBeCalledOnce();
+
+        $this->raylib->beginMode3D($camera);
+    }
+
     public function test_clearBackground_convertsColorToCData(): void
     {
         $color = new Color(0, 0, 0, 0);
@@ -69,6 +98,58 @@ class RaylibTest extends TestCase
             ->shouldBeCalledOnce();
 
         $this->raylib->clearBackground($color);
+    }
+
+    public function test_closeWindow(): void
+    {
+        $this->ffiProxy->CloseWindow()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->closeWindow();
+    }
+
+    public function test_drawCube_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $position = new Vector3(5, 10, 15);
+        $color = new Color(0, 0, 0, 0);
+
+        $expectedColorStruct = $this->ffi->new('Color');
+        $expectedVector3Struct = $this->ffi->new('Vector3');
+        $expectedVector3Struct->x = 5;
+        $expectedVector3Struct->y = 10;
+        $expectedVector3Struct->z = 15;
+
+        $this->ffiProxy->DrawCube(
+            $this->sameCDataVector3Argument($expectedVector3Struct),
+            10,
+            20,
+            30,
+            $this->sameCDataColorArgument($expectedColorStruct),
+            )->shouldBeCalledOnce();
+
+        $this->raylib->drawCube($position, 10, 20, 30, $color);
+    }
+
+    public function test_drawCubeWires_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $position = new Vector3(5, 10, 15);
+        $color = new Color(0, 0, 0, 0);
+
+        $expectedColorStruct = $this->ffi->new('Color');
+        $expectedVector3Struct = $this->ffi->new('Vector3');
+        $expectedVector3Struct->x = 5;
+        $expectedVector3Struct->y = 10;
+        $expectedVector3Struct->z = 15;
+
+        $this->ffiProxy->DrawCubeWires(
+            $this->sameCDataVector3Argument($expectedVector3Struct),
+            10,
+            20,
+            30,
+            $this->sameCDataColorArgument($expectedColorStruct),
+            )->shouldBeCalledOnce();
+
+        $this->raylib->drawCubeWires($position, 10, 20, 30, $color);
     }
 
     public function test_drawLine_respectsParameterOrderAndConvertsColorToCData(): void
@@ -82,12 +163,28 @@ class RaylibTest extends TestCase
         $this->raylib->drawLine(10, 20, 30 ,40, $color);
     }
 
-    public function test_closeWindow(): void
+    public function test_drawPlane_respectsParameterOrderAndConvertsColorToCData(): void
     {
-        $this->ffiProxy->CloseWindow()
-            ->shouldBeCalledOnce();
+        $center = new Vector3(5, 10, 15);
+        $size = new Vector2(20, 40);
+        $color = new Color(0, 0, 0, 0);
 
-        $this->raylib->closeWindow();
+        $expectedCenterStruct = $this->ffi->new('Vector3');
+        $expectedCenterStruct->x = 5;
+        $expectedCenterStruct->y = 10;
+        $expectedCenterStruct->z = 15;
+        $expectedSizeStruct = $this->ffi->new('Vector2');
+        $expectedSizeStruct->x = 20;
+        $expectedSizeStruct->y = 40;
+        $expectedColorStruct = $this->ffi->new('Color');
+
+        $this->ffiProxy->DrawPlane(
+            $this->sameCDataVector3Argument($expectedCenterStruct),
+            $this->sameCDataVector2Argument($expectedSizeStruct),
+            $this->sameCDataColorArgument($expectedColorStruct),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawPlane($center, $size, $color);
     }
 
     public function test_drawRectangle_respectsParameterOrderAndConvertsColorToCData(): void
@@ -152,6 +249,14 @@ class RaylibTest extends TestCase
             ->shouldBeCalledOnce();
 
         $this->raylib->endMode2D();
+    }
+
+    public function test_endMode3D(): void
+    {
+        $this->ffiProxy->EndMode3D()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->endMode3D();
     }
 
     public function test_fade_respectsParameterOrderAndConvertsObjectsToCData(): void
@@ -265,12 +370,55 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->isKeyPressed(10));
     }
 
+    public function test_setCameraMode_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $camera = new Camera3D(
+            new Vector3(0, 0, 0),
+            new Vector3(0, 0, 0),
+            new Vector3(0, 0, 0),
+            15.0,
+            5,
+        );
+
+        $expectedStruct = $this->ffi->new('Camera3D');
+        $expectedStruct->fovy = 15.0;
+        $expectedStruct->type = 5;
+
+        $this->ffiProxy->SetCameraMode(
+            $this->sameCDataCamera3DArgument($expectedStruct),
+            Camera3D::MODE_FIRST_PERSON,
+        )->shouldBeCalledOnce();
+
+        $this->raylib->setCameraMode($camera, Camera3D::MODE_FIRST_PERSON);
+    }
+
     public function test_setTargetFPS_respectsParameterOrder(): void
     {
         $this->ffiProxy->SetTargetFPS(45)
             ->shouldBeCalledOnce();
 
         $this->raylib->setTargetFPS(45);
+    }
+
+    public function test_updateCamera_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $camera = new Camera3D(
+            new Vector3(0, 0, 0),
+            new Vector3(0, 0, 0),
+            new Vector3(0, 0, 0),
+            15.0,
+            5,
+        );
+
+        $expectedStruct = $this->ffi->new('Camera3D');
+        $expectedStruct->fovy = 15.0;
+        $expectedStruct->type = 5;
+
+        $this->ffiProxy->UpdateCamera(
+            $this->sameCDataCamera3DArgument($expectedStruct)
+        )->shouldBeCalledOnce();
+
+        $this->raylib->updateCamera($camera);
     }
 
     public function test_windowShouldClose(): void
@@ -282,11 +430,41 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->windowShouldClose());
     }
 
+    private function sameCDataVector3Argument(CData $expectedStruct): Argument\Token\CallbackToken
+    {
+        return Argument::that(function (CData $vector3) use ($expectedStruct) {
+            self::assertEquals($expectedStruct->x, $vector3->x);
+            self::assertEquals($expectedStruct->y, $vector3->y);
+            self::assertEquals($expectedStruct->z, $vector3->z);
+
+            return true;
+        });
+    }
+
     private function sameCDataVector2Argument(CData $expectedStruct): Argument\Token\CallbackToken
     {
         return Argument::that(function (CData $vector2) use ($expectedStruct) {
             self::assertEquals($expectedStruct->x, $vector2->x);
             self::assertEquals($expectedStruct->y, $vector2->y);
+
+            return true;
+        });
+    }
+
+    private function sameCDataCamera3DArgument(CData $expectedStruct): Argument\Token\CallbackToken
+    {
+        return Argument::that(function (CData $camera) use ($expectedStruct) {
+            self::assertEquals($expectedStruct->position->x, $camera->position->x);
+            self::assertEquals($expectedStruct->position->y, $camera->position->y);
+            self::assertEquals($expectedStruct->position->z, $camera->position->z);
+            self::assertEquals($expectedStruct->target->x, $camera->target->x);
+            self::assertEquals($expectedStruct->target->y, $camera->target->y);
+            self::assertEquals($expectedStruct->target->z, $camera->target->z);
+            self::assertEquals($expectedStruct->up->x, $camera->up->x);
+            self::assertEquals($expectedStruct->up->y, $camera->up->y);
+            self::assertEquals($expectedStruct->up->z, $camera->up->z);
+            self::assertEquals($expectedStruct->fovy, $camera->fovy);
+            self::assertEquals($expectedStruct->type, $camera->type);
 
             return true;
         });
