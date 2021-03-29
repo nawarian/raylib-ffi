@@ -295,7 +295,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] audio/audio_raw_stream.php
 - [ ] audio/audio_sound_loading.php
 - [x] [core/core_2d_camera.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_2d_camera.php)
-- [x] [core/core_2d_camera_platformer.php](https://github.com/raylib-ffi/blob/main/examples/core/core_2d_camera_platformer.php)
+- [x] [core/core_2d_camera_platformer.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_2d_camera_platformer.php)
 - [ ] core/core_3d_camera_first_person.php
 - [ ] core/core_3d_camera_free.php
 - [ ] core/core_3d_camera_mode.php
