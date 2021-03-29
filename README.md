@@ -96,8 +96,8 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void EndDrawing(void)`
 - [x] `void BeginMode2D(Camera2D camera)`
 - [x] `void EndMode2D(void)`
-- [ ] `void BeginMode3D(Camera3D camera)`
-- [ ] `void EndMode3D(void)`
+- [x] `void BeginMode3D(Camera3D camera)`
+- [x] `void EndMode3D(void)`
 - [ ] `void BeginTextureMode(RenderTexture2D target)`
 - [ ] `void EndTextureMode(void)`
 - [ ] `void BeginScissorMode(int x, int y, int width, int height)`
@@ -187,6 +187,9 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void DrawRectangleLines(int posX, int posY, int width, int height, Color color)`
 - [x] `void DrawRectangleRec(Rectangle rec, Color color)`
 - [x] `void DrawText(const char *text, int posX, int posY, int fontSize, Color color)`
+- [x] `void DrawCube(Vector3 position, float width, float height, float length, Color color);`
+- [x] `void DrawCubeWires(Vector3 position, float width, float height, float length, Color color);`
+- [x] `void DrawPlane(Vector3 centerPos, Vector2 size, Color color);`
 - [x] `Color Fade(Color color, float alpha)`
 
 ### Ray Math
