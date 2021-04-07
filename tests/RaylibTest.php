@@ -400,7 +400,7 @@ class RaylibTest extends TestCase
         $this->raylib->setTargetFPS(45);
     }
 
-    public function test_updateCamera_respectsParameterOrderAndConvertsObjectsToCData(): void
+    public function test_updateCamera_respectsParameterOrderAndConvertsObjectsToCDataAndUpdatesOriginalObject(): void
     {
         $camera = new Camera3D(
             new Vector3(0, 0, 0),
@@ -416,9 +416,22 @@ class RaylibTest extends TestCase
 
         $this->ffiProxy->UpdateCamera(
             $this->sameCDataCamera3DArgument($expectedStruct)
-        )->shouldBeCalledOnce();
+        )->will(function (array $args) {
+            /** @var CData $cdata */
+            [$cdata] = $args;
+
+            $cdata->position->x = 10;
+            $cdata->target->x = 15;
+            $cdata->up->x = 20;
+            $cdata->fovy = 30.0;
+        })->shouldBeCalledOnce();
 
         $this->raylib->updateCamera($camera);
+
+        self::assertEquals(10, $camera->position->x);
+        self::assertEquals(15, $camera->target->x);
+        self::assertEquals(20, $camera->up->x);
+        self::assertEquals(30.0, $camera->fovy);
     }
 
     public function test_windowShouldClose(): void
