@@ -49,6 +49,11 @@ final class Color
         return new self(255, 203, 0, 255);
     }
 
+    public static function green(): Color
+    {
+        return new self(0, 228, 48, 255);
+    }
+
     public static function lime(): Color
     {
         return new self(0, 158, 47, 255);

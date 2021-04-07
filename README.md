@@ -111,7 +111,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void EndTextureMode(void)`
 - [ ] `void BeginScissorMode(int x, int y, int width, int height)`
 - [ ] `void EndScissorMode(void)`
-- [ ] `Ray GetMouseRay(Vector2 mousePosition, Camera camera)`
+- [x] `Ray GetMouseRay(Vector2 mousePosition, Camera camera)`
 - [ ] `Matrix GetCameraMatrix(Camera camera)`
 - [ ] `Matrix GetCameraMatrix2D(Camera2D camera)`
 - [ ] `Vector2 GetWorldToScreen(Vector3 position, Camera camera)`
@@ -175,13 +175,13 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `int GetGamepadButtonPressed(void)`
 - [ ] `int GetGamepadAxisCount(int gamepad)`
 - [ ] `float GetGamepadAxisMovement(int gamepad, int axis)`
-- [ ] `bool IsMouseButtonPressed(int button)`
+- [x] `bool IsMouseButtonPressed(int button)`
 - [ ] `bool IsMouseButtonDown(int button)`
 - [ ] `bool IsMouseButtonReleased(int button)`
 - [ ] `bool IsMouseButtonUp(int button)`
 - [ ] `int GetMouseX(void)`
 - [ ] `int GetMouseY(void)`
-- [ ] `Vector2 GetMousePosition(void)`
+- [x] `Vector2 GetMousePosition(void)`
 - [ ] `void SetMousePosition(int x, int y)`
 - [ ] `void SetMouseOffset(int offsetX, int offsetY)`
 - [ ] `void SetMouseScale(float scaleX, float scaleY)`
@@ -357,7 +357,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void DrawTextRecEx(Font font, const char *text, Rectangle rec, float fontSize, float spacing, bool wordWrap, Color tint,`
 - [ ] `int selectStart, int selectLength, Color selectTint, Color selectBackTint)`
 - [ ] `void DrawTextCodepoint(Font font, int codepoint, Vector2 position, float fontSize, Color tint)`
-- [ ] `int MeasureText(const char *text, int fontSize)`
+- [x] `int MeasureText(const char *text, int fontSize)`
 - [ ] `Vector2 MeasureTextEx(Font font, const char *text, float fontSize, float spacing)`
 - [ ] `int GetGlyphIndex(Font font, int codepoint)`
 - [ ] `int TextCopy(char *dst, const char *src)`
@@ -396,7 +396,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void DrawCylinder(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color)`
 - [ ] `void DrawCylinderWires(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color)`
 - [x] `void DrawPlane(Vector3 centerPos, Vector2 size, Color color)`
-- [ ] `void DrawRay(Ray ray, Color color)`
+- [x] `void DrawRay(Ray ray, Color color)`
 - [x] `void DrawGrid(int slices, float spacing)`
 - [ ] `void DrawGizmo(Vector3 position)`
 - [ ] `Model LoadModel(const char *fileName)`
@@ -441,7 +441,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `bool CheckCollisionBoxSphere(BoundingBox box, Vector3 center, float radius)`
 - [ ] `bool CheckCollisionRaySphere(Ray ray, Vector3 center, float radius)`
 - [ ] `bool CheckCollisionRaySphereEx(Ray ray, Vector3 center, float radius, Vector3 *collisionPoint)`
-- [ ] `bool CheckCollisionRayBox(Ray ray, BoundingBox box)`
+- [x] `bool CheckCollisionRayBox(Ray ray, BoundingBox box)`
 - [ ] `RayHitInfo GetCollisionRayMesh(Ray ray, Mesh mesh, Matrix transform)`
 - [ ] `RayHitInfo GetCollisionRayModel(Ray ray, Model model)`
 - [ ] `RayHitInfo GetCollisionRayTriangle(Ray ray, Vector3 p1, Vector3 p2, Vector3 p3)`
@@ -643,7 +643,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [core/core_3d_camera_first_person.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_3d_camera_first_person.php)
 - [x] [core/core_3d_camera_free.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_3d_camera_free.php)
 - [x] [core/core_3d_camera_mode.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_3d_camera_mode.php)
-- [ ] core/core_3d_picking.php
+- [x] [core/core_3d_picking.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_3d_picking.php)
 - [ ] core/core_basic_window.php
 - [ ] core/core_basic_window_web.php
 - [ ] core/core_custom_logging.php
