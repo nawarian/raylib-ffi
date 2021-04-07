@@ -8,14 +8,17 @@ use FFI;
 use FFI\CData;
 use Nawarian\Raylib\Raylib;
 use Nawarian\Raylib\RaylibFFIProxy;
+use Nawarian\Raylib\Types\BoundingBox;
 use Nawarian\Raylib\Types\Camera2D;
 use Nawarian\Raylib\Types\Camera3D;
 use Nawarian\Raylib\Types\Color;
+use Nawarian\Raylib\Types\Ray;
 use Nawarian\Raylib\Types\Rectangle;
 use Nawarian\Raylib\Types\Vector2;
 use Nawarian\Raylib\Types\Vector3;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\Argument\Token\CallbackToken;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 
@@ -87,6 +90,28 @@ class RaylibTest extends TestCase
         )->shouldBeCalledOnce();
 
         $this->raylib->beginMode3D($camera);
+    }
+
+    public function test_checkCollisionRayBox_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $ray = new Ray(new Vector3(0, 0, 0), new Vector3(0, 0, 0));
+        $box = new BoundingBox(new Vector3(1, 1, 1), new Vector3(1, 1, 1));
+
+        $expectedRayStruct = $this->ffi->new('Ray');
+        $expectedBoxStruct = $this->ffi->new('BoundingBox');
+        $expectedBoxStruct->min->x = 1;
+        $expectedBoxStruct->min->y = 1;
+        $expectedBoxStruct->min->z = 1;
+        $expectedBoxStruct->max->x = 1;
+        $expectedBoxStruct->max->y = 1;
+        $expectedBoxStruct->max->z = 1;
+
+        $this->ffiProxy->CheckCollisionRayBox(
+            $this->sameCDataRayArgument($expectedRayStruct),
+            $this->sameCDataBoundingBoxArgument($expectedBoxStruct),
+        )->willReturn(true)->shouldBeCalledOnce();
+
+        self::assertTrue($this->raylib->checkCollisionRayBox($ray, $box));
     }
 
     public function test_clearBackground_convertsColorToCData(): void
@@ -203,6 +228,22 @@ class RaylibTest extends TestCase
         $this->raylib->drawPlane($center, $size, $color);
     }
 
+    public function test_drawRay_respectsParameterOrderAndConvertsColorToCData(): void
+    {
+        $ray = new Ray(new Vector3(0, 0, 0), new Vector3(0, 0, 0));
+        $color = new Color(0, 0, 0, 0);
+
+        $expectedRay = $this->ffi->new('Ray');
+        $expectedColor = $this->ffi->new('Color');
+
+        $this->ffiProxy->DrawRay(
+            $this->sameCDataRayArgument($expectedRay),
+            $this->sameCDataColorArgument($expectedColor),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawRay($ray, $color);
+    }
+
     public function test_drawRectangle_respectsParameterOrderAndConvertsColorToCData(): void
     {
         $color = new Color(0, 0, 0, 0);
@@ -298,6 +339,44 @@ class RaylibTest extends TestCase
         self::assertEquals(10.0, $this->raylib->getFrameTime());
     }
 
+    public function test_getMousePosition(): void
+    {
+        $vector2Struct = $this->ffi->new('Vector2');
+        $vector2Struct->x = 10;
+
+        $this->ffiProxy->GetMousePosition()
+            ->shouldBeCalledOnce()
+            ->willReturn($vector2Struct);
+
+        self::assertEquals(new Vector2(10, 0), $this->raylib->getMousePosition());
+    }
+
+    public function test_GetMouseRay(): void
+    {
+        $mousePosition = new Vector2(0, 0);
+        $camera = new Camera3D(
+            new Vector3(0, 0, 0),
+            new Vector3(0, 0, 0),
+            new Vector3(0, 0, 0),
+            10.0,
+            Camera3D::PROJECTION_PERSPECTIVE,
+        );
+
+        $mousePositionStruct = $this->ffi->new('Vector2');
+        $cameraStruct = $this->ffi->new('Camera3D');
+        $cameraStruct->fovy = 10.0;
+
+        $expectedRayStruct = $this->ffi->new('Ray');
+
+        $this->ffiProxy->GetMouseRay(
+            $this->sameCDataVector2Argument($mousePositionStruct),
+            $this->sameCDataCamera3DArgument($cameraStruct),
+        )->willReturn($expectedRayStruct)->shouldBeCalledOnce();
+
+        $ray = $this->raylib->getMouseRay($mousePosition, $camera);
+        self::assertEquals(new Ray(new Vector3(0, 0, 0), new Vector3(0, 0, 0)), $ray);
+    }
+
     public function test_getMouseWheelMove(): void
     {
         $this->ffiProxy->GetMouseWheelMove()
@@ -386,6 +465,24 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->isKeyPressed(10));
     }
 
+    public function test_isMouseButtonPressed(): void
+    {
+        $this->ffiProxy->IsMouseButtonPressed(10)
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isMouseButtonPressed(10));
+    }
+
+    public function test_measureText(): void
+    {
+        $this->ffiProxy->MeasureText('Tiny Text', 20)
+            ->shouldBeCalledOnce()
+            ->willReturn(2000);
+
+        self::assertEquals(2000, $this->raylib->measureText('Tiny Text', 20));
+    }
+
     public function test_setCameraMode_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $camera = new Camera3D(
@@ -459,28 +556,36 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->windowShouldClose());
     }
 
-    private function sameCDataVector3Argument(CData $expectedStruct): Argument\Token\CallbackToken
+    private function sameCDataBoundingBoxArgument(CData $expectedStruct): CallbackToken
     {
-        return Argument::that(function (CData $vector3) use ($expectedStruct) {
-            self::assertEquals($expectedStruct->x, $vector3->x);
-            self::assertEquals($expectedStruct->y, $vector3->y);
-            self::assertEquals($expectedStruct->z, $vector3->z);
+        return Argument::that(function (CData $boundingBox) use ($expectedStruct) {
+            self::assertEquals($expectedStruct->min->x, $boundingBox->min->x);
+            self::assertEquals($expectedStruct->min->y, $boundingBox->min->y);
+            self::assertEquals($expectedStruct->min->z, $boundingBox->min->z);
+
+            self::assertEquals($expectedStruct->max->x, $boundingBox->max->x);
+            self::assertEquals($expectedStruct->max->y, $boundingBox->max->y);
+            self::assertEquals($expectedStruct->max->z, $boundingBox->max->z);
 
             return true;
         });
     }
 
-    private function sameCDataVector2Argument(CData $expectedStruct): Argument\Token\CallbackToken
+    private function sameCDataCamera2DArgument(CData $expectedStruct): CallbackToken
     {
-        return Argument::that(function (CData $vector2) use ($expectedStruct) {
-            self::assertEquals($expectedStruct->x, $vector2->x);
-            self::assertEquals($expectedStruct->y, $vector2->y);
+        return Argument::that(function (CData $camera) use ($expectedStruct) {
+            self::assertEquals($expectedStruct->offset->x, $camera->offset->x);
+            self::assertEquals($expectedStruct->offset->y, $camera->offset->y);
+            self::assertEquals($expectedStruct->target->x, $camera->target->x);
+            self::assertEquals($expectedStruct->target->y, $camera->target->y);
+            self::assertEquals($expectedStruct->rotation, $camera->rotation);
+            self::assertEquals($expectedStruct->zoom, $camera->zoom);
 
             return true;
         });
     }
 
-    private function sameCDataCamera3DArgument(CData $expectedStruct): Argument\Token\CallbackToken
+    private function sameCDataCamera3DArgument(CData $expectedStruct): CallbackToken
     {
         return Argument::that(function (CData $camera) use ($expectedStruct) {
             self::assertEquals($expectedStruct->position->x, $camera->position->x);
@@ -499,21 +604,7 @@ class RaylibTest extends TestCase
         });
     }
 
-    private function sameCDataCamera2DArgument(CData $expectedStruct): Argument\Token\CallbackToken
-    {
-        return Argument::that(function (CData $camera) use ($expectedStruct) {
-            self::assertEquals($expectedStruct->offset->x, $camera->offset->x);
-            self::assertEquals($expectedStruct->offset->y, $camera->offset->y);
-            self::assertEquals($expectedStruct->target->x, $camera->target->x);
-            self::assertEquals($expectedStruct->target->y, $camera->target->y);
-            self::assertEquals($expectedStruct->rotation, $camera->rotation);
-            self::assertEquals($expectedStruct->zoom, $camera->zoom);
-
-            return true;
-        });
-    }
-
-    private function sameCDataColorArgument(CData $expectedStruct): Argument\Token\CallbackToken
+    private function sameCDataColorArgument(CData $expectedStruct): CallbackToken
     {
         return Argument::that(function (CData $color) use ($expectedStruct) {
             self::assertEquals($expectedStruct->r, $color->r);
@@ -525,13 +616,49 @@ class RaylibTest extends TestCase
         });
     }
 
-    private function sameCDataRectangleArgument(CData $expectedStruct): Argument\Token\CallbackToken
+    public function sameCDataRayArgument(CData $expectedStruct): CallbackToken
+    {
+        return Argument::that(function (CData $ray) use ($expectedStruct) {
+            self::assertEquals($expectedStruct->position->x, $ray->position->x);
+            self::assertEquals($expectedStruct->position->y, $ray->position->y);
+            self::assertEquals($expectedStruct->position->z, $ray->position->z);
+
+            self::assertEquals($expectedStruct->direction->x, $ray->direction->x);
+            self::assertEquals($expectedStruct->direction->y, $ray->direction->y);
+            self::assertEquals($expectedStruct->direction->z, $ray->direction->z);
+
+            return true;
+        });
+    }
+
+    private function sameCDataRectangleArgument(CData $expectedStruct): CallbackToken
     {
         return Argument::that(function (CData $rectangle) use ($expectedStruct) {
             self::assertEquals($expectedStruct->x, $rectangle->x);
             self::assertEquals($expectedStruct->y, $rectangle->y);
             self::assertEquals($expectedStruct->width, $rectangle->width);
             self::assertEquals($expectedStruct->height, $rectangle->height);
+
+            return true;
+        });
+    }
+
+    private function sameCDataVector2Argument(CData $expectedStruct): CallbackToken
+    {
+        return Argument::that(function (CData $vector2) use ($expectedStruct) {
+            self::assertEquals($expectedStruct->x, $vector2->x);
+            self::assertEquals($expectedStruct->y, $vector2->y);
+
+            return true;
+        });
+    }
+
+    private function sameCDataVector3Argument(CData $expectedStruct): CallbackToken
+    {
+        return Argument::that(function (CData $vector3) use ($expectedStruct) {
+            self::assertEquals($expectedStruct->x, $vector3->x);
+            self::assertEquals($expectedStruct->y, $vector3->y);
+            self::assertEquals($expectedStruct->z, $vector3->z);
 
             return true;
         });

@@ -6,7 +6,7 @@ namespace Nawarian\Raylib;
 
 use FFI;
 
-final class Raylib implements HasRaylibKeysConstants
+final class Raylib implements HasRaylibKeysConstants, HasRaylibMouseConstants
 {
     private RaylibFFIProxy $ffi;
 
@@ -28,6 +28,11 @@ final class Raylib implements HasRaylibKeysConstants
     public function beginMode3D(Types\Camera3D $camera): void
     {
         $this->ffi->BeginMode3D($camera->toCData($this->ffi));
+    }
+
+    public function checkCollisionRayBox(Types\Ray $ray, Types\BoundingBox $box): bool
+    {
+        return $this->ffi->CheckCollisionRayBox($ray->toCData($this->ffi), $box->toCData($this->ffi));
     }
 
     public function clearBackground(Types\Color $color): void
@@ -90,6 +95,11 @@ final class Raylib implements HasRaylibKeysConstants
         );
     }
 
+    public function drawRay(Types\Ray $ray, Types\Color $color): void
+    {
+        $this->ffi->DrawRay($ray->toCData($this->ffi), $color->toCData($this->ffi));
+    }
+
     public function drawRectangle(float $x, float $y, float $width, float $height, Types\Color $color): void
     {
         $this->ffi->DrawRectangle($x, $y, $width, $height, $color->toCData($this->ffi));
@@ -141,6 +151,33 @@ final class Raylib implements HasRaylibKeysConstants
         return $this->ffi->GetFrameTime();
     }
 
+    /**
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function getMousePosition(): Types\Vector2
+    {
+        $vec2Struct = $this->ffi->GetMousePosition();
+
+        return new Types\Vector2($vec2Struct->x, $vec2Struct->y);
+    }
+
+    /**
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedPropertyFetch
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function getMouseRay(Types\Vector2 $mousePosition, Types\Camera3D $camera): Types\Ray
+    {
+        $rayStruct = $this->ffi->GetMouseRay($mousePosition->toCData($this->ffi), $camera->toCData($this->ffi));
+
+        return new Types\Ray(
+            new Types\Vector3($rayStruct->position->x, $rayStruct->position->y, $rayStruct->position->z),
+            new Types\Vector3($rayStruct->direction->x, $rayStruct->direction->y, $rayStruct->direction->z),
+        );
+    }
+
     public function getMouseWheelMove(): float
     {
         return $this->ffi->GetMouseWheelMove();
@@ -186,6 +223,16 @@ final class Raylib implements HasRaylibKeysConstants
     public function isKeyPressed(int $key): bool
     {
         return $this->ffi->IsKeyPressed($key);
+    }
+
+    public function isMouseButtonPressed(int $button): bool
+    {
+        return $this->ffi->IsMouseButtonPressed($button);
+    }
+
+    public function measureText(string $text, int $fontSize): int
+    {
+        return $this->ffi->MeasureText($text, $fontSize);
     }
 
     public function setCameraMode(Types\Camera3D $camera, int $mode): void
