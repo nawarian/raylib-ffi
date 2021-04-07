@@ -66,6 +66,11 @@ final class Raylib implements HasRaylibKeysConstants
         );
     }
 
+    public function drawGrid(int $slices, float $spacing): void
+    {
+        $this->ffi->DrawGrid($slices, $spacing);
+    }
+
     public function drawLine(int $x0, int $y0, int $x1, int $y1, Types\Color $color): void
     {
         $this->ffi->DrawLine($x0, $y0, $x1, $y1, $color->toCData($this->ffi));

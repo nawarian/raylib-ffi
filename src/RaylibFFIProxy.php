@@ -15,6 +15,7 @@ use FFI;
  * @method void CloseWindow()
  * @method void DrawCube(FFI\CData $position, float $width, float $height, float $length, FFI\CData $color)
  * @method void DrawCubeWires(FFI\CData $position, float $width, float $height, float $length, FFI\CData $color)
+ * @method void DrawGrid(int $slices, float $spacing)
  * @method void DrawLine(int $x0, int $y0, int $x1, int $y1, FFI\CData $color)
  * @method void DrawPlane(FFI\CData $center, FFI\CData $size, FFI\CData $color)
  * @method void DrawRectangle(float $x, float $y, float $width, float $height, FFI\CData $color)
