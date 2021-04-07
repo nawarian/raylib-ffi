@@ -152,6 +152,14 @@ class RaylibTest extends TestCase
         $this->raylib->drawCubeWires($position, 10, 20, 30, $color);
     }
 
+    public function test_drawFPS_respectsParameterOrder(): void
+    {
+        $this->ffiProxy->DrawFPS(15, 30)
+            ->shouldBeCalledOnce();
+
+        $this->raylib->drawFPS(15, 30);
+    }
+
     public function test_drawGrid_respectsParameterOrder(): void
     {
         $this->ffiProxy->DrawGrid(10, 20.0)

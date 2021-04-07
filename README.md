@@ -350,7 +350,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `Image GenImageFontAtlas(const CharInfo *chars, Rectangle **recs, int charsCount, int fontSize, int padding, int packMethod)`
 - [ ] `void UnloadFontData(CharInfo *chars, int charsCount)`
 - [ ] `void UnloadFont(Font font)`
-- [ ] `void DrawFPS(int posX, int posY)`
+- [x] `void DrawFPS(int posX, int posY)`
 - [ ] `void DrawText(const char *text, int posX, int posY, int fontSize, Color color)`
 - [ ] `void DrawTextEx(Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint)`
 - [ ] `void DrawTextRec(Font font, const char *text, Rectangle rec, float fontSize, float spacing, bool wordWrap, Color tint)`
@@ -642,7 +642,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [core/core_2d_camera_platformer.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_2d_camera_platformer.php)
 - [x] [core/core_3d_camera_first_person.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_3d_camera_first_person.php)
 - [x] [core/core_3d_camera_free.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_3d_camera_free.php)
-- [ ] core/core_3d_camera_mode.php
+- [x] [core/core_3d_camera_mode.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_3d_camera_mode.php)
 - [ ] core/core_3d_picking.php
 - [ ] core/core_basic_window.php
 - [ ] core/core_basic_window_web.php
