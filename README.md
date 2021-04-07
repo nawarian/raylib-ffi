@@ -191,8 +191,8 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `float GetGestureDragAngle(void)`
 - [ ] `Vector2 GetGesturePinchVector(void)`
 - [ ] `float GetGesturePinchAngle(void)`
-- [ ] `void SetCameraMode(Camera camera, int mode)`
-- [ ] `void UpdateCamera(Camera *camera)`
+- [x] `void SetCameraMode(Camera camera, int mode)`
+- [x] `void UpdateCamera(Camera *camera)`
 - [ ] `void SetCameraPanControl(int keyPan)`
 - [ ] `void SetCameraAltControl(int keyAlt)`
 - [ ] `void SetCameraSmoothZoomControl(int keySmoothZoom)`
