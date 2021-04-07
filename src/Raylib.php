@@ -191,10 +191,31 @@ final class Raylib implements HasRaylibKeysConstants
     /**
      * @psalm-suppress InvalidPassByReference
      * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedPropertyFetch
      */
     public function updateCamera(Types\Camera3D $camera): void
     {
-        $this->ffi->UpdateCamera(FFI::addr($camera->toCData($this->ffi)));
+        // Raylib's UpdateCamera() expects a struct *Camera3D
+        // So we pass by ref here. Given it will write to the
+        // camera object, we need to update on PHP side as well.
+        $cdata = FFI::addr($camera->toCData($this->ffi));
+        $this->ffi->UpdateCamera($cdata);
+
+        $camera->position->x = $cdata->position->x;
+        $camera->position->y = $cdata->position->y;
+        $camera->position->z = $cdata->position->z;
+
+        $camera->target->x = $cdata->target->x;
+        $camera->target->y = $cdata->target->y;
+        $camera->target->z = $cdata->target->z;
+
+        $camera->up->x = $cdata->up->x;
+        $camera->up->y = $cdata->up->y;
+        $camera->up->z = $cdata->up->z;
+
+        $camera->fovy = $cdata->fovy;
+        $camera->projection = $cdata->type;
     }
 
     public function windowShouldClose(): bool
