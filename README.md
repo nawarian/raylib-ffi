@@ -397,7 +397,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void DrawCylinderWires(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color)`
 - [x] `void DrawPlane(Vector3 centerPos, Vector2 size, Color color)`
 - [ ] `void DrawRay(Ray ray, Color color)`
-- [ ] `void DrawGrid(int slices, float spacing)`
+- [x] `void DrawGrid(int slices, float spacing)`
 - [ ] `void DrawGizmo(Vector3 position)`
 - [ ] `Model LoadModel(const char *fileName)`
 - [ ] `Model LoadModelFromMesh(Mesh mesh)`
