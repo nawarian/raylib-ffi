@@ -644,7 +644,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [core/core_3d_camera_free.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_3d_camera_free.php)
 - [x] [core/core_3d_camera_mode.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_3d_camera_mode.php)
 - [x] [core/core_3d_picking.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_3d_picking.php)
-- [ ] core/core_basic_window.php
+- [x] [core/core_basic_window.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_basic_window.php)
 - [ ] core/core_basic_window_web.php
 - [ ] core/core_custom_logging.php
 - [ ] core/core_drop_files.php
