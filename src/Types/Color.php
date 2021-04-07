@@ -39,6 +39,31 @@ final class Color
         return new self(80, 80, 80, 255);
     }
 
+    public static function blue(): Color
+    {
+        return new self(0, 121, 241, 255);
+    }
+
+    public static function gold(): Color
+    {
+        return new self(255, 203, 0, 255);
+    }
+
+    public static function lime(): Color
+    {
+        return new self(0, 158, 47, 255);
+    }
+
+    public static function maroon(): Color
+    {
+        return new self(190, 33, 55, 255);
+    }
+
+    public static function skyBlue(): Color
+    {
+        return new self(102, 191, 255, 255);
+    }
+
     public static function red(): Color
     {
         return new self(230, 41, 55, 255);
@@ -47,6 +72,11 @@ final class Color
     public static function black(): Color
     {
         return new self(0, 0, 0, 255);
+    }
+
+    public static function rayWhite(): Color
+    {
+        return new self(245, 245, 245, 255);
     }
 
     /**

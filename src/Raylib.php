@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib;
 
-use Nawarian\Raylib\Types\Camera2D;
-use Nawarian\Raylib\Types\Vector2;
+use FFI;
 
 final class Raylib implements HasRaylibKeysConstants
 {
@@ -26,6 +25,11 @@ final class Raylib implements HasRaylibKeysConstants
         $this->ffi->BeginMode2D($camera->toCData($this->ffi));
     }
 
+    public function beginMode3D(Types\Camera3D $camera): void
+    {
+        $this->ffi->BeginMode3D($camera->toCData($this->ffi));
+    }
+
     public function clearBackground(Types\Color $color): void
     {
         $this->ffi->ClearBackground($color->toCData($this->ffi));
@@ -36,9 +40,44 @@ final class Raylib implements HasRaylibKeysConstants
         $this->ffi->CloseWindow();
     }
 
+    public function drawCube(
+        Types\Vector3 $position,
+        float $width,
+        float $height,
+        float $length,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawCube($position->toCData($this->ffi), $width, $height, $length, $color->toCData($this->ffi));
+    }
+
+    public function drawCubeWires(
+        Types\Vector3 $position,
+        float $width,
+        float $height,
+        float $length,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawCubeWires(
+            $position->toCData($this->ffi),
+            $width,
+            $height,
+            $length,
+            $color->toCData($this->ffi)
+        );
+    }
+
     public function drawLine(int $x0, int $y0, int $x1, int $y1, Types\Color $color): void
     {
         $this->ffi->DrawLine($x0, $y0, $x1, $y1, $color->toCData($this->ffi));
+    }
+
+    public function drawPlane(Types\Vector3 $center, Types\Vector2 $size, Types\Color $color): void
+    {
+        $this->ffi->DrawPlane(
+            $center->toCData($this->ffi),
+            $size->toCData($this->ffi),
+            $color->toCData($this->ffi),
+        );
     }
 
     public function drawRectangle(float $x, float $y, float $width, float $height, Types\Color $color): void
@@ -71,6 +110,11 @@ final class Raylib implements HasRaylibKeysConstants
         $this->ffi->EndMode2D();
     }
 
+    public function endMode3D(): void
+    {
+        $this->ffi->EndMode3D();
+    }
+
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
@@ -101,22 +145,22 @@ final class Raylib implements HasRaylibKeysConstants
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
      */
-    public function getScreenToWorld2D(Vector2 $position, Camera2D $camera): Vector2
+    public function getScreenToWorld2D(Types\Vector2 $position, Types\Camera2D $camera): Types\Vector2
     {
         $vec = $this->ffi->GetScreenToWorld2D($position->toCData($this->ffi), $camera->toCData($this->ffi));
 
-        return new Vector2($vec->x, $vec->y);
+        return new Types\Vector2($vec->x, $vec->y);
     }
 
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
      */
-    public function getWorldToScreen2D(Vector2 $position, Camera2D $camera): Vector2
+    public function getWorldToScreen2D(Types\Vector2 $position, Types\Camera2D $camera): Types\Vector2
     {
         $vec = $this->ffi->GetWorldToScreen2D($position->toCData($this->ffi), $camera->toCData($this->ffi));
 
-        return new Vector2($vec->x, $vec->y);
+        return new Types\Vector2($vec->x, $vec->y);
     }
 
     public function initWindow(int $width, int $height, string $title): void
@@ -134,9 +178,44 @@ final class Raylib implements HasRaylibKeysConstants
         return $this->ffi->IsKeyPressed($key);
     }
 
+    public function setCameraMode(Types\Camera3D $camera, int $mode): void
+    {
+        $this->ffi->SetCameraMode($camera->toCData($this->ffi), $mode);
+    }
+
     public function setTargetFPS(int $fps): void
     {
         $this->ffi->SetTargetFPS($fps);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedPropertyFetch
+     */
+    public function updateCamera(Types\Camera3D $camera): void
+    {
+        // Raylib's UpdateCamera() expects a struct *Camera3D
+        // So we pass by ref here. Given it will write to the
+        // camera object, we need to update on PHP side as well.
+        $cdata = FFI::addr($camera->toCData($this->ffi));
+        $this->ffi->UpdateCamera($cdata);
+
+        $camera->position->x = $cdata->position->x;
+        $camera->position->y = $cdata->position->y;
+        $camera->position->z = $cdata->position->z;
+
+        $camera->target->x = $cdata->target->x;
+        $camera->target->y = $cdata->target->y;
+        $camera->target->z = $cdata->target->z;
+
+        $camera->up->x = $cdata->up->x;
+        $camera->up->y = $cdata->up->y;
+        $camera->up->z = $cdata->up->z;
+
+        $camera->fovy = $cdata->fovy;
+        $camera->projection = $cdata->type;
     }
 
     public function windowShouldClose(): bool
@@ -144,22 +223,22 @@ final class Raylib implements HasRaylibKeysConstants
         return $this->ffi->WindowShouldClose();
     }
 
-    public function vector2Add(Vector2 $v1, Vector2 $v2): Vector2
+    public function vector2Add(Types\Vector2 $v1, Types\Vector2 $v2): Types\Vector2
     {
         return $v1->add($v2);
     }
 
-    public function vector2Length(Vector2 $vec): float
+    public function vector2Length(Types\Vector2 $vec): float
     {
         return $vec->length();
     }
 
-    public function vector2Scale(Vector2 $vec, float $scale): Vector2
+    public function vector2Scale(Types\Vector2 $vec, float $scale): Types\Vector2
     {
         return $vec->scale($scale);
     }
 
-    public function vector2Subtract(Vector2 $v1, Vector2 $v2): Vector2
+    public function vector2Subtract(Types\Vector2 $v1, Types\Vector2 $v2): Types\Vector2
     {
         return $v1->subtract($v2);
     }

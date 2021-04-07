@@ -5,21 +5,25 @@ declare(strict_types=1);
 namespace Nawarian\Raylib;
 
 use FFI;
-use Nawarian\Raylib\Types\Vector2;
 
 /**
  * @method FFI\CData new(string $type)
  * @method void BeginDrawing()
  * @method void BeginMode2D(FFI\CData $camera2D)
- * @method void ClearBackground(FFI\CData $camera2D)
+ * @method void BeginMode3D(FFI\CData $camera3D)
+ * @method void ClearBackground(FFI\CData $color)
  * @method void CloseWindow()
+ * @method void DrawCube(FFI\CData $position, float $width, float $height, float $length, FFI\CData $color)
+ * @method void DrawCubeWires(FFI\CData $position, float $width, float $height, float $length, FFI\CData $color)
  * @method void DrawLine(int $x0, int $y0, int $x1, int $y1, FFI\CData $color)
+ * @method void DrawPlane(FFI\CData $center, FFI\CData $size, FFI\CData $color)
  * @method void DrawRectangle(float $x, float $y, float $width, float $height, FFI\CData $color)
  * @method void DrawRectangleLines(float $x, float $y, float $width, float $height, FFI\CData $color)
  * @method void DrawRectangleRec(FFI\CData $rectangle, FFI\CData $color)
  * @method void DrawText(string $text, int $x, int $y, int $fontSize, FFI\CData $color)
  * @method void EndDrawing()
  * @method void EndMode2D()
+ * @method void EndMode3D()
  * @method FFI\CData Fade(FFI\CData $color, float $alpha)
  * @method float GetFrameTime()
  * @method float GetMouseWheelMove()
@@ -29,7 +33,9 @@ use Nawarian\Raylib\Types\Vector2;
  * @method void InitWindow(int $width, int $height, string $title)
  * @method bool IsKeyDown(int $key)
  * @method bool IsKeyPressed(int $key)
+ * @method void SetCameraMode(FFI\CData $camera, int $mode)
  * @method void SetTargetFPS(int $fps)
+ * @method void UpdateCamera(FFI\CData $camera)
  * @method bool WindowShouldClose()
  */
 class RaylibFFIProxy
