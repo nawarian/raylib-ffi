@@ -34,6 +34,15 @@ while (!$raylib->windowShouldClose()) {
 $raylib->closeWindow();
 ```
 
+### Recent Impressive Screenshot
+
+Here's a screenshot taken from the [core_3d_camera_first_person](examples/core/core_3d_camera_first_person.php) program.
+
+It generates random buildings on start up and creates a 3D first-person camera, allowing
+the player to walk freely using W,A,S,D keys and the cursor.
+
+![3D screen displaying blocks](examples/core/core_3d_camera_first_person.png)
+
 ## Roadmap
 
 Below you'll find the list of things to be developed in this project.
