@@ -6,7 +6,7 @@ namespace Nawarian\Raylib;
 
 use FFI;
 
-final class Raylib implements HasRaylibKeysConstants, HasRaylibMouseConstants
+final class Raylib implements HasRaylibKeysConstants, HasRaylibMouseConstants, HasRaylibTraceLogConstants
 {
     private RaylibFFIProxy $ffi;
 
@@ -243,6 +243,23 @@ final class Raylib implements HasRaylibKeysConstants, HasRaylibMouseConstants
     public function setTargetFPS(int $fps): void
     {
         $this->ffi->SetTargetFPS($fps);
+    }
+
+    public function setTraceLogCallback(callable $callback): void
+    {
+        $wrapper = function (int $logType, string $text, FFI\CData $args) use ($callback) {
+            // TODO: How to extract $args data? (array-like structure)
+
+            $text = str_replace('%i', '%d', $text);
+            $paramCount = 0;
+            for ($i = 0; $i < strlen($text); $i++) {
+                if ($text[$i] === '%') {
+                    $paramCount++;
+                }
+            }
+            $callback($logType, $text, array_fill(0, $paramCount, 0));
+        };
+        $this->ffi->SetTraceLogCallback($wrapper);
     }
 
     /**
