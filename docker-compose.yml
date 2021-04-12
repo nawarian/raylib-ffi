@@ -1,0 +1,18 @@
+version: '3'
+services:
+    php-7.4:
+        build: .docker/php-7.4-dev
+        volumes:
+            - .:/app
+        working_dir: /app
+    php-8.0:
+        build: .docker/php-8.0-dev
+        volumes:
+            - .:/app
+        working_dir: /app
+    php-8.1:
+        build: .docker/php-8.1-dev
+        volumes:
+            - .:/app
+        working_dir: /app
+

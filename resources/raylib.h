@@ -1,5 +1,3 @@
-#define FFI_LIB "libraylib.dylib"
-
 // Vector2 type
 typedef struct Vector2 {
     float x;
