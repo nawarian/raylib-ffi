@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @phpcs:disable PSR1.Files.SideEffects
+ */
+
 declare(strict_types=1);
 
 require_once __DIR__ . '/../../vendor/autoload.php';
@@ -33,6 +37,9 @@ function LogCustom(int $msgType, string $text, array $args): void
             break;
     }
 
+    /**
+     * @psalm-suppress MixedArgument
+     */
     printf($text, ...$args);
     printf("\n");
 }

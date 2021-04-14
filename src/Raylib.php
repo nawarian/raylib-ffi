@@ -8,6 +8,8 @@ use FFI;
 
 final class Raylib implements HasRaylibKeysConstants, HasRaylibMouseConstants, HasRaylibTraceLogConstants
 {
+    use CStylePrintfTypeTranslatorTrait;
+
     private RaylibFFIProxy $ffi;
 
     public function __construct(RaylibFFIProxy $ffi)
@@ -247,10 +249,10 @@ final class Raylib implements HasRaylibKeysConstants, HasRaylibMouseConstants, H
 
     public function setTraceLogCallback(callable $callback): void
     {
-        $wrapper = function (int $logType, string $text, FFI\CData $args) use ($callback) {
+        $wrapper = function (int $logType, string $text, FFI\CData $args) use ($callback): void {
             // TODO: How to extract $args data? (array-like structure)
 
-            $text = str_replace('%i', '%d', $text);
+            $text = $this->translateCStylePrintfTypeField($text);
             $paramCount = 0;
             for ($i = 0; $i < strlen($text); $i++) {
                 if ($text[$i] === '%') {
