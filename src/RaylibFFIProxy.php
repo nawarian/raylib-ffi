@@ -43,6 +43,7 @@ use FFI;
  * @method int MeasureText(string $text, int $fontSize)
  * @method void SetCameraMode(FFI\CData $camera, int $mode)
  * @method void SetTargetFPS(int $fps)
+ * @method void SetTraceLogCallback(callable $callback)
  * @method void UpdateCamera(FFI\CData $camera)
  * @method bool WindowShouldClose()
  */

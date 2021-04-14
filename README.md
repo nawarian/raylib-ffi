@@ -125,7 +125,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void SetConfigFlags(unsigned int flags)`
 - [ ] `void SetTraceLogLevel(int logType)`
 - [ ] `void SetTraceLogExit(int logType)`
-- [ ] `void SetTraceLogCallback(TraceLogCallback callback)`
+- [x] `void SetTraceLogCallback(TraceLogCallback callback)`
 - [ ] `void TraceLog(int logType, const char *text, ...)`
 - [ ] `void *MemAlloc(int size)`
 - [ ] `void MemFree(void *ptr)`
@@ -646,7 +646,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [core/core_3d_picking.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_3d_picking.php)
 - [x] [core/core_basic_window.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_basic_window.php)
 - [ ] core/core_basic_window_web.php
-- [ ] core/core_custom_logging.php
+- [x] [core/core_custom_logging.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_custom_logging.php)
 - [ ] core/core_drop_files.php
 - [ ] core/core_input_gamepad.php
 - [ ] core/core_input_gestures.php
