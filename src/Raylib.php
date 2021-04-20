@@ -6,7 +6,7 @@ namespace Nawarian\Raylib;
 
 use FFI;
 
-final class Raylib implements HasRaylibKeysConstants, HasRaylibMouseConstants
+final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants, HasRaylibMouseConstants
 {
     private RaylibFFIProxy $ffi;
 
@@ -30,6 +30,11 @@ final class Raylib implements HasRaylibKeysConstants, HasRaylibMouseConstants
         $this->ffi->BeginMode3D($camera->toCData($this->ffi));
     }
 
+    public function checkCollisionPointRec(Types\Vector2 $point, Types\Rectangle $rec): bool
+    {
+        return $this->ffi->CheckCollisionPointRec($point->toCData($this->ffi), $rec->toCData($this->ffi));
+    }
+
     public function checkCollisionRayBox(Types\Ray $ray, Types\BoundingBox $box): bool
     {
         return $this->ffi->CheckCollisionRayBox($ray->toCData($this->ffi), $box->toCData($this->ffi));
@@ -43,6 +48,11 @@ final class Raylib implements HasRaylibKeysConstants, HasRaylibMouseConstants
     public function closeWindow(): void
     {
         $this->ffi->CloseWindow();
+    }
+
+    public function drawCircleV(Types\Vector2 $center, float $radius, Types\Color $color): void
+    {
+        $this->ffi->DrawCircleV($center->toCData($this->ffi), $radius, $color->toCData($this->ffi));
     }
 
     public function drawCube(
@@ -151,6 +161,11 @@ final class Raylib implements HasRaylibKeysConstants, HasRaylibMouseConstants
         return $this->ffi->GetFrameTime();
     }
 
+    public function getGestureDetected(): int
+    {
+        return $this->ffi->GetGestureDetected();
+    }
+
     /**
      * @psalm-suppress MixedArgument
      * @psalm-suppress UndefinedPropertyFetch
@@ -195,6 +210,17 @@ final class Raylib implements HasRaylibKeysConstants, HasRaylibMouseConstants
     public function getScreenToWorld2D(Types\Vector2 $position, Types\Camera2D $camera): Types\Vector2
     {
         $vec = $this->ffi->GetScreenToWorld2D($position->toCData($this->ffi), $camera->toCData($this->ffi));
+
+        return new Types\Vector2($vec->x, $vec->y);
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function getTouchPosition(int $index): Types\Vector2
+    {
+        $vec = $this->ffi->GetTouchPosition($index);
 
         return new Types\Vector2($vec->x, $vec->y);
     }

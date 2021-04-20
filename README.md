@@ -649,7 +649,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] core/core_custom_logging.php
 - [ ] core/core_drop_files.php
 - [ ] core/core_input_gamepad.php
-- [ ] core/core_input_gestures.php
+- [x] [core/core_input_gestures.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_input_gestures.php)
 - [ ] core/core_input_keys.php
 - [ ] core/core_input_mouse.php
 - [ ] core/core_input_mouse_wheel.php
