@@ -6,7 +6,7 @@ namespace Nawarian\Raylib;
 
 use FFI;
 
-final class Raylib implements HasRaylibKeysConstants, HasRaylibMouseConstants
+final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants, HasRaylibMouseConstants
 {
     private RaylibFFIProxy $ffi;
 
