@@ -42,6 +42,12 @@ $raylib->setTargetFPS(60);               // Set our game to run at 60 frames-per
 while (!$raylib->windowShouldClose()) {    // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
+    // Reset gestures strings
+    if ($gesturesCount > MAX_GESTURE_STRINGS) {
+        $gestureStrings = array_fill(0, MAX_GESTURE_STRINGS, '');
+        $gesturesCount = 0;
+    }
+
     $lastGesture = $currentGesture;
     $currentGesture = $raylib->getGestureDetected();
     $touchPosition = $raylib->getTouchPosition(0);
@@ -51,41 +57,38 @@ while (!$raylib->windowShouldClose()) {    // Detect window close button or ESC 
             // Store gesture string
             switch ($currentGesture) {
                 case Raylib::GESTURE_TAP:
-                    strcpy(gestureStrings[gesturesCount], "GESTURE TAP");
+                    $gestureStrings[$gesturesCount] = 'GESTURE TAP';
                     break;
                 case Raylib::GESTURE_DOUBLETAP:
-                    strcpy(gestureStrings[gesturesCount], "GESTURE DOUBLETAP");
+                    $gestureStrings[$gesturesCount] = 'GESTURE DOUBLETAP';
                     break;
                 case Raylib::GESTURE_HOLD:
-                    strcpy(gestureStrings[gesturesCount], "GESTURE HOLD");
+                    $gestureStrings[$gesturesCount] = 'GESTURE HOLD';
                     break;
                 case Raylib::GESTURE_DRAG:
-                    strcpy(gestureStrings[gesturesCount], "GESTURE DRAG");
+                    $gestureStrings[$gesturesCount] = 'GESTURE DRAG';
                     break;
                 case Raylib::GESTURE_SWIPE_RIGHT:
-                    strcpy(gestureStrings[gesturesCount], "GESTURE SWIPE RIGHT");
+                    $gestureStrings[$gesturesCount] = 'GESTURE SWIPE RIGHT';
                     break;
                 case Raylib::GESTURE_SWIPE_LEFT:
-                    strcpy(gestureStrings[gesturesCount], "GESTURE SWIPE LEFT");
+                    $gestureStrings[$gesturesCount] = 'GESTURE SWIPE LEFT';
                     break;
                 case Raylib::GESTURE_SWIPE_UP:
-                    strcpy(gestureStrings[gesturesCount], "GESTURE SWIPE UP");
+                    $gestureStrings[$gesturesCount] = 'GESTURE SWIPE UP';
                     break;
                 case Raylib::GESTURE_SWIPE_DOWN:
-                    strcpy(gestureStrings[gesturesCount], "GESTURE SWIPE DOWN");
+                    $gestureStrings[$gesturesCount] = 'GESTURE SWIPE DOWN';
                     break;
                 case Raylib::GESTURE_PINCH_IN:
-                    strcpy(gestureStrings[gesturesCount], "GESTURE PINCH IN");
+                    $gestureStrings[$gesturesCount] = 'GESTURE PINCH IN';
                     break;
                 case Raylib::GESTURE_PINCH_OUT:
-                    strcpy(gestureStrings[gesturesCount], "GESTURE PINCH OUT");
+                    $gestureStrings[$gesturesCount] = 'GESTURE PINCH OUT';
                     break;
             }
 
             $gesturesCount++;
-
-            // Reset gestures strings
-            $gestureStrings = array_fill(0, MAX_GESTURE_STRINGS, '');
         }
     }
     //----------------------------------------------------------------------------------
@@ -107,6 +110,7 @@ while (!$raylib->windowShouldClose()) {    // Detect window close button or ESC 
             $raylib->fade(Color::gray(), 0.5)
         );
 
+        // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
         for ($i = 0; $i < $gesturesCount; ++$i) {
             if ($i % 2 === 0) {
                 $raylib->drawRectangle(10, 30 + 20 * $i, 200, 20, $raylib->fade(Color::lightGray(), 0.5));
@@ -114,9 +118,9 @@ while (!$raylib->windowShouldClose()) {    // Detect window close button or ESC 
                 $raylib->drawRectangle(10, 30 + 20 * $i, 200, 20, $raylib->fade(Color::lightGray(), 0.3));
             }
 
-            if ($i < $gesturesCount - 1) {
+            if ($i < $gesturesCount - 1 && $gestureStrings[$i]) {
                 $raylib->drawText($gestureStrings[$i], 35, 36 + 20 * $i, 10, Color::darkGray());
-            } else {
+            } elseif ($gestureStrings[$i]) {
                 $raylib->drawText($gestureStrings[$i], 35, 36 + 20 * $i, 10, Color::maroon());
             }
         }
@@ -127,6 +131,7 @@ while (!$raylib->windowShouldClose()) {    // Detect window close button or ESC 
         if ($currentGesture !== Raylib::GESTURE_NONE) {
             $raylib->drawCircleV($touchPosition, 30, Color::maroon());
         }
+        // phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact
 
     $raylib->endDrawing();
     //----------------------------------------------------------------------------------
