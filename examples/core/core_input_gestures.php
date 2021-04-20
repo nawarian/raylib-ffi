@@ -7,7 +7,6 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 use Nawarian\Raylib\Raylib;
 use Nawarian\Raylib\RaylibFactory;
 use Nawarian\Raylib\Types\{
-    Camera2D,
     Color,
     Rectangle,
     Vector2
