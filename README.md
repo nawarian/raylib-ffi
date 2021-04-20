@@ -3,6 +3,12 @@ Raylib FFI
 
 Raylib bindings for PHP using [FFI](https://thephp.website/en/issue/php-ffi/).
 
+## Contributing
+
+This project is still under development and contributions are very welcome!
+
+[Please see this quick guide on how to get started with contributions](https://github.com/nawarian/raylib-ffi/wiki/Quick-guide-to-increase-Raylib-FFI's-coverage).
+
 ## Usage
 
 See [examples/](https://github.com/nawarian/raylib-ffi/tree/main/examples/) for full implementation examples.
