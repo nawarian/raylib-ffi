@@ -44,6 +44,11 @@ final class Color
         return new self(0, 121, 241, 255);
     }
 
+    public static function darkBlue(): Color
+    {
+        return new self(0, 82, 172, 255);
+    }
+
     public static function gold(): Color
     {
         return new self(255, 203, 0, 255);
