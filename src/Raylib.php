@@ -272,6 +272,15 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
     }
 
     /**
+     * @psalm-suppress MissingParamType
+     * @psalm-suppress MixedArgument
+     */
+    public function textFormat(string $format, ...$args): string
+    {
+        return sprintf($format, ...$args);
+    }
+
+    /**
      * @psalm-suppress InvalidPassByReference
      * @psalm-suppress MixedArgument
      * @psalm-suppress MixedAssignment
