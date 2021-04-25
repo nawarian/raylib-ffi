@@ -659,7 +659,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [core/core_input_keys.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_input_keys.php)
 - [x] [core/core_input_mouse.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_input_mouse.php)
 - [x] [core/core_input_mouse_wheel.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_input_mouse_wheel.php)
-- [ ] core/core_input_multitouch.php
+- [x] [core/core_input_multitouch.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_input_multitouch.php)
 - [ ] core/core_loading_thread.php
 - [ ] core/core_quat_conversion.php
 - [ ] core/core_random_values.php

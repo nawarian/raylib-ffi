@@ -465,6 +465,15 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->isKeyPressed(10));
     }
 
+    public function test_isMouseButtonDown(): void
+    {
+        $this->ffiProxy->IsMouseButtonDown(10)
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isMouseButtonDown(10));
+    }
+
     public function test_isMouseButtonPressed(): void
     {
         $this->ffiProxy->IsMouseButtonPressed(10)

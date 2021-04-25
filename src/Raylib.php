@@ -251,6 +251,11 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         return $this->ffi->IsKeyPressed($key);
     }
 
+    public function isMouseButtonDown(int $button): bool
+    {
+        return $this->ffi->IsMouseButtonDown($button);
+    }
+
     public function isMouseButtonPressed(int $button): bool
     {
         return $this->ffi->IsMouseButtonPressed($button);

@@ -24,6 +24,11 @@ final class Color
         $this->alpha = $alpha;
     }
 
+    public static function beige(): Color
+    {
+        return new self(211, 176, 131, 255);
+    }
+
     public static function lightGray(): Color
     {
         return new self(200, 200, 200, 255);
@@ -67,6 +72,11 @@ final class Color
     public static function maroon(): Color
     {
         return new self(190, 33, 55, 255);
+    }
+
+    public static function orange(): Color
+    {
+        return new self(255, 161, 0, 255);
     }
 
     public static function skyBlue(): Color

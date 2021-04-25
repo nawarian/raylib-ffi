@@ -43,6 +43,7 @@ use FFI;
  * @method void InitWindow(int $width, int $height, string $title)
  * @method bool IsKeyDown(int $key)
  * @method bool IsKeyPressed(int $key)
+ * @method bool IsMouseButtonDown(int $button)
  * @method bool IsMouseButtonPressed(int $button)
  * @method int MeasureText(string $text, int $fontSize)
  * @method void SetCameraMode(FFI\CData $camera, int $mode)
