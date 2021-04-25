@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Nawarian\Raylib;
 
 use FFI;
+use Nawarian\Raylib\Types\Matrix;
+use Nawarian\Raylib\Types\Quaternion;
 
 final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants, HasRaylibMouseConstants
 {
@@ -261,9 +263,63 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         return $this->ffi->IsMouseButtonPressed($button);
     }
 
+    public function matrixIdentity(): Types\Matrix
+    {
+        return Matrix::identity();
+    }
+
+    public function matrixMultiply(Types\Matrix $left, Types\Matrix $right): Types\Matrix
+    {
+        return $left->multiply($right);
+    }
+
+    public function matrixRotateX(float $angle): Types\Matrix
+    {
+        return Matrix::xRotation($angle);
+    }
+
+    public function matrixRotateY(float $angle): Types\Matrix
+    {
+        return Matrix::yRotation($angle);
+    }
+
+    public function matrixRotateZ(float $angle): Types\Matrix
+    {
+        return Matrix::zRotation($angle);
+    }
+
+    public function matrixRotateZYX(Types\Vector3 $angle): Types\Matrix
+    {
+        $result = $this->matrixRotateZ($angle->z);
+        $result = $this->matrixMultiply($result, $this->matrixRotateY($angle->y));
+        $result = $this->matrixMultiply($result, $this->matrixRotateX($angle->x));
+
+        return $result;
+    }
+
     public function measureText(string $text, int $fontSize): int
     {
         return $this->ffi->MeasureText($text, $fontSize);
+    }
+
+    public function quaternionFromEuler(float $roll, float $pitch, float $yaw): Types\Vector4
+    {
+        return Types\Vector4::fromEulerAngles($roll, $pitch, $yaw);
+    }
+
+    public function quaternionFromMatrix(Types\Matrix $matrix): Types\Vector4
+    {
+        return Quaternion::fromMatrix($matrix);
+    }
+
+    public function quaternionToEuler(Types\Vector4 $quaternion): Types\Vector3
+    {
+        return Types\Vector3::eulerAngles($quaternion);
+    }
+
+    public function quaternionToMatrix(Types\Vector4 $quaternion): Types\Matrix
+    {
+        return Matrix::fromVector4($quaternion);
     }
 
     public function setCameraMode(Types\Camera3D $camera, int $mode): void

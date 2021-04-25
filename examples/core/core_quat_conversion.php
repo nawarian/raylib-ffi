@@ -8,11 +8,7 @@ use Nawarian\Raylib\{
     Raylib,
     RaylibFactory,
 };
-use Nawarian\Raylib\Types\{
-    Camera3D,
-    Color,
-    Vector3,
-};
+use Nawarian\Raylib\Types\{Camera3D, Color, Matrix, Quaternion, Vector3};
 
 $raylibFactory = new RaylibFactory();
 $raylib = $raylibFactory->newInstance();
@@ -39,7 +35,7 @@ $mesh = $raylib->genMeshCylinder(0.2, 1.0, 32);
 $model = $raylib->loadModelFromMesh($mesh);
 
 // Some required variables
-$q1 = new Quaternion();
+$q1 = new Quaternion(0, 0, 0, 0);
 
 $m1 = new Matrix();
 $m2 = new Matrix();
@@ -74,19 +70,19 @@ while (!$raylib->windowShouldClose()) {  // Detect window close button or ESC ke
         $v1->z -= $pi * 2;
     }
 
-    $q1 = QuaternionFromEuler($v1->x, $v1->y, $v1->z);
-    $m1 = MatrixRotateZYX($v1);
-    $m2 = QuaternionToMatrix($q1);
+    $q1 = $raylib->quaternionFromEuler($v1->x, $v1->y, $v1->z);
+    $m1 = $raylib->matrixRotateZYX($v1);
+    $m2 = $raylib->quaternionToMatrix($q1);
 
-    $q1 = QuaternionFromMatrix($m1);
-    $m3 = QuaternionToMatrix($q1);
+    $q1 = $raylib->quaternionFromMatrix($m1);
+    $m3 = $raylib->quaternionToMatrix($q1);
 
-    $v2 = QuaternionToEuler($q1);
+    $v2 = $raylib->quaternionToEuler($q1);
     $v2->x *= $deg2rad;
     $v2->y *= $deg2rad;
     $v2->z *= $deg2rad;
 
-    $m4 = MatrixRotateZYX($v2);
+    $m4 = $raylib->matrixRotateZYX($v2);
     //--------------------------------------------------------------------------------------
 
     // Draw
