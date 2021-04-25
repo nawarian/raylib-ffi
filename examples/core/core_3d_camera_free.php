@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-use Nawarian\Raylib\Raylib;
-use Nawarian\Raylib\RaylibFactory;
+use Nawarian\Raylib\{
+    Raylib,
+    RaylibFactory,
+};
 use Nawarian\Raylib\Types\{
     Camera3D,
     Color,
-    Vector3
+    Vector3,
 };
 
 $raylibFactory = new RaylibFactory();

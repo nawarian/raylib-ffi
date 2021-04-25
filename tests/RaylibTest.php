@@ -6,16 +6,20 @@ namespace Nawarian\Tests\Raylib;
 
 use FFI;
 use FFI\CData;
-use Nawarian\Raylib\Raylib;
-use Nawarian\Raylib\RaylibFFIProxy;
-use Nawarian\Raylib\Types\BoundingBox;
-use Nawarian\Raylib\Types\Camera2D;
-use Nawarian\Raylib\Types\Camera3D;
-use Nawarian\Raylib\Types\Color;
-use Nawarian\Raylib\Types\Ray;
-use Nawarian\Raylib\Types\Rectangle;
-use Nawarian\Raylib\Types\Vector2;
-use Nawarian\Raylib\Types\Vector3;
+use Nawarian\Raylib\{
+    Raylib,
+    RaylibFFIProxy,
+};
+use Nawarian\Raylib\Types\{
+    BoundingBox,
+    Camera2D,
+    Camera3D,
+    Color,
+    Ray,
+    Rectangle,
+    Vector2,
+    Vector3,
+};
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Argument\Token\CallbackToken;

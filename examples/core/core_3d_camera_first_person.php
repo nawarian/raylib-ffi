@@ -9,7 +9,7 @@ use Nawarian\Raylib\Types\{
     Camera3D,
     Color,
     Vector2,
-    Vector3
+    Vector3,
 };
 
 $raylibFactory = new RaylibFactory();
