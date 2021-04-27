@@ -158,6 +158,13 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         return new Types\Color($colorStruct->r, $colorStruct->g, $colorStruct->b, $colorStruct->a);
     }
 
+    public function genMeshCylinder(float $radius, float $height, int $slices): Types\Mesh
+    {
+        $meshStruct = $this->ffi->GenMeshCylinder($radius, $height, $slices);
+
+        return Types\Mesh::fromStruct($meshStruct);
+    }
+
     public function getFrameTime(): float
     {
         return $this->ffi->GetFrameTime();
@@ -263,6 +270,13 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         return $this->ffi->IsMouseButtonPressed($button);
     }
 
+    public function loadModelFromMesh(Types\Mesh $mesh): Types\Model
+    {
+        $modelStruct = $this->ffi->LoadModelFromMesh($mesh->toCData($this->ffi));
+
+        return Types\Model::fromStruct($modelStruct);
+    }
+
     public function matrixIdentity(): Types\Matrix
     {
         return Matrix::identity();
@@ -339,6 +353,11 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
     public function textFormat(string $format, ...$args): string
     {
         return sprintf($format, ...$args);
+    }
+
+    public function unloadModel(Types\Model $model): void
+    {
+        $this->ffi->UnloadModel($model->toCData($this->ffi));
     }
 
     /**
