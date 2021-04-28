@@ -98,6 +98,16 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         $this->ffi->DrawLine($x0, $y0, $x1, $y1, $color->toCData($this->ffi));
     }
 
+    public function drawModel(Types\Model $model, Types\Vector3 $position, float $scale, Types\Color $tint): void
+    {
+        $this->ffi->DrawModel(
+            $model->toCData($this->ffi),
+            $position->toCData($this->ffi),
+            $scale,
+            $tint->toCData($this->ffi),
+        );
+    }
+
     public function drawPlane(Types\Vector3 $center, Types\Vector2 $size, Types\Color $color): void
     {
         $this->ffi->DrawPlane(

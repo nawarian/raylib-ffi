@@ -21,6 +21,7 @@ use FFI;
  * @method void DrawFPS(int $posX, int $posY)
  * @method void DrawGrid(int $slices, float $spacing)
  * @method void DrawLine(int $x0, int $y0, int $x1, int $y1, FFI\CData $color)
+ * @method void DrawModel(FFI\CData $model, FFI\CData $position, float $scale, FFI\CData $tint)
  * @method void DrawPlane(FFI\CData $center, FFI\CData $size, FFI\CData $color)
  * @method void DrawRay(FFI\CData $ray, FFI\CData $color)
  * @method void DrawRectangle(float $x, float $y, float $width, float $height, FFI\CData $color)
