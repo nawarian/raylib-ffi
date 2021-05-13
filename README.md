@@ -662,7 +662,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [core/core_input_multitouch.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_input_multitouch.php)
 - [ ] core/core_loading_thread.php
 - [ ] core/core_quat_conversion.php
-- [ ] core/core_random_values.php
+- [x] [core/core_random_values.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_random_values.php)
 - [ ] core/core_scissor_test.php
 - [ ] core/core_storage_values.php
 - [ ] core/core_vr_simulator.php
