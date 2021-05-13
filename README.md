@@ -86,8 +86,8 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void SetWindowMinSize(int width, int height)`
 - [ ] `void SetWindowSize(int width, int height)`
 - [ ] `void *GetWindowHandle(void)`
-- [ ] `int GetScreenWidth(void)`
-- [ ] `int GetScreenHeight(void)`
+- [x] `int GetScreenWidth(void)`
+- [x] `int GetScreenHeight(void)`
 - [ ] `int GetMonitorCount(void)`
 - [ ] `Vector2 GetMonitorPosition(int monitor)`
 - [ ] `int GetMonitorWidth(int monitor)`
@@ -115,8 +115,8 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void EndMode3D(void)`
 - [ ] `void BeginTextureMode(RenderTexture2D target)`
 - [ ] `void EndTextureMode(void)`
-- [ ] `void BeginScissorMode(int x, int y, int width, int height)`
-- [ ] `void EndScissorMode(void)`
+- [x] `void BeginScissorMode(int x, int y, int width, int height)`
+- [x] `void EndScissorMode(void)`
 - [x] `Ray GetMouseRay(Vector2 mousePosition, Camera camera)`
 - [ ] `Matrix GetCameraMatrix(Camera camera)`
 - [ ] `Matrix GetCameraMatrix2D(Camera2D camera)`
@@ -185,8 +185,8 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `bool IsMouseButtonDown(int button)`
 - [ ] `bool IsMouseButtonReleased(int button)`
 - [ ] `bool IsMouseButtonUp(int button)`
-- [ ] `int GetMouseX(void)`
-- [ ] `int GetMouseY(void)`
+- [x] `int GetMouseX(void)`
+- [x] `int GetMouseY(void)`
 - [x] `Vector2 GetMousePosition(void)`
 - [ ] `void SetMousePosition(int x, int y)`
 - [ ] `void SetMouseOffset(int offsetX, int offsetY)`
@@ -237,7 +237,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void DrawRectangleGradientH(int posX, int posY, int width, int height, Color color1, Color color2)`
 - [ ] `void DrawRectangleGradientEx(Rectangle rec, Color col1, Color col2, Color col3, Color col4)`
 - [x] `void DrawRectangleLines(int posX, int posY, int width, int height, Color color)`
-- [ ] `void DrawRectangleLinesEx(Rectangle rec, int lineThick, Color color)`
+- [x] `void DrawRectangleLinesEx(Rectangle rec, int lineThick, Color color)`
 - [ ] `void DrawRectangleRounded(Rectangle rec, float roundness, int segments, Color color)`
 - [ ] `void DrawRectangleRoundedLines(Rectangle rec, float roundness, int segments, int lineThick, Color color)`
 - [ ] `void DrawTriangle(Vector2 v1, Vector2 v2, Vector2 v3, Color color)`
@@ -663,7 +663,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] core/core_loading_thread.php
 - [ ] core/core_quat_conversion.php
 - [x] [core/core_random_values.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_random_values.php)
-- [ ] core/core_scissor_test.php
+- [x] [core/core_scissor_test.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_scissor_test.php)
 - [ ] core/core_storage_values.php
 - [ ] core/core_vr_simulator.php
 - [ ] core/core_window_flags.php

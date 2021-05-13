@@ -96,6 +96,14 @@ class RaylibTest extends TestCase
         $this->raylib->beginMode3D($camera);
     }
 
+    public function test_beginScissorMode(): void
+    {
+        $this->ffiProxy->BeginScissorMode(10, 20, 30, 40)
+            ->shouldBeCalledOnce();
+
+        $this->raylib->beginScissorMode(10, 20, 30,40);
+    }
+
     public function test_checkCollisionRayBox_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $ray = new Ray(new Vector3(0, 0, 0), new Vector3(0, 0, 0));
@@ -270,6 +278,26 @@ class RaylibTest extends TestCase
         $this->raylib->drawRectangleLines(10, 20, 30, 40, $color);
     }
 
+    public function test_drawRectangleLinesEx_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $rectangle = new Rectangle(10, 20, 30, 40);
+        $color = new Color(0, 0, 0, 0);
+
+        $expectedRectangle = $this->ffi->new('Rectangle');
+        $expectedRectangle->x = 10;
+        $expectedRectangle->y = 20;
+        $expectedRectangle->width = 30;
+        $expectedRectangle->height = 40;
+        $expectedColor = $this->ffi->new('Color');
+        $this->ffiProxy->DrawRectangleLinesEx(
+            $this->sameCDataRectangleArgument($expectedRectangle),
+            10,
+            $this->sameCDataColorArgument($expectedColor)
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawRectangleLinesEx($rectangle, 10, $color);
+    }
+
     public function test_drawRectangleRec_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $rectangle = new Rectangle(0, 0, 0, 0);
@@ -318,6 +346,14 @@ class RaylibTest extends TestCase
             ->shouldBeCalledOnce();
 
         $this->raylib->endMode3D();
+    }
+
+    public function test_endScissorMode(): void
+    {
+        $this->ffiProxy->EndScissorMode()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->endScissorMode();
     }
 
     public function test_fade_respectsParameterOrderAndConvertsObjectsToCData(): void
@@ -390,6 +426,24 @@ class RaylibTest extends TestCase
         self::assertEquals(1.0, $this->raylib->getMouseWheelMove());
     }
 
+    public function test_getMouseX(): void
+    {
+        $this->ffiProxy->GetMouseX()
+            ->shouldBeCalledOnce()
+            ->willReturn(10);
+
+        self::assertEquals(10, $this->raylib->getMouseX());
+    }
+
+    public function test_getMouseY(): void
+    {
+        $this->ffiProxy->GetMouseY()
+            ->shouldBeCalledOnce()
+            ->willReturn(10);
+
+        self::assertEquals(10, $this->raylib->getMouseY());
+    }
+
     /**
      * @method DrawText(string $text, int $x, int $y, int $fontSize, FFI\CData $color): void
      * @method Fade(FFI\CData $color, float $alpha): FFI\CData
@@ -441,6 +495,24 @@ class RaylibTest extends TestCase
         $position = new Vector2(5, 5);
         $camera = new Camera2D(new Vector2(0, 0), new Vector2(0, 0), 0, 0);
         self::assertEquals(new Vector2(10, 20), $this->raylib->getWorldToScreen2D($position, $camera));
+    }
+
+    public function test_getScreenWidth(): void
+    {
+        $this->ffiProxy->GetScreenWidth()
+            ->shouldBeCalledOnce()
+            ->willReturn(10);
+
+        self::assertEquals(10, $this->raylib->getScreenWidth());
+    }
+
+    public function test_getScreenHeight(): void
+    {
+        $this->ffiProxy->GetScreenHeight()
+            ->shouldBeCalledOnce()
+            ->willReturn(10);
+
+        self::assertEquals(10, $this->raylib->getScreenHeight());
     }
 
     public function test_initWindow_respectsParameterOrder(): void

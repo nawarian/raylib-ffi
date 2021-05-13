@@ -10,6 +10,7 @@
         <directory name="src" />
         <directory name="examples" />
         <ignoreFiles>
+            <directory name="tests" />
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>

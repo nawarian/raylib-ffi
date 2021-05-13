@@ -30,6 +30,11 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         $this->ffi->BeginMode3D($camera->toCData($this->ffi));
     }
 
+    public function beginScissorMode(int $x, int $y, int $width, int $height): void
+    {
+        $this->ffi->BeginScissorMode($x, $y, $width, $height);
+    }
+
     public function checkCollisionPointRec(Types\Vector2 $point, Types\Rectangle $rec): bool
     {
         return $this->ffi->CheckCollisionPointRec($point->toCData($this->ffi), $rec->toCData($this->ffi));
@@ -120,6 +125,11 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         $this->ffi->DrawRectangleLines($x, $y, $width, $height, $color->toCData($this->ffi));
     }
 
+    public function drawRectangleLinesEx(Types\Rectangle $rectangle, int $lineThick, Types\Color $color): void
+    {
+        $this->ffi->DrawRectangleLinesEx($rectangle->toCData($this->ffi), $lineThick, $color->toCData($this->ffi));
+    }
+
     public function drawRectangleRec(Types\Rectangle $rec, Types\Color $color): void
     {
         $this->ffi->DrawRectangleRec($rec->toCData($this->ffi), $color->toCData($this->ffi));
@@ -143,6 +153,11 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
     public function endMode3D(): void
     {
         $this->ffi->EndMode3D();
+    }
+
+    public function endScissorMode(): void
+    {
+        $this->ffi->EndScissorMode();
     }
 
     /**
@@ -198,6 +213,16 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         return $this->ffi->GetMouseWheelMove();
     }
 
+    public function getMouseX(): int
+    {
+        return $this->ffi->GetMouseX();
+    }
+
+    public function getMouseY(): int
+    {
+        return $this->ffi->GetMouseY();
+    }
+
     public function getRandomValue(int $min, int $max): int
     {
         return $this->ffi->GetRandomValue($min, $max);
@@ -212,6 +237,16 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         $vec = $this->ffi->GetScreenToWorld2D($position->toCData($this->ffi), $camera->toCData($this->ffi));
 
         return new Types\Vector2($vec->x, $vec->y);
+    }
+
+    public function getScreenWidth(): int
+    {
+        return $this->ffi->GetScreenWidth();
+    }
+
+    public function getScreenHeight(): int
+    {
+        return $this->ffi->GetScreenHeight();
     }
 
     /**
