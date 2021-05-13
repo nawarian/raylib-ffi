@@ -120,7 +120,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] `Ray GetMouseRay(Vector2 mousePosition, Camera camera)`
 - [ ] `Matrix GetCameraMatrix(Camera camera)`
 - [ ] `Matrix GetCameraMatrix2D(Camera2D camera)`
-- [ ] `Vector2 GetWorldToScreen(Vector3 position, Camera camera)`
+- [x] `Vector2 GetWorldToScreen(Vector3 position, Camera camera)`
 - [ ] `Vector2 GetWorldToScreenEx(Vector3 position, Camera camera, int width, int height)`
 - [x] `Vector2 GetWorldToScreen2D(Vector2 position, Camera2D camera)`
 - [x] `Vector2 GetScreenToWorld2D(Vector2 position, Camera2D camera)`
@@ -668,7 +668,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] core/core_vr_simulator.php
 - [ ] core/core_window_flags.php
 - [ ] core/core_window_letterbox.php
-- [ ] core/core_world_screen.php
+- [x] [core/core_world_screen.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_world_screen.php)
 - [ ] models/models_animation.php
 - [ ] models/models_billboard.php
 - [ ] models/models_box_collisions.php

@@ -477,6 +477,27 @@ class RaylibTest extends TestCase
         self::assertEquals(new Vector2(10, 20), $this->raylib->getScreenToWorld2D($position, $camera));
     }
 
+    public function test_getWorldToScreen_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $expectedPosition = $this->ffi->new('Vector3');
+        $expectedPosition->x = 5;
+        $expectedPosition->y = 5;
+        $expectedPosition->z = 5;
+
+        $expectedStruct = $this->ffi->new('Vector2');
+        $expectedStruct->x = 10;
+        $expectedStruct->y = 20;
+
+        $this->ffiProxy->GetWorldToScreen(
+            $this->sameCDataVector3Argument($expectedPosition),
+            $this->sameCDataCamera3DArgument($this->ffi->new('Camera3D')),
+        )->shouldBeCalledOnce()->willReturn($expectedStruct);
+
+        $position = new Vector3(5, 5, 5);
+        $camera = new Camera3D(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), 0, 0);
+        self::assertEquals(new Vector2(10, 20), $this->raylib->getWorldToScreen($position, $camera));
+    }
+
     public function test_getWorldToScreen2D_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $expectedPosition = $this->ffi->new('Vector2');

@@ -46,6 +46,7 @@ use FFI;
  * @method int GetScreenWidth()
  * @method int GetScreenHeight()
  * @method FFI\CData GetTouchPosition(int $index)
+ * @method FFI\CData GetWorldToScreen(FFI\CData $position, FFI\CData $camera)
  * @method FFI\CData GetWorldToScreen2D(FFI\CData $position, FFI\CData $camera)
  * @method void InitWindow(int $width, int $height, string $title)
  * @method bool IsKeyDown(int $key)

@@ -264,6 +264,17 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
      */
+    public function getWorldToScreen(Types\Vector3 $position, Types\Camera3D $camera): Types\Vector2
+    {
+        $vec = $this->ffi->GetWorldToScreen($position->toCData($this->ffi), $camera->toCData($this->ffi));
+
+        return new Types\Vector2($vec->x, $vec->y);
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
     public function getWorldToScreen2D(Types\Vector2 $position, Types\Camera2D $camera): Types\Vector2
     {
         $vec = $this->ffi->GetWorldToScreen2D($position->toCData($this->ffi), $camera->toCData($this->ffi));
