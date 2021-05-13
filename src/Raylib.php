@@ -296,9 +296,19 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         return $this->ffi->IsMouseButtonPressed($button);
     }
 
+    public function loadStorageValue(int $position): int
+    {
+        return $this->ffi->LoadStorageValue($position);
+    }
+
     public function measureText(string $text, int $fontSize): int
     {
         return $this->ffi->MeasureText($text, $fontSize);
+    }
+
+    public function saveStorageValue(int $position, int $value): bool
+    {
+        return $this->ffi->SaveStorageValue($position, $value);
     }
 
     public function setCameraMode(Types\Camera3D $camera, int $mode): void

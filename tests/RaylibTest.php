@@ -559,6 +559,15 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->isMouseButtonPressed(10));
     }
 
+    public function test_loadStorageValue(): void
+    {
+        $this->ffiProxy->LoadStorageValue(10)
+            ->shouldBeCalledOnce()
+            ->willReturn(20);
+
+        self::assertEquals(20, $this->raylib->loadStorageValue(10));
+    }
+
     public function test_measureText(): void
     {
         $this->ffiProxy->MeasureText('Tiny Text', 20)
@@ -566,6 +575,15 @@ class RaylibTest extends TestCase
             ->willReturn(2000);
 
         self::assertEquals(2000, $this->raylib->measureText('Tiny Text', 20));
+    }
+
+    public function test_saveStorageValue(): void
+    {
+        $this->ffiProxy->SaveStorageValue(0, 200)
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->saveStorageValue(0, 200));
     }
 
     public function test_setCameraMode_respectsParameterOrderAndConvertsObjectsToCData(): void

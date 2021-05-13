@@ -161,8 +161,8 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `long GetFileModTime(const char *fileName)`
 - [ ] `unsigned char *CompressData(unsigned char *data, int dataLength, int *compDataLength)`
 - [ ] `unsigned char *DecompressData(unsigned char *compData, int compDataLength, int *dataLength)`
-- [ ] `bool SaveStorageValue(unsigned int position, int value)`
-- [ ] `int LoadStorageValue(unsigned int position)`
+- [x] `bool SaveStorageValue(unsigned int position, int value)`
+- [x] `int LoadStorageValue(unsigned int position)`
 - [ ] `void OpenURL(const char *url)`
 - [x] `bool IsKeyPressed(int key)`
 - [x] `bool IsKeyDown(int key)`
@@ -664,7 +664,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] core/core_quat_conversion.php
 - [x] [core/core_random_values.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_random_values.php)
 - [x] [core/core_scissor_test.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_scissor_test.php)
-- [ ] core/core_storage_values.php
+- [x] [core/core_storage_values.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_storage_values.php)
 - [ ] core/core_vr_simulator.php
 - [ ] core/core_window_flags.php
 - [ ] core/core_window_letterbox.php
