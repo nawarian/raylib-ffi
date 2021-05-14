@@ -99,6 +99,11 @@ final class Color
         return new self(245, 245, 245, 255);
     }
 
+    public static function white(): Color
+    {
+        return new self(255, 255, 255, 255);
+    }
+
     /**
      * @psalm-suppress MixedPropertyAssignment
      * @psalm-suppress UndefinedPropertyAssignment

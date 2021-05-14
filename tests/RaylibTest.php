@@ -10,16 +10,7 @@ use Nawarian\Raylib\{
     Raylib,
     RaylibFFIProxy,
 };
-use Nawarian\Raylib\Types\{
-    BoundingBox,
-    Camera2D,
-    Camera3D,
-    Color,
-    Ray,
-    Rectangle,
-    Vector2,
-    Vector3,
-};
+use Nawarian\Raylib\Types\{BoundingBox, Camera2D, Camera3D, Color, Ray, Rectangle, Texture2D, Vector2, Vector3};
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Argument\Token\CallbackToken;
@@ -324,6 +315,28 @@ class RaylibTest extends TestCase
         $this->raylib->drawText('abc', 10, 20, 30, $color);
     }
 
+    public function test_drawTextureEx_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $texture = new Texture2D(0, 0, 0, 0, 0);
+        $position = new Vector2(0, 0);
+        $tint = new Color(255, 0, 0, 0);
+
+        $expectedTexture = $this->ffi->new('Texture');
+        $expectedPosition = $this->ffi->new('Vector2');
+        $expectedTint = $this->ffi->new('Color');
+        $expectedTint->r = 255;
+
+        $this->ffiProxy->DrawTextureEx(
+            $this->sameCDataTexture2DArgument($expectedTexture),
+            $this->sameCDataVector2Argument($expectedPosition),
+            20,
+            30,
+            $this->sameCDataColorArgument($expectedTint),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawTextureEx($texture, $position, 20, 30, $tint);
+    }
+
     public function test_endDrawing(): void
     {
         $this->ffiProxy->EndDrawing()
@@ -368,6 +381,19 @@ class RaylibTest extends TestCase
             new Color(0, 0, 0, 0),
             $this->raylib->fade($color, 20),
         );
+    }
+
+    public function test_getColor(): void
+    {
+        $expectedColor = $this->ffi->new('Color');
+        $expectedColor->g = 255;
+        $expectedColor->a = 255;
+
+        $this->ffiProxy->GetColor(0x00ff00ff)
+            ->shouldBeCalledOnce()
+            ->willReturn($expectedColor);
+
+        self::assertEquals(new Color(0, 255,0, 255), $this->raylib->getColor(0x00ff00ff));
     }
 
     public function test_getFrameTime(): void
@@ -589,6 +615,16 @@ class RaylibTest extends TestCase
         self::assertEquals(20, $this->raylib->loadStorageValue(10));
     }
 
+    public function test_loadTexture(): void
+    {
+        $texture = $this->ffi->new('Texture');
+        $this->ffiProxy->LoadTexture('unknown.png')
+            ->shouldBeCalledOnce()
+            ->willReturn($texture);
+
+        self::assertEquals(new Texture2D(0, 0, 0, 0, 0), $this->raylib->loadTexture('unknown.png'));
+    }
+
     public function test_measureText(): void
     {
         $this->ffiProxy->MeasureText('Tiny Text', 20)
@@ -635,6 +671,16 @@ class RaylibTest extends TestCase
             ->shouldBeCalledOnce();
 
         $this->raylib->setTargetFPS(45);
+    }
+
+    public function test_unloadTexture(): void
+    {
+        $texture = $this->ffi->new('Texture');
+        $this->ffiProxy->UnloadTexture(
+            $this->sameCDataTexture2DArgument($texture)
+        )->shouldBeCalledOnce();
+
+        $this->raylib->unloadTexture(new Texture2D(0, 0, 0, 0, 0));
     }
 
     public function test_updateCamera_respectsParameterOrderAndConvertsObjectsToCDataAndUpdatesOriginalObject(): void
@@ -762,6 +808,19 @@ class RaylibTest extends TestCase
             self::assertEquals($expectedStruct->y, $rectangle->y);
             self::assertEquals($expectedStruct->width, $rectangle->width);
             self::assertEquals($expectedStruct->height, $rectangle->height);
+
+            return true;
+        });
+    }
+
+    private function sameCDataTexture2DArgument(CData $expectedStruct): CallbackToken
+    {
+        return Argument::that(function (CData $texture2D) use ($expectedStruct) {
+            self::assertEquals($expectedStruct->id, $texture2D->id);
+            self::assertEquals($expectedStruct->width, $texture2D->width);
+            self::assertEquals($expectedStruct->height, $texture2D->height);
+            self::assertEquals($expectedStruct->mipmaps, $texture2D->mipmaps);
+            self::assertEquals($expectedStruct->format, $texture2D->format);
 
             return true;
         });

@@ -140,6 +140,22 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         $this->ffi->DrawText($text, $x, $y, $fontSize, $color->toCData($this->ffi));
     }
 
+    public function drawTextureEx(
+        Types\Texture2D $texture,
+        Types\Vector2 $position,
+        float $rotation,
+        float $scale,
+        Types\Color $tint
+    ): void {
+        $this->ffi->DrawTextureEx(
+            $texture->toCData($this->ffi),
+            $position->toCData($this->ffi),
+            $rotation,
+            $scale,
+            $tint->toCData($this->ffi),
+        );
+    }
+
     public function endDrawing(): void
     {
         $this->ffi->EndDrawing();
@@ -169,6 +185,17 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         $colorStruct = $this->ffi->Fade($color->toCData($this->ffi), $alpha);
 
         return new Types\Color($colorStruct->r, $colorStruct->g, $colorStruct->b, $colorStruct->a);
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function getColor(int $hex): Types\Color
+    {
+        $color = $this->ffi->GetColor($hex);
+
+        return new Types\Color($color->r, $color->g, $color->b, $color->a);
     }
 
     public function getFrameTime(): float
@@ -312,6 +339,23 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         return $this->ffi->LoadStorageValue($position);
     }
 
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function loadTexture(string $path): Types\Texture2D
+    {
+        $texture = $this->ffi->LoadTexture($path);
+
+        return new Types\Texture2D(
+            $texture->id,
+            $texture->width,
+            $texture->height,
+            $texture->mipmaps,
+            $texture->format,
+        );
+    }
+
     public function measureText(string $text, int $fontSize): int
     {
         return $this->ffi->MeasureText($text, $fontSize);
@@ -339,6 +383,11 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
     public function textFormat(string $format, ...$args): string
     {
         return sprintf($format, ...$args);
+    }
+
+    public function unloadTexture(Types\Texture2D $texture): void
+    {
+        $this->ffi->UnloadTexture($texture->toCData($this->ffi));
     }
 
     /**

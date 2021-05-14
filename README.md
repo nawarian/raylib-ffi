@@ -314,11 +314,11 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void ImageDraw(Image *dst, Image src, Rectangle srcRec, Rectangle dstRec, Color tint)`
 - [x] `void ImageDrawText(Image *dst, const char *text, int posX, int posY, int fontSize, Color color)`
 - [ ] `void ImageDrawTextEx(Image *dst, Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint)`
-- [ ] `Texture2D LoadTexture(const char *fileName)`
+- [x] `Texture2D LoadTexture(const char *fileName)`
 - [ ] `Texture2D LoadTextureFromImage(Image image)`
 - [ ] `TextureCubemap LoadTextureCubemap(Image image, int layoutType)`
 - [ ] `RenderTexture2D LoadRenderTexture(int width, int height)`
-- [ ] `void UnloadTexture(Texture2D texture)`
+- [x] `void UnloadTexture(Texture2D texture)`
 - [ ] `void UnloadRenderTexture(RenderTexture2D target)`
 - [ ] `void UpdateTexture(Texture2D texture, const void *pixels)`
 - [ ] `void UpdateTextureRec(Texture2D texture, Rectangle rec, const void *pixels)`
@@ -329,7 +329,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void SetTextureWrap(Texture2D texture, int wrapMode)`
 - [ ] `void DrawTexture(Texture2D texture, int posX, int posY, Color tint)`
 - [ ] `void DrawTextureV(Texture2D texture, Vector2 position, Color tint)`
-- [ ] `void DrawTextureEx(Texture2D texture, Vector2 position, float rotation, float scale, Color tint)`
+- [x] `void DrawTextureEx(Texture2D texture, Vector2 position, float rotation, float scale, Color tint)`
 - [ ] `void DrawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint)`
 - [ ] `void DrawTextureQuad(Texture2D texture, Vector2 tiling, Vector2 offset, Rectangle quad, Color tint)`
 - [ ] `void DrawTextureTiled(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float rotation, float scale, Color tint)`
@@ -343,7 +343,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `Color ColorFromHSV(float hue, float saturation, float value)`
 - [ ] `Color ColorAlpha(Color color, float alpha)`
 - [ ] `Color ColorAlphaBlend(Color dst, Color src, Color tint)`
-- [ ] `Color GetColor(int hexValue)`
+- [x] `Color GetColor(int hexValue)`
 - [ ] `Color GetPixelColor(void *srcPtr, int format)`
 - [ ] `void SetPixelColor(void *dstPtr, Color color, int format)`
 - [ ] `int GetPixelDataSize(int width, int height, int format)`
@@ -734,7 +734,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] text/text_rectangle_bounds.php
 - [ ] text/text_unicode.php
 - [ ] text/text_writing_anim.php
-- [ ] textures/textures_background_scrolling.php
+- [x] [textures/textures_background_scrolling.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_background_scrolling.php)
 - [ ] textures/textures_blend_modes.php
 - [ ] textures/textures_bunnymark.php
 - [ ] textures/textures_draw_tiled.php
