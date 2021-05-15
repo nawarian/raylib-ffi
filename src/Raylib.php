@@ -156,6 +156,26 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         );
     }
 
+    public function drawTextureTiled(
+        Types\Texture2D $texture,
+        Types\Rectangle $source,
+        Types\Rectangle $dest,
+        Types\Vector2 $origin,
+        float $rotation,
+        float $scale,
+        Types\Color $tint
+    ): void {
+        $this->ffi->DrawTextureTiled(
+            $texture->toCData($this->ffi),
+            $source->toCData($this->ffi),
+            $dest->toCData($this->ffi),
+            $origin->toCData($this->ffi),
+            $rotation,
+            $scale,
+            $tint->toCData($this->ffi),
+        );
+    }
+
     public function endDrawing(): void
     {
         $this->ffi->EndDrawing();

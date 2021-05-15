@@ -31,6 +31,7 @@ use FFI\CData;
  * @method void DrawRectangleRec(CData $rectangle, CData $color)
  * @method void DrawText(string $text, int $x, int $y, int $fontSize, CData $color)
  * @method CData DrawTextureEx(CData $texture, CData $position, float $rotation, float $scale, CData $tint)
+ * @method CData DrawTextureTiled(CData $texture, CData $source, CData $dest, CData $origin, float $rotation, float $scale, CData $tint)
  * @method void EndDrawing()
  * @method void EndMode2D()
  * @method void EndMode3D()
