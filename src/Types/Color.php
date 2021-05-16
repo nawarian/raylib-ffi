@@ -8,6 +8,7 @@ use FFI;
 use FFI\CData;
 use InvalidArgumentException;
 use Nawarian\Raylib\RaylibFFIProxy;
+use Webmozart\Assert\Assert;
 
 final class Color
 {
@@ -24,84 +25,106 @@ final class Color
         $this->alpha = $alpha;
     }
 
-    public static function beige(): Color
+    private static function assertUint8(int $value): void
     {
-        return new self(211, 176, 131, 255);
+        Assert::greaterThanEq($value, 0);
+        Assert::lessThanEq($value, 255);
     }
 
-    public static function lightGray(): Color
+    public static function beige(int $alpha = 255): Color
     {
-        return new self(200, 200, 200, 255);
+        self::assertUint8($alpha);
+        return new self(211, 176, 131, $alpha);
     }
 
-    public static function gray(): Color
+    public static function lightGray(int $alpha = 255): Color
     {
-        return new self(130, 130, 130, 255);
+        self::assertUint8($alpha);
+        return new self(200, 200, 200, $alpha);
     }
 
-    public static function darkGray(): Color
+    public static function gray(int $alpha = 255): Color
     {
-        return new self(80, 80, 80, 255);
+        self::assertUint8($alpha);
+        return new self(130, 130, 130, $alpha);
     }
 
-    public static function blue(): Color
+    public static function darkGray(int $alpha = 255): Color
     {
-        return new self(0, 121, 241, 255);
+        self::assertUint8($alpha);
+        return new self(80, 80, 80, $alpha);
     }
 
-    public static function darkBlue(): Color
+    public static function blue(int $alpha = 255): Color
     {
-        return new self(0, 82, 172, 255);
+        self::assertUint8($alpha);
+        return new self(0, 121, 241, $alpha);
     }
 
-    public static function gold(): Color
+    public static function darkBlue(int $alpha = 255): Color
     {
-        return new self(255, 203, 0, 255);
+        self::assertUint8($alpha);
+        return new self(0, 82, 172, $alpha);
     }
 
-    public static function green(): Color
+    public static function gold(int $alpha = 255): Color
     {
-        return new self(0, 228, 48, 255);
+        self::assertUint8($alpha);
+        return new self(255, 203, 0, $alpha);
     }
 
-    public static function lime(): Color
+    public static function green(int $alpha = 255): Color
     {
-        return new self(0, 158, 47, 255);
+        self::assertUint8($alpha);
+        return new self(0, 228, 48, $alpha);
     }
 
-    public static function maroon(): Color
+    public static function lime(int $alpha = 255): Color
     {
-        return new self(190, 33, 55, 255);
+        self::assertUint8($alpha);
+        return new self(0, 158, 47, $alpha);
     }
 
-    public static function orange(): Color
+    public static function maroon(int $alpha = 255): Color
     {
-        return new self(255, 161, 0, 255);
+        self::assertUint8($alpha);
+        return new self(190, 33, 55, $alpha);
     }
 
-    public static function skyBlue(): Color
+    public static function orange(int $alpha = 255): Color
     {
-        return new self(102, 191, 255, 255);
+        self::assertUint8($alpha);
+        return new self(255, 161, 0, $alpha);
     }
 
-    public static function red(): Color
+    public static function skyBlue(int $alpha = 255): Color
     {
-        return new self(230, 41, 55, 255);
+        self::assertUint8($alpha);
+        return new self(102, 191, 255, $alpha);
     }
 
-    public static function black(): Color
+    public static function red(int $alpha = 255): Color
     {
-        return new self(0, 0, 0, 255);
+        self::assertUint8($alpha);
+        return new self(230, 41, 55, $alpha);
     }
 
-    public static function rayWhite(): Color
+    public static function black(int $alpha = 255): Color
     {
-        return new self(245, 245, 245, 255);
+        self::assertUint8($alpha);
+        return new self(0, 0, 0, $alpha);
     }
 
-    public static function white(): Color
+    public static function rayWhite(int $alpha = 255): Color
     {
-        return new self(255, 255, 255, 255);
+        self::assertUint8($alpha);
+        return new self(245, 245, 245, $alpha);
+    }
+
+    public static function white(int $alpha = 255): Color
+    {
+        self::assertUint8($alpha);
+        return new self(255, 255, 255, $alpha);
     }
 
     /**

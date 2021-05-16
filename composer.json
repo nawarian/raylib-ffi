@@ -12,10 +12,11 @@
     "minimum-stability": "stable",
     "require": {
         "ext-ffi": "^7.4|^8.0",
-        "php": "^7.4|^8.0"
+        "php": "^7.4|^8.0",
+        "webmozart/assert": "^1.10"
     },
     "require-dev": {
-        "vimeo/psalm": "^4.6",
+        "vimeo/psalm": "^4.7",
         "squizlabs/php_codesniffer": "^3.5",
         "captainhook/captainhook": "^5.4",
         "captainhook/plugin-composer": "^5.2",
