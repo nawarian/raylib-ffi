@@ -23,7 +23,6 @@ use Nawarian\Raylib\Types\{
 
 $raylibFactory = new RaylibFactory();
 
-/** @var Raylib $raylib */
 $raylib = $raylibFactory->newInstance();
 
 const G = 400;
@@ -97,11 +96,11 @@ function UpdatePlayer(Raylib $raylib, Player $player, iterable $envItems, float 
 }
 
 function UpdateCameraCenter(
-    Raylib $raylib,
+    Raylib $_raylib,
     Camera2D $camera,
     Player $player,
-    iterable $envItems,
-    float $delta,
+    iterable $_envItems,
+    float $_delta,
     int $width,
     int $height
 ): void {
@@ -114,7 +113,7 @@ function UpdateCameraCenterInsideMap(
     Camera2D $camera,
     Player $player,
     iterable $envItems,
-    float $delta,
+    float $_delta,
     int $width,
     int $height
 ): void {
@@ -156,7 +155,7 @@ function UpdateCameraCenterSmoothFollow(
     Raylib $raylib,
     Camera2D $camera,
     Player $player,
-    iterable $envItems,
+    iterable $_envItems,
     float $delta,
     int $width,
     int $height
@@ -179,10 +178,10 @@ function UpdateCameraCenterSmoothFollow(
 }
 
 function UpdateCameraEvenOutOnLanding(
-    Raylib $raylib,
+    Raylib $_raylib,
     Camera2D $camera,
     Player $player,
-    iterable $envItems,
+    iterable $_envItems,
     float $delta,
     int $width,
     int $height
@@ -223,8 +222,8 @@ function UpdateCameraPlayerBoundsPush(
     Raylib $raylib,
     Camera2D $camera,
     Player $player,
-    iterable $envItems,
-    float $delta,
+    iterable $_envItems,
+    float $_delta,
     int $width,
     int $height
 ): void {
@@ -349,7 +348,6 @@ while (!$raylib->windowShouldClose()) {
 
         $raylib->beginMode2D($camera);
 
-            /** @var EnvItem $ei */
             // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
             foreach ($envItems as $ei) {
                 $raylib->drawRectangleRec($ei->rect, $ei->color);

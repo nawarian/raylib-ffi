@@ -32,7 +32,6 @@ $camera = new Camera3D(
 );
 
 $cubePosition = new Vector3(0, 0, 0);
-$cubeScreenPosition = new Vector2(0, 0);
 
 $raylib->setCameraMode($camera, Camera3D::MODE_FREE); // Set a free camera mode
 

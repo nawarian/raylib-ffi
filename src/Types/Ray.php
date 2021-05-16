@@ -28,7 +28,6 @@ final class Ray
     public function toCData(RaylibFFIProxy $ffi): CData
     {
         try {
-            /** @var CData $ray */
             $ray = $ffi->new('Ray');
         } catch (ParserException $e) {
             throw new InvalidArgumentException(

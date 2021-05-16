@@ -8,10 +8,7 @@ use Nawarian\Raylib\{
     Raylib,
     RaylibFactory,
 };
-use Nawarian\Raylib\Types\{
-    Color,
-    Vector2,
-};
+use Nawarian\Raylib\Types\Color;
 
 $raylibFactory = new RaylibFactory();
 $raylib = $raylibFactory->newInstance();
@@ -24,11 +21,7 @@ $screenHeight = 450;
 const MAX_TOUCH_POINTS = 10;
 $raylib->initWindow($screenWidth, $screenHeight, "raylib [core] example - input multitouch");
 
-$ballPosition = new Vector2(-100, -100);
-
 $touchCounter = 0;
-$touchPosition = new Vector2(0, 0);
-
 $raylib->setTargetFPS(60);               // Set our game to run at 60 frames-per-second
 //---------------------------------------------------------------------------------------
 

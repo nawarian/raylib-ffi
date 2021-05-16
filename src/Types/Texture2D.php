@@ -33,7 +33,6 @@ final class Texture2D
     public function toCData(RaylibFFIProxy $ffi): CData
     {
         try {
-            /** @var CData $texture */
             $texture = $ffi->new('Texture');
         } catch (FFI\ParserException $e) {
             throw new InvalidArgumentException(

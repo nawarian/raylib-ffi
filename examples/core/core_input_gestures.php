@@ -26,14 +26,12 @@ $screenHeight = 450;
 
 $raylib->initWindow($screenWidth, $screenHeight, "raylib [core] example - input gestures");
 
-$touchPosition = new Vector2(0, 0);
 $touchArea = new Rectangle(220, 10, $screenWidth - 230, $screenHeight - 20);
 
 $gesturesCount = 0;
 $gestureStrings = array_fill(0, MAX_GESTURE_STRINGS, []);
 
 $currentGesture = Raylib::GESTURE_NONE;
-$lastGesture = Raylib::GESTURE_NONE;
 
 //SetGesturesEnabled(0b0000000000001001);   // Enable only some gestures to be detected
 

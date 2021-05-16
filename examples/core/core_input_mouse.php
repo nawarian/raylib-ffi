@@ -23,7 +23,6 @@ $screenHeight = 450;
 
 $raylib->InitWindow($screenWidth, $screenHeight, "raylib [core] example - mouse input");
 
-$ballPosition = new Vector2(-100, -100);
 $ballColor = Color::darkBlue();
 
 $raylib->setTargetFPS(60);               // Set our game to run at 60 frames-per-second

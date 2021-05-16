@@ -14,7 +14,6 @@ final class RaylibFactory
     {
         // Figure out shared lib for current OS
         $os = php_uname('s');
-        $lib = null;
 
         switch (strtoupper(substr($os, 0, 3))) {
             case 'WIN':

@@ -31,7 +31,6 @@ final class Camera2D
     public function toCData(RaylibFFIProxy $ffi): CData
     {
         try {
-            /** @var CData $camera */
             $camera = $ffi->new('Camera2D');
         } catch (FFI\ParserException $e) {
             throw new InvalidArgumentException(

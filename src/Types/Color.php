@@ -134,7 +134,6 @@ final class Color
     public function toCData(RaylibFFIProxy $ffi): CData
     {
         try {
-            /** @var CData $color */
             $color = $ffi->new('Color');
         } catch (FFI\ParserException $e) {
             throw new InvalidArgumentException(

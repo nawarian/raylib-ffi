@@ -29,7 +29,6 @@ final class Vector3
     public function toCData(RaylibFFIProxy $ffi): CData
     {
         try {
-            /** @var CData $vec */
             $vec = $ffi->new('Vector3');
         } catch (FFI\ParserException $e) {
             throw new InvalidArgumentException(

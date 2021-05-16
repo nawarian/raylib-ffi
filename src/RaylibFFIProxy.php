@@ -8,6 +8,7 @@ use FFI;
 use FFI\CData;
 
 /**
+ * @phpcs:disable Generic.Files.LineLength.TooLong
  * @method CData new(string $type)
  * @method void BeginDrawing()
  * @method void BeginMode2D(CData $camera2D)

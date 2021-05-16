@@ -31,7 +31,6 @@ final class Rectangle
     public function toCData(RaylibFFIProxy $ffi): CData
     {
         try {
-            /** @var CData $rec */
             $rec = $ffi->new('Rectangle');
         } catch (FFI\ParserException $e) {
             throw new InvalidArgumentException(

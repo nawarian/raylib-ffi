@@ -27,7 +27,6 @@ final class BoundingBox
     public function toCData(RaylibFFIProxy $ffi): CData
     {
         try {
-            /** @var CData $box */
             $box = $ffi->new('BoundingBox');
         } catch (ParserException $e) {
             throw new InvalidArgumentException(
