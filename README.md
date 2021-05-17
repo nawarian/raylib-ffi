@@ -736,7 +736,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] text/text_writing_anim.php
 - [x] [textures/textures_background_scrolling.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_background_scrolling.php)
 - [x] [textures/textures_blend_modes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_blend_modes.php)
-- [ ] textures/textures_bunnymark.php
+- [x] [textures/textures_bunnymark.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_bunnymark.php)
 - [ ] textures/textures_draw_tiled.php
 - [ ] textures/textures_image_drawing.php
 - [ ] textures/textures_image_generation.php
