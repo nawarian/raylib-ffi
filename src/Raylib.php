@@ -6,13 +6,22 @@ namespace Nawarian\Raylib;
 
 use FFI;
 
-final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants, HasRaylibMouseConstants
+final class Raylib implements
+    HasRaylibBlendModeConstants,
+    HasRaylibGestureConstants,
+    HasRaylibKeysConstants,
+    HasRaylibMouseConstants
 {
     private RaylibFFIProxy $ffi;
 
     public function __construct(RaylibFFIProxy $ffi)
     {
         $this->ffi = $ffi;
+    }
+
+    public function beginBlendMode(int $mode): void
+    {
+        $this->ffi->BeginBlendMode($mode);
     }
 
     public function beginDrawing(): void
@@ -140,6 +149,11 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         $this->ffi->DrawText($text, $x, $y, $fontSize, $color->toCData($this->ffi));
     }
 
+    public function drawTexture(Types\Texture2D $texture, int $posX, int $posY, Types\Color $tint): void
+    {
+        $this->ffi->DrawTexture($texture->toCData($this->ffi), $posX, $posY, $tint->toCData($this->ffi));
+    }
+
     public function drawTextureEx(
         Types\Texture2D $texture,
         Types\Vector2 $position,
@@ -174,6 +188,11 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
             $scale,
             $tint->toCData($this->ffi),
         );
+    }
+
+    public function endBlendMode(): void
+    {
+        $this->ffi->EndBlendMode();
     }
 
     public function endDrawing(): void
@@ -359,6 +378,17 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         return $this->ffi->IsMouseButtonPressed($button);
     }
 
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function loadImage(string $filename): Types\Image
+    {
+        $image = $this->ffi->LoadImage($filename);
+
+        return new Types\Image($image->data, $image->width, $image->height, $image->mipmaps, $image->format);
+    }
+
     public function loadStorageValue(int $position): int
     {
         return $this->ffi->LoadStorageValue($position);
@@ -371,6 +401,23 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
     public function loadTexture(string $path): Types\Texture2D
     {
         $texture = $this->ffi->LoadTexture($path);
+
+        return new Types\Texture2D(
+            $texture->id,
+            $texture->width,
+            $texture->height,
+            $texture->mipmaps,
+            $texture->format,
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function loadTextureFromImage(Types\Image $image): Types\Texture2D
+    {
+        $texture = $this->ffi->LoadTextureFromImage($image->toCData($this->ffi));
 
         return new Types\Texture2D(
             $texture->id,
@@ -408,6 +455,11 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
     public function textFormat(string $format, ...$args): string
     {
         return sprintf($format, ...$args);
+    }
+
+    public function unloadImage(Types\Image $image): void
+    {
+        $this->ffi->UnloadImage($image->toCData($this->ffi));
     }
 
     public function unloadTexture(Types\Texture2D $texture): void

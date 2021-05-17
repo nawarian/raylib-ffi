@@ -254,11 +254,11 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `bool CheckCollisionPointTriangle(Vector2 point, Vector2 p1, Vector2 p2, Vector2 p3)`
 - [ ] `bool CheckCollisionLines(Vector2 startPos1, Vector2 endPos1, Vector2 startPos2, Vector2 endPos2, Vector2 *collisionPoint)`
 - [ ] `Rectangle GetCollisionRec(Rectangle rec1, Rectangle rec2)`
-- [ ] `Image LoadImage(const char *fileName)`
+- [x] `Image LoadImage(const char *fileName)`
 - [ ] `Image LoadImageRaw(const char *fileName, int width, int height, int format, int headerSize)`
 - [ ] `Image LoadImageAnim(const char *fileName, int *frames)`
 - [ ] `Image LoadImageFromMemory(const char *fileType, const unsigned char *fileData, int dataSize)`
-- [ ] `void UnloadImage(Image image)`
+- [x] `void UnloadImage(Image image)`
 - [ ] `bool ExportImage(Image image, const char *fileName)`
 - [ ] `bool ExportImageAsCode(Image image, const char *fileName)`
 - [ ] `Image GenImageColor(int width, int height, Color color)`
@@ -315,7 +315,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void ImageDrawText(Image *dst, const char *text, int posX, int posY, int fontSize, Color color)`
 - [ ] `void ImageDrawTextEx(Image *dst, Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint)`
 - [x] `Texture2D LoadTexture(const char *fileName)`
-- [ ] `Texture2D LoadTextureFromImage(Image image)`
+- [x] `Texture2D LoadTextureFromImage(Image image)`
 - [ ] `TextureCubemap LoadTextureCubemap(Image image, int layoutType)`
 - [ ] `RenderTexture2D LoadRenderTexture(int width, int height)`
 - [x] `void UnloadTexture(Texture2D texture)`
@@ -327,7 +327,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void GenTextureMipmaps(Texture2D *texture)`
 - [ ] `void SetTextureFilter(Texture2D texture, int filterMode)`
 - [ ] `void SetTextureWrap(Texture2D texture, int wrapMode)`
-- [ ] `void DrawTexture(Texture2D texture, int posX, int posY, Color tint)`
+- [x] `void DrawTexture(Texture2D texture, int posX, int posY, Color tint)`
 - [ ] `void DrawTextureV(Texture2D texture, Vector2 position, Color tint)`
 - [x] `void DrawTextureEx(Texture2D texture, Vector2 position, float rotation, float scale, Color tint)`
 - [ ] `void DrawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint)`
@@ -476,8 +476,8 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `Texture2D GenTextureBRDF(Shader shader, int size)`
 - [ ] `void BeginShaderMode(Shader shader)`
 - [ ] `void EndShaderMode(void)`
-- [ ] `void BeginBlendMode(int mode)`
-- [ ] `void EndBlendMode(void)`
+- [x] `void BeginBlendMode(int mode)`
+- [x] `void EndBlendMode(void)`
 - [ ] `void InitVrSimulator(void)`
 - [ ] `void CloseVrSimulator(void)`
 - [ ] `void UpdateVrTracking(Camera *camera)`
@@ -735,7 +735,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] text/text_unicode.php
 - [ ] text/text_writing_anim.php
 - [x] [textures/textures_background_scrolling.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_background_scrolling.php)
-- [ ] textures/textures_blend_modes.php
+- [x] [textures/textures_blend_modes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_blend_modes.php)
 - [ ] textures/textures_bunnymark.php
 - [ ] textures/textures_draw_tiled.php
 - [ ] textures/textures_image_drawing.php

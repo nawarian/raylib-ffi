@@ -10,7 +10,7 @@ use Nawarian\Raylib\{
     Raylib,
     RaylibFFIProxy,
 };
-use Nawarian\Raylib\Types\{BoundingBox, Camera2D, Camera3D, Color, Ray, Rectangle, Texture2D, Vector2, Vector3};
+use Nawarian\Raylib\Types\{BoundingBox, Camera2D, Camera3D, Color, Image, Ray, Rectangle, Texture2D, Vector2, Vector3};
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Argument\Token\CallbackToken;
@@ -39,6 +39,14 @@ class RaylibTest extends TestCase
         $this->raylib = new Raylib(
             $this->ffiProxy->reveal(),
         );
+    }
+
+    public function test_beginBlendMode(): void
+    {
+        $this->ffiProxy->BeginBlendMode(Raylib::BLEND_ADDITIVE)
+            ->shouldBeCalledOnce();
+
+        $this->raylib->beginBlendMode(Raylib::BLEND_ADDITIVE);
     }
 
     public function test_beginDrawing(): void
@@ -315,6 +323,25 @@ class RaylibTest extends TestCase
         $this->raylib->drawText('abc', 10, 20, 30, $color);
     }
 
+    public function test_drawTexture_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $texture = new Texture2D(0, 0, 0, 0, 0);
+        $tint = new Color(255, 0, 0, 0);
+
+        $expectedTexture = $this->ffi->new('Texture');
+        $expectedTint = $this->ffi->new('Color');
+        $expectedTint->r = 255;
+
+        $this->ffiProxy->DrawTexture(
+            $this->sameCDataTexture2DArgument($expectedTexture),
+            10,
+            20,
+            $this->sameCDataColorArgument($expectedTint),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawTexture($texture, 10, 20, $tint);
+    }
+
     public function test_drawTextureEx_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $texture = new Texture2D(0, 0, 0, 0, 0);
@@ -332,7 +359,7 @@ class RaylibTest extends TestCase
             20,
             30,
             $this->sameCDataColorArgument($expectedTint),
-            )->shouldBeCalledOnce();
+        )->shouldBeCalledOnce();
 
         $this->raylib->drawTextureEx($texture, $position, 20, 30, $tint);
     }
@@ -363,6 +390,14 @@ class RaylibTest extends TestCase
         )->shouldBeCalledOnce();
 
         $this->raylib->drawTextureTiled($texture, $source, $dest, $origin, 20, 30, $tint);
+    }
+
+    public function test_endBlendMode(): void
+    {
+        $this->ffiProxy->EndBlendMode()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->endBlendMode();
     }
 
     public function test_endDrawing(): void
@@ -634,6 +669,26 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->isMouseButtonPressed(10));
     }
 
+    public function test_loadImage(): void
+    {
+        $imageCData = $this->ffi->new('Image');
+        $data = FFI::addr($this->ffi->new('void *'));
+
+        $imageCData->data = $data;
+        $imageCData->width = 10;
+        $imageCData->height = 20;
+        $imageCData->mipmaps = 30;
+        $imageCData->format = 40;
+
+        $this->ffiProxy->LoadImage('image001.png')
+            ->shouldBeCalledOnce()
+            ->willReturn($imageCData);
+
+        $expectedImage = new Image($data, 10, 20, 30, 40);
+
+        self::assertEquals($expectedImage, $this->raylib->loadImage('image001.png'));
+    }
+
     public function test_loadStorageValue(): void
     {
         $this->ffiProxy->LoadStorageValue(10)
@@ -699,6 +754,20 @@ class RaylibTest extends TestCase
             ->shouldBeCalledOnce();
 
         $this->raylib->setTargetFPS(45);
+    }
+
+    public function test_unloadImage(): void
+    {
+        $expectedImage = $this->ffi->new('Image');
+        $data = FFI::addr($this->ffi->new('void *'));
+        $expectedImage->data = $data;
+        $image = new Image($data, 0, 0, 0, 0);
+
+        $this->ffiProxy->UnloadImage(
+            $this->sameCDataImageArgument($expectedImage)
+        )->shouldBeCalledOnce();
+
+        $this->raylib->unloadImage($image);
     }
 
     public function test_unloadTexture(): void
@@ -809,6 +878,19 @@ class RaylibTest extends TestCase
             self::assertEquals($expectedStruct->g, $color->g);
             self::assertEquals($expectedStruct->b, $color->b);
             self::assertEquals($expectedStruct->a, $color->a);
+
+            return true;
+        });
+    }
+
+    public function sameCDataImageArgument(CData $expectedStruct): CallbackToken
+    {
+        return Argument::that(function (CData $image) use ($expectedStruct) {
+            self::assertEquals($expectedStruct->data, $image->data);
+            self::assertEquals($expectedStruct->width, $image->width);
+            self::assertEquals($expectedStruct->height, $image->height);
+            self::assertEquals($expectedStruct->mipmaps, $image->mipmaps);
+            self::assertEquals($expectedStruct->format, $image->format);
 
             return true;
         });
