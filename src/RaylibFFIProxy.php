@@ -50,6 +50,7 @@ use FFI\CData;
  * @method CData GetScreenToWorld2D(CData $position, CData $camera)
  * @method int GetScreenWidth()
  * @method int GetScreenHeight()
+ * @method float GetTime()
  * @method CData GetTouchPosition(int $index)
  * @method CData GetWorldToScreen(CData $position, CData $camera)
  * @method CData GetWorldToScreen2D(CData $position, CData $camera)

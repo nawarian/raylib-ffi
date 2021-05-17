@@ -127,7 +127,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void SetTargetFPS(int fps)`
 - [ ] `int GetFPS(void)`
 - [x] `float GetFrameTime(void)`
-- [ ] `double GetTime(void)`
+- [x] `double GetTime(void)`
 - [ ] `void SetConfigFlags(unsigned int flags)`
 - [ ] `void SetTraceLogLevel(int logType)`
 - [ ] `void SetTraceLogExit(int logType)`

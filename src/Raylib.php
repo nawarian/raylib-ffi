@@ -296,6 +296,11 @@ final class Raylib implements HasRaylibGestureConstants, HasRaylibKeysConstants,
         return $this->ffi->GetScreenHeight();
     }
 
+    public function getTime(): float
+    {
+        return $this->ffi->GetTime();
+    }
+
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
