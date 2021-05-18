@@ -124,11 +124,11 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `Vector2 GetWorldToScreenEx(Vector3 position, Camera camera, int width, int height)`
 - [x] `Vector2 GetWorldToScreen2D(Vector2 position, Camera2D camera)`
 - [x] `Vector2 GetScreenToWorld2D(Vector2 position, Camera2D camera)`
-- [ ] `void SetTargetFPS(int fps)`
-- [ ] `int GetFPS(void)`
+- [x] `void SetTargetFPS(int fps)`
+- [x] `int GetFPS(void)`
 - [x] `float GetFrameTime(void)`
 - [x] `double GetTime(void)`
-- [ ] `void SetConfigFlags(unsigned int flags)`
+- [x] `void SetConfigFlags(unsigned int flags)`
 - [ ] `void SetTraceLogLevel(int logType)`
 - [ ] `void SetTraceLogExit(int logType)`
 - [ ] `void SetTraceLogCallback(TraceLogCallback callback)`
@@ -325,7 +325,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `Image GetTextureData(Texture2D texture)`
 - [ ] `Image GetScreenData(void)`
 - [ ] `void GenTextureMipmaps(Texture2D *texture)`
-- [ ] `void SetTextureFilter(Texture2D texture, int filterMode)`
+- [x] `void SetTextureFilter(Texture2D texture, int filterMode)`
 - [ ] `void SetTextureWrap(Texture2D texture, int wrapMode)`
 - [x] `void DrawTexture(Texture2D texture, int posX, int posY, Color tint)`
 - [ ] `void DrawTextureV(Texture2D texture, Vector2 position, Color tint)`
@@ -341,7 +341,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `Color ColorFromNormalized(Vector4 normalized)`
 - [ ] `Vector3 ColorToHSV(Color color)`
 - [ ] `Color ColorFromHSV(float hue, float saturation, float value)`
-- [ ] `Color ColorAlpha(Color color, float alpha)`
+- [x] `Color ColorAlpha(Color color, float alpha)`
 - [ ] `Color ColorAlphaBlend(Color dst, Color src, Color tint)`
 - [x] `Color GetColor(int hexValue)`
 - [ ] `Color GetPixelColor(void *srcPtr, int format)`
@@ -737,7 +737,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [textures/textures_background_scrolling.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_background_scrolling.php)
 - [x] [textures/textures_blend_modes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_blend_modes.php)
 - [x] [textures/textures_bunnymark.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_bunnymark.php)
-- [ ] textures/textures_draw_tiled.php
+- [x] [textures/textures_draw_tiled.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_draw_tiled.php)
 - [ ] textures/textures_image_drawing.php
 - [ ] textures/textures_image_generation.php
 - [ ] textures/textures_image_loading.php
