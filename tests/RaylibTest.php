@@ -144,6 +144,23 @@ class RaylibTest extends TestCase
         $this->raylib->closeWindow();
     }
 
+    public function test_colorAlpha_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $color = Color::black(0);
+        $expectedColorStruct = $this->ffi->new('Color');
+
+        $newColorStruct = $this->ffi->new('Color');
+        $newColorStruct->r = 255;
+        $this->ffiProxy->ColorAlpha($this->sameCDataColorArgument($expectedColorStruct), 0.5)
+            ->shouldBeCalledOnce()
+            ->willReturn($newColorStruct);
+
+        self::assertEquals(
+            new Color(255, 0, 0, 0),
+            $this->raylib->colorAlpha($color, 0.5)
+        );
+    }
+
     public function test_drawCube_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $position = new Vector3(5, 10, 15);
@@ -459,6 +476,15 @@ class RaylibTest extends TestCase
         self::assertEquals(new Color(0, 255,0, 255), $this->raylib->getColor(0x00ff00ff));
     }
 
+    public function test_getFPS(): void
+    {
+        $this->ffiProxy->GetFPS()
+            ->shouldBeCalledOnce()
+            ->willReturn(10);
+
+        self::assertEquals(10, $this->raylib->getFPS());
+    }
+
     public function test_getFrameTime(): void
     {
         $this->ffiProxy->GetFrameTime()
@@ -748,12 +774,33 @@ class RaylibTest extends TestCase
         $this->raylib->setCameraMode($camera, Camera3D::MODE_FIRST_PERSON);
     }
 
+    public function test_setConfigFlags(): void
+    {
+        $this->ffiProxy->SetConfigFlags(10)
+            ->shouldBeCalledOnce();
+
+        $this->raylib->setConfigFlags(10);
+    }
+
     public function test_setTargetFPS_respectsParameterOrder(): void
     {
         $this->ffiProxy->SetTargetFPS(45)
             ->shouldBeCalledOnce();
 
         $this->raylib->setTargetFPS(45);
+    }
+
+    public function test_setTextureFilter_respectsParameterOrder(): void
+    {
+        $tex = new Texture2D(0, 0, 0, 0, 0);
+        $texStruct = $this->ffi->new('Texture');
+
+        $this->ffiProxy->SetTextureFilter(
+            $this->sameCDataTexture2DArgument($texStruct),
+            10
+        )->shouldBeCalledOnce();
+
+        $this->raylib->setTextureFilter($tex, 10);
     }
 
     public function test_unloadImage(): void

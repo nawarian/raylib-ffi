@@ -8,9 +8,11 @@ use FFI;
 
 final class Raylib implements
     HasRaylibBlendModeConstants,
+    HasRaylibFilterModeConstants,
     HasRaylibGestureConstants,
     HasRaylibKeysConstants,
-    HasRaylibMouseConstants
+    HasRaylibMouseConstants,
+    HasRaylibWindowFlagConstants
 {
     private RaylibFFIProxy $ffi;
 
@@ -62,6 +64,17 @@ final class Raylib implements
     public function closeWindow(): void
     {
         $this->ffi->CloseWindow();
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function colorAlpha(Types\Color $color, float $alpha): Types\Color
+    {
+        $c = $this->ffi->ColorAlpha($color->toCData($this->ffi), $alpha);
+
+        return new Types\Color($c->r, $c->g, $c->b, $c->a);
     }
 
     public function drawCircleV(Types\Vector2 $center, float $radius, Types\Color $color): void
@@ -235,6 +248,11 @@ final class Raylib implements
         $color = $this->ffi->GetColor($hex);
 
         return new Types\Color($color->r, $color->g, $color->b, $color->a);
+    }
+
+    public function getFPS(): int
+    {
+        return $this->ffi->GetFPS();
     }
 
     public function getFrameTime(): float
@@ -443,9 +461,19 @@ final class Raylib implements
         $this->ffi->SetCameraMode($camera->toCData($this->ffi), $mode);
     }
 
+    public function setConfigFlags(int $flags): void
+    {
+        $this->ffi->SetConfigFlags($flags);
+    }
+
     public function setTargetFPS(int $fps): void
     {
         $this->ffi->SetTargetFPS($fps);
+    }
+
+    public function setTextureFilter(Types\Texture2D $texture, int $filterMode): void
+    {
+        $this->ffi->SetTextureFilter($texture->toCData($this->ffi), $filterMode);
     }
 
     /**

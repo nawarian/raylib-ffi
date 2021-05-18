@@ -127,6 +127,12 @@ final class Color
         return new self(255, 255, 255, $alpha);
     }
 
+    public static function purple(int $alpha = 255): Color
+    {
+        self::assertUint8($alpha);
+        return new self(200, 122, 255, $alpha);
+    }
+
     /**
      * @psalm-suppress MixedPropertyAssignment
      * @psalm-suppress UndefinedPropertyAssignment
