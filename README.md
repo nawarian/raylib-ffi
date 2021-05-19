@@ -486,8 +486,8 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void ToggleVrMode(void)`
 - [ ] `void BeginVrDrawing(void)`
 - [ ] `void EndVrDrawing(void)`
-- [ ] `void InitAudioDevice(void)`
-- [ ] `void CloseAudioDevice(void)`
+- [x] `void InitAudioDevice(void)`
+- [x] `void CloseAudioDevice(void)`
 - [ ] `bool IsAudioDeviceReady(void)`
 - [ ] `void SetMasterVolume(float volume)`
 - [ ] `Wave LoadWave(const char *fileName)`
@@ -514,18 +514,18 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void WaveCrop(Wave *wave, int initSample, int finalSample)`
 - [ ] `float *LoadWaveSamples(Wave wave)`
 - [ ] `void UnloadWaveSamples(float *samples)`
-- [ ] `Music LoadMusicStream(const char *fileName)`
-- [ ] `void UnloadMusicStream(Music music)`
-- [ ] `void PlayMusicStream(Music music)`
-- [ ] `void UpdateMusicStream(Music music)`
-- [ ] `void StopMusicStream(Music music)`
-- [ ] `void PauseMusicStream(Music music)`
-- [ ] `void ResumeMusicStream(Music music)`
+- [x] `Music LoadMusicStream(const char *fileName)`
+- [x] `void UnloadMusicStream(Music music)`
+- [x] `void PlayMusicStream(Music music)`
+- [x] `void UpdateMusicStream(Music music)`
+- [x] `void StopMusicStream(Music music)`
+- [x] `void PauseMusicStream(Music music)`
+- [x] `void ResumeMusicStream(Music music)`
 - [ ] `bool IsMusicPlaying(Music music)`
 - [ ] `void SetMusicVolume(Music music, float volume)`
-- [ ] `void SetMusicPitch(Music music, float pitch)`
-- [ ] `float GetMusicTimeLength(Music music)`
-- [ ] `float GetMusicTimePlayed(Music music)`
+- [x] `void SetMusicPitch(Music music, float pitch)`
+- [x] `float GetMusicTimeLength(Music music)`
+- [x] `float GetMusicTimePlayed(Music music)`
 - [ ] `AudioStream InitAudioStream(unsigned int sampleRate, unsigned int sampleSize, unsigned int channels)`
 - [ ] `void UpdateAudioStream(AudioStream stream, const void *data, int samplesCount)`
 - [ ] `void CloseAudioStream(AudioStream stream)`
@@ -639,7 +639,7 @@ Below you'll find the list of things to be developed in this project.
 
 ### Examples
 
-- [ ] audio/audio_module_playing.php
+- [x] [audio/audio_module_playing.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/audio/audio_module_playing.php)
 - [ ] audio/audio_multichannel_sound.php
 - [ ] audio/audio_music_stream.php
 - [ ] audio/audio_raw_stream.php

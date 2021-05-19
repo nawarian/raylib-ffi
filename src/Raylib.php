@@ -61,6 +61,11 @@ final class Raylib implements
         $this->ffi->ClearBackground($color->toCData($this->ffi));
     }
 
+    public function closeAudioDevice(): void
+    {
+        $this->ffi->CloseAudioDevice();
+    }
+
     public function closeWindow(): void
     {
         $this->ffi->CloseWindow();
@@ -307,6 +312,16 @@ final class Raylib implements
         return $this->ffi->GetMouseY();
     }
 
+    public function getMusicTimeLength(Types\Music $music): float
+    {
+        return $this->ffi->GetMusicTimeLength($music->toCData($this->ffi));
+    }
+
+    public function getMusicTimePlayed(Types\Music $music): float
+    {
+        return $this->ffi->GetMusicTimePlayed($music->toCData($this->ffi));
+    }
+
     public function getRandomValue(int $min, int $max): int
     {
         return $this->ffi->GetRandomValue($min, $max);
@@ -371,6 +386,11 @@ final class Raylib implements
         return new Types\Vector2($vec->x, $vec->y);
     }
 
+    public function initAudioDevice(): void
+    {
+        $this->ffi->InitAudioDevice();
+    }
+
     public function initWindow(int $width, int $height, string $title): void
     {
         $this->ffi->InitWindow($width, $height, $title);
@@ -405,6 +425,29 @@ final class Raylib implements
         $image = $this->ffi->LoadImage($filename);
 
         return new Types\Image($image->data, $image->width, $image->height, $image->mipmaps, $image->format);
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedPropertyFetch
+     */
+    public function loadMusicStream(string $filename): Types\Music
+    {
+        $music = $this->ffi->LoadMusicStream($filename);
+
+        return new Types\Music(
+            new Types\AudioStream(
+                $music->stream->buffer,
+                $music->stream->sampleRate,
+                $music->stream->sampleSize,
+                $music->stream->channels,
+            ),
+            $music->sampleCount,
+            $music->looping,
+            $music->ctxType,
+            $music->ctxData
+        );
     }
 
     public function loadStorageValue(int $position): int
@@ -451,6 +494,21 @@ final class Raylib implements
         return $this->ffi->MeasureText($text, $fontSize);
     }
 
+    public function pauseMusicStream(Types\Music $music): void
+    {
+        $this->ffi->PauseMusicStream($music->toCData($this->ffi));
+    }
+
+    public function playMusicStream(Types\Music $music): void
+    {
+        $this->ffi->PlayMusicStream($music->toCData($this->ffi));
+    }
+
+    public function resumeMusicStream(Types\Music $music): void
+    {
+        $this->ffi->ResumeMusicStream($music->toCData($this->ffi));
+    }
+
     public function saveStorageValue(int $position, int $value): bool
     {
         return $this->ffi->SaveStorageValue($position, $value);
@@ -466,6 +524,11 @@ final class Raylib implements
         $this->ffi->SetConfigFlags($flags);
     }
 
+    public function setMusicPitch(Types\Music $music, float $pitch): void
+    {
+        $this->ffi->SetMusicPitch($music->toCData($this->ffi), $pitch);
+    }
+
     public function setTargetFPS(int $fps): void
     {
         $this->ffi->SetTargetFPS($fps);
@@ -474,6 +537,11 @@ final class Raylib implements
     public function setTextureFilter(Types\Texture2D $texture, int $filterMode): void
     {
         $this->ffi->SetTextureFilter($texture->toCData($this->ffi), $filterMode);
+    }
+
+    public function stopMusicStream(Types\Music $music): void
+    {
+        $this->ffi->StopMusicStream($music->toCData($this->ffi));
     }
 
     /**
@@ -485,9 +553,15 @@ final class Raylib implements
         return sprintf($format, ...$args);
     }
 
+
     public function unloadImage(Types\Image $image): void
     {
         $this->ffi->UnloadImage($image->toCData($this->ffi));
+    }
+
+    public function unloadMusicStream(Types\Music $music): void
+    {
+        $this->ffi->UnloadMusicStream($music->toCData($this->ffi));
     }
 
     public function unloadTexture(Types\Texture2D $texture): void
@@ -523,6 +597,11 @@ final class Raylib implements
 
         $camera->fovy = $cdata->fovy;
         $camera->projection = $cdata->type;
+    }
+
+    public function updateMusicStream(Types\Music $music): void
+    {
+        $this->ffi->UpdateMusicStream($music->toCData($this->ffi));
     }
 
     public function windowShouldClose(): bool

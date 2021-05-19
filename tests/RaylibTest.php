@@ -10,7 +10,18 @@ use Nawarian\Raylib\{
     Raylib,
     RaylibFFIProxy,
 };
-use Nawarian\Raylib\Types\{BoundingBox, Camera2D, Camera3D, Color, Image, Ray, Rectangle, Texture2D, Vector2, Vector3};
+use Nawarian\Raylib\Types\{AudioStream,
+    BoundingBox,
+    Camera2D,
+    Camera3D,
+    Color,
+    Image,
+    Music,
+    Ray,
+    Rectangle,
+    Texture2D,
+    Vector2,
+    Vector3};
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Argument\Token\CallbackToken;
@@ -134,6 +145,14 @@ class RaylibTest extends TestCase
             ->shouldBeCalledOnce();
 
         $this->raylib->clearBackground($color);
+    }
+
+    public function test_closeAudioDevice(): void
+    {
+        $this->ffiProxy->CloseAudioDevice()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->closeAudioDevice();
     }
 
     public function test_closeWindow(): void
@@ -649,6 +668,14 @@ class RaylibTest extends TestCase
             ->willReturn(10);
 
         self::assertEquals(10, $this->raylib->getScreenHeight());
+    }
+
+    public function test_initAudioDevice(): void
+    {
+        $this->ffiProxy->InitAudioDevice()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->initAudioDevice();
     }
 
     public function test_initWindow_respectsParameterOrder(): void
