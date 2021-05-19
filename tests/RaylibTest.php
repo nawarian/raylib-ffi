@@ -742,6 +742,19 @@ class RaylibTest extends TestCase
         self::assertEquals($expectedImage, $this->raylib->loadImage('image001.png'));
     }
 
+    public function test_loadMusicStream(): void
+    {
+        $expectedMusicStruct = $this->ffi->new('Music');
+        $expectedMusicStruct->stream->buffer = FFI::addr($this->ffi->new('struct rAudioBuffer { void* ptr; }'));
+        $expectedMusicStruct->ctxData = FFI::addr($this->ffi->new('struct { void* ptr; }'));
+
+        $this->ffiProxy->LoadMusicStream('music001.xm')
+            ->shouldBeCalledOnce()
+            ->willReturn($expectedMusicStruct);
+
+        $this->raylib->loadMusicStream('music001.xm');
+    }
+
     public function test_loadStorageValue(): void
     {
         $this->ffiProxy->LoadStorageValue(10)
