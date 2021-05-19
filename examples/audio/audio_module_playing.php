@@ -74,7 +74,7 @@ for ($i = MAX_CIRCLES - 1; $i >= 0; $i--) {
     $circles[$i]->color = $colors[$raylib->GetRandomValue(0, 13)];
 }
 
-$music = $raylib->loadMusicStream('resources/mini1111.xm');
+$music = $raylib->loadMusicStream(__DIR__ . '/resources/mini1111.xm');
 $music->looping = false;
 $pitch = 1.0;
 
