@@ -188,6 +188,24 @@ final class Raylib implements
         );
     }
 
+    public function drawTexturePro(
+        Types\Texture2D $texture,
+        Types\Rectangle $source,
+        Types\Rectangle $dest,
+        Types\Vector2 $origin,
+        float $rotation,
+        Types\Color $tint
+    ): void {
+        $this->ffi->DrawTexturePro(
+            $texture->toCData($this->ffi),
+            $source->toCData($this->ffi),
+            $dest->toCData($this->ffi),
+            $origin->toCData($this->ffi),
+            $rotation,
+            $tint->toCData($this->ffi)
+        );
+    }
+
     public function drawTextureTiled(
         Types\Texture2D $texture,
         Types\Rectangle $source,

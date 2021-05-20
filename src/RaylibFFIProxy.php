@@ -36,6 +36,7 @@ use FFI\CData;
  * @method void DrawText(string $text, int $x, int $y, int $fontSize, CData $color)
  * @method void DrawTexture(CData $texture, int $posX, int $posY, CData $tint)
  * @method void DrawTextureEx(CData $texture, CData $position, float $rotation, float $scale, CData $tint)
+ * @method void DrawTexturePro(CData $texture, CData $source, CData $dest, CData $origin, float $rotation, CData $tint)
  * @method void DrawTextureTiled(CData $texture, CData $source, CData $dest, CData $origin, float $rotation, float $scale, CData $tint)
  * @method void EndBlendMode()
  * @method void EndDrawing()

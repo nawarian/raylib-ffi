@@ -400,6 +400,34 @@ class RaylibTest extends TestCase
         $this->raylib->drawTextureEx($texture, $position, 20, 30, $tint);
     }
 
+    public function test_drawTexturePro_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $texture = new Texture2D(0, 0, 0, 0, 0);
+        $source = new Rectangle(0, 0, 0, 0);
+        $dest = new Rectangle(0, 0, 0, 0);
+        $origin = new Vector2(0, 0);
+        $rotation = 0.0;
+        $tint = new Color(255, 0, 0, 0);
+
+        $expectedTexture = $this->ffi->new('Texture');
+        $expectedSource = $this->ffi->new('Rectangle');
+        $expectedDest = $this->ffi->new('Rectangle');
+        $expectedOrigin = $this->ffi->new('Vector2');
+        $expectedTint = $this->ffi->new('Color');
+        $expectedTint->r = 255;
+
+        $this->ffiProxy->DrawTexturePro(
+            $this->sameCDataTexture2DArgument($expectedTexture),
+            $this->sameCDataRectangleArgument($expectedSource),
+            $this->sameCDataRectangleArgument($expectedDest),
+            $this->sameCDataVector2Argument($expectedOrigin),
+            $rotation,
+            $this->sameCDataColorArgument($expectedTint),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawTexturePro($texture, $source, $dest, $origin, $rotation, $tint);
+    }
+
     public function test_drawTextureTiled_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $texture = new Texture2D(0, 0, 0, 0, 0);

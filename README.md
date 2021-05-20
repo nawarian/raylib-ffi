@@ -333,7 +333,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void DrawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint)`
 - [ ] `void DrawTextureQuad(Texture2D texture, Vector2 tiling, Vector2 offset, Rectangle quad, Color tint)`
 - [x] `void DrawTextureTiled(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float rotation, float scale, Color tint)`
-- [ ] `void DrawTexturePro(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float rotation, Color tint)`
+- [x] `void DrawTexturePro(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float rotation, Color tint)`
 - [ ] `void DrawTextureNPatch(Texture2D texture, NPatchInfo nPatchInfo, Rectangle dest, Vector2 origin, float rotation, Color tint)`
 - [x] `Color Fade(Color color, float alpha)`
 - [ ] `int ColorToInt(Color color)`
@@ -746,7 +746,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] textures/textures_logo_raylib.php
 - [ ] textures/textures_mouse_painting.php
 - [ ] textures/textures_npatch_drawing.php
-- [ ] textures/textures_particles_blending.php
+- [x] [textures/textures_particles_blending.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_particles_blending.php)
 - [ ] textures/textures_poly.php
 - [ ] textures/textures_raw_data.php
 - [ ] textures/textures_rectangle.php
