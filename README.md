@@ -496,18 +496,18 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `Sound LoadSoundFromWave(Wave wave)`
 - [ ] `void UpdateSound(Sound sound, const void *data, int samplesCount)`
 - [ ] `void UnloadWave(Wave wave)`
-- [ ] `void UnloadSound(Sound sound)`
+- [x] `void UnloadSound(Sound sound)`
 - [ ] `bool ExportWave(Wave wave, const char *fileName)`
 - [ ] `bool ExportWaveAsCode(Wave wave, const char *fileName)`
 - [ ] `void PlaySound(Sound sound)`
 - [ ] `void StopSound(Sound sound)`
 - [ ] `void PauseSound(Sound sound)`
 - [ ] `void ResumeSound(Sound sound)`
-- [ ] `void PlaySoundMulti(Sound sound)`
-- [ ] `void StopSoundMulti(void)`
-- [ ] `int GetSoundsPlaying(void)`
+- [x] `void PlaySoundMulti(Sound sound)`
+- [x] `void StopSoundMulti(void)`
+- [x] `int GetSoundsPlaying(void)`
 - [ ] `bool IsSoundPlaying(Sound sound)`
-- [ ] `void SetSoundVolume(Sound sound, float volume)`
+- [x] `void SetSoundVolume(Sound sound, float volume)`
 - [ ] `void SetSoundPitch(Sound sound, float pitch)`
 - [ ] `void WaveFormat(Wave *wave, int sampleRate, int sampleSize, int channels)`
 - [ ] `Wave WaveCopy(Wave wave)`
@@ -640,7 +640,7 @@ Below you'll find the list of things to be developed in this project.
 ### Examples
 
 - [x] [audio/audio_module_playing.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/audio/audio_module_playing.php)
-- [ ] audio/audio_multichannel_sound.php
+- [x] [audio/audio_multichannel_sound.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/audio/audio_multichannel_sound.php)
 - [ ] audio/audio_music_stream.php
 - [ ] audio/audio_raw_stream.php
 - [ ] audio/audio_sound_loading.php
