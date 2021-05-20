@@ -20,8 +20,8 @@ $raylib->initWindow($screenWidth, $screenHeight, 'raylib [audio] example - Multi
 
 $raylib->initAudioDevice();      // Initialize audio device
 
-$fxWav = $raylib->loadSound('resources/sound.wav');         // Load WAV audio file
-$fxOgg = $raylib->loadSound('resources/target.ogg');        // Load OGG audio file
+$fxWav = $raylib->loadSound(__DIR__ . 'resources/sound.wav');         // Load WAV audio file
+$fxOgg = $raylib->loadSound(__DIR__ . 'resources/target.ogg');        // Load OGG audio file
 
 $raylib->setSoundVolume($fxWav, 0.2);
 
