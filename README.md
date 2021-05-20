@@ -499,7 +499,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void UnloadSound(Sound sound)`
 - [ ] `bool ExportWave(Wave wave, const char *fileName)`
 - [ ] `bool ExportWaveAsCode(Wave wave, const char *fileName)`
-- [ ] `void PlaySound(Sound sound)`
+- [x] `void PlaySound(Sound sound)`
 - [ ] `void StopSound(Sound sound)`
 - [ ] `void PauseSound(Sound sound)`
 - [ ] `void ResumeSound(Sound sound)`
@@ -641,9 +641,9 @@ Below you'll find the list of things to be developed in this project.
 
 - [x] [audio/audio_module_playing.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/audio/audio_module_playing.php)
 - [x] [audio/audio_multichannel_sound.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/audio/audio_multichannel_sound.php)
-- [ ] audio/audio_music_stream.php
+- [x] [audio/audio_music_stream.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/audio/audio_music_stream.php)
 - [ ] audio/audio_raw_stream.php
-- [ ] audio/audio_sound_loading.php
+- [x] [audio/audio_sound_loading.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/audio/audio_sound_loading.php)
 - [x] [core/core_2d_camera.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_2d_camera.php)
 - [x] [core/core_2d_camera_platformer.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_2d_camera_platformer.php)
 - [x] [core/core_3d_camera_first_person.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_3d_camera_first_person.php)

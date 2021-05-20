@@ -529,6 +529,11 @@ final class Raylib implements
         $this->ffi->PlayMusicStream($music->toCData($this->ffi));
     }
 
+    public function playSound(Types\Sound $sound): void
+    {
+        $this->ffi->PlaySound($sound->toCData($this->ffi));
+    }
+
     public function playSoundMulti(Types\Sound $sound): void
     {
         $this->ffi->PlaySoundMulti($sound->toCData($this->ffi));

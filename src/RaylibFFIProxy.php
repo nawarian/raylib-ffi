@@ -78,6 +78,7 @@ use FFI\CData;
  * @method int MeasureText(string $text, int $fontSize)
  * @method void PauseMusicStream(CData $music)
  * @method void PlayMusicStream(CData $music)
+ * @method void PlaySound(CData $sound)
  * @method void PlaySoundMulti(CData $sound)
  * @method void ResumeMusicStream(CData $music)
  * @method bool SaveStorageValue(int $position, int $value)

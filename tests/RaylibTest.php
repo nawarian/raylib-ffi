@@ -792,6 +792,18 @@ class RaylibTest extends TestCase
         self::assertEquals(2000, $this->raylib->measureText('Tiny Text', 20));
     }
 
+    public function test_playSound(): void
+    {
+        $buffer = FFI::addr($this->ffi->new('struct rAudioBuffer { void* ptr; }'));
+        $stream = new AudioStream($buffer, 0, 0, 0);
+        $sound = new Sound($stream, 0);
+
+        $this->ffiProxy->PlaySound($buffer)
+            ->shouldBeCalledOnce();
+
+        $this->raylib->playSound($sound);
+    }
+
     public function test_playSoundMulti(): void
     {
         $buffer = FFI::addr($this->ffi->new('struct rAudioBuffer { void* ptr; }'));
