@@ -19,10 +19,10 @@ $screenHeight = 450;
 $raylib->initWindow($screenWidth, $screenHeight, 'raylib [textures] example - blend modes');
 
 // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
-$bgImage = $raylib->loadImage('resources/cyberpunk_street_background.png');     // Loaded in CPU memory (RAM)
+$bgImage = $raylib->loadImage(__DIR__ . '/resources/cyberpunk_street_background.png');     // Loaded in CPU memory (RAM)
 $bgTexture = $raylib->loadTextureFromImage($bgImage);          // Image converted to texture, GPU memory (VRAM)
 
-$fgImage = $raylib->loadImage('resources/cyberpunk_street_foreground.png');     // Loaded in CPU memory (RAM)
+$fgImage = $raylib->loadImage(__DIR__ . '/resources/cyberpunk_street_foreground.png');     // Loaded in CPU memory (RAM)
 $fgTexture = $raylib->loadTextureFromImage($fgImage);          // Image converted to texture, GPU memory (VRAM)
 
 // Once image has been converted to texture and uploaded to VRAM, it can be unloaded from RAM

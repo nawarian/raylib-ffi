@@ -23,7 +23,7 @@ $screenHeight = 450;
 $raylib->initWindow($screenWidth, $screenHeight, 'raylib [textures] example - bunnymark');
 
 // Load bunny texture
-$texBunny = $raylib->loadTexture('resources/wabbit_alpha.png');
+$texBunny = $raylib->loadTexture(__DIR__ . '/resources/wabbit_alpha.png');
 
 $bunnies = [];    // Bunnies array
 foreach (range(0, MAX_BUNNIES) as $i) {

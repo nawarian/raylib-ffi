@@ -22,9 +22,9 @@ $raylib->initWindow($screenWidth, $screenHeight, 'raylib [textures] example - ba
 
 // NOTE: Be careful, background width must be equal or bigger than screen width
 // if not, texture should be draw more than two times for scrolling effect
-$background = $raylib->loadTexture('resources/cyberpunk_street_background.png');
-$midground = $raylib->loadTexture('resources/cyberpunk_street_midground.png');
-$foreground = $raylib->loadTexture('resources/cyberpunk_street_foreground.png');
+$background = $raylib->loadTexture(__DIR__ . '/resources/cyberpunk_street_background.png');
+$midground = $raylib->loadTexture(__DIR__ . '/resources/cyberpunk_street_midground.png');
+$foreground = $raylib->loadTexture(__DIR__ . '/resources/cyberpunk_street_foreground.png');
 
 $scrollingBack = 0.0;
 $scrollingMid = 0.0;

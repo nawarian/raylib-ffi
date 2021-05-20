@@ -26,7 +26,7 @@ $raylib->setConfigFlags(Raylib::FLAG_WINDOW_RESIZABLE); // Make the window resiz
 $raylib->initWindow($screenWidth, $screenHeight, 'raylib [textures] example - Draw part of a texture tiled');
 
 // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
-$texPattern = $raylib->loadTexture('resources/patterns.png');
+$texPattern = $raylib->loadTexture(__DIR__ . '/resources/patterns.png');
 $raylib->setTextureFilter($texPattern, Raylib::FILTER_TRILINEAR); // Makes the texture smoother when upscaled
 
 // Coordinates for all patterns inside the texture
