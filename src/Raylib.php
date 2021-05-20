@@ -348,6 +348,11 @@ final class Raylib implements
         return $this->ffi->GetScreenHeight();
     }
 
+    public function getSoundsPlaying(): int
+    {
+        return $this->ffi->GetSoundsPlaying();
+    }
+
     public function getTime(): float
     {
         return $this->ffi->GetTime();
@@ -450,6 +455,26 @@ final class Raylib implements
         );
     }
 
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedPropertyFetch
+     */
+    public function loadSound(string $filename): Types\Sound
+    {
+        $audio = $this->ffi->LoadSound($filename);
+
+        return new Types\Sound(
+            new Types\AudioStream(
+                $audio->stream->buffer,
+                $audio->stream->sampleRate,
+                $audio->stream->sampleSize,
+                $audio->stream->channels,
+            ),
+            $audio->sampleCount,
+        );
+    }
+
     public function loadStorageValue(int $position): int
     {
         return $this->ffi->LoadStorageValue($position);
@@ -504,6 +529,11 @@ final class Raylib implements
         $this->ffi->PlayMusicStream($music->toCData($this->ffi));
     }
 
+    public function playSoundMulti(Types\Sound $sound): void
+    {
+        $this->ffi->PlaySoundMulti($sound->toCData($this->ffi));
+    }
+
     public function resumeMusicStream(Types\Music $music): void
     {
         $this->ffi->ResumeMusicStream($music->toCData($this->ffi));
@@ -529,6 +559,11 @@ final class Raylib implements
         $this->ffi->SetMusicPitch($music->toCData($this->ffi), $pitch);
     }
 
+    public function setSoundVolume(Types\Sound $sound, float $volume): void
+    {
+        $this->ffi->SetSoundVolume($sound->toCData($this->ffi), $volume);
+    }
+
     public function setTargetFPS(int $fps): void
     {
         $this->ffi->SetTargetFPS($fps);
@@ -542,6 +577,11 @@ final class Raylib implements
     public function stopMusicStream(Types\Music $music): void
     {
         $this->ffi->StopMusicStream($music->toCData($this->ffi));
+    }
+
+    public function stopSoundMulti(): void
+    {
+        $this->ffi->StopSoundMulti();
     }
 
     /**
@@ -562,6 +602,11 @@ final class Raylib implements
     public function unloadMusicStream(Types\Music $music): void
     {
         $this->ffi->UnloadMusicStream($music->toCData($this->ffi));
+    }
+
+    public function unloadSound(Types\Sound $sound): void
+    {
+        $this->ffi->UnloadSound($sound->toCData($this->ffi));
     }
 
     public function unloadTexture(Types\Texture2D $texture): void

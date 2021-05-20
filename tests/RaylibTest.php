@@ -16,9 +16,9 @@ use Nawarian\Raylib\Types\{AudioStream,
     Camera3D,
     Color,
     Image,
-    Music,
     Ray,
     Rectangle,
+    Sound,
     Texture2D,
     Vector2,
     Vector3};
@@ -611,6 +611,15 @@ class RaylibTest extends TestCase
         self::assertEquals(new Vector2(10, 20), $this->raylib->getScreenToWorld2D($position, $camera));
     }
 
+    public function test_getSoundsPlaying(): void
+    {
+        $this->ffiProxy->GetSoundsPlaying()
+            ->shouldBeCalledOnce()
+            ->willReturn(10);
+
+        self::assertEquals(10, $this->raylib->getSoundsPlaying());
+    }
+
     public function test_getWorldToScreen_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $expectedPosition = $this->ffi->new('Vector3');
@@ -783,6 +792,18 @@ class RaylibTest extends TestCase
         self::assertEquals(2000, $this->raylib->measureText('Tiny Text', 20));
     }
 
+    public function test_playSoundMulti(): void
+    {
+        $buffer = FFI::addr($this->ffi->new('struct rAudioBuffer { void* ptr; }'));
+        $stream = new AudioStream($buffer, 0, 0, 0);
+        $sound = new Sound($stream, 0);
+
+        $this->ffiProxy->PlaySoundMulti($buffer)
+            ->shouldBeCalledOnce();
+
+        $this->raylib->playSoundMulti($sound);
+    }
+
     public function test_saveStorageValue(): void
     {
         $this->ffiProxy->SaveStorageValue(0, 200)
@@ -822,6 +843,17 @@ class RaylibTest extends TestCase
         $this->raylib->setConfigFlags(10);
     }
 
+    public function test_setSoundVolume_respectsParameterOrder(): void
+    {
+        $buffer = FFI::addr($this->ffi->new('struct rAudioBuffer { void* ptr; }'));
+        $stream = new AudioStream($buffer, 0, 0, 0);
+        $sound = new Sound($stream, 0);
+
+        $this->ffiProxy->SetSoundVolume($this->ffi->new('Sound'), 10)->shouldBeCalledOnce();
+
+        $this->raylib->setSoundVolume($sound, 10.0);
+    }
+
     public function test_setTargetFPS_respectsParameterOrder(): void
     {
         $this->ffiProxy->SetTargetFPS(45)
@@ -843,6 +875,14 @@ class RaylibTest extends TestCase
         $this->raylib->setTextureFilter($tex, 10);
     }
 
+    public function test_stopSoundMulti(): void
+    {
+        $this->ffiProxy->StopSoundMulti()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->stopSoundMulti();
+    }
+
     public function test_unloadImage(): void
     {
         $expectedImage = $this->ffi->new('Image');
@@ -855,6 +895,18 @@ class RaylibTest extends TestCase
         )->shouldBeCalledOnce();
 
         $this->raylib->unloadImage($image);
+    }
+
+    public function test_unloadSound_respectsParameterOrder(): void
+    {
+        $buffer = FFI::addr($this->ffi->new('struct rAudioBuffer { void* ptr; }'));
+        $stream = new AudioStream($buffer, 0, 0, 0);
+        $sound = new Sound($stream, 0);
+
+        $this->ffiProxy->UnloadSound($this->ffi->new('Sound'))
+            ->shouldBeCalledOnce();
+
+        $this->raylib->unloadSound($sound);
     }
 
     public function test_unloadTexture(): void
