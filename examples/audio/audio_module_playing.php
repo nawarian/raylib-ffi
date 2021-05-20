@@ -80,7 +80,6 @@ $pitch = 1.0;
 
 $raylib->playMusicStream($music);
 
-$timePlayed = 0.0;
 $pause = false;
 
 $raylib->setTargetFPS(60);               // Set our game to run at 60 frames-per-second
