@@ -63,6 +63,7 @@ $raylib->unloadFont($font);     // Unload custom spritefont (already drawn used 
 
 $texture = $raylib->loadTextureFromImage($parrots); // Image converted to texture, uploaded to GPU memory (VRAM)
 
+//phpcs:ignore Generic.Files.LineLength.TooLong
 $raylib->unloadImage($parrots); //Once image has been converted to texture and uploaded to VRAM,it can be unloaded from RAM
 
 $raylib->setTargetFPS(60);
