@@ -82,6 +82,32 @@ final class Raylib implements
         return new Types\Color($c->r, $c->g, $c->b, $c->a);
     }
 
+    public function drawCircle(int $centerX, int $centerY, float $radius, Types\Color $color): void
+    {
+        $this->ffi->DrawCircle($centerX, $centerY, $radius, $color->toCData($this->ffi));
+    }
+
+    public function drawCircleGradient(
+        int $centerX,
+        int $centerY,
+        float $radius,
+        Types\Color $color1,
+        Types\Color $color2
+    ): void {
+        $this->ffi->DrawCircleGradient(
+            $centerX,
+            $centerY,
+            $radius,
+            $color1->toCData($this->ffi),
+            $color2->toCData($this->ffi),
+        );
+    }
+
+    public function drawCircleLines(int $centerX, int $centerY, float $radius, Types\Color $color): void
+    {
+        $this->ffi->DrawCircleLines($centerX, $centerY, $radius, $color->toCData($this->ffi));
+    }
+
     public function drawCircleV(Types\Vector2 $center, float $radius, Types\Color $color): void
     {
         $this->ffi->DrawCircleV($center->toCData($this->ffi), $radius, $color->toCData($this->ffi));
@@ -137,6 +163,16 @@ final class Raylib implements
         );
     }
 
+    public function drawPoly(
+        Types\Vector2 $center,
+        int $sides,
+        float $radius,
+        float $rotation,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawPoly($center->toCData($this->ffi), $sides, $radius, $rotation, $color->toCData($this->ffi));
+    }
+
     public function drawRay(Types\Ray $ray, Types\Color $color): void
     {
         $this->ffi->DrawRay($ray->toCData($this->ffi), $color->toCData($this->ffi));
@@ -145,6 +181,24 @@ final class Raylib implements
     public function drawRectangle(float $x, float $y, float $width, float $height, Types\Color $color): void
     {
         $this->ffi->DrawRectangle($x, $y, $width, $height, $color->toCData($this->ffi));
+    }
+
+    public function drawRectangleGradientH(
+        float $x,
+        float $y,
+        float $width,
+        float $height,
+        Types\Color $color1,
+        Types\Color $color2
+    ): void {
+        $this->ffi->DrawRectangleGradientH(
+            $x,
+            $y,
+            $width,
+            $height,
+            $color1->toCData($this->ffi),
+            $color2->toCData($this->ffi)
+        );
     }
 
     public function drawRectangleLines(float $x, float $y, float $width, float $height, Types\Color $color): void
@@ -205,6 +259,26 @@ final class Raylib implements
             $rotation,
             $scale,
             $tint->toCData($this->ffi),
+        );
+    }
+
+    public function drawTriangle(Types\Vector2 $v1, Types\Vector2 $v2, Types\Vector2 $v3, Types\Color $color): void
+    {
+        $this->ffi->DrawTriangle(
+            $v1->toCData($this->ffi),
+            $v2->toCData($this->ffi),
+            $v3->toCData($this->ffi),
+            $color->toCData($this->ffi),
+        );
+    }
+
+    public function drawTriangleLines(Types\Vector2 $v1, Types\Vector2 $v2, Types\Vector2 $v3, Types\Color $color): void
+    {
+        $this->ffi->DrawTriangleLines(
+            $v1->toCData($this->ffi),
+            $v2->toCData($this->ffi),
+            $v3->toCData($this->ffi),
+            $color->toCData($this->ffi),
         );
     }
 

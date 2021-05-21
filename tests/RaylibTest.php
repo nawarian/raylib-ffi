@@ -180,6 +180,39 @@ class RaylibTest extends TestCase
         );
     }
 
+    public function test_drawCircle_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $expectedColor = $this->ffi->new('Color');
+        $this->ffiProxy->DrawCircle(10, 20, 30, $this->sameCDataColorArgument($expectedColor))
+            ->shouldBeCalledOnce();
+
+        $this->raylib->drawCircle(10, 20, 30, Color::black(0));
+    }
+
+    public function test_drawCircleGradient_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $expectedColor1 = $this->ffi->new('Color');
+        $expectedColor2 = $this->ffi->new('Color');
+        $this->ffiProxy->DrawCircleGradient(
+            10,
+            20,
+            30,
+            $this->sameCDataColorArgument($expectedColor1),
+            $this->sameCDataColorArgument($expectedColor2),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawCircleGradient(10, 20, 30, Color::black(0), Color::black(0));
+    }
+
+    public function test_drawCircleLines_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $expectedColor = $this->ffi->new('Color');
+        $this->ffiProxy->DrawCircleLines(10, 20, 30, $this->sameCDataColorArgument($expectedColor))
+            ->shouldBeCalledOnce();
+
+        $this->raylib->drawCircleLines(10, 20, 30, Color::black(0));
+    }
+
     public function test_drawCube_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $position = new Vector3(5, 10, 15);
@@ -275,6 +308,22 @@ class RaylibTest extends TestCase
         $this->raylib->drawPlane($center, $size, $color);
     }
 
+    public function test_drawPoly_respectsParameterOrderAndConvertsColorToCData(): void
+    {
+        $expectedVector = $this->ffi->new('Vector2');
+        $expectedColor = $this->ffi->new('Color');
+
+        $this->ffiProxy->DrawPoly(
+            $this->sameCDataVector2Argument($expectedVector),
+            10,
+            20,
+            30,
+            $this->sameCDataColorArgument($expectedColor),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawPoly(new Vector2(0, 0), 10, 20, 30, Color::black(0));
+    }
+
     public function test_drawRay_respectsParameterOrderAndConvertsColorToCData(): void
     {
         $ray = new Ray(new Vector3(0, 0, 0), new Vector3(0, 0, 0));
@@ -300,6 +349,31 @@ class RaylibTest extends TestCase
             ->shouldBeCalledOnce();
 
         $this->raylib->drawRectangle(10, 20, 30, 40, $color);
+    }
+
+    public function test_drawRectangleGradientH_respectsParameterOrderAndConvertsColorToCData(): void
+    {
+        $expectedColor1 = $this->ffi->new('Color');
+        $expectedColor2 = $this->ffi->new('Color');
+        $expectedColor2->a = 255;
+
+        $this->ffiProxy->DrawRectangleGradientH(
+            0,
+            10,
+            20,
+            30,
+            $this->sameCDataColorArgument($expectedColor1),
+            $this->sameCDataColorArgument($expectedColor2),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->DrawRectangleGradientH(
+            0,
+            10,
+            20,
+            30,
+            Color::black(0),
+            Color::black(255),
+        );
     }
 
     public function test_drawRectangleLines_respectsParameterOrderAndConvertsColorToCData(): void
@@ -426,6 +500,53 @@ class RaylibTest extends TestCase
         )->shouldBeCalledOnce();
 
         $this->raylib->drawTextureTiled($texture, $source, $dest, $origin, 20, 30, $tint);
+    }
+
+    public function test_drawTriangle_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $expectedVec1 = $this->ffi->new('Vector2');
+        $expectedVec2 = $this->ffi->new('Vector2');
+        $expectedVec2->x = 1;
+        $expectedVec2->y = 1;
+        $expectedVec3 = $this->ffi->new('Vector2');
+        $expectedVec3->x = 2;
+        $expectedVec3->y = 2;
+        $expectedColor = $this->ffi->new('Color');
+
+        $this->ffiProxy->DrawTriangle(
+            $this->sameCDataVector2Argument($expectedVec1),
+            $this->sameCDataVector2Argument($expectedVec2),
+            $this->sameCDataVector2Argument($expectedVec3),
+            $this->sameCDataColorArgument($expectedColor)
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawTriangle(new Vector2(0, 0), new Vector2(1, 1), new Vector2(2, 2), Color::black(0));
+    }
+
+    public function test_drawTriangleLines_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $expectedVec1 = $this->ffi->new('Vector2');
+        $expectedVec2 = $this->ffi->new('Vector2');
+        $expectedVec2->x = 1;
+        $expectedVec2->y = 1;
+        $expectedVec3 = $this->ffi->new('Vector2');
+        $expectedVec3->x = 2;
+        $expectedVec3->y = 2;
+        $expectedColor = $this->ffi->new('Color');
+
+        $this->ffiProxy->DrawTriangleLines(
+            $this->sameCDataVector2Argument($expectedVec1),
+            $this->sameCDataVector2Argument($expectedVec2),
+            $this->sameCDataVector2Argument($expectedVec3),
+            $this->sameCDataColorArgument($expectedColor)
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawTriangleLines(
+            new Vector2(0, 0),
+            new Vector2(1, 1),
+            new Vector2(2, 2),
+            Color::black(0),
+        );
     }
 
     public function test_endBlendMode(): void
