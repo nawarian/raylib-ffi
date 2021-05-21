@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-use Nawarian\Raylib\HasRaylibBlendModeConstants;
-use Nawarian\Raylib\HasRaylibKeysConstants;
+use Nawarian\Raylib\Raylib;
 use Nawarian\Raylib\RaylibFactory;
 use Nawarian\Raylib\Types\Color;
 use Nawarian\Raylib\Types\Rectangle;
@@ -73,7 +72,7 @@ $gravity = 3.0;
 
 $smoke = $raylib->loadTexture(__DIR__ . '/resources/spark_flame.png');
 
-$blending = HasRaylibBlendModeConstants::BLEND_ALPHA;
+$blending = Raylib::BLEND_ALPHA;
 
 $raylib->setTargetFPS(60);
 //-------------------------------------------------------------------------------------
@@ -87,12 +86,15 @@ while (!$raylib->windowShouldClose()) { // Detect window close button or ESC key
     // NOTE: Particles initial position should be mouse position when activated
     // NOTE: Particles fall down with gravity and rotation... and disappear after 2 seconds (alpha = 0)
     // NOTE: When a particle disappears, active = false and it can be reused.
-    $i = 0;
-    for (; $i < MAX_PARTICLES; $i++) {
+    for ($i = 0; $i < MAX_PARTICLES; $i++) {
         if (!$mouseTail[$i]->active) {
             $mouseTail[$i]->active = true;
             $mouseTail[$i]->alpha = 1.0;
             $mouseTail[$i]->position = $raylib->getMousePosition();
+
+            /**
+             * @psalm-suppress LoopInvalidation
+             */
             $i = MAX_PARTICLES;
         }
     }
@@ -110,11 +112,11 @@ while (!$raylib->windowShouldClose()) { // Detect window close button or ESC key
         }
     }
 
-    if ($raylib->isKeyPressed(HasRaylibKeysConstants::KEY_SPACE)) {
-        if ($blending == HasRaylibBlendModeConstants::BLEND_ALPHA) {
-            $blending = HasRaylibBlendModeConstants::BLEND_ADDITIVE;
+    if ($raylib->isKeyPressed(Raylib::KEY_SPACE)) {
+        if ($blending === Raylib::BLEND_ALPHA) {
+            $blending = Raylib::BLEND_ADDITIVE;
         } else {
-            $blending = HasRaylibBlendModeConstants::BLEND_ALPHA;
+            $blending = Raylib::BLEND_ALPHA;
         }
     }
     //----------------------------------------------------------------------------------
@@ -122,41 +124,41 @@ while (!$raylib->windowShouldClose()) { // Detect window close button or ESC key
     // Draw
     //----------------------------------------------------------------------------------
     $raylib->beginDrawing();
-    $raylib->clearBackground(Color::darkGray());
+        $raylib->clearBackground(Color::darkGray());
 
-    $raylib->beginBlendMode($blending);
+        $raylib->beginBlendMode($blending);
 
-    // Draw active particles
-    for ($i = 0; $i < MAX_PARTICLES; $i++) {
-        if ($mouseTail[$i]->active) {
-            $raylib->drawTexturePro(
-                $smoke,
-                new Rectangle(0.0, 0.0, (float) $smoke->width, (float) $smoke->height),
-                new Rectangle(
-                    $mouseTail[$i]->position->x,
-                    $mouseTail[$i]->position->y,
-                    (float) $smoke->width * $mouseTail[$i]->size,
-                    (float) $smoke->height * $mouseTail[$i]->size
-                ),
-                new Vector2(
-                    (float) $smoke->width * $mouseTail[$i]->size / 2.0,
-                    (float) $smoke->height * $mouseTail[$i]->size / 2.0
-                ),
-                $mouseTail[$i]->rotation,
-                $raylib->fade($mouseTail[$i]->color, $mouseTail[$i]->alpha)
-            );
+            //phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
+            for ($i = 0; $i < MAX_PARTICLES; $i++) {
+                if ($mouseTail[$i]->active) {
+                    $raylib->drawTexturePro(
+                        $smoke,
+                        new Rectangle(0.0, 0.0, (float) $smoke->width, (float) $smoke->height),
+                        new Rectangle(
+                            $mouseTail[$i]->position->x,
+                            $mouseTail[$i]->position->y,
+                            (float) $smoke->width * $mouseTail[$i]->size,
+                            (float) $smoke->height * $mouseTail[$i]->size
+                        ),
+                        new Vector2(
+                            (float) $smoke->width * $mouseTail[$i]->size / 2.0,
+                            (float) $smoke->height * $mouseTail[$i]->size / 2.0
+                        ),
+                        $mouseTail[$i]->rotation,
+                        $raylib->fade($mouseTail[$i]->color, $mouseTail[$i]->alpha)
+                    );
+                }
+            }
+
+        $raylib->endBlendMode();
+
+        $raylib->drawText('PRESS SPACE to CHANGE BLENDING MODE', 180, 20, 20, Color::black());
+
+        if ($blending == Raylib::BLEND_ALPHA) {
+            $raylib->drawText('ALPHA BLENDING', 290, $screenHeight - 40, 20, Color::black());
+        } else {
+            $raylib->drawText('ADDITIVE BLENDING', 280, $screenHeight - 40, 20, Color::rayWhite());
         }
-    }
-
-    $raylib->endBlendMode();
-
-    $raylib->drawText('PRESS SPACE to CHANGE BLENDING MODE', 180, 20, 20, Color::black());
-
-    if ($blending == HasRaylibBlendModeConstants::BLEND_ALPHA) {
-        $raylib->drawText('ALPHA BLENDING', 290, $screenHeight - 40, 20, Color::black());
-    } else {
-        $raylib->drawText('ADDITIVE BLENDING', 280, $screenHeight - 40, 20, Color::rayWhite());
-    }
     $raylib->endDrawing();
     //----------------------------------------------------------------------------------
 }
