@@ -56,6 +56,11 @@ final class Raylib implements
         return $this->ffi->CheckCollisionRayBox($ray->toCData($this->ffi), $box->toCData($this->ffi));
     }
 
+    public function checkCollisionRecs(Types\Rectangle $rec1, Types\Rectangle $rec2): bool
+    {
+        return $this->ffi->CheckCollisionRecs($rec1->toCData($this->ffi), $rec2->toCData($this->ffi));
+    }
+
     public function clearBackground(Types\Color $color): void
     {
         $this->ffi->ClearBackground($color->toCData($this->ffi));
@@ -327,6 +332,17 @@ final class Raylib implements
         $color = $this->ffi->GetColor($hex);
 
         return new Types\Color($color->r, $color->g, $color->b, $color->a);
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function getCollisionRec(Types\Rectangle $rec1, Types\Rectangle $rec2): Types\Rectangle
+    {
+        $rec = $this->ffi->GetCollisionRec($rec1->toCData($this->ffi), $rec2->toCData($this->ffi));
+
+        return new Types\Rectangle($rec->x, $rec->y, $rec->width, $rec->height);
     }
 
     public function getFPS(): int

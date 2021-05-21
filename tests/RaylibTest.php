@@ -136,6 +136,24 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->checkCollisionRayBox($ray, $box));
     }
 
+    public function test_checkCollisionRecs_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $rec1 = $this->ffi->new('Rectangle');
+        $rec2 = $this->ffi->new('Rectangle');
+
+        $this->ffiProxy->CheckCollisionRecs(
+            $this->sameCDataRectangleArgument($rec1),
+            $this->sameCDataRectangleArgument($rec2),
+        )->shouldBeCalledOnce()->willReturn(true);
+
+        self::assertTrue(
+            $this->raylib->checkCollisionRecs(
+                new Rectangle(0, 0, 0, 0),
+                new Rectangle(0, 0, 0, 0),
+            ),
+        );
+    }
+
     public function test_clearBackground_convertsColorToCData(): void
     {
         $color = new Color(0, 0, 0, 0);
@@ -614,6 +632,27 @@ class RaylibTest extends TestCase
             ->willReturn($expectedColor);
 
         self::assertEquals(new Color(0, 255,0, 255), $this->raylib->getColor(0x00ff00ff));
+    }
+
+    public function test_getCollisionRec_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $expectedRec = $this->ffi->new('Rectangle');
+        $expectedRec->x = 100;
+
+        $this->ffiProxy->GetCollisionRec(
+            $this->ffi->new('Rectangle'),
+            $this->ffi->new('Rectangle'),
+        )->shouldBeCalledOnce()->willReturn($expectedRec);
+
+        $collsionRec = $this->raylib->getCollisionRec(
+            new Rectangle(0, 0, 10, 10),
+            new Rectangle(0, 0, 20, 20),
+        );
+
+        self::assertEquals(100, $collsionRec->x);
+        self::assertEquals(0, $collsionRec->y);
+        self::assertEquals(0, $collsionRec->width);
+        self::assertEquals(0, $collsionRec->height);
     }
 
     public function test_getFPS(): void

@@ -246,14 +246,14 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void DrawTriangleStrip(Vector2 *points, int pointsCount, Color color)`
 - [x] `void DrawPoly(Vector2 center, int sides, float radius, float rotation, Color color)`
 - [ ] `void DrawPolyLines(Vector2 center, int sides, float radius, float rotation, Color color)`
-- [ ] `bool CheckCollisionRecs(Rectangle rec1, Rectangle rec2)`
+- [x] `bool CheckCollisionRecs(Rectangle rec1, Rectangle rec2)`
 - [ ] `bool CheckCollisionCircles(Vector2 center1, float radius1, Vector2 center2, float radius2)`
 - [ ] `bool CheckCollisionCircleRec(Vector2 center, float radius, Rectangle rec)`
 - [ ] `bool CheckCollisionPointRec(Vector2 point, Rectangle rec)`
 - [ ] `bool CheckCollisionPointCircle(Vector2 point, Vector2 center, float radius)`
 - [ ] `bool CheckCollisionPointTriangle(Vector2 point, Vector2 p1, Vector2 p2, Vector2 p3)`
 - [ ] `bool CheckCollisionLines(Vector2 startPos1, Vector2 endPos1, Vector2 startPos2, Vector2 endPos2, Vector2 *collisionPoint)`
-- [ ] `Rectangle GetCollisionRec(Rectangle rec1, Rectangle rec2)`
+- [x] `Rectangle GetCollisionRec(Rectangle rec1, Rectangle rec2)`
 - [x] `Image LoadImage(const char *fileName)`
 - [ ] `Image LoadImageRaw(const char *fileName, int width, int height, int format, int headerSize)`
 - [ ] `Image LoadImageAnim(const char *fileName, int *frames)`
@@ -711,7 +711,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] shaders/shaders_texture_waves.php
 - [x] [shapes/shapes_basic_shapes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_basic_shapes.php)
 - [x] [shapes/shapes_bouncing_ball.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_bouncing_ball.php)
-- [ ] shapes/shapes_collision_area.php
+- [x] [shapes/shapes_collision_area.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_collision_area.php)
 - [ ] shapes/shapes_colors_palette.php
 - [ ] shapes/shapes_draw_circle_sector.php
 - [ ] shapes/shapes_draw_rectangle_rounded.php
