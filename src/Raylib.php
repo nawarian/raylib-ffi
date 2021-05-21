@@ -391,6 +391,117 @@ final class Raylib implements
         return new Types\Vector2($vec->x, $vec->y);
     }
 
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     */
+    public function imageCrop(Types\Image $image, Types\Rectangle $crop): void
+    {
+        $cData = FFI::addr($image->toCData($this->ffi));
+        $this->ffi->ImageCrop($cData, $crop->toCData($this->ffi));
+    }
+
+    public function imageDraw(
+        Types\Image $dst,
+        Types\Image $src,
+        Types\Rectangle $srcRec,
+        Types\Rectangle $dstRec,
+        Types\Color $tint
+    ): void {
+        $this->ffi->ImageDraw(
+            $dst->toCData($this->ffi),
+            $src->toCData($this->ffi),
+            $srcRec->toCData($this->ffi),
+            $dstRec->toCData($this->ffi),
+            $tint->toCData($this->ffi)
+        );
+    }
+
+    public function imageDrawCircle(
+        Types\Image $dst,
+        int $centerX,
+        int $centerY,
+        int $radius,
+        Types\Color $color
+    ): void {
+        $this->ffi->ImageDrawCircle(
+            $dst->toCData($this->ffi),
+            $centerX,
+            $centerY,
+            $radius,
+            $color->toCData($this->ffi)
+        );
+    }
+
+    public function imageDrawPixel(
+        Types\Image $dst,
+        int $posX,
+        int $posY,
+        Types\Color $tint
+    ): void {
+        $this->ffi->ImageDrawPixel(
+            $dst->toCData($this->ffi),
+            $posX,
+            $posY,
+            $tint->toCData($this->ffi)
+        );
+    }
+
+    public function imageDrawRectangle(
+        Types\Image $dst,
+        int $posX,
+        int $posY,
+        int $width,
+        int $height,
+        Types\Color $color
+    ): void {
+        $this->ffi->ImageDrawRectangle(
+            $dst->toCData($this->ffi),
+            $posX,
+            $posY,
+            $width,
+            $height,
+            $color->toCData($this->ffi)
+        );
+    }
+
+    public function imageDrawTextEx(
+        Types\Image $dst,
+        Types\Font $font,
+        string $text,
+        Types\Vector2 $position,
+        float $fontSize,
+        float $spacing,
+        Types\Color $tint
+    ): void {
+        $this->ffi->ImageDrawTextEx(
+            $dst->toCData($this->ffi),
+            $font->toCData($this->ffi),
+            $text,
+            $position->toCData($this->ffi),
+            $fontSize,
+            $spacing,
+            $tint->toCData($this->ffi)
+        );
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     */
+    public function imageFlipHorizontal(Types\Image $image): void
+    {
+        $cData = FFI::addr($image->toCData($this->ffi));
+        $this->ffi->ImageFlipHorizontal($cData);
+    }
+
+    public function imageResize(Types\Image $image, int $newWidth, int $newHeight): void
+    {
+        $this->ffi->ImageResize($image->toCData($this->ffi), $newWidth, $newHeight);
+    }
+
     public function initAudioDevice(): void
     {
         $this->ffi->InitAudioDevice();
@@ -419,6 +530,24 @@ final class Raylib implements
     public function isMouseButtonPressed(int $button): bool
     {
         return $this->ffi->IsMouseButtonPressed($button);
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function loadFont(string $filename): Types\Font
+    {
+        $font = $this->ffi->LoadFont($filename);
+
+        return new Types\Font(
+            $font->baseSize,
+            $font->charsCount,
+            $font->charsPadding,
+            $font->texture,
+            $font->recs,
+            $font->chars
+        );
     }
 
     /**
@@ -598,6 +727,10 @@ final class Raylib implements
         return sprintf($format, ...$args);
     }
 
+    public function unloadFont(Types\Font $font): void
+    {
+        $this->ffi->UnloadFont($font->toCData($this->ffi));
+    }
 
     public function unloadImage(Types\Image $image): void
     {
