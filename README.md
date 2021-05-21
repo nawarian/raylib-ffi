@@ -710,7 +710,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] shaders/shaders_texture_drawing.php
 - [ ] shaders/shaders_texture_waves.php
 - [x] [shapes/shapes_basic_shapes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_basic_shapes.php)
-- [ ] shapes/shapes_bouncing_ball.php
+- [x] [shapes/shapes_bouncing_ball.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_bouncing_ball.php)
 - [ ] shapes/shapes_collision_area.php
 - [ ] shapes/shapes_colors_palette.php
 - [ ] shapes/shapes_draw_circle_sector.php
