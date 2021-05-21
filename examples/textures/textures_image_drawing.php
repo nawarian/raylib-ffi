@@ -63,8 +63,7 @@ $raylib->unloadFont($font);     // Unload custom spritefont (already drawn used 
 
 $texture = $raylib->loadTextureFromImage($parrots); // Image converted to texture, uploaded to GPU memory (VRAM)
 
-//Once image has been converted to texture and uploaded to VRAM,it can be unloaded from RAM
-$raylib->unloadImage($parrots);
+$raylib->unloadImage($parrots); //Once image has been converted to texture and uploaded to VRAM,it can be unloaded from RAM
 
 $raylib->setTargetFPS(60);
 //---------------------------------------------------------------------------------------
@@ -84,7 +83,7 @@ while (!$raylib->windowShouldClose()) {     // Detect window close button or ESC
 
         $raylib->drawTexture(
             $texture,
-            (int) ($screenWidth / 2),
+            (int) ($screenWidth / 2 - $texture->width / 2),
             (int) ($screenHeight / 2 - $texture->height / 2 - 40),
             Color::white()
         );

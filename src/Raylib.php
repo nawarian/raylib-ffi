@@ -395,13 +395,26 @@ final class Raylib implements
      * @psalm-suppress InvalidPassByReference
      * @psalm-suppress MixedArgument
      * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
      */
     public function imageCrop(Types\Image $image, Types\Rectangle $crop): void
     {
-        $cData = FFI::addr($image->toCData($this->ffi));
-        $this->ffi->ImageCrop($cData, $crop->toCData($this->ffi));
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageCrop(FFI::addr($imageStruct), $crop->toCData($this->ffi));
+
+        $image->data = $imageStruct->data;
+        $image->width = $imageStruct->width;
+        $image->height = $imageStruct->height;
+        $image->format = $imageStruct->format;
+        $image->mipmaps = $imageStruct->mipmaps;
     }
 
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
     public function imageDraw(
         Types\Image $dst,
         Types\Image $src,
@@ -409,15 +422,28 @@ final class Raylib implements
         Types\Rectangle $dstRec,
         Types\Color $tint
     ): void {
+        $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDraw(
-            $dst->toCData($this->ffi),
+            FFI::addr($imageStruct),
             $src->toCData($this->ffi),
             $srcRec->toCData($this->ffi),
             $dstRec->toCData($this->ffi),
             $tint->toCData($this->ffi)
         );
+
+        $dst->data = $imageStruct->data;
+        $dst->width = $imageStruct->width;
+        $dst->height = $imageStruct->height;
+        $dst->format = $imageStruct->format;
+        $dst->mipmaps = $imageStruct->mipmaps;
     }
 
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
     public function imageDrawCircle(
         Types\Image $dst,
         int $centerX,
@@ -425,29 +451,55 @@ final class Raylib implements
         int $radius,
         Types\Color $color
     ): void {
+        $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDrawCircle(
-            $dst->toCData($this->ffi),
+            FFI::addr($imageStruct),
             $centerX,
             $centerY,
             $radius,
             $color->toCData($this->ffi)
         );
+
+        $dst->data = $imageStruct->data;
+        $dst->width = $imageStruct->width;
+        $dst->height = $imageStruct->height;
+        $dst->format = $imageStruct->format;
+        $dst->mipmaps = $imageStruct->mipmaps;
     }
 
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
     public function imageDrawPixel(
         Types\Image $dst,
         int $posX,
         int $posY,
         Types\Color $tint
     ): void {
+        $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDrawPixel(
-            $dst->toCData($this->ffi),
+            FFI::addr($imageStruct),
             $posX,
             $posY,
             $tint->toCData($this->ffi)
         );
+
+        $dst->data = $imageStruct->data;
+        $dst->width = $imageStruct->width;
+        $dst->height = $imageStruct->height;
+        $dst->format = $imageStruct->format;
+        $dst->mipmaps = $imageStruct->mipmaps;
     }
 
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
     public function imageDrawRectangle(
         Types\Image $dst,
         int $posX,
@@ -456,16 +508,29 @@ final class Raylib implements
         int $height,
         Types\Color $color
     ): void {
+        $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDrawRectangle(
-            $dst->toCData($this->ffi),
+            FFI::addr($imageStruct),
             $posX,
             $posY,
             $width,
             $height,
             $color->toCData($this->ffi)
         );
+
+        $dst->data = $imageStruct->data;
+        $dst->width = $imageStruct->width;
+        $dst->height = $imageStruct->height;
+        $dst->format = $imageStruct->format;
+        $dst->mipmaps = $imageStruct->mipmaps;
     }
 
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
     public function imageDrawTextEx(
         Types\Image $dst,
         Types\Font $font,
@@ -475,8 +540,9 @@ final class Raylib implements
         float $spacing,
         Types\Color $tint
     ): void {
+        $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDrawTextEx(
-            $dst->toCData($this->ffi),
+            FFI::addr($imageStruct),
             $font->toCData($this->ffi),
             $text,
             $position->toCData($this->ffi),
@@ -490,16 +556,36 @@ final class Raylib implements
      * @psalm-suppress InvalidPassByReference
      * @psalm-suppress MixedArgument
      * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
      */
     public function imageFlipHorizontal(Types\Image $image): void
     {
-        $cData = FFI::addr($image->toCData($this->ffi));
-        $this->ffi->ImageFlipHorizontal($cData);
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageFlipHorizontal(FFI::addr($imageStruct));
+
+        $image->data = $imageStruct->data;
+        $image->width = $imageStruct->width;
+        $image->height = $imageStruct->height;
+        $image->format = $imageStruct->format;
+        $image->mipmaps = $imageStruct->mipmaps;
     }
 
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
     public function imageResize(Types\Image $image, int $newWidth, int $newHeight): void
     {
-        $this->ffi->ImageResize($image->toCData($this->ffi), $newWidth, $newHeight);
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageResize(FFI::addr($imageStruct), $newWidth, $newHeight);
+
+        $image->data = $imageStruct->data;
+        $image->width = $imageStruct->width;
+        $image->height = $imageStruct->height;
+        $image->format = $imageStruct->format;
+        $image->mipmaps = $imageStruct->mipmaps;
     }
 
     public function initAudioDevice(): void
