@@ -155,6 +155,7 @@ while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC k
     // Draw
     //-----------------------------------------------------
     $raylib->beginDrawing();
+        // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
 
         if ($raylib->isWindowState(Raylib::FLAG_WINDOW_TRANSPARENT)) {
             $raylib->clearBackground(Color::blank());
@@ -274,6 +275,7 @@ while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC k
         } else {
             $raylib->drawText('FLAG_MSAA_4X_HINT: off', 10, 360, 10, Color::maroon());
         }
+        // phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact
 
     $raylib->endDrawing();
     //-----------------------------------------------------
