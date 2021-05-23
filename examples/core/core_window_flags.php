@@ -34,7 +34,7 @@ FLAG_MSAA_4X_HINT
 
 // Set configuration flags for window creation
 $raylib->setConfigFlags(Raylib::FLAG_VSYNC_HINT | Raylib::FLAG_MSAA_4X_HINT | Raylib::FLAG_WINDOW_HIGHDPI);
-$raylib->initWindow($screenWidth, $screenHeight, "raylib [core] example - window flags");
+$raylib->initWindow($screenWidth, $screenHeight, 'raylib [core] example - window flags');
 
 $ballPosition = new Vector2((int) ($raylib->getScreenWidth() / 2), (int) ($raylib->getScreenHeight() / 2));
 $ballSpeed = new Vector2(5, 4);
@@ -43,12 +43,11 @@ $ballRadius = 20;
 $framesCounter = 0;
 
 //----------------------------------------------------------
-
 // Main game loop
 while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC key
     // Update
     //-----------------------------------------------------
-    if ($raylib->$raylib->isKeyPressed(Raylib::KEY_F)) {
+    if ($raylib->isKeyPressed(Raylib::KEY_F)) {
         // modifies window size when scaling!
         $raylib->toggleFullscreen();
     }
@@ -175,7 +174,7 @@ while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC k
         $raylib->drawFPS(10, 10);
 
         $raylib->drawText(
-            $raylib->formatText("Screen Size: [%d, %d]", $raylib->getScreenWidth(), $raylib->getScreenHeight()),
+            $raylib->textFormat('Screen Size: [%d, %d]', $raylib->getScreenWidth(), $raylib->getScreenHeight()),
             10,
             40,
             10,
@@ -184,7 +183,7 @@ while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC k
 
         // Draw window state info
         $raylib->drawText(
-            "Following flags can be set after window creation:",
+            'Following flags can be set after window creation:',
             10,
             60,
             10,
@@ -192,88 +191,88 @@ while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC k
         );
 
         if ($raylib->isWindowState(Raylib::FLAG_FULLSCREEN_MODE)) {
-            $raylib->drawText("[F] FLAG_FULLSCREEN_MODE: on", 10, 80, 10, Color::lime());
+            $raylib->drawText('[F] FLAG_FULLSCREEN_MODE: on', 10, 80, 10, Color::lime());
         } else {
-            $raylib->drawText("[F] FLAG_FULLSCREEN_MODE: off", 10, 80, 10, Color::maroon());
+            $raylib->drawText('[F] FLAG_FULLSCREEN_MODE: off', 10, 80, 10, Color::maroon());
         }
 
         if ($raylib->isWindowState(Raylib::FLAG_WINDOW_RESIZABLE)) {
-            $raylib->drawText("[R] FLAG_WINDOW_RESIZABLE: on", 10, 100, 10, Color::lime());
+            $raylib->drawText('[R] FLAG_WINDOW_RESIZABLE: on', 10, 100, 10, Color::lime());
         } else {
-            $raylib->drawText("[R] FLAG_WINDOW_RESIZABLE: off", 10, 100, 10, Color::maroon());
+            $raylib->drawText('[R] FLAG_WINDOW_RESIZABLE: off', 10, 100, 10, Color::maroon());
         }
 
         if ($raylib->isWindowState(Raylib::FLAG_WINDOW_UNDECORATED)) {
-            $raylib->drawText("[D] FLAG_WINDOW_UNDECORATED: on", 10, 120, 10, Color::lime());
+            $raylib->drawText('[D] FLAG_WINDOW_UNDECORATED: on', 10, 120, 10, Color::lime());
         } else {
-            $raylib->drawText("[D] FLAG_WINDOW_UNDECORATED: off", 10, 120, 10, Color::maroon());
+            $raylib->drawText('[D] FLAG_WINDOW_UNDECORATED: off', 10, 120, 10, Color::maroon());
         }
 
         if ($raylib->isWindowState(Raylib::FLAG_WINDOW_HIDDEN)) {
-            $raylib->drawText("[H] FLAG_WINDOW_HIDDEN: on", 10, 140, 10, Color::lime());
+            $raylib->drawText('[H] FLAG_WINDOW_HIDDEN: on', 10, 140, 10, Color::lime());
         } else {
-            $raylib->drawText("[H] FLAG_WINDOW_HIDDEN: off", 10, 140, 10, Color::maroon());
+            $raylib->drawText('[H] FLAG_WINDOW_HIDDEN: off', 10, 140, 10, Color::maroon());
         }
 
         if ($raylib->isWindowState(Raylib::FLAG_WINDOW_MINIMIZED)) {
-            $raylib->drawText("[N] FLAG_WINDOW_MINIMIZED: on", 10, 160, 10, Color::lime());
+            $raylib->drawText('[N] FLAG_WINDOW_MINIMIZED: on', 10, 160, 10, Color::lime());
         } else {
-            $raylib->drawText("[N] FLAG_WINDOW_MINIMIZED: off", 10, 160, 10, Color::maroon());
+            $raylib->drawText('[N] FLAG_WINDOW_MINIMIZED: off', 10, 160, 10, Color::maroon());
         }
 
         if ($raylib->isWindowState(Raylib::FLAG_WINDOW_MAXIMIZED)) {
-            $raylib->drawText("[M] FLAG_WINDOW_MAXIMIZED: on", 10, 180, 10, Color::lime());
+            $raylib->drawText('[M] FLAG_WINDOW_MAXIMIZED: on', 10, 180, 10, Color::lime());
         } else {
-            $raylib->drawText("[M] FLAG_WINDOW_MAXIMIZED: off", 10, 180, 10, Color::maroon());
+            $raylib->drawText('[M] FLAG_WINDOW_MAXIMIZED: off', 10, 180, 10, Color::maroon());
         }
 
         if ($raylib->isWindowState(Raylib::FLAG_WINDOW_UNFOCUSED)) {
-            $raylib->drawText("[G] FLAG_WINDOW_UNFOCUSED: on", 10, 200, 10, Color::lime());
+            $raylib->drawText('[G] FLAG_WINDOW_UNFOCUSED: on', 10, 200, 10, Color::lime());
         } else {
-            $raylib->drawText("[U] FLAG_WINDOW_UNFOCUSED: off", 10, 200, 10, Color::maroon());
+            $raylib->drawText('[U] FLAG_WINDOW_UNFOCUSED: off', 10, 200, 10, Color::maroon());
         }
 
         if ($raylib->isWindowState(Raylib::FLAG_WINDOW_TOPMOST)) {
-            $raylib->drawText("[T] FLAG_WINDOW_TOPMOST: on", 10, 220, 10, Color::lime());
+            $raylib->drawText('[T] FLAG_WINDOW_TOPMOST: on', 10, 220, 10, Color::lime());
         } else {
-            $raylib->drawText("[T] FLAG_WINDOW_TOPMOST: off", 10, 220, 10, Color::maroon());
+            $raylib->drawText('[T] FLAG_WINDOW_TOPMOST: off', 10, 220, 10, Color::maroon());
         }
 
         if ($raylib->isWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN)) {
-            $raylib->drawText("[A] FLAG_WINDOW_ALWAYS_RUN: on", 10, 240, 10, Color::lime());
+            $raylib->drawText('[A] FLAG_WINDOW_ALWAYS_RUN: on', 10, 240, 10, Color::lime());
         } else {
-            $raylib->drawText("[A] FLAG_WINDOW_ALWAYS_RUN: off", 10, 240, 10, Color::maroon());
+            $raylib->drawText('[A] FLAG_WINDOW_ALWAYS_RUN: off', 10, 240, 10, Color::maroon());
         }
 
         if ($raylib->isWindowState(Raylib::FLAG_VSYNC_HINT)) {
-            $raylib->drawText("[V] FLAG_VSYNC_HINT: on", 10, 260, 10, Color::lime());
+            $raylib->drawText('[V] FLAG_VSYNC_HINT: on', 10, 260, 10, Color::lime());
         } else {
-            $raylib->drawText("[V] FLAG_VSYNC_HINT: off", 10, 260, 10, Color::maroon());
+            $raylib->drawText('[V] FLAG_VSYNC_HINT: off', 10, 260, 10, Color::maroon());
         }
 
         $raylib->drawText(
-            "Following flags can only be set before window creation:",
+            'Following flags can only be set before window creation:',
             10,
             300,
             10,
             Color::gray(),
         );
         if ($raylib->isWindowState(Raylib::FLAG_WINDOW_HIGHDPI)) {
-            $raylib->drawText("FLAG_WINDOW_HIGHDPI: on", 10, 320, 10, Color::lime());
+            $raylib->drawText('FLAG_WINDOW_HIGHDPI: on', 10, 320, 10, Color::lime());
         } else {
-            $raylib->drawText("FLAG_WINDOW_HIGHDPI: off", 10, 320, 10, Color::maroon());
+            $raylib->drawText('FLAG_WINDOW_HIGHDPI: off', 10, 320, 10, Color::maroon());
         }
 
         if ($raylib->isWindowState(Raylib::FLAG_WINDOW_TRANSPARENT)) {
-            $raylib->drawText("FLAG_WINDOW_TRANSPARENT: on", 10, 340, 10, Color::lime());
+            $raylib->drawText('FLAG_WINDOW_TRANSPARENT: on', 10, 340, 10, Color::lime());
         } else {
-            $raylib->drawText("FLAG_WINDOW_TRANSPARENT: off", 10, 340, 10, Color::maroon());
+            $raylib->drawText('FLAG_WINDOW_TRANSPARENT: off', 10, 340, 10, Color::maroon());
         }
 
         if ($raylib->isWindowState(Raylib::FLAG_MSAA_4X_HINT)) {
-            $raylib->drawText("FLAG_MSAA_4X_HINT: on", 10, 360, 10, Color::lime());
+            $raylib->drawText('FLAG_MSAA_4X_HINT: on', 10, 360, 10, Color::lime());
         } else {
-            $raylib->drawText("FLAG_MSAA_4X_HINT: off", 10, 360, 10, Color::maroon());
+            $raylib->drawText('FLAG_MSAA_4X_HINT: off', 10, 360, 10, Color::maroon());
         }
 
     $raylib->endDrawing();

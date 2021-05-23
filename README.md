@@ -72,13 +72,13 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `bool IsWindowMaximized(void)`
 - [ ] `bool IsWindowFocused(void)`
 - [ ] `bool IsWindowResized(void)`
-- [ ] `bool IsWindowState(unsigned int flag)`
-- [ ] `void SetWindowState(unsigned int flags)`
-- [ ] `void ClearWindowState(unsigned int flags)`
-- [ ] `void ToggleFullscreen(void)`
-- [ ] `void MaximizeWindow(void)`
-- [ ] `void MinimizeWindow(void)`
-- [ ] `void RestoreWindow(void)`
+- [x] `bool IsWindowState(unsigned int flag)`
+- [x] `void SetWindowState(unsigned int flags)`
+- [x] `void ClearWindowState(unsigned int flags)`
+- [x] `void ToggleFullscreen(void)`
+- [x] `void MaximizeWindow(void)`
+- [x] `void MinimizeWindow(void)`
+- [x] `void RestoreWindow(void)`
 - [ ] `void SetWindowIcon(Image image)`
 - [ ] `void SetWindowTitle(const char *title)`
 - [ ] `void SetWindowPosition(int x, int y)`
