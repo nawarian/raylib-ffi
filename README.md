@@ -666,7 +666,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [core/core_scissor_test.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_scissor_test.php)
 - [x] [core/core_storage_values.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_storage_values.php)
 - [ ] core/core_vr_simulator.php
-- [ ] core/core_window_flags.php
+- [x] [core/core_window_flags.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_window_flags.php)
 - [ ] core/core_window_letterbox.php
 - [x] [core/core_world_screen.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_world_screen.php)
 - [ ] models/models_animation.php
