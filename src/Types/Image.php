@@ -48,4 +48,13 @@ final class Image
 
         return $image;
     }
+
+    /**
+     * @psalm-suppress MixedPropertyAssignment
+     * @psalm-suppress MixedReturnStatement
+     */
+    public function updateFromStruct(CData $imageStruct): CData
+    {
+        return FFI::addr($imageStruct);
+    }
 }

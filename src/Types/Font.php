@@ -44,7 +44,7 @@ class Font
             $font = $ffi->new('Font');
         } catch (FFI\ParserException $e) {
             throw new InvalidArgumentException(
-                'Object $ffi does not provide the type "struct Image"'
+                'Object $ffi does not provide the type "struct Font"'
             );
         }
 

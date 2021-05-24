@@ -41,7 +41,7 @@ class CharInfo
             $charInfo = $ffi->new('CharInfo');
         } catch (FFI\ParserException $e) {
             throw new InvalidArgumentException(
-                'Object $ffi does not provide the type "struct Image"'
+                'Object $ffi does not provide the type "struct CharInfo"'
             );
         }
 

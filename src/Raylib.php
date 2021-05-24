@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nawarian\Raylib;
 
 use FFI;
+use FFI\CDATA;
 
 final class Raylib implements
     HasRaylibBlendModeConstants,
@@ -513,7 +514,7 @@ final class Raylib implements
     public function imageCrop(Types\Image $image, Types\Rectangle $crop): void
     {
         $imageStruct = $image->toCData($this->ffi);
-        $this->ffi->ImageCrop(FFI::addr($imageStruct), $crop->toCData($this->ffi));
+        $this->ffi->ImageCrop($image->updateFromStruct($imageStruct), $crop->toCData($this->ffi));
 
         $image->data = $imageStruct->data;
         $image->width = $imageStruct->width;
@@ -537,7 +538,7 @@ final class Raylib implements
     ): void {
         $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDraw(
-            FFI::addr($imageStruct),
+            $dst->updateFromStruct($imageStruct),
             $src->toCData($this->ffi),
             $srcRec->toCData($this->ffi),
             $dstRec->toCData($this->ffi),
@@ -566,7 +567,7 @@ final class Raylib implements
     ): void {
         $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDrawCircle(
-            FFI::addr($imageStruct),
+            $dst->updateFromStruct($imageStruct),
             $centerX,
             $centerY,
             $radius,
@@ -594,7 +595,7 @@ final class Raylib implements
     ): void {
         $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDrawPixel(
-            FFI::addr($imageStruct),
+            $dst->updateFromStruct($imageStruct),
             $posX,
             $posY,
             $tint->toCData($this->ffi)
@@ -623,7 +624,7 @@ final class Raylib implements
     ): void {
         $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDrawRectangle(
-            FFI::addr($imageStruct),
+            $dst->updateFromStruct($imageStruct),
             $posX,
             $posY,
             $width,
@@ -655,7 +656,7 @@ final class Raylib implements
     ): void {
         $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDrawTextEx(
-            FFI::addr($imageStruct),
+            $dst->updateFromStruct($imageStruct),
             $font->toCData($this->ffi),
             $text,
             $position->toCData($this->ffi),
@@ -674,7 +675,7 @@ final class Raylib implements
     public function imageFlipHorizontal(Types\Image $image): void
     {
         $imageStruct = $image->toCData($this->ffi);
-        $this->ffi->ImageFlipHorizontal(FFI::addr($imageStruct));
+        $this->ffi->ImageFlipHorizontal($image->updateFromStruct($imageStruct));
 
         $image->data = $imageStruct->data;
         $image->width = $imageStruct->width;
@@ -692,7 +693,7 @@ final class Raylib implements
     public function imageResize(Types\Image $image, int $newWidth, int $newHeight): void
     {
         $imageStruct = $image->toCData($this->ffi);
-        $this->ffi->ImageResize(FFI::addr($imageStruct), $newWidth, $newHeight);
+        $this->ffi->ImageResize($image->updateFromStruct($imageStruct), $newWidth, $newHeight);
 
         $image->data = $imageStruct->data;
         $image->width = $imageStruct->width;
