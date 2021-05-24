@@ -15,6 +15,7 @@ use Nawarian\Raylib\Types\{AudioStream,
     Camera2D,
     Camera3D,
     Color,
+    Font,
     Image,
     Ray,
     Rectangle,
@@ -867,6 +868,354 @@ class RaylibTest extends TestCase
         self::assertEquals(10, $this->raylib->getScreenHeight());
     }
 
+    public function test_imageCrop(): void
+    {
+        $rec1 = $this->ffi->new('Rectangle');
+        $rec1->x = 10.0;
+        $rec1->y = 5.0;
+        $rec1->width = 100.0;
+        $rec1->height = 50.0;
+
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($imageStruct);
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $this->ffiProxy->ImageCrop(
+            $this->sameCDataImageArgument($imageStruct),
+            $this->sameCDataRectangleArgument($rec1)
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $rectangle = new Rectangle(
+            $rec1->x,
+            $rec1->y,
+            $rec1->width,
+            $rec1->height
+        );
+
+        $this->raylib->imageCrop($image, $rectangle);
+    }
+
+    public function test_imageDraw(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($imageStruct);
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $imageSrcStruct = $this->ffi->new('Image');
+        $dataSrc = FFI::addr($imageSrcStruct);
+
+        $imageSrcStruct->data = $dataSrc;
+        $imageSrcStruct->width = 10;
+        $imageSrcStruct->height = 20;
+        $imageSrcStruct->mipmaps = 30;
+        $imageSrcStruct->format = 40;
+
+        $colorStruct = $this->ffi->new('Color');
+        $colorStruct->r = 255;
+        $colorStruct->g = 255;
+        $colorStruct->b = 255;
+        $colorStruct->a = 255;
+
+        $recDstStruct = $this->ffi->new('Rectangle');
+        $recSrcStruct = $this->ffi->new('Rectangle');
+
+        $this->ffiProxy->ImageDraw(
+            $this->sameCDataImageArgument($imageStruct),
+            $this->sameCDataImageArgument($imageSrcStruct),
+            $this->sameCDataRectangleArgument($recSrcStruct),
+            $this->sameCDataRectangleArgument($recDstStruct),
+            $this->sameCDataColorArgument($colorStruct)
+        )
+            ->willReturn($imageStruct);
+
+        $imageDst = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $imageSrc = new Image(
+            $dataSrc,
+            $imageSrcStruct->width,
+            $imageSrcStruct->height,
+            $imageSrcStruct->mipmaps,
+            $imageSrcStruct->format
+        );
+
+        $srcRec = new Rectangle(0, 0, 0, 0);
+        $dstRec = new Rectangle(0, 0, 0, 0);
+
+        $this->raylib->imageDraw($imageDst, $imageSrc, $srcRec, $dstRec, Color::white());
+    }
+
+    public function test_imageDrawCircle(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($imageStruct);
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $colorStruct = $this->ffi->new('Color');
+        $colorStruct->r = 255;
+        $colorStruct->g = 255;
+        $colorStruct->b = 255;
+        $colorStruct->a = 255;
+
+        $this->ffiProxy->ImageDrawCircle(
+            $this->sameCDataImageArgument($imageStruct),
+            10,
+            10,
+            2,
+            $this->sameCDataColorArgument($colorStruct)
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $this->raylib->imageDrawCircle($image, 10, 10, 2, Color::white());
+    }
+
+    public function test_imageDrawPixel(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($imageStruct);
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $colorStruct = $this->ffi->new('Color');
+        $colorStruct->r = 255;
+        $colorStruct->g = 255;
+        $colorStruct->b = 255;
+        $colorStruct->a = 255;
+
+        $this->ffiProxy->ImageDrawPixel(
+            $this->sameCDataImageArgument($imageStruct),
+            10,
+            10,
+            $this->sameCDataColorArgument($colorStruct)
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $this->raylib->imageDrawPixel($image, 10, 10, Color::white());
+    }
+
+    public function test_imageDrawRectangle(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($imageStruct);
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $colorStruct = $this->ffi->new('Color');
+        $colorStruct->r = 255;
+        $colorStruct->g = 255;
+        $colorStruct->b = 255;
+        $colorStruct->a = 255;
+
+        $this->ffiProxy->ImageDrawRectangle(
+            $this->sameCDataImageArgument($imageStruct),
+            10,
+            10,
+            20,
+            20,
+            $this->sameCDataColorArgument($colorStruct)
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $this->raylib->imageDrawRectangle($image, 10, 10, 20, 20, Color::white());
+    }
+
+    public function test_imageDrawTextEx(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($imageStruct);
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $recStruct = $this->ffi->new('Rectangle');
+        $dataRec = FFI::addr($recStruct);
+
+        $charInfoStruct = $this->ffi->new('CharInfo');
+        $dataCharInfo = FFI::addr($charInfoStruct);
+        $dataCharInfo->value = 10;
+        $dataCharInfo->offsetX = 10;
+        $dataCharInfo->offsetY = 10;
+        $dataCharInfo->advanceX = 10;
+        $dataCharInfo->image = $imageStruct;
+
+        $fontStruct = $this->ffi->new('Font');
+        $fontStruct->recs = $dataRec;
+        $fontStruct->chars = $dataCharInfo;
+
+        $position = $this->ffi->new('Vector2');
+
+        $textureStruct = $this->ffi->new('Texture');
+        $textureStruct->id = 10;
+        $textureStruct->width = 10;
+        $textureStruct->height = 10;
+        $textureStruct->mipmaps = 10;
+        $textureStruct->format = 10;
+
+        $colorStruct = $this->ffi->new('Color');
+        $colorStruct->r = 255;
+        $colorStruct->g = 255;
+        $colorStruct->b = 255;
+        $colorStruct->a = 255;
+
+        $this->ffiProxy->ImageDrawTextEx(
+            $this->sameCDataImageArgument($imageStruct),
+            $this->sameCDataFontArgument($fontStruct),
+            'Text',
+            $this->sameCDataVector2Argument($position),
+            20.0,
+            1.5,
+            $this->sameCDataColorArgument($colorStruct)
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $imageStruct->data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $font = new Font(
+            $fontStruct->baseSize,
+            $fontStruct->charsCount,
+            $fontStruct->charsPadding,
+            $textureStruct,
+            $dataRec,
+            $dataCharInfo
+        );
+
+        $this->raylib->imageDrawTextEx(
+            $image,
+            $font,
+            'Text',
+            new Vector2(0, 0),
+            20,
+            1.5,
+            Color::white()
+        );
+    }
+
+    public function test_imageFlipHorizontal(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($imageStruct);
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $this->ffiProxy->ImageFlipHorizontal(
+            $this->sameCDataImageArgument($imageStruct)
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $this->raylib->imageFlipHorizontal($image);
+    }
+
+    public function test_imageResize(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($imageStruct);
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $this->ffiProxy->ImageResize(
+            $this->sameCDataImageArgument($imageStruct),
+            200,
+            200
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $this->raylib->imageResize($image, 200, 200);
+    }
+
     public function test_initAudioDevice(): void
     {
         $this->ffiProxy->InitAudioDevice()
@@ -1217,6 +1566,20 @@ class RaylibTest extends TestCase
             self::assertEquals($expectedStruct->g, $color->g);
             self::assertEquals($expectedStruct->b, $color->b);
             self::assertEquals($expectedStruct->a, $color->a);
+
+            return true;
+        });
+    }
+
+    private function sameCDataFontArgument(CData $expectedStruct): CallbackToken
+    {
+        return Argument::that(function (CData $font) use ($expectedStruct) {
+            self::assertEquals($expectedStruct->baseSize, $font->baseSize);
+            self::assertEquals($expectedStruct->charsCount, $font->charsCount);
+            self::assertEquals($expectedStruct->charsPadding, $font->charsPadding);
+            self::assertEquals($expectedStruct->texture, $font->texture);
+            self::assertEquals($expectedStruct->recs, $font->recs);
+            self::assertEquals($expectedStruct->chars, $font->chars);
 
             return true;
         });

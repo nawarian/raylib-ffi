@@ -275,18 +275,18 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `Image ImageTextEx(Font font, const char *text, float fontSize, float spacing, Color tint)`
 - [ ] `void ImageFormat(Image *image, int newFormat)`
 - [ ] `void ImageToPOT(Image *image, Color fill)`
-- [ ] `void ImageCrop(Image *image, Rectangle crop)`
+- [x] `void ImageCrop(Image *image, Rectangle crop)`
 - [ ] `void ImageAlphaCrop(Image *image, float threshold)`
 - [ ] `void ImageAlphaClear(Image *image, Color color, float threshold)`
 - [ ] `void ImageAlphaMask(Image *image, Image alphaMask)`
 - [ ] `void ImageAlphaPremultiply(Image *image)`
-- [ ] `void ImageResize(Image *image, int newWidth, int newHeight)`
+- [x] `void ImageResize(Image *image, int newWidth, int newHeight)`
 - [ ] `void ImageResizeNN(Image *image, int newWidth,int newHeight)`
 - [ ] `void ImageResizeCanvas(Image *image, int newWidth, int newHeight, int offsetX, int offsetY, Color fill)`
 - [ ] `void ImageMipmaps(Image *image)`
 - [ ] `void ImageDither(Image *image, int rBpp, int gBpp, int bBpp, int aBpp)`
 - [ ] `void ImageFlipVertical(Image *image)`
-- [ ] `void ImageFlipHorizontal(Image *image)`
+- [x] `void ImageFlipHorizontal(Image *image)`
 - [ ] `void ImageRotateCW(Image *image)`
 - [ ] `void ImageRotateCCW(Image *image)`
 - [ ] `void ImageColorTint(Image *image, Color color)`
@@ -301,19 +301,19 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void UnloadImagePalette(Color *colors)`
 - [ ] `Rectangle GetImageAlphaBorder(Image image, float threshold)`
 - [ ] `void ImageClearBackground(Image *dst, Color color)`
-- [ ] `void ImageDrawPixel(Image *dst, int posX, int posY, Color color)`
+- [x] `void ImageDrawPixel(Image *dst, int posX, int posY, Color color)`
 - [ ] `void ImageDrawPixelV(Image *dst, Vector2 position, Color color)`
 - [ ] `void ImageDrawLine(Image *dst, int startPosX, int startPosY, int endPosX, int endPosY, Color color)`
 - [ ] `void ImageDrawLineV(Image *dst, Vector2 start, Vector2 end, Color color)`
-- [ ] `void ImageDrawCircle(Image *dst, int centerX, int centerY, int radius, Color color)`
+- [x] `void ImageDrawCircle(Image *dst, int centerX, int centerY, int radius, Color color)`
 - [ ] `void ImageDrawCircleV(Image *dst, Vector2 center, int radius, Color color)`
-- [ ] `void ImageDrawRectangle(Image *dst, int posX, int posY, int width, int height, Color color)`
+- [x] `void ImageDrawRectangle(Image *dst, int posX, int posY, int width, int height, Color color)`
 - [ ] `void ImageDrawRectangleV(Image *dst, Vector2 position, Vector2 size, Color color)`
 - [x] `void ImageDrawRectangleRec(Image *dst, Rectangle rec, Color color)`
-- [ ] `void ImageDrawRectangleLines(Image *dst, Rectangle rec, int thick, Color color)`
-- [ ] `void ImageDraw(Image *dst, Image src, Rectangle srcRec, Rectangle dstRec, Color tint)`
+- [x] `void ImageDrawRectangleLines(Image *dst, Rectangle rec, int thick, Color color)`
+- [x] `void ImageDraw(Image *dst, Image src, Rectangle srcRec, Rectangle dstRec, Color tint)`
 - [x] `void ImageDrawText(Image *dst, const char *text, int posX, int posY, int fontSize, Color color)`
-- [ ] `void ImageDrawTextEx(Image *dst, Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint)`
+- [x] `void ImageDrawTextEx(Image *dst, Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint)`
 - [x] `Texture2D LoadTexture(const char *fileName)`
 - [x] `Texture2D LoadTextureFromImage(Image image)`
 - [ ] `TextureCubemap LoadTextureCubemap(Image image, int layoutType)`
@@ -738,7 +738,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [textures/textures_blend_modes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_blend_modes.php)
 - [x] [textures/textures_bunnymark.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_bunnymark.php)
 - [x] [textures/textures_draw_tiled.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_draw_tiled.php)
-- [ ] textures/textures_image_drawing.php
+- [x] [textures/textures_image_drawing.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_drawing.php)
 - [ ] textures/textures_image_generation.php
 - [ ] textures/textures_image_loading.php
 - [ ] textures/textures_image_processing.php
