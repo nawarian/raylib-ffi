@@ -165,6 +165,15 @@ class RaylibTest extends TestCase
         $this->raylib->clearBackground($color);
     }
 
+    public function test_clearWindowState(): void
+    {
+        $this->ffiProxy->ClearWindowState(
+            Raylib::FLAG_WINDOW_ALWAYS_RUN
+        )->shouldBeCalledOnce();
+
+        $this->raylib->clearWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN);
+    }
+
     public function test_closeAudioDevice(): void
     {
         $this->ffiProxy->CloseAudioDevice()
@@ -919,6 +928,15 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->isMouseButtonPressed(10));
     }
 
+    public function test_isWindowState(): void
+    {
+        $this->ffiProxy->IsWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN)
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN));
+    }
+
     public function test_loadImage(): void
     {
         $imageCData = $this->ffi->new('Image');
@@ -971,6 +989,14 @@ class RaylibTest extends TestCase
         self::assertEquals(new Texture2D(0, 0, 0, 0, 0), $this->raylib->loadTexture('unknown.png'));
     }
 
+    public function test_maximizeWindow(): void
+    {
+        $this->ffiProxy->MaximizeWindow()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->maximizeWindow();
+    }
+
     public function test_measureText(): void
     {
         $this->ffiProxy->MeasureText('Tiny Text', 20)
@@ -978,6 +1004,14 @@ class RaylibTest extends TestCase
             ->willReturn(2000);
 
         self::assertEquals(2000, $this->raylib->measureText('Tiny Text', 20));
+    }
+
+    public function test_minimizeWindow(): void
+    {
+        $this->ffiProxy->MinimizeWindow()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->minimizeWindow();
     }
 
     public function test_playSound(): void
@@ -1002,6 +1036,14 @@ class RaylibTest extends TestCase
             ->shouldBeCalledOnce();
 
         $this->raylib->playSoundMulti($sound);
+    }
+
+    public function test_restoreWindow(): void
+    {
+        $this->ffiProxy->RestoreWindow()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->restoreWindow();
     }
 
     public function test_saveStorageValue(): void
@@ -1075,12 +1117,28 @@ class RaylibTest extends TestCase
         $this->raylib->setTextureFilter($tex, 10);
     }
 
+    public function test_setWindowState(): void
+    {
+        $this->ffiProxy->SetWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN)
+            ->shouldBeCalledOnce();
+
+        $this->raylib->setWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN);
+    }
+
     public function test_stopSoundMulti(): void
     {
         $this->ffiProxy->StopSoundMulti()
             ->shouldBeCalledOnce();
 
         $this->raylib->stopSoundMulti();
+    }
+
+    public function test_toggleFullscreen(): void
+    {
+        $this->ffiProxy->ToggleFullscreen()
+            ->shouldBeCalledOnce();
+
+        $this->raylib->toggleFullscreen();
     }
 
     public function test_unloadImage(): void

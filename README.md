@@ -72,13 +72,13 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `bool IsWindowMaximized(void)`
 - [ ] `bool IsWindowFocused(void)`
 - [ ] `bool IsWindowResized(void)`
-- [ ] `bool IsWindowState(unsigned int flag)`
-- [ ] `void SetWindowState(unsigned int flags)`
-- [ ] `void ClearWindowState(unsigned int flags)`
-- [ ] `void ToggleFullscreen(void)`
-- [ ] `void MaximizeWindow(void)`
-- [ ] `void MinimizeWindow(void)`
-- [ ] `void RestoreWindow(void)`
+- [x] `bool IsWindowState(unsigned int flag)`
+- [x] `void SetWindowState(unsigned int flags)`
+- [x] `void ClearWindowState(unsigned int flags)`
+- [x] `void ToggleFullscreen(void)`
+- [x] `void MaximizeWindow(void)`
+- [x] `void MinimizeWindow(void)`
+- [x] `void RestoreWindow(void)`
 - [ ] `void SetWindowIcon(Image image)`
 - [ ] `void SetWindowTitle(const char *title)`
 - [ ] `void SetWindowPosition(int x, int y)`
@@ -666,7 +666,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [core/core_scissor_test.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_scissor_test.php)
 - [x] [core/core_storage_values.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_storage_values.php)
 - [ ] core/core_vr_simulator.php
-- [ ] core/core_window_flags.php
+- [x] [core/core_window_flags.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_window_flags.php)
 - [ ] core/core_window_letterbox.php
 - [x] [core/core_world_screen.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_world_screen.php)
 - [ ] models/models_animation.php

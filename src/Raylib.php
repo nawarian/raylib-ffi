@@ -66,6 +66,11 @@ final class Raylib implements
         $this->ffi->ClearBackground($color->toCData($this->ffi));
     }
 
+    public function clearWindowState(int $flags): void
+    {
+        $this->ffi->ClearWindowState($flags);
+    }
+
     public function closeAudioDevice(): void
     {
         $this->ffi->CloseAudioDevice();
@@ -529,6 +534,11 @@ final class Raylib implements
         return $this->ffi->IsMouseButtonPressed($button);
     }
 
+    public function isWindowState(int $flag): bool
+    {
+        return $this->ffi->IsWindowState($flag);
+    }
+
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
@@ -622,9 +632,19 @@ final class Raylib implements
         );
     }
 
+    public function maximizeWindow(): void
+    {
+        $this->ffi->MaximizeWindow();
+    }
+
     public function measureText(string $text, int $fontSize): int
     {
         return $this->ffi->MeasureText($text, $fontSize);
+    }
+
+    public function minimizeWindow(): void
+    {
+        $this->ffi->MinimizeWindow();
     }
 
     public function pauseMusicStream(Types\Music $music): void
@@ -650,6 +670,11 @@ final class Raylib implements
     public function resumeMusicStream(Types\Music $music): void
     {
         $this->ffi->ResumeMusicStream($music->toCData($this->ffi));
+    }
+
+    public function restoreWindow(): void
+    {
+        $this->ffi->RestoreWindow();
     }
 
     public function saveStorageValue(int $position, int $value): bool
@@ -687,6 +712,11 @@ final class Raylib implements
         $this->ffi->SetTextureFilter($texture->toCData($this->ffi), $filterMode);
     }
 
+    public function setWindowState(int $flags): void
+    {
+        $this->ffi->SetWindowState($flags);
+    }
+
     public function stopMusicStream(Types\Music $music): void
     {
         $this->ffi->StopMusicStream($music->toCData($this->ffi));
@@ -706,6 +736,10 @@ final class Raylib implements
         return sprintf($format, ...$args);
     }
 
+    public function toggleFullscreen(): void
+    {
+        $this->ffi->ToggleFullscreen();
+    }
 
     public function unloadImage(Types\Image $image): void
     {

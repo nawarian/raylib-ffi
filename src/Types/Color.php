@@ -115,6 +115,11 @@ final class Color
         return new self(0, 0, 0, $alpha);
     }
 
+    public static function blank(int $alpha = 0): Color
+    {
+        return self::black($alpha);
+    }
+
     public static function rayWhite(int $alpha = 255): Color
     {
         self::assertUint8($alpha);
