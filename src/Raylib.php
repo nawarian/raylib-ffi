@@ -351,6 +351,182 @@ final class Raylib implements
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
      */
+    public function genImageCellular(int $width, int $height, int $tileSize): Types\Image
+    {
+        $image = $this->ffi->GenImageCellular($width, $height, $tileSize);
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function genImageChecked(
+        int $width,
+        int $height,
+        int $checksX,
+        int $checksY,
+        Types\Color $col1,
+        Types\Color $col2
+    ): Types\Image {
+        $image = $this->ffi->GenImageChecked(
+            $width,
+            $height,
+            $checksX,
+            $checksY,
+            $col1->toCData($this->ffi),
+            $col2->toCData($this->ffi)
+        );
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function genImageGradientH(
+        int $width,
+        int $height,
+        Types\Color $left,
+        Types\Color $right
+    ): Types\Image {
+        $image = $this->ffi->GenImageGradientH(
+            $width,
+            $height,
+            $left->toCData($this->ffi),
+            $right->toCData($this->ffi)
+        );
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function genImageGradientRadial(
+        int $width,
+        int $height,
+        float $density,
+        Types\Color $inner,
+        Types\Color $outer
+    ): Types\Image {
+        $image = $this->ffi->GenImageGradientRadial(
+            $width,
+            $height,
+            $density,
+            $inner->toCData($this->ffi),
+            $outer->toCData($this->ffi)
+        );
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function genImageGradientV(
+        int $width,
+        int $height,
+        Types\Color $top,
+        Types\Color $bottom
+    ): Types\Image {
+        $image = $this->ffi->GenImageGradientV(
+            $width,
+            $height,
+            $top->toCData($this->ffi),
+            $bottom->toCData($this->ffi)
+        );
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function genImagePerlinNoise(
+        int $width,
+        int $height,
+        int $offsetX,
+        int $offsetY,
+        float $scale
+    ): Types\Image {
+        $image = $this->ffi->GenImagePerlinNoise(
+            $width,
+            $height,
+            $offsetX,
+            $offsetY,
+            $scale
+        );
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function genImageWhiteNoise(int $width, int $height, float $factor): Types\Image
+    {
+        $image = $this->ffi->GenImageWhiteNoise(
+            $width,
+            $height,
+            $factor
+        );
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
     public function getColor(int $hex): Types\Color
     {
         $color = $this->ffi->GetColor($hex);
