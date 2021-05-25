@@ -11,11 +11,11 @@ use Nawarian\Raylib\RaylibFFIProxy;
 
 final class Image
 {
-    private CData $data;
-    private int $width;
-    private int $height;
-    private int $mipmaps;
-    private int $format;
+    public CData $data;
+    public int $width;
+    public int $height;
+    public int $mipmaps;
+    public int $format;
 
     public function __construct(CData $data, int $width, int $height, int $mipmaps, int $format)
     {
@@ -47,5 +47,14 @@ final class Image
         $image->format = $this->format;
 
         return $image;
+    }
+
+    /**
+     * @psalm-suppress MixedPropertyAssignment
+     * @psalm-suppress MixedReturnStatement
+     */
+    public function updateFromStruct(CData $imageStruct): CData
+    {
+        return FFI::addr($imageStruct);
     }
 }

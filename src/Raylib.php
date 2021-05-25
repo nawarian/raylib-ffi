@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nawarian\Raylib;
 
 use FFI;
+use FFI\CDATA;
 
 final class Raylib implements
     HasRaylibBlendModeConstants,
@@ -504,6 +505,203 @@ final class Raylib implements
         return new Types\Vector2($vec->x, $vec->y);
     }
 
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageCrop(Types\Image $image, Types\Rectangle $crop): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageCrop($image->updateFromStruct($imageStruct), $crop->toCData($this->ffi));
+
+        $image->data = $imageStruct->data;
+        $image->width = $imageStruct->width;
+        $image->height = $imageStruct->height;
+        $image->format = $imageStruct->format;
+        $image->mipmaps = $imageStruct->mipmaps;
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageDraw(
+        Types\Image $dst,
+        Types\Image $src,
+        Types\Rectangle $srcRec,
+        Types\Rectangle $dstRec,
+        Types\Color $tint
+    ): void {
+        $imageStruct = $dst->toCData($this->ffi);
+        $this->ffi->ImageDraw(
+            $dst->updateFromStruct($imageStruct),
+            $src->toCData($this->ffi),
+            $srcRec->toCData($this->ffi),
+            $dstRec->toCData($this->ffi),
+            $tint->toCData($this->ffi)
+        );
+
+        $dst->data = $imageStruct->data;
+        $dst->width = $imageStruct->width;
+        $dst->height = $imageStruct->height;
+        $dst->format = $imageStruct->format;
+        $dst->mipmaps = $imageStruct->mipmaps;
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageDrawCircle(
+        Types\Image $dst,
+        int $centerX,
+        int $centerY,
+        int $radius,
+        Types\Color $color
+    ): void {
+        $imageStruct = $dst->toCData($this->ffi);
+        $this->ffi->ImageDrawCircle(
+            $dst->updateFromStruct($imageStruct),
+            $centerX,
+            $centerY,
+            $radius,
+            $color->toCData($this->ffi)
+        );
+
+        $dst->data = $imageStruct->data;
+        $dst->width = $imageStruct->width;
+        $dst->height = $imageStruct->height;
+        $dst->format = $imageStruct->format;
+        $dst->mipmaps = $imageStruct->mipmaps;
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageDrawPixel(
+        Types\Image $dst,
+        int $posX,
+        int $posY,
+        Types\Color $tint
+    ): void {
+        $imageStruct = $dst->toCData($this->ffi);
+        $this->ffi->ImageDrawPixel(
+            $dst->updateFromStruct($imageStruct),
+            $posX,
+            $posY,
+            $tint->toCData($this->ffi)
+        );
+
+        $dst->data = $imageStruct->data;
+        $dst->width = $imageStruct->width;
+        $dst->height = $imageStruct->height;
+        $dst->format = $imageStruct->format;
+        $dst->mipmaps = $imageStruct->mipmaps;
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageDrawRectangle(
+        Types\Image $dst,
+        int $posX,
+        int $posY,
+        int $width,
+        int $height,
+        Types\Color $color
+    ): void {
+        $imageStruct = $dst->toCData($this->ffi);
+        $this->ffi->ImageDrawRectangle(
+            $dst->updateFromStruct($imageStruct),
+            $posX,
+            $posY,
+            $width,
+            $height,
+            $color->toCData($this->ffi)
+        );
+
+        $dst->data = $imageStruct->data;
+        $dst->width = $imageStruct->width;
+        $dst->height = $imageStruct->height;
+        $dst->format = $imageStruct->format;
+        $dst->mipmaps = $imageStruct->mipmaps;
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageDrawTextEx(
+        Types\Image $dst,
+        Types\Font $font,
+        string $text,
+        Types\Vector2 $position,
+        float $fontSize,
+        float $spacing,
+        Types\Color $tint
+    ): void {
+        $imageStruct = $dst->toCData($this->ffi);
+        $this->ffi->ImageDrawTextEx(
+            $dst->updateFromStruct($imageStruct),
+            $font->toCData($this->ffi),
+            $text,
+            $position->toCData($this->ffi),
+            $fontSize,
+            $spacing,
+            $tint->toCData($this->ffi)
+        );
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageFlipHorizontal(Types\Image $image): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageFlipHorizontal($image->updateFromStruct($imageStruct));
+
+        $image->data = $imageStruct->data;
+        $image->width = $imageStruct->width;
+        $image->height = $imageStruct->height;
+        $image->format = $imageStruct->format;
+        $image->mipmaps = $imageStruct->mipmaps;
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageResize(Types\Image $image, int $newWidth, int $newHeight): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageResize($image->updateFromStruct($imageStruct), $newWidth, $newHeight);
+
+        $image->data = $imageStruct->data;
+        $image->width = $imageStruct->width;
+        $image->height = $imageStruct->height;
+        $image->format = $imageStruct->format;
+        $image->mipmaps = $imageStruct->mipmaps;
+    }
+
     public function initAudioDevice(): void
     {
         $this->ffi->InitAudioDevice();
@@ -537,6 +735,24 @@ final class Raylib implements
     public function isWindowState(int $flag): bool
     {
         return $this->ffi->IsWindowState($flag);
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function loadFont(string $filename): Types\Font
+    {
+        $font = $this->ffi->LoadFont($filename);
+
+        return new Types\Font(
+            $font->baseSize,
+            $font->charsCount,
+            $font->charsPadding,
+            $font->texture,
+            $font->recs,
+            $font->chars
+        );
     }
 
     /**
@@ -734,6 +950,11 @@ final class Raylib implements
     public function textFormat(string $format, ...$args): string
     {
         return sprintf($format, ...$args);
+    }
+
+    public function unloadFont(Types\Font $font): void
+    {
+        $this->ffi->UnloadFont($font->toCData($this->ffi));
     }
 
     public function toggleFullscreen(): void
