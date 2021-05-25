@@ -4,3 +4,4 @@ composer.phar
 /vendor/
 .phpunit.cache
 .idea
+storage.data
