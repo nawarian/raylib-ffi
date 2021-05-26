@@ -712,7 +712,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [shapes/shapes_basic_shapes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_basic_shapes.php)
 - [x] [shapes/shapes_bouncing_ball.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_bouncing_ball.php)
 - [x] [shapes/shapes_collision_area.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_collision_area.php)
-- [ ] shapes/shapes_colors_palette.php
+- [x] [shapes/shapes_colors_palette.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_colors_palette.php)
 - [ ] shapes/shapes_draw_circle_sector.php
 - [ ] shapes/shapes_draw_rectangle_rounded.php
 - [ ] shapes/shapes_draw_ring.php
