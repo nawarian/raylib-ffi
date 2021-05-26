@@ -739,8 +739,8 @@ Below you'll find the list of things to be developed in this project.
 - [x] [textures/textures_bunnymark.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_bunnymark.php)
 - [x] [textures/textures_draw_tiled.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_draw_tiled.php)
 - [x] [textures/textures_image_drawing.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_drawing.php)
+- [x] [textures/textures_image_loading.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_loading.php)
 - [x] [textures/textures_image_generation.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_generation.php)
-- [ ] textures/textures_image_loading.php
 - [ ] textures/textures_image_processing.php
 - [ ] textures/textures_image_text.php
 - [ ] textures/textures_logo_raylib.php
