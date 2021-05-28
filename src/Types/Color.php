@@ -55,6 +55,24 @@ final class Color
         return new self(80, 80, 80, $alpha);
     }
 
+    public static function darkGreen(int $alpha = 255): Color
+    {
+        self::assertUint8($alpha);
+        return new self(0, 117, 44, $alpha);
+    }
+
+    public static function darkPurple(int $alpha = 255): Color
+    {
+        self::assertUint8($alpha);
+        return new self(112, 31, 126, $alpha);
+    }
+
+    public static function darkBrown(int $alpha = 255): Color
+    {
+        self::assertUint8($alpha);
+        return new self(76, 63, 47, $alpha);
+    }
+
     public static function blue(int $alpha = 255): Color
     {
         self::assertUint8($alpha);

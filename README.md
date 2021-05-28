@@ -262,13 +262,13 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `bool ExportImage(Image image, const char *fileName)`
 - [ ] `bool ExportImageAsCode(Image image, const char *fileName)`
 - [ ] `Image GenImageColor(int width, int height, Color color)`
-- [ ] `Image GenImageGradientV(int width, int height, Color top, Color bottom)`
-- [ ] `Image GenImageGradientH(int width, int height, Color left, Color right)`
-- [ ] `Image GenImageGradientRadial(int width, int height, float density, Color inner, Color outer)`
-- [ ] `Image GenImageChecked(int width, int height, int checksX, int checksY, Color col1, Color col2)`
-- [ ] `Image GenImageWhiteNoise(int width, int height, float factor)`
-- [ ] `Image GenImagePerlinNoise(int width, int height, int offsetX, int offsetY, float scale)`
-- [ ] `Image GenImageCellular(int width, int height, int tileSize)`
+- [x] `Image GenImageGradientV(int width, int height, Color top, Color bottom)`
+- [x] `Image GenImageGradientH(int width, int height, Color left, Color right)`
+- [x] `Image GenImageGradientRadial(int width, int height, float density, Color inner, Color outer)`
+- [x] `Image GenImageChecked(int width, int height, int checksX, int checksY, Color col1, Color col2)`
+- [x] `Image GenImageWhiteNoise(int width, int height, float factor)`
+- [x] `Image GenImagePerlinNoise(int width, int height, int offsetX, int offsetY, float scale)`
+- [x] `Image GenImageCellular(int width, int height, int tileSize)`
 - [ ] `Image ImageCopy(Image image)`
 - [ ] `Image ImageFromImage(Image image, Rectangle rec)`
 - [ ] `Image ImageText(const char *text, int fontSize, Color color)`
@@ -712,7 +712,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [shapes/shapes_basic_shapes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_basic_shapes.php)
 - [x] [shapes/shapes_bouncing_ball.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_bouncing_ball.php)
 - [x] [shapes/shapes_collision_area.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_collision_area.php)
-- [ ] shapes/shapes_colors_palette.php
+- [x] [shapes/shapes_colors_palette.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_colors_palette.php)
 - [ ] shapes/shapes_draw_circle_sector.php
 - [ ] shapes/shapes_draw_rectangle_rounded.php
 - [ ] shapes/shapes_draw_ring.php
@@ -739,8 +739,8 @@ Below you'll find the list of things to be developed in this project.
 - [x] [textures/textures_bunnymark.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_bunnymark.php)
 - [x] [textures/textures_draw_tiled.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_draw_tiled.php)
 - [x] [textures/textures_image_drawing.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_drawing.php)
-- [ ] textures/textures_image_generation.php
-- [ ] textures/textures_image_loading.php
+- [x] [textures/textures_image_loading.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_loading.php)
+- [x] [textures/textures_image_generation.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_generation.php)
 - [ ] textures/textures_image_processing.php
 - [ ] textures/textures_image_text.php
 - [ ] textures/textures_logo_raylib.php
