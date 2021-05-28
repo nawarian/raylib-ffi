@@ -6,13 +6,16 @@ namespace Nawarian\Raylib;
 
 use FFI;
 use FFI\CDATA;
+use Psalm\Type;
 
 final class Raylib implements
     HasRaylibBlendModeConstants,
     HasRaylibFilterModeConstants,
     HasRaylibGestureConstants,
+    HasRaylibImageProcessConstants,
     HasRaylibKeysConstants,
     HasRaylibMouseConstants,
+    HasRaylibPixelFormatConstants,
     HasRaylibWindowFlagConstants
 {
     private RaylibFFIProxy $ffi;
@@ -511,16 +514,82 @@ final class Raylib implements
      * @psalm-suppress MixedAssignment
      * @psalm-suppress UndefinedPropertyFetch
      */
+    public function imageColorBrightness(Types\Image $image, int $brightness): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageColorBrightness($image->updateFromStruct($imageStruct), $brightness);
+
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageColorContrast(Types\Image $image, float $contrast): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageColorContrast($image->updateFromStruct($imageStruct), $contrast);
+
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageColorGrayscale(Types\Image $image): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageColorGrayscale($image->updateFromStruct($imageStruct));
+
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageColorInvert(Types\Image $image): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageColorInvert($image->updateFromStruct($imageStruct));
+
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageColorTint(Types\Image $image, Types\Color $color): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageColorTint($image->updateFromStruct($imageStruct), $color->toCData($this->ffi));
+
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
     public function imageCrop(Types\Image $image, Types\Rectangle $crop): void
     {
         $imageStruct = $image->toCData($this->ffi);
         $this->ffi->ImageCrop($image->updateFromStruct($imageStruct), $crop->toCData($this->ffi));
 
-        $image->data = $imageStruct->data;
-        $image->width = $imageStruct->width;
-        $image->height = $imageStruct->height;
-        $image->format = $imageStruct->format;
-        $image->mipmaps = $imageStruct->mipmaps;
+        $image->updateImageObject($image, $imageStruct);
     }
 
     /**
@@ -545,11 +614,7 @@ final class Raylib implements
             $tint->toCData($this->ffi)
         );
 
-        $dst->data = $imageStruct->data;
-        $dst->width = $imageStruct->width;
-        $dst->height = $imageStruct->height;
-        $dst->format = $imageStruct->format;
-        $dst->mipmaps = $imageStruct->mipmaps;
+        $dst->updateImageObject($dst, $imageStruct);
     }
 
     /**
@@ -574,11 +639,7 @@ final class Raylib implements
             $color->toCData($this->ffi)
         );
 
-        $dst->data = $imageStruct->data;
-        $dst->width = $imageStruct->width;
-        $dst->height = $imageStruct->height;
-        $dst->format = $imageStruct->format;
-        $dst->mipmaps = $imageStruct->mipmaps;
+        $dst->updateImageObject($dst, $imageStruct);
     }
 
     /**
@@ -601,11 +662,7 @@ final class Raylib implements
             $tint->toCData($this->ffi)
         );
 
-        $dst->data = $imageStruct->data;
-        $dst->width = $imageStruct->width;
-        $dst->height = $imageStruct->height;
-        $dst->format = $imageStruct->format;
-        $dst->mipmaps = $imageStruct->mipmaps;
+        $dst->updateImageObject($dst, $imageStruct);
     }
 
     /**
@@ -632,11 +689,7 @@ final class Raylib implements
             $color->toCData($this->ffi)
         );
 
-        $dst->data = $imageStruct->data;
-        $dst->width = $imageStruct->width;
-        $dst->height = $imageStruct->height;
-        $dst->format = $imageStruct->format;
-        $dst->mipmaps = $imageStruct->mipmaps;
+        $dst->updateImageObject($dst, $imageStruct);
     }
 
     /**
@@ -677,11 +730,35 @@ final class Raylib implements
         $imageStruct = $image->toCData($this->ffi);
         $this->ffi->ImageFlipHorizontal($image->updateFromStruct($imageStruct));
 
-        $image->data = $imageStruct->data;
-        $image->width = $imageStruct->width;
-        $image->height = $imageStruct->height;
-        $image->format = $imageStruct->format;
-        $image->mipmaps = $imageStruct->mipmaps;
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageFlipVertical(Types\Image $image): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageFlipVertical($image->updateFromStruct($imageStruct));
+
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageFormat(Types\Image $image, int $newFormat): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageFormat($image->updateFromStruct($imageStruct), $newFormat);
+
+        $image->updateImageObject($image, $imageStruct);
     }
 
     /**
@@ -695,11 +772,7 @@ final class Raylib implements
         $imageStruct = $image->toCData($this->ffi);
         $this->ffi->ImageResize($image->updateFromStruct($imageStruct), $newWidth, $newHeight);
 
-        $image->data = $imageStruct->data;
-        $image->width = $imageStruct->width;
-        $image->height = $imageStruct->height;
-        $image->format = $imageStruct->format;
-        $image->mipmaps = $imageStruct->mipmaps;
+        $image->updateImageObject($image, $imageStruct);
     }
 
     public function initAudioDevice(): void
@@ -730,6 +803,11 @@ final class Raylib implements
     public function isMouseButtonPressed(int $button): bool
     {
         return $this->ffi->IsMouseButtonPressed($button);
+    }
+
+    public function isMouseButtonReleased(int $button): bool
+    {
+        return $this->ffi->IsMouseButtonReleased($button);
     }
 
     public function isWindowState(int $flag): bool

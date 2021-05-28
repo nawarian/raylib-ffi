@@ -183,7 +183,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `float GetGamepadAxisMovement(int gamepad, int axis)`
 - [x] `bool IsMouseButtonPressed(int button)`
 - [ ] `bool IsMouseButtonDown(int button)`
-- [ ] `bool IsMouseButtonReleased(int button)`
+- [x] `bool IsMouseButtonReleased(int button)`
 - [ ] `bool IsMouseButtonUp(int button)`
 - [x] `int GetMouseX(void)`
 - [x] `int GetMouseY(void)`
@@ -273,7 +273,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `Image ImageFromImage(Image image, Rectangle rec)`
 - [ ] `Image ImageText(const char *text, int fontSize, Color color)`
 - [ ] `Image ImageTextEx(Font font, const char *text, float fontSize, float spacing, Color tint)`
-- [ ] `void ImageFormat(Image *image, int newFormat)`
+- [x] `void ImageFormat(Image *image, int newFormat)`
 - [ ] `void ImageToPOT(Image *image, Color fill)`
 - [x] `void ImageCrop(Image *image, Rectangle crop)`
 - [ ] `void ImageAlphaCrop(Image *image, float threshold)`
@@ -285,15 +285,15 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void ImageResizeCanvas(Image *image, int newWidth, int newHeight, int offsetX, int offsetY, Color fill)`
 - [ ] `void ImageMipmaps(Image *image)`
 - [ ] `void ImageDither(Image *image, int rBpp, int gBpp, int bBpp, int aBpp)`
-- [ ] `void ImageFlipVertical(Image *image)`
+- [x] `void ImageFlipVertical(Image *image)`
 - [x] `void ImageFlipHorizontal(Image *image)`
 - [ ] `void ImageRotateCW(Image *image)`
 - [ ] `void ImageRotateCCW(Image *image)`
-- [ ] `void ImageColorTint(Image *image, Color color)`
-- [ ] `void ImageColorInvert(Image *image)`
-- [ ] `void ImageColorGrayscale(Image *image)`
-- [ ] `void ImageColorContrast(Image *image, float contrast)`
-- [ ] `void ImageColorBrightness(Image *image, int brightness)`
+- [x] `void ImageColorTint(Image *image, Color color)`
+- [x] `void ImageColorInvert(Image *image)`
+- [x] `void ImageColorGrayscale(Image *image)`
+- [x] `void ImageColorContrast(Image *image, float contrast)`
+- [x] `void ImageColorBrightness(Image *image, int brightness)`
 - [ ] `void ImageColorReplace(Image *image, Color color, Color replace)`
 - [ ] `Color *LoadImageColors(Image image)`
 - [ ] `Color *LoadImagePalette(Image image, int maxPaletteSize, int *colorsCount)`
@@ -741,7 +741,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [textures/textures_image_drawing.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_drawing.php)
 - [ ] textures/textures_image_generation.php
 - [ ] textures/textures_image_loading.php
-- [ ] textures/textures_image_processing.php
+- [x] [textures/textures_image_processing.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_processing.php)
 - [ ] textures/textures_image_text.php
 - [ ] textures/textures_logo_raylib.php
 - [ ] textures/textures_mouse_painting.php

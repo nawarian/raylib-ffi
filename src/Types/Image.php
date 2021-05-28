@@ -57,4 +57,21 @@ final class Image
     {
         return FFI::addr($imageStruct);
     }
+
+    /**
+     * @psalm-suppress MixedPropertyAssignment
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function updateImageObject(Image $image, CData $imageStruct): Image
+    {
+        $image->data = $imageStruct->data;
+        $image->width = $imageStruct->width;
+        $image->height = $imageStruct->height;
+        $image->format = $imageStruct->format;
+        $image->mipmaps = $imageStruct->mipmaps;
+
+        return $image;
+    }
 }
