@@ -6,12 +6,12 @@ namespace Nawarian\Raylib;
 
 interface HasRaylibImageProcessConstants
 {
-    const NONE = 0;
-    const COLOR_GRAYSCALE = 1;
-    const COLOR_TINT = 2;
-    const COLOR_INVERT = 3;
-    const COLOR_CONTRAST = 4;
-    const COLOR_BRIGHTNESS = 5;
-    const FLIP_VERTICAL = 6;
-    const FLIP_HORIZONTAL = 7;
+    public const NONE = 0;
+    public const COLOR_GRAYSCALE = 1;
+    public const COLOR_TINT = 2;
+    public const COLOR_INVERT = 3;
+    public const COLOR_CONTRAST = 4;
+    public const COLOR_BRIGHTNESS = 5;
+    public const FLIP_VERTICAL = 6;
+    public const FLIP_HORIZONTAL = 7;
 }

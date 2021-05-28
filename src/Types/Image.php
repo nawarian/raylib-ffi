@@ -51,6 +51,7 @@ final class Image
 
     /**
      * @psalm-suppress MixedPropertyAssignment
+     * @psalm-suppress MixedInferredReturnType
      * @psalm-suppress MixedReturnStatement
      */
     public function updateFromStruct(CData $imageStruct): CData
