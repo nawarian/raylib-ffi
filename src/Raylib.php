@@ -222,6 +222,20 @@ final class Raylib implements
         $this->ffi->DrawRectangleLinesEx($rectangle->toCData($this->ffi), $lineThick, $color->toCData($this->ffi));
     }
 
+    public function drawRectanglePro(
+        Types\Rectangle $rectangle,
+        Types\Vector2 $origin,
+        float $rotation,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawRectanglePro(
+            $rectangle->toCData($this->ffi),
+            $origin->toCData($this->ffi),
+            $rotation,
+            $color->toCData($this->ffi)
+        );
+    }
+
     public function drawRectangleRec(Types\Rectangle $rec, Types\Color $color): void
     {
         $this->ffi->DrawRectangleRec($rec->toCData($this->ffi), $color->toCData($this->ffi));

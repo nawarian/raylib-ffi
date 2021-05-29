@@ -39,6 +39,7 @@ use FFI\CData;
  * @method void DrawRectangleGradientH(float $x, float $y, float $width, float $height, CData $color1, CData $color2)
  * @method void DrawRectangleLines(float $x, float $y, float $width, float $height, CData $color)
  * @method void DrawRectangleLinesEx(CData $rectangle, int $lineThick, CData $color)
+ * @method void DrawRectanglePro(CData $rectangle, CData $origin, float $rotation, CData $color)
  * @method void DrawRectangleRec(CData $rectangle, CData $color)
  * @method void DrawText(string $text, int $x, int $y, int $fontSize, CData $color)
  * @method void DrawTexture(CData $texture, int $posX, int $posY, CData $tint)

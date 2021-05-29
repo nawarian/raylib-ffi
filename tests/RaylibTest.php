@@ -435,6 +435,29 @@ class RaylibTest extends TestCase
         $this->raylib->drawRectangleLinesEx($rectangle, 10, $color);
     }
 
+    public function test_drawRectanglePro_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $rectangle = new Rectangle(10, 20, 30, 40);
+        $vector2 = new Vector2(0, 0);
+        $color = new Color(0, 0, 0, 0);
+
+        $expectedRectangle = $this->ffi->new('Rectangle');
+        $expectedRectangle->x = 10;
+        $expectedRectangle->y = 20;
+        $expectedRectangle->width = 30;
+        $expectedRectangle->height = 40;
+        $expectedVector2 = $this->ffi->new('Vector2');
+        $expectedColor = $this->ffi->new('Color');
+        $this->ffiProxy->DrawRectanglePro(
+            $this->sameCDataRectangleArgument($expectedRectangle),
+            $this->sameCDataVector2Argument($expectedVector2),
+            10.0,
+            $this->sameCDataColorArgument($expectedColor)
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawRectanglePro($rectangle, $vector2, 10.0, $color);
+    }
+
     public function test_drawRectangleRec_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $rectangle = new Rectangle(0, 0, 0, 0);
