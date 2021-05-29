@@ -717,8 +717,8 @@ Below you'll find the list of things to be developed in this project.
 - [ ] shapes/shapes_draw_rectangle_rounded.php
 - [ ] shapes/shapes_draw_ring.php
 - [ ] shapes/shapes_easings_ball_anim.php
-- [ ] shapes/shapes_easings_box_anim.php
-- [ ] shapes/shapes_easings_rectangle_array.php
+- [x] [shapes/shapes_easings_box_anim.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_easings_box_anim.php)
+- [x] [shapes/shapes_easings_rectangle_array.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_easings_rectangle_array.php)
 - [ ] shapes/shapes_following_eyes.php
 - [ ] shapes/shapes_lines_bezier.php
 - [ ] shapes/shapes_logo_raylib.php
