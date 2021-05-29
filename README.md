@@ -249,8 +249,8 @@ Below you'll find the list of things to be developed in this project.
 - [x] `bool CheckCollisionRecs(Rectangle rec1, Rectangle rec2)`
 - [ ] `bool CheckCollisionCircles(Vector2 center1, float radius1, Vector2 center2, float radius2)`
 - [ ] `bool CheckCollisionCircleRec(Vector2 center, float radius, Rectangle rec)`
-- [ ] `bool CheckCollisionPointRec(Vector2 point, Rectangle rec)`
-- [ ] `bool CheckCollisionPointCircle(Vector2 point, Vector2 center, float radius)`
+- [x] `bool CheckCollisionPointRec(Vector2 point, Rectangle rec)`
+- [x] `bool CheckCollisionPointCircle(Vector2 point, Vector2 center, float radius)`
 - [ ] `bool CheckCollisionPointTriangle(Vector2 point, Vector2 p1, Vector2 p2, Vector2 p3)`
 - [ ] `bool CheckCollisionLines(Vector2 startPos1, Vector2 endPos1, Vector2 startPos2, Vector2 endPos2, Vector2 *collisionPoint)`
 - [x] `Rectangle GetCollisionRec(Rectangle rec1, Rectangle rec2)`
@@ -719,7 +719,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] shapes/shapes_easings_ball_anim.php
 - [x] [shapes/shapes_easings_box_anim.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_easings_box_anim.php)
 - [x] [shapes/shapes_easings_rectangle_array.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_easings_rectangle_array.php)
-- [ ] shapes/shapes_following_eyes.php
+- [x] [shapes/shapes_following_eyes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_following_eyes.php)
 - [ ] shapes/shapes_lines_bezier.php
 - [ ] shapes/shapes_logo_raylib.php
 - [ ] shapes/shapes_logo_raylib_anim.php

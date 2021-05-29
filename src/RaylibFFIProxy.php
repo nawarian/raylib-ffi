@@ -16,6 +16,7 @@ use FFI\CData;
  * @method void BeginMode3D(CData $camera3D)
  * @method void BeginScissorMode(int $x, int $y, int $width, int $height)
  * @method bool CheckCollisionPointRec(CData $point, CData $rec)
+ * @method bool CheckCollisionPointCircle(CData $point, CData $center, float $radius)
  * @method bool CheckCollisionRayBox(CData $ray, CData $box)
  * @method bool CheckCollisionRecs(CData $rec1, CData $rec2)
  * @method void ClearBackground(CData $color)

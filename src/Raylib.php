@@ -47,6 +47,15 @@ final class Raylib implements
         $this->ffi->BeginScissorMode($x, $y, $width, $height);
     }
 
+    public function checkCollisionPointCircle(Types\Vector2 $point, Types\Vector2 $center, float $radius): bool
+    {
+        return $this->ffi->CheckCollisionPointCircle(
+            $point->toCData($this->ffi),
+            $center->toCData($this->ffi),
+            $radius,
+        );
+    }
+
     public function checkCollisionPointRec(Types\Vector2 $point, Types\Rectangle $rec): bool
     {
         return $this->ffi->CheckCollisionPointRec($point->toCData($this->ffi), $rec->toCData($this->ffi));

@@ -137,6 +137,44 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->checkCollisionRayBox($ray, $box));
     }
 
+    public function test_checkCollisionPointCircle_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $point = $this->ffi->new('Vector2');
+        $origin = $this->ffi->new('Vector2');
+
+        $this->ffiProxy->CheckCollisionPointCircle(
+            $this->sameCDataVector2Argument($point),
+            $this->sameCDataVector2Argument($origin),
+            10.0,
+        )->shouldBeCalledOnce()->willReturn(true);
+
+        self::assertTrue(
+            $this->raylib->checkCollisionPointCircle(
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                10.0,
+            ),
+        );
+    }
+
+    public function test_checkCollisionPointRec_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $point = $this->ffi->new('Vector2');
+        $rec = $this->ffi->new('Rectangle');
+
+        $this->ffiProxy->CheckCollisionPointRec(
+            $this->sameCDataVector2Argument($point),
+            $this->sameCDataRectangleArgument($rec),
+        )->shouldBeCalledOnce()->willReturn(true);
+
+        self::assertTrue(
+            $this->raylib->checkCollisionPointRec(
+                new Vector2(0, 0),
+                new Rectangle(0, 0, 0, 0),
+            ),
+        );
+    }
+
     public function test_checkCollisionRecs_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $rec1 = $this->ffi->new('Rectangle');
