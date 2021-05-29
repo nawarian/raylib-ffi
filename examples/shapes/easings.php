@@ -59,3 +59,8 @@ function easeSineOut(float $t, float $b, float $c, float $d): float
 {
     return ($c * sin($t / $d * (pi() / 2)) + $b);
 }
+
+function EaseLinearIn(float $t, float $b, float $c, float $d): float
+{
+    return ($c * $t / $d + $b);
+}
