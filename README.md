@@ -355,7 +355,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `CharInfo *LoadFontData(const unsigned char *fileData, int dataSize, int fontSize, int *fontChars, int charsCount, int type)`
 - [ ] `Image GenImageFontAtlas(const CharInfo *chars, Rectangle **recs, int charsCount, int fontSize, int padding, int packMethod)`
 - [ ] `void UnloadFontData(CharInfo *chars, int charsCount)`
-- [ ] `void UnloadFont(Font font)`
+- [x] `void UnloadFont(Font font)`
 - [x] `void DrawFPS(int posX, int posY)`
 - [ ] `void DrawText(const char *text, int posX, int posY, int fontSize, Color color)`
 - [ ] `void DrawTextEx(Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint)`
@@ -369,8 +369,8 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `int TextCopy(char *dst, const char *src)`
 - [ ] `bool TextIsEqual(const char *text1, const char *text2)`
 - [ ] `unsigned int TextLength(const char *text)`
-- [ ] `const char *TextFormat(const char *text, ...)`
-- [ ] `const char *TextSubtext(const char *text, int position, int length)`
+- [x] `const char *TextFormat(const char *text, ...)`
+- [x] `const char *TextSubtext(const char *text, int position, int length)`
 - [ ] `char *TextReplace(char *text, const char *replace, const char *by)`
 - [ ] `char *TextInsert(const char *text, const char *insert, int position)`
 - [ ] `const char *TextJoin(const char **textList, int count, const char *delimiter)`
@@ -722,7 +722,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [shapes/shapes_following_eyes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_following_eyes.php)
 - [x] [shapes/shapes_lines_bezier.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_lines_bezier.php)
 - [x] [shapes/shapes_logo_raylib.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_logo_raylib.php)
-- [ ] shapes/shapes_logo_raylib_anim.php
+- [x] [shapes/shapes_logo_raylib_anim.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_logo_raylib_anim.php)
 - [x] [shapes/shapes_rectangle_scaling.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_rectangle_scaling.php)
 - [ ] text/text_font_filters.php
 - [ ] text/text_font_loading.php

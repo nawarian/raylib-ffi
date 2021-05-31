@@ -1813,6 +1813,18 @@ class RaylibTest extends TestCase
         $this->raylib->stopSoundMulti();
     }
 
+    public function test_textSubtext(): void
+    {
+        $this->ffiProxy->TextSubtext('blah', 10, 20)
+            ->shouldBeCalledOnce()
+            ->willReturn('somethingelseactually');
+
+        self::assertEquals(
+            'somethingelseactually',
+            $this->raylib->textSubtext('blah', 10, 20)
+        );
+    }
+
     public function test_toggleFullscreen(): void
     {
         $this->ffiProxy->ToggleFullscreen()

@@ -126,6 +126,7 @@ use FFI\CData;
  * @method void SetWindowState(int $flags)
  * @method void StopMusicStream(CData $music)
  * @method void StopSoundMulti()
+ * @method string TextSubtext(string $text, int $position, int $length)
  * @method void UnloadFont(CData $font)
  * @method void ToggleFullscreen()
  * @method void UnloadImage(CData $image)

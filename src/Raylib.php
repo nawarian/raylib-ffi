@@ -1170,6 +1170,11 @@ final class Raylib implements
         return sprintf($format, ...$args);
     }
 
+    public function textSubtext(string $text, int $position, int $length): string
+    {
+        return $this->ffi->TextSubtext($text, $position, $length);
+    }
+
     public function unloadFont(Types\Font $font): void
     {
         $this->ffi->UnloadFont($font->toCData($this->ffi));
