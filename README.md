@@ -217,7 +217,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color)`
 - [ ] `void DrawLineV(Vector2 startPos, Vector2 endPos, Color color)`
 - [ ] `void DrawLineEx(Vector2 startPos, Vector2 endPos, float thick, Color color)`
-- [ ] `void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color)`
+- [x] `void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color)`
 - [ ] `void DrawLineStrip(Vector2 *points, int pointsCount, Color color)`
 - [x] `void DrawCircle(int centerX, int centerY, float radius, Color color)`
 - [ ] `void DrawCircleSector(Vector2 center, float radius, int startAngle, int endAngle, int segments, Color color)`
@@ -720,7 +720,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [shapes/shapes_easings_box_anim.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_easings_box_anim.php)
 - [x] [shapes/shapes_easings_rectangle_array.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_easings_rectangle_array.php)
 - [x] [shapes/shapes_following_eyes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_following_eyes.php)
-- [ ] shapes/shapes_lines_bezier.php
+- [x] [shapes/shapes_lines_bezier.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_lines_bezier.php)
 - [ ] shapes/shapes_logo_raylib.php
 - [ ] shapes/shapes_logo_raylib_anim.php
 - [ ] shapes/shapes_rectangle_scaling.php

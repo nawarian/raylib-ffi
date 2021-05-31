@@ -350,6 +350,28 @@ class RaylibTest extends TestCase
         $this->raylib->drawLine(10, 20, 30 ,40, $color);
     }
 
+    public function test_drawLineBezier_respectsParameterOrderAndConvertsColorToCData(): void
+    {
+        $start = new Vector2(0, 0);
+        $end = new Vector2(100, 100);
+
+        $expectedStart = $this->ffi->new('Vector2');
+        $expectedEnd = $this->ffi->new('Vector2');
+        $expectedEnd->x = 100;
+        $expectedEnd->y = 100;
+        $expectedColor = $this->ffi->new('Color');
+        $expectedColor->a = 255;
+
+        $this->ffiProxy->DrawLineBezier(
+            $this->sameCDataVector2Argument($expectedStart),
+            $this->sameCDataVector2Argument($expectedEnd),
+            10,
+            $this->sameCDataColorArgument($expectedColor),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawLineBezier($start, $end, 10, Color::black());
+    }
+
     public function test_drawPlane_respectsParameterOrderAndConvertsColorToCData(): void
     {
         $center = new Vector3(5, 10, 15);

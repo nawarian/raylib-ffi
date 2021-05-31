@@ -174,6 +174,20 @@ final class Raylib implements
         $this->ffi->DrawLine($x0, $y0, $x1, $y1, $color->toCData($this->ffi));
     }
 
+    public function drawLineBezier(
+        Types\Vector2 $startPos,
+        Types\Vector2 $endPos,
+        float $thick,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawLineBezier(
+            $startPos->toCData($this->ffi),
+            $endPos->toCData($this->ffi),
+            $thick,
+            $color->toCData($this->ffi),
+        );
+    }
+
     public function drawPlane(Types\Vector3 $center, Types\Vector2 $size, Types\Color $color): void
     {
         $this->ffi->DrawPlane(
