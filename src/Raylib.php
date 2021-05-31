@@ -945,6 +945,11 @@ final class Raylib implements
         return $this->ffi->IsMouseButtonPressed($button);
     }
 
+    public function isMouseButtonReleased(int $button): bool
+    {
+        return $this->ffi->IsMouseButtonReleased($button);
+    }
+
     public function isWindowState(int $flag): bool
     {
         return $this->ffi->IsWindowState($flag);

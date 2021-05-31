@@ -183,7 +183,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `float GetGamepadAxisMovement(int gamepad, int axis)`
 - [x] `bool IsMouseButtonPressed(int button)`
 - [ ] `bool IsMouseButtonDown(int button)`
-- [ ] `bool IsMouseButtonReleased(int button)`
+- [x] `bool IsMouseButtonReleased(int button)`
 - [ ] `bool IsMouseButtonUp(int button)`
 - [x] `int GetMouseX(void)`
 - [x] `int GetMouseY(void)`
@@ -723,7 +723,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [shapes/shapes_lines_bezier.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_lines_bezier.php)
 - [x] [shapes/shapes_logo_raylib.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_logo_raylib.php)
 - [ ] shapes/shapes_logo_raylib_anim.php
-- [ ] shapes/shapes_rectangle_scaling.php
+- [x] [shapes/shapes_rectangle_scaling.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_rectangle_scaling.php)
 - [ ] text/text_font_filters.php
 - [ ] text/text_font_loading.php
 - [ ] text/text_font_sdf.php

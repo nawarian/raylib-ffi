@@ -98,6 +98,7 @@ use FFI\CData;
  * @method bool IsKeyPressed(int $key)
  * @method bool IsMouseButtonDown(int $button)
  * @method bool IsMouseButtonPressed(int $button)
+ * @method bool IsMouseButtonReleased(int $button)
  * @method CData LoadFont(string $fileName)
  * @method bool IsWindowState(int $flag)
  * @method CData LoadImage(string $filename)
