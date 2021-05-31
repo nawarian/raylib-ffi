@@ -1363,6 +1363,14 @@ class RaylibTest extends TestCase
         $textureStruct->mipmaps = 10;
         $textureStruct->format = 10;
 
+        $texture = new Texture2D(
+            $textureStruct->id,
+            $textureStruct->width,
+            $textureStruct->height,
+            $textureStruct->mipmaps,
+            $textureStruct->format,
+        );
+
         $colorStruct = $this->ffi->new('Color');
         $colorStruct->r = 255;
         $colorStruct->g = 255;
@@ -1392,7 +1400,7 @@ class RaylibTest extends TestCase
             $fontStruct->baseSize,
             $fontStruct->charsCount,
             $fontStruct->charsPadding,
-            $textureStruct,
+            $texture,
             $dataRec,
             $dataCharInfo
         );

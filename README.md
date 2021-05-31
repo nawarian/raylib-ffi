@@ -328,7 +328,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void SetTextureFilter(Texture2D texture, int filterMode)`
 - [ ] `void SetTextureWrap(Texture2D texture, int wrapMode)`
 - [x] `void DrawTexture(Texture2D texture, int posX, int posY, Color tint)`
-- [ ] `void DrawTextureV(Texture2D texture, Vector2 position, Color tint)`
+- [x] `void DrawTextureV(Texture2D texture, Vector2 position, Color tint)`
 - [x] `void DrawTextureEx(Texture2D texture, Vector2 position, float rotation, float scale, Color tint)`
 - [ ] `void DrawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint)`
 - [ ] `void DrawTextureQuad(Texture2D texture, Vector2 tiling, Vector2 offset, Rectangle quad, Color tint)`
@@ -349,7 +349,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `int GetPixelDataSize(int width, int height, int format)`
 - [ ] `Font GetFontDefault(void)`
 - [ ] `Font LoadFont(const char *fileName)`
-- [ ] `Font LoadFontEx(const char *fileName, int fontSize, int *fontChars, int charsCount)`
+- [x] `Font LoadFontEx(const char *fileName, int fontSize, int *fontChars, int charsCount)`
 - [ ] `Font LoadFontFromImage(Image image, Color key, int firstChar)`
 - [ ] `Font LoadFontFromMemory(const char *fileType, const unsigned char *fileData, int dataSize, int fontSize, int *fontChars, int charsCount)`
 - [ ] `CharInfo *LoadFontData(const unsigned char *fileData, int dataSize, int fontSize, int *fontChars, int charsCount, int type)`
@@ -358,7 +358,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void UnloadFont(Font font)`
 - [x] `void DrawFPS(int posX, int posY)`
 - [ ] `void DrawText(const char *text, int posX, int posY, int fontSize, Color color)`
-- [ ] `void DrawTextEx(Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint)`
+- [x] `void DrawTextEx(Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint)`
 - [ ] `void DrawTextRec(Font font, const char *text, Rectangle rec, float fontSize, float spacing, bool wordWrap, Color tint)`
 - [ ] `void DrawTextRecEx(Font font, const char *text, Rectangle rec, float fontSize, float spacing, bool wordWrap, Color tint,`
 - [ ] `int selectStart, int selectLength, Color selectTint, Color selectBackTint)`
@@ -742,7 +742,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [textures/textures_image_loading.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_loading.php)
 - [x] [textures/textures_image_generation.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_generation.php)
 - [ ] textures/textures_image_processing.php
-- [ ] textures/textures_image_text.php
+- [x] [textures/textures_image_text.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_text.php)
 - [ ] textures/textures_logo_raylib.php
 - [ ] textures/textures_mouse_painting.php
 - [ ] textures/textures_npatch_drawing.php
