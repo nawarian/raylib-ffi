@@ -721,7 +721,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [shapes/shapes_easings_rectangle_array.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_easings_rectangle_array.php)
 - [x] [shapes/shapes_following_eyes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_following_eyes.php)
 - [x] [shapes/shapes_lines_bezier.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_lines_bezier.php)
-- [ ] shapes/shapes_logo_raylib.php
+- [x] [shapes/shapes_logo_raylib.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_logo_raylib.php)
 - [ ] shapes/shapes_logo_raylib_anim.php
 - [ ] shapes/shapes_rectangle_scaling.php
 - [ ] text/text_font_filters.php
