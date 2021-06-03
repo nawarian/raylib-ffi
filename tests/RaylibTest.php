@@ -1033,6 +1033,24 @@ class RaylibTest extends TestCase
         self::assertEquals(10.0, $this->raylib->getFrameTime());
     }
 
+    public function test_getKeyPressed(): void
+    {
+        $this->ffiProxy->GetKeyPressed()
+            ->shouldBeCalledOnce()
+            ->willReturn(Raylib::KEY_N);
+
+        self::assertEquals(Raylib::KEY_N, $this->raylib->getKeyPressed());
+    }
+
+    public function test_getCharPressed(): void
+    {
+        $this->ffiProxy->GetCharPressed()
+            ->shouldBeCalledOnce()
+            ->willReturn(Raylib::KEY_N);
+
+        self::assertEquals(Raylib::KEY_N, $this->raylib->getCharPressed());
+    }
+
     public function test_getMousePosition(): void
     {
         $vector2Struct = $this->ffi->new('Vector2');

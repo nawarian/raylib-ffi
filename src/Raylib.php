@@ -597,6 +597,16 @@ final class Raylib implements
         return $this->ffi->GetGestureDetected();
     }
 
+    public function getKeyPressed(): int
+    {
+        return $this->ffi->GetKeyPressed();
+    }
+
+    public function getCharPressed(): int
+    {
+        return $this->ffi->GetCharPressed();
+    }
+
     /**
      * @psalm-suppress MixedArgument
      * @psalm-suppress UndefinedPropertyFetch

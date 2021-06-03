@@ -68,6 +68,8 @@ use FFI\CData;
  * @method int GetFPS()
  * @method float GetFrameTime()
  * @method int GetGestureDetected()
+ * @method int GetKeyPressed()
+ * @method int GetCharPressed()
  * @method CData GetMousePosition()
  * @method CData GetMouseRay(CData $mousePosition, CData $camera)
  * @method float GetMouseWheelMove()
