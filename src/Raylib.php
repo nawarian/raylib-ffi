@@ -50,6 +50,15 @@ final class Raylib implements
         $this->ffi->BeginScissorMode($x, $y, $width, $height);
     }
 
+    public function checkCollisionPointCircle(Types\Vector2 $point, Types\Vector2 $center, float $radius): bool
+    {
+        return $this->ffi->CheckCollisionPointCircle(
+            $point->toCData($this->ffi),
+            $center->toCData($this->ffi),
+            $radius,
+        );
+    }
+
     public function checkCollisionPointRec(Types\Vector2 $point, Types\Rectangle $rec): bool
     {
         return $this->ffi->CheckCollisionPointRec($point->toCData($this->ffi), $rec->toCData($this->ffi));
@@ -168,6 +177,20 @@ final class Raylib implements
         $this->ffi->DrawLine($x0, $y0, $x1, $y1, $color->toCData($this->ffi));
     }
 
+    public function drawLineBezier(
+        Types\Vector2 $startPos,
+        Types\Vector2 $endPos,
+        float $thick,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawLineBezier(
+            $startPos->toCData($this->ffi),
+            $endPos->toCData($this->ffi),
+            $thick,
+            $color->toCData($this->ffi),
+        );
+    }
+
     public function drawPlane(Types\Vector3 $center, Types\Vector2 $size, Types\Color $color): void
     {
         $this->ffi->DrawPlane(
@@ -223,6 +246,20 @@ final class Raylib implements
     public function drawRectangleLinesEx(Types\Rectangle $rectangle, int $lineThick, Types\Color $color): void
     {
         $this->ffi->DrawRectangleLinesEx($rectangle->toCData($this->ffi), $lineThick, $color->toCData($this->ffi));
+    }
+
+    public function drawRectanglePro(
+        Types\Rectangle $rectangle,
+        Types\Vector2 $origin,
+        float $rotation,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawRectanglePro(
+            $rectangle->toCData($this->ffi),
+            $origin->toCData($this->ffi),
+            $rotation,
+            $color->toCData($this->ffi)
+        );
     }
 
     public function drawRectangleRec(Types\Rectangle $rec, Types\Color $color): void
@@ -354,6 +391,182 @@ final class Raylib implements
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
      */
+    public function genImageCellular(int $width, int $height, int $tileSize): Types\Image
+    {
+        $image = $this->ffi->GenImageCellular($width, $height, $tileSize);
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function genImageChecked(
+        int $width,
+        int $height,
+        int $checksX,
+        int $checksY,
+        Types\Color $col1,
+        Types\Color $col2
+    ): Types\Image {
+        $image = $this->ffi->GenImageChecked(
+            $width,
+            $height,
+            $checksX,
+            $checksY,
+            $col1->toCData($this->ffi),
+            $col2->toCData($this->ffi)
+        );
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function genImageGradientH(
+        int $width,
+        int $height,
+        Types\Color $left,
+        Types\Color $right
+    ): Types\Image {
+        $image = $this->ffi->GenImageGradientH(
+            $width,
+            $height,
+            $left->toCData($this->ffi),
+            $right->toCData($this->ffi)
+        );
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function genImageGradientRadial(
+        int $width,
+        int $height,
+        float $density,
+        Types\Color $inner,
+        Types\Color $outer
+    ): Types\Image {
+        $image = $this->ffi->GenImageGradientRadial(
+            $width,
+            $height,
+            $density,
+            $inner->toCData($this->ffi),
+            $outer->toCData($this->ffi)
+        );
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function genImageGradientV(
+        int $width,
+        int $height,
+        Types\Color $top,
+        Types\Color $bottom
+    ): Types\Image {
+        $image = $this->ffi->GenImageGradientV(
+            $width,
+            $height,
+            $top->toCData($this->ffi),
+            $bottom->toCData($this->ffi)
+        );
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function genImagePerlinNoise(
+        int $width,
+        int $height,
+        int $offsetX,
+        int $offsetY,
+        float $scale
+    ): Types\Image {
+        $image = $this->ffi->GenImagePerlinNoise(
+            $width,
+            $height,
+            $offsetX,
+            $offsetY,
+            $scale
+        );
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function genImageWhiteNoise(int $width, int $height, float $factor): Types\Image
+    {
+        $image = $this->ffi->GenImageWhiteNoise(
+            $width,
+            $height,
+            $factor
+        );
+
+        return new Types\Image(
+            $image->data,
+            $image->width,
+            $image->height,
+            $image->mipmaps,
+            $image->format
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
     public function getColor(int $hex): Types\Color
     {
         $color = $this->ffi->GetColor($hex);
@@ -393,6 +606,16 @@ final class Raylib implements
     public function getGestureDetected(): int
     {
         return $this->ffi->GetGestureDetected();
+    }
+
+    public function getKeyPressed(): int
+    {
+        return $this->ffi->GetKeyPressed();
+    }
+
+    public function getCharPressed(): int
+    {
+        return $this->ffi->GetCharPressed();
     }
 
     /**
@@ -1052,6 +1275,11 @@ final class Raylib implements
     public function updateTexture(Types\Texture2D $texture, CDATA $pixels): void
     {
         $this->ffi->UpdateTexture($texture->toCData($this->ffi), $pixels);
+    }
+
+    public function textSubtext(string $text, int $position, int $length): string
+    {
+        return $this->ffi->TextSubtext($text, $position, $length);
     }
 
     public function unloadFont(Types\Font $font): void

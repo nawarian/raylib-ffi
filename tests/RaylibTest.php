@@ -137,6 +137,44 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->checkCollisionRayBox($ray, $box));
     }
 
+    public function test_checkCollisionPointCircle_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $point = $this->ffi->new('Vector2');
+        $origin = $this->ffi->new('Vector2');
+
+        $this->ffiProxy->CheckCollisionPointCircle(
+            $this->sameCDataVector2Argument($point),
+            $this->sameCDataVector2Argument($origin),
+            10.0,
+        )->shouldBeCalledOnce()->willReturn(true);
+
+        self::assertTrue(
+            $this->raylib->checkCollisionPointCircle(
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                10.0,
+            ),
+        );
+    }
+
+    public function test_checkCollisionPointRec_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $point = $this->ffi->new('Vector2');
+        $rec = $this->ffi->new('Rectangle');
+
+        $this->ffiProxy->CheckCollisionPointRec(
+            $this->sameCDataVector2Argument($point),
+            $this->sameCDataRectangleArgument($rec),
+        )->shouldBeCalledOnce()->willReturn(true);
+
+        self::assertTrue(
+            $this->raylib->checkCollisionPointRec(
+                new Vector2(0, 0),
+                new Rectangle(0, 0, 0, 0),
+            ),
+        );
+    }
+
     public function test_checkCollisionRecs_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $rec1 = $this->ffi->new('Rectangle');
@@ -312,6 +350,28 @@ class RaylibTest extends TestCase
         $this->raylib->drawLine(10, 20, 30 ,40, $color);
     }
 
+    public function test_drawLineBezier_respectsParameterOrderAndConvertsColorToCData(): void
+    {
+        $start = new Vector2(0, 0);
+        $end = new Vector2(100, 100);
+
+        $expectedStart = $this->ffi->new('Vector2');
+        $expectedEnd = $this->ffi->new('Vector2');
+        $expectedEnd->x = 100;
+        $expectedEnd->y = 100;
+        $expectedColor = $this->ffi->new('Color');
+        $expectedColor->a = 255;
+
+        $this->ffiProxy->DrawLineBezier(
+            $this->sameCDataVector2Argument($expectedStart),
+            $this->sameCDataVector2Argument($expectedEnd),
+            10,
+            $this->sameCDataColorArgument($expectedColor),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawLineBezier($start, $end, 10, Color::black());
+    }
+
     public function test_drawPlane_respectsParameterOrderAndConvertsColorToCData(): void
     {
         $center = new Vector3(5, 10, 15);
@@ -433,6 +493,29 @@ class RaylibTest extends TestCase
         )->shouldBeCalledOnce();
 
         $this->raylib->drawRectangleLinesEx($rectangle, 10, $color);
+    }
+
+    public function test_drawRectanglePro_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $rectangle = new Rectangle(10, 20, 30, 40);
+        $vector2 = new Vector2(0, 0);
+        $color = new Color(0, 0, 0, 0);
+
+        $expectedRectangle = $this->ffi->new('Rectangle');
+        $expectedRectangle->x = 10;
+        $expectedRectangle->y = 20;
+        $expectedRectangle->width = 30;
+        $expectedRectangle->height = 40;
+        $expectedVector2 = $this->ffi->new('Vector2');
+        $expectedColor = $this->ffi->new('Color');
+        $this->ffiProxy->DrawRectanglePro(
+            $this->sameCDataRectangleArgument($expectedRectangle),
+            $this->sameCDataVector2Argument($expectedVector2),
+            10.0,
+            $this->sameCDataColorArgument($expectedColor)
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawRectanglePro($rectangle, $vector2, 10.0, $color);
     }
 
     public function test_drawRectangleRec_respectsParameterOrderAndConvertsObjectsToCData(): void
@@ -659,6 +742,245 @@ class RaylibTest extends TestCase
         );
     }
 
+    public function test_GenImageCellular(): void
+    {
+        $expectedImage = $this->ffi->new('Image');
+        $imageData = FFI::addr($this->ffi->new('void *'));
+
+        $expectedImage->data = $imageData;
+        $expectedImage->width = 10;
+        $expectedImage->height = 10;
+        $expectedImage->mipmaps = 5;
+        $expectedImage->format = 5;
+
+        $this->ffiProxy->GenImageCellular(200, 200, 32)
+            ->shouldBeCalledOnce()
+            ->willReturn($expectedImage);
+
+        $image = $this->raylib->genImageCellular(200, 200, 32);
+
+        self::assertEquals($expectedImage->data, $image->data);
+        self::assertEquals($expectedImage->width, $image->width);
+        self::assertEquals($expectedImage->height, $image->height);
+        self::assertEquals($expectedImage->mipmaps, $image->mipmaps);
+        self::assertEquals($expectedImage->format, $image->format);
+    }
+
+    public function test_GenImageChecked(): void
+    {
+        $expectedImage = $this->ffi->new('Image');
+        $imageData = FFI::addr($this->ffi->new('void *'));
+
+        $expectedImage->data = $imageData;
+        $expectedImage->width = 10;
+        $expectedImage->height = 10;
+        $expectedImage->mipmaps = 5;
+        $expectedImage->format = 5;
+
+        $colorCol1Struct = $this->ffi->new('Color');
+        $colorCol1Struct->r = 230;
+        $colorCol1Struct->g = 41;
+        $colorCol1Struct->b = 55;
+        $colorCol1Struct->a = 255;
+
+        $colorCol2Struct = $this->ffi->new('Color');
+        $colorCol2Struct->r = 0;
+        $colorCol2Struct->g = 121;
+        $colorCol2Struct->b = 241;
+        $colorCol2Struct->a = 255;
+
+        $this->ffiProxy->GenImageChecked(
+            200,
+            200,
+            32,
+            32,
+            $this->sameCDataColorArgument($colorCol1Struct),
+            $this->sameCDataColorArgument($colorCol2Struct),
+        )
+            ->shouldBeCalledOnce()
+            ->willReturn($expectedImage);
+
+        $image = $this->raylib->genImageChecked(200, 200, 32, 32, Color::red(), Color::blue());
+
+        self::assertEquals($expectedImage->data, $image->data);
+        self::assertEquals($expectedImage->width, $image->width);
+        self::assertEquals($expectedImage->height, $image->height);
+        self::assertEquals($expectedImage->mipmaps, $image->mipmaps);
+        self::assertEquals($expectedImage->format, $image->format);
+    }
+
+    public function test_GenImageGradientH(): void
+    {
+        $expectedImage = $this->ffi->new('Image');
+        $imageData = FFI::addr($this->ffi->new('void *'));
+
+        $expectedImage->data = $imageData;
+        $expectedImage->width = 10;
+        $expectedImage->height = 10;
+        $expectedImage->mipmaps = 5;
+        $expectedImage->format = 5;
+
+        $colorCol1Struct = $this->ffi->new('Color');
+        $colorCol1Struct->r = 230;
+        $colorCol1Struct->g = 41;
+        $colorCol1Struct->b = 55;
+        $colorCol1Struct->a = 255;
+
+        $colorCol2Struct = $this->ffi->new('Color');
+        $colorCol2Struct->r = 0;
+        $colorCol2Struct->g = 121;
+        $colorCol2Struct->b = 241;
+        $colorCol2Struct->a = 255;
+
+        $this->ffiProxy->GenImageGradientH(
+            200,
+            200,
+            $this->sameCDataColorArgument($colorCol1Struct),
+            $this->sameCDataColorArgument($colorCol2Struct),
+        )
+            ->shouldBeCalledOnce()
+            ->willReturn($expectedImage);
+
+        $image = $this->raylib->genImageGradientH(200, 200, Color::red(), Color::blue());
+
+        self::assertEquals($expectedImage->data, $image->data);
+        self::assertEquals($expectedImage->width, $image->width);
+        self::assertEquals($expectedImage->height, $image->height);
+        self::assertEquals($expectedImage->mipmaps, $image->mipmaps);
+        self::assertEquals($expectedImage->format, $image->format);
+    }
+
+    public function test_GenImageGradientRadial(): void
+    {
+        $expectedImage = $this->ffi->new('Image');
+        $imageData = FFI::addr($this->ffi->new('void *'));
+
+        $expectedImage->data = $imageData;
+        $expectedImage->width = 10;
+        $expectedImage->height = 10;
+        $expectedImage->mipmaps = 5;
+        $expectedImage->format = 5;
+
+        $colorCol1Struct = $this->ffi->new('Color');
+        $colorCol1Struct->r = 230;
+        $colorCol1Struct->g = 41;
+        $colorCol1Struct->b = 55;
+        $colorCol1Struct->a = 255;
+
+        $colorCol2Struct = $this->ffi->new('Color');
+        $colorCol2Struct->r = 0;
+        $colorCol2Struct->g = 121;
+        $colorCol2Struct->b = 241;
+        $colorCol2Struct->a = 255;
+
+        $this->ffiProxy->GenImageGradientRadial(
+            200,
+            200,
+            0.5,
+            $this->sameCDataColorArgument($colorCol1Struct),
+            $this->sameCDataColorArgument($colorCol2Struct),
+        )
+            ->shouldBeCalledOnce()
+            ->willReturn($expectedImage);
+
+        $image = $this->raylib->genImageGradientRadial(200, 200, 0.5, Color::red(), Color::blue());
+
+        self::assertEquals($expectedImage->data, $image->data);
+        self::assertEquals($expectedImage->width, $image->width);
+        self::assertEquals($expectedImage->height, $image->height);
+        self::assertEquals($expectedImage->mipmaps, $image->mipmaps);
+        self::assertEquals($expectedImage->format, $image->format);
+    }
+
+    public function test_GenImageGradientV(): void
+    {
+        $expectedImage = $this->ffi->new('Image');
+        $imageData = FFI::addr($this->ffi->new('void *'));
+
+        $expectedImage->data = $imageData;
+        $expectedImage->width = 10;
+        $expectedImage->height = 10;
+        $expectedImage->mipmaps = 5;
+        $expectedImage->format = 5;
+
+        $colorCol1Struct = $this->ffi->new('Color');
+        $colorCol1Struct->r = 230;
+        $colorCol1Struct->g = 41;
+        $colorCol1Struct->b = 55;
+        $colorCol1Struct->a = 255;
+
+        $colorCol2Struct = $this->ffi->new('Color');
+        $colorCol2Struct->r = 0;
+        $colorCol2Struct->g = 121;
+        $colorCol2Struct->b = 241;
+        $colorCol2Struct->a = 255;
+
+        $this->ffiProxy->GenImageGradientV(
+            200,
+            200,
+            $this->sameCDataColorArgument($colorCol1Struct),
+            $this->sameCDataColorArgument($colorCol2Struct),
+        )
+            ->shouldBeCalledOnce()
+            ->willReturn($expectedImage);
+
+        $image = $this->raylib->genImageGradientV(200, 200, Color::red(), Color::blue());
+
+        self::assertEquals($expectedImage->data, $image->data);
+        self::assertEquals($expectedImage->width, $image->width);
+        self::assertEquals($expectedImage->height, $image->height);
+        self::assertEquals($expectedImage->mipmaps, $image->mipmaps);
+        self::assertEquals($expectedImage->format, $image->format);
+    }
+
+    public function test_GenImagePerlinNoise(): void
+    {
+        $expectedImage = $this->ffi->new('Image');
+        $imageData = FFI::addr($this->ffi->new('void *'));
+
+        $expectedImage->data = $imageData;
+        $expectedImage->width = 10;
+        $expectedImage->height = 10;
+        $expectedImage->mipmaps = 5;
+        $expectedImage->format = 5;
+
+        $this->ffiProxy->GenImagePerlinNoise(200, 200, 1, 1, 1.5)
+            ->shouldBeCalledOnce()
+            ->willReturn($expectedImage);
+
+        $image = $this->raylib->genImagePerlinNoise(200, 200, 1, 1, 1.5);
+
+        self::assertEquals($expectedImage->data, $image->data);
+        self::assertEquals($expectedImage->width, $image->width);
+        self::assertEquals($expectedImage->height, $image->height);
+        self::assertEquals($expectedImage->mipmaps, $image->mipmaps);
+        self::assertEquals($expectedImage->format, $image->format);
+    }
+
+    public function test_GenImageWhiteNoise(): void
+    {
+        $expectedImage = $this->ffi->new('Image');
+        $imageData = FFI::addr($this->ffi->new('void *'));
+
+        $expectedImage->data = $imageData;
+        $expectedImage->width = 10;
+        $expectedImage->height = 10;
+        $expectedImage->mipmaps = 5;
+        $expectedImage->format = 5;
+
+        $this->ffiProxy->GenImageWhiteNoise(200, 200, 1.5)
+            ->shouldBeCalledOnce()
+            ->willReturn($expectedImage);
+
+        $image = $this->raylib->genImageWhiteNoise(200, 200, 1.5);
+
+        self::assertEquals($expectedImage->data, $image->data);
+        self::assertEquals($expectedImage->width, $image->width);
+        self::assertEquals($expectedImage->height, $image->height);
+        self::assertEquals($expectedImage->mipmaps, $image->mipmaps);
+        self::assertEquals($expectedImage->format, $image->format);
+    }
+
     public function test_getColor(): void
     {
         $expectedColor = $this->ffi->new('Color');
@@ -741,6 +1063,24 @@ class RaylibTest extends TestCase
         );
 
         self::assertEquals($colorStruct, $this->raylib->getImageData($image));
+    }
+
+    public function test_getKeyPressed(): void
+    {
+        $this->ffiProxy->GetKeyPressed()
+            ->shouldBeCalledOnce()
+            ->willReturn(Raylib::KEY_N);
+
+        self::assertEquals(Raylib::KEY_N, $this->raylib->getKeyPressed());
+    }
+
+    public function test_getCharPressed(): void
+    {
+        $this->ffiProxy->GetCharPressed()
+            ->shouldBeCalledOnce()
+            ->willReturn(Raylib::KEY_N);
+
+        self::assertEquals(Raylib::KEY_N, $this->raylib->getCharPressed());
     }
 
     public function test_getMousePosition(): void
@@ -1801,6 +2141,18 @@ class RaylibTest extends TestCase
             ->shouldBeCalledOnce();
 
         $this->raylib->stopSoundMulti();
+    }
+
+    public function test_textSubtext(): void
+    {
+        $this->ffiProxy->TextSubtext('blah', 10, 20)
+            ->shouldBeCalledOnce()
+            ->willReturn('somethingelseactually');
+
+        self::assertEquals(
+            'somethingelseactually',
+            $this->raylib->textSubtext('blah', 10, 20)
+        );
     }
 
     public function test_toggleFullscreen(): void

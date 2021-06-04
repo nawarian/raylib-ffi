@@ -169,8 +169,8 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `bool IsKeyReleased(int key)`
 - [ ] `bool IsKeyUp(int key)`
 - [ ] `void SetExitKey(int key)`
-- [ ] `int GetKeyPressed(void)`
-- [ ] `int GetCharPressed(void)`
+- [x] `int GetKeyPressed(void)`
+- [x] `int GetCharPressed(void)`
 - [ ] `bool IsGamepadAvailable(int gamepad)`
 - [ ] `bool IsGamepadName(int gamepad, const char *name)`
 - [ ] `const char *GetGamepadName(int gamepad)`
@@ -217,7 +217,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color)`
 - [ ] `void DrawLineV(Vector2 startPos, Vector2 endPos, Color color)`
 - [ ] `void DrawLineEx(Vector2 startPos, Vector2 endPos, float thick, Color color)`
-- [ ] `void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color)`
+- [x] `void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color)`
 - [ ] `void DrawLineStrip(Vector2 *points, int pointsCount, Color color)`
 - [x] `void DrawCircle(int centerX, int centerY, float radius, Color color)`
 - [ ] `void DrawCircleSector(Vector2 center, float radius, int startAngle, int endAngle, int segments, Color color)`
@@ -249,8 +249,8 @@ Below you'll find the list of things to be developed in this project.
 - [x] `bool CheckCollisionRecs(Rectangle rec1, Rectangle rec2)`
 - [ ] `bool CheckCollisionCircles(Vector2 center1, float radius1, Vector2 center2, float radius2)`
 - [ ] `bool CheckCollisionCircleRec(Vector2 center, float radius, Rectangle rec)`
-- [ ] `bool CheckCollisionPointRec(Vector2 point, Rectangle rec)`
-- [ ] `bool CheckCollisionPointCircle(Vector2 point, Vector2 center, float radius)`
+- [x] `bool CheckCollisionPointRec(Vector2 point, Rectangle rec)`
+- [x] `bool CheckCollisionPointCircle(Vector2 point, Vector2 center, float radius)`
 - [ ] `bool CheckCollisionPointTriangle(Vector2 point, Vector2 p1, Vector2 p2, Vector2 p3)`
 - [ ] `bool CheckCollisionLines(Vector2 startPos1, Vector2 endPos1, Vector2 startPos2, Vector2 endPos2, Vector2 *collisionPoint)`
 - [x] `Rectangle GetCollisionRec(Rectangle rec1, Rectangle rec2)`
@@ -262,13 +262,13 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `bool ExportImage(Image image, const char *fileName)`
 - [ ] `bool ExportImageAsCode(Image image, const char *fileName)`
 - [ ] `Image GenImageColor(int width, int height, Color color)`
-- [ ] `Image GenImageGradientV(int width, int height, Color top, Color bottom)`
-- [ ] `Image GenImageGradientH(int width, int height, Color left, Color right)`
-- [ ] `Image GenImageGradientRadial(int width, int height, float density, Color inner, Color outer)`
-- [ ] `Image GenImageChecked(int width, int height, int checksX, int checksY, Color col1, Color col2)`
-- [ ] `Image GenImageWhiteNoise(int width, int height, float factor)`
-- [ ] `Image GenImagePerlinNoise(int width, int height, int offsetX, int offsetY, float scale)`
-- [ ] `Image GenImageCellular(int width, int height, int tileSize)`
+- [x] `Image GenImageGradientV(int width, int height, Color top, Color bottom)`
+- [x] `Image GenImageGradientH(int width, int height, Color left, Color right)`
+- [x] `Image GenImageGradientRadial(int width, int height, float density, Color inner, Color outer)`
+- [x] `Image GenImageChecked(int width, int height, int checksX, int checksY, Color col1, Color col2)`
+- [x] `Image GenImageWhiteNoise(int width, int height, float factor)`
+- [x] `Image GenImagePerlinNoise(int width, int height, int offsetX, int offsetY, float scale)`
+- [x] `Image GenImageCellular(int width, int height, int tileSize)`
 - [ ] `Image ImageCopy(Image image)`
 - [ ] `Image ImageFromImage(Image image, Rectangle rec)`
 - [ ] `Image ImageText(const char *text, int fontSize, Color color)`
@@ -355,7 +355,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `CharInfo *LoadFontData(const unsigned char *fileData, int dataSize, int fontSize, int *fontChars, int charsCount, int type)`
 - [ ] `Image GenImageFontAtlas(const CharInfo *chars, Rectangle **recs, int charsCount, int fontSize, int padding, int packMethod)`
 - [ ] `void UnloadFontData(CharInfo *chars, int charsCount)`
-- [ ] `void UnloadFont(Font font)`
+- [x] `void UnloadFont(Font font)`
 - [x] `void DrawFPS(int posX, int posY)`
 - [ ] `void DrawText(const char *text, int posX, int posY, int fontSize, Color color)`
 - [ ] `void DrawTextEx(Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint)`
@@ -369,8 +369,8 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `int TextCopy(char *dst, const char *src)`
 - [ ] `bool TextIsEqual(const char *text1, const char *text2)`
 - [ ] `unsigned int TextLength(const char *text)`
-- [ ] `const char *TextFormat(const char *text, ...)`
-- [ ] `const char *TextSubtext(const char *text, int position, int length)`
+- [x] `const char *TextFormat(const char *text, ...)`
+- [x] `const char *TextSubtext(const char *text, int position, int length)`
 - [ ] `char *TextReplace(char *text, const char *replace, const char *by)`
 - [ ] `char *TextInsert(const char *text, const char *insert, int position)`
 - [ ] `const char *TextJoin(const char **textList, int count, const char *delimiter)`
@@ -712,18 +712,18 @@ Below you'll find the list of things to be developed in this project.
 - [x] [shapes/shapes_basic_shapes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_basic_shapes.php)
 - [x] [shapes/shapes_bouncing_ball.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_bouncing_ball.php)
 - [x] [shapes/shapes_collision_area.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_collision_area.php)
-- [ ] shapes/shapes_colors_palette.php
+- [x] [shapes/shapes_colors_palette.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_colors_palette.php)
 - [ ] shapes/shapes_draw_circle_sector.php
 - [ ] shapes/shapes_draw_rectangle_rounded.php
 - [ ] shapes/shapes_draw_ring.php
 - [ ] shapes/shapes_easings_ball_anim.php
-- [ ] shapes/shapes_easings_box_anim.php
-- [ ] shapes/shapes_easings_rectangle_array.php
-- [ ] shapes/shapes_following_eyes.php
-- [ ] shapes/shapes_lines_bezier.php
-- [ ] shapes/shapes_logo_raylib.php
-- [ ] shapes/shapes_logo_raylib_anim.php
-- [ ] shapes/shapes_rectangle_scaling.php
+- [x] [shapes/shapes_easings_box_anim.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_easings_box_anim.php)
+- [x] [shapes/shapes_easings_rectangle_array.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_easings_rectangle_array.php)
+- [x] [shapes/shapes_following_eyes.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_following_eyes.php)
+- [x] [shapes/shapes_lines_bezier.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_lines_bezier.php)
+- [x] [shapes/shapes_logo_raylib.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_logo_raylib.php)
+- [x] [shapes/shapes_logo_raylib_anim.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_logo_raylib_anim.php)
+- [x] [shapes/shapes_rectangle_scaling.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/shapes/shapes_rectangle_scaling.php)
 - [ ] text/text_font_filters.php
 - [ ] text/text_font_loading.php
 - [ ] text/text_font_sdf.php
@@ -739,8 +739,8 @@ Below you'll find the list of things to be developed in this project.
 - [x] [textures/textures_bunnymark.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_bunnymark.php)
 - [x] [textures/textures_draw_tiled.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_draw_tiled.php)
 - [x] [textures/textures_image_drawing.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_drawing.php)
-- [ ] textures/textures_image_generation.php
-- [ ] textures/textures_image_loading.php
+- [x] [textures/textures_image_generation.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_generation.php)
+- [x] [textures/textures_image_loading.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_loading.php)
 - [x] [textures/textures_image_processing.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_processing.php)
 - [ ] textures/textures_image_text.php
 - [ ] textures/textures_logo_raylib.php
