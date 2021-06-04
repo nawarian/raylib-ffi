@@ -711,6 +711,38 @@ class RaylibTest extends TestCase
         self::assertEquals(10.0, $this->raylib->getFrameTime());
     }
 
+    public function test_getImageData(): void
+    {
+        $colorStruct = $this->ffi->new('Color');
+        $colorStruct->r = 255;
+        $colorStruct->g = 255;
+        $colorStruct->b = 255;
+        $colorStruct->a = 255;
+
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($this->ffi->new('void *'));
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $this->ffiProxy->LoadImageColors($this->sameCDataImageArgument($imageStruct))
+            ->shouldBeCalledOnce()
+            ->willReturn($colorStruct);
+
+        $image = new Image(
+            $imageStruct->data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format,
+        );
+
+        self::assertEquals($colorStruct, $this->raylib->getImageData($image));
+    }
+
     public function test_getMousePosition(): void
     {
         $vector2Struct = $this->ffi->new('Vector2');
@@ -875,6 +907,157 @@ class RaylibTest extends TestCase
             ->willReturn(10);
 
         self::assertEquals(10, $this->raylib->getScreenHeight());
+    }
+
+    public function test_imageColorBrightness(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($this->ffi->new('void *'));
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $this->ffiProxy->ImageColorBrightness(
+            $this->sameCDataImageArgument($imageStruct),
+            -40
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $this->raylib->imageColorBrightness($image, -40);
+    }
+
+    public function test_imageColorContrast(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($this->ffi->new('void *'));
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $this->ffiProxy->ImageColorContrast(
+            $this->sameCDataImageArgument($imageStruct),
+            -40.0
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $this->raylib->imageColorContrast($image, -40.0);
+    }
+
+    public function test_imageColorGrayscale(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($this->ffi->new('void *'));
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $this->ffiProxy->ImageColorGrayscale(
+            $this->sameCDataImageArgument($imageStruct)
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $this->raylib->imageColorGrayscale($image);
+    }
+
+    public function test_imageColorInvert(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($this->ffi->new('void *'));
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $this->ffiProxy->ImageColorInvert(
+            $this->sameCDataImageArgument($imageStruct)
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $this->raylib->imageColorInvert($image);
+    }
+
+    public function test_imageColorTint(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($this->ffi->new('void *'));
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $colorStruct = $this->ffi->new('Color');
+        $colorStruct->r = 255;
+        $colorStruct->g = 255;
+        $colorStruct->b = 255;
+        $colorStruct->a = 255;
+
+        $this->ffiProxy->ImageColorTint(
+            $this->sameCDataImageArgument($imageStruct),
+            $this->sameCDataColorArgument($colorStruct)
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $color = new Color(
+            $colorStruct->r,
+            $colorStruct->g,
+            $colorStruct->b,
+            $colorStruct->a,
+        );
+
+        $this->raylib->imageColorTint($image, $color);
     }
 
     public function test_imageCrop(): void
@@ -1196,6 +1379,61 @@ class RaylibTest extends TestCase
         $this->raylib->imageFlipHorizontal($image);
     }
 
+    public function test_imageFlipVertical(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($imageStruct);
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $this->ffiProxy->ImageFlipVertical(
+            $this->sameCDataImageArgument($imageStruct)
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $this->raylib->imageFlipVertical($image);
+    }
+
+    public function test_imageFormat(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($imageStruct);
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $this->ffiProxy->ImageFormat(
+            $this->sameCDataImageArgument($imageStruct),
+            Raylib::UNCOMPRESSED_R8G8B8A8
+        )
+            ->willReturn($imageStruct);
+
+        $image = new Image(
+            $data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        $this->raylib->imageFormat($image, Raylib::UNCOMPRESSED_R8G8B8A8);
+    }
+
     public function test_imageResize(): void
     {
         $imageStruct = $this->ffi->new('Image');
@@ -1277,6 +1515,15 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->isMouseButtonPressed(10));
     }
 
+    public function test_isMouseButtonReleased(): void
+    {
+        $this->ffiProxy->IsMouseButtonReleased(10)
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isMouseButtonReleased(10));
+    }
+
     public function test_isWindowState(): void
     {
         $this->ffiProxy->IsWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN)
@@ -1304,6 +1551,38 @@ class RaylibTest extends TestCase
         $expectedImage = new Image($data, 10, 20, 30, 40);
 
         self::assertEquals($expectedImage, $this->raylib->loadImage('image001.png'));
+    }
+
+    public function test_loadImageColors(): void
+    {
+        $colorStruct = $this->ffi->new('Color');
+        $colorStruct->r = 255;
+        $colorStruct->g = 255;
+        $colorStruct->b = 255;
+        $colorStruct->a = 255;
+
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($this->ffi->new('void *'));
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $this->ffiProxy->LoadImageColors($this->sameCDataImageArgument($imageStruct))
+            ->shouldBeCalledOnce()
+            ->willReturn($colorStruct);
+
+        $image = new Image(
+            $imageStruct->data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format,
+        );
+
+        self::assertEquals($colorStruct, $this->raylib->loadImageColors($image));
     }
 
     public function test_loadMusicStream(): void
@@ -1336,6 +1615,48 @@ class RaylibTest extends TestCase
             ->willReturn($texture);
 
         self::assertEquals(new Texture2D(0, 0, 0, 0, 0), $this->raylib->loadTexture('unknown.png'));
+    }
+
+    public function test_loadTextureFromImage(): void
+    {
+        $imageStruct = $this->ffi->new('Image');
+        $data = FFI::addr($imageStruct);
+
+        $imageStruct->data = $data;
+        $imageStruct->width = 10;
+        $imageStruct->height = 20;
+        $imageStruct->mipmaps = 30;
+        $imageStruct->format = 40;
+
+        $textureStruct = $this->ffi->new('Texture');
+        $textureStruct->id = 10;
+        $textureStruct->width = 10;
+        $textureStruct->height = 10;
+        $textureStruct->mipmaps = 10;
+        $textureStruct->format = 10;
+
+        $texture = new Texture2D(
+            $textureStruct->id,
+            $textureStruct->width,
+            $textureStruct->height,
+            $textureStruct->mipmaps,
+            $textureStruct->format,
+        );
+
+        $this->ffiProxy->LoadTextureFromImage(
+            $this->sameCDataImageArgument($imageStruct)
+        )
+            ->willReturn($texture);
+
+        $image = new Image(
+            $imageStruct->data,
+            $imageStruct->width,
+            $imageStruct->height,
+            $imageStruct->mipmaps,
+            $imageStruct->format
+        );
+
+        self::assertEquals($texture, $this->raylib->loadTextureFromImage($image));
     }
 
     public function test_maximizeWindow(): void
@@ -1558,6 +1879,37 @@ class RaylibTest extends TestCase
         self::assertEquals(15, $camera->target->x);
         self::assertEquals(20, $camera->up->x);
         self::assertEquals(30.0, $camera->fovy);
+    }
+
+    public function test_updateTexture(): void
+    {
+        $textureStruct = $this->ffi->new('Texture');
+        $textureStruct->id = 10;
+        $textureStruct->width = 10;
+        $textureStruct->height = 10;
+        $textureStruct->mipmaps = 10;
+        $textureStruct->format = 10;
+
+        $colorStruct = $this->ffi->new('Color');
+        $colorStruct->r = 255;
+        $colorStruct->g = 255;
+        $colorStruct->b = 255;
+        $colorStruct->a = 255;
+
+        $this->ffiProxy->UpdateTexture(
+            $this->sameCDataTexture2DArgument($textureStruct),
+            $this->sameCDataColorArgument($colorStruct)
+        )->shouldBeCalledOnce();
+
+        $texture = new Texture2D(
+            $textureStruct->id,
+            $textureStruct->width,
+            $textureStruct->height,
+            $textureStruct->mipmaps,
+            $textureStruct->format,
+        );
+
+        $this->raylib->updateTexture($texture, $colorStruct);
     }
 
     public function test_windowShouldClose(): void

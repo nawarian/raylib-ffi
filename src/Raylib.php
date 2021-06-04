@@ -382,6 +382,14 @@ final class Raylib implements
         return $this->ffi->GetFrameTime();
     }
 
+    /**
+     * @deprecated Please, use method loadImageColors()
+     */
+    public function getImageData(Types\Image $image): CData
+    {
+        return $this->loadImageColors($image);
+    }
+
     public function getGestureDetected(): int
     {
         return $this->ffi->GetGestureDetected();
@@ -833,6 +841,11 @@ final class Raylib implements
         );
     }
 
+    public function loadImageColors(Types\Image $image): CData
+    {
+        return $this->ffi->LoadImageColors($image->toCData($this->ffi));
+    }
+
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
@@ -1028,6 +1041,17 @@ final class Raylib implements
     public function textFormat(string $format, ...$args): string
     {
         return sprintf($format, ...$args);
+    }
+
+    /**
+     * @psalm-suppress MissingParamType
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedPropertyFetch
+     */
+    public function updateTexture(Types\Texture2D $texture, CDATA $pixels): void
+    {
+        $this->ffi->UpdateTexture($texture->toCData($this->ffi), $pixels);
     }
 
     public function unloadFont(Types\Font $font): void

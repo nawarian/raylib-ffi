@@ -58,7 +58,6 @@ use FFI\CData;
  * @method int GetFPS()
  * @method float GetFrameTime()
  * @method int GetGestureDetected()
- * @method CData GetImageData(CData $image)
  * @method CData GetMousePosition()
  * @method CData GetMouseRay(CData $mousePosition, CData $camera)
  * @method float GetMouseWheelMove()
@@ -98,6 +97,7 @@ use FFI\CData;
  * @method bool IsMouseButtonPressed(int $button)
  * @method bool IsMouseButtonReleased(int $button)
  * @method CData LoadFont(string $fileName)
+ * @method CData LoadImageColors(CData $image)
  * @method bool IsWindowState(int $flag)
  * @method CData LoadImage(string $filename)
  * @method CData LoadSound(string $filename)
@@ -126,6 +126,7 @@ use FFI\CData;
  * @method void StopSoundMulti()
  * @method void UnloadFont(CData $font)
  * @method void ToggleFullscreen()
+ * @method void UpdateTexture(CData $texture, CData $pixels);
  * @method void UnloadImage(CData $image)
  * @method void UnloadMusicStream(CData $music)
  * @method void UnloadSound(CData $sound)

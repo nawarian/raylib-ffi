@@ -295,7 +295,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void ImageColorContrast(Image *image, float contrast)`
 - [x] `void ImageColorBrightness(Image *image, int brightness)`
 - [ ] `void ImageColorReplace(Image *image, Color color, Color replace)`
-- [ ] `Color *LoadImageColors(Image image)`
+- [x] `Color *LoadImageColors(Image image)`
 - [ ] `Color *LoadImagePalette(Image image, int maxPaletteSize, int *colorsCount)`
 - [ ] `void UnloadImageColors(Color *colors)`
 - [ ] `void UnloadImagePalette(Color *colors)`
