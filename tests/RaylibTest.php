@@ -137,6 +137,44 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->checkCollisionRayBox($ray, $box));
     }
 
+    public function test_checkCollisionPointCircle_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $point = $this->ffi->new('Vector2');
+        $origin = $this->ffi->new('Vector2');
+
+        $this->ffiProxy->CheckCollisionPointCircle(
+            $this->sameCDataVector2Argument($point),
+            $this->sameCDataVector2Argument($origin),
+            10.0,
+        )->shouldBeCalledOnce()->willReturn(true);
+
+        self::assertTrue(
+            $this->raylib->checkCollisionPointCircle(
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                10.0,
+            ),
+        );
+    }
+
+    public function test_checkCollisionPointRec_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $point = $this->ffi->new('Vector2');
+        $rec = $this->ffi->new('Rectangle');
+
+        $this->ffiProxy->CheckCollisionPointRec(
+            $this->sameCDataVector2Argument($point),
+            $this->sameCDataRectangleArgument($rec),
+        )->shouldBeCalledOnce()->willReturn(true);
+
+        self::assertTrue(
+            $this->raylib->checkCollisionPointRec(
+                new Vector2(0, 0),
+                new Rectangle(0, 0, 0, 0),
+            ),
+        );
+    }
+
     public function test_checkCollisionRecs_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $rec1 = $this->ffi->new('Rectangle');
@@ -312,6 +350,28 @@ class RaylibTest extends TestCase
         $this->raylib->drawLine(10, 20, 30 ,40, $color);
     }
 
+    public function test_drawLineBezier_respectsParameterOrderAndConvertsColorToCData(): void
+    {
+        $start = new Vector2(0, 0);
+        $end = new Vector2(100, 100);
+
+        $expectedStart = $this->ffi->new('Vector2');
+        $expectedEnd = $this->ffi->new('Vector2');
+        $expectedEnd->x = 100;
+        $expectedEnd->y = 100;
+        $expectedColor = $this->ffi->new('Color');
+        $expectedColor->a = 255;
+
+        $this->ffiProxy->DrawLineBezier(
+            $this->sameCDataVector2Argument($expectedStart),
+            $this->sameCDataVector2Argument($expectedEnd),
+            10,
+            $this->sameCDataColorArgument($expectedColor),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawLineBezier($start, $end, 10, Color::black());
+    }
+
     public function test_drawPlane_respectsParameterOrderAndConvertsColorToCData(): void
     {
         $center = new Vector3(5, 10, 15);
@@ -433,6 +493,29 @@ class RaylibTest extends TestCase
         )->shouldBeCalledOnce();
 
         $this->raylib->drawRectangleLinesEx($rectangle, 10, $color);
+    }
+
+    public function test_drawRectanglePro_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $rectangle = new Rectangle(10, 20, 30, 40);
+        $vector2 = new Vector2(0, 0);
+        $color = new Color(0, 0, 0, 0);
+
+        $expectedRectangle = $this->ffi->new('Rectangle');
+        $expectedRectangle->x = 10;
+        $expectedRectangle->y = 20;
+        $expectedRectangle->width = 30;
+        $expectedRectangle->height = 40;
+        $expectedVector2 = $this->ffi->new('Vector2');
+        $expectedColor = $this->ffi->new('Color');
+        $this->ffiProxy->DrawRectanglePro(
+            $this->sameCDataRectangleArgument($expectedRectangle),
+            $this->sameCDataVector2Argument($expectedVector2),
+            10.0,
+            $this->sameCDataColorArgument($expectedColor)
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawRectanglePro($rectangle, $vector2, 10.0, $color);
     }
 
     public function test_drawRectangleRec_respectsParameterOrderAndConvertsObjectsToCData(): void
@@ -948,6 +1031,24 @@ class RaylibTest extends TestCase
             ->willReturn(10.0);
 
         self::assertEquals(10.0, $this->raylib->getFrameTime());
+    }
+
+    public function test_getKeyPressed(): void
+    {
+        $this->ffiProxy->GetKeyPressed()
+            ->shouldBeCalledOnce()
+            ->willReturn(Raylib::KEY_N);
+
+        self::assertEquals(Raylib::KEY_N, $this->raylib->getKeyPressed());
+    }
+
+    public function test_getCharPressed(): void
+    {
+        $this->ffiProxy->GetCharPressed()
+            ->shouldBeCalledOnce()
+            ->willReturn(Raylib::KEY_N);
+
+        self::assertEquals(Raylib::KEY_N, $this->raylib->getCharPressed());
     }
 
     public function test_getMousePosition(): void
@@ -1516,6 +1617,15 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->isMouseButtonPressed(10));
     }
 
+    public function test_isMouseButtonReleased(): void
+    {
+        $this->ffiProxy->IsMouseButtonReleased(10)
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isMouseButtonReleased(10));
+    }
+
     public function test_isWindowState(): void
     {
         $this->ffiProxy->IsWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN)
@@ -1719,6 +1829,18 @@ class RaylibTest extends TestCase
             ->shouldBeCalledOnce();
 
         $this->raylib->stopSoundMulti();
+    }
+
+    public function test_textSubtext(): void
+    {
+        $this->ffiProxy->TextSubtext('blah', 10, 20)
+            ->shouldBeCalledOnce()
+            ->willReturn('somethingelseactually');
+
+        self::assertEquals(
+            'somethingelseactually',
+            $this->raylib->textSubtext('blah', 10, 20)
+        );
     }
 
     public function test_toggleFullscreen(): void

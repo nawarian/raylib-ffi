@@ -47,6 +47,15 @@ final class Raylib implements
         $this->ffi->BeginScissorMode($x, $y, $width, $height);
     }
 
+    public function checkCollisionPointCircle(Types\Vector2 $point, Types\Vector2 $center, float $radius): bool
+    {
+        return $this->ffi->CheckCollisionPointCircle(
+            $point->toCData($this->ffi),
+            $center->toCData($this->ffi),
+            $radius,
+        );
+    }
+
     public function checkCollisionPointRec(Types\Vector2 $point, Types\Rectangle $rec): bool
     {
         return $this->ffi->CheckCollisionPointRec($point->toCData($this->ffi), $rec->toCData($this->ffi));
@@ -165,6 +174,20 @@ final class Raylib implements
         $this->ffi->DrawLine($x0, $y0, $x1, $y1, $color->toCData($this->ffi));
     }
 
+    public function drawLineBezier(
+        Types\Vector2 $startPos,
+        Types\Vector2 $endPos,
+        float $thick,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawLineBezier(
+            $startPos->toCData($this->ffi),
+            $endPos->toCData($this->ffi),
+            $thick,
+            $color->toCData($this->ffi),
+        );
+    }
+
     public function drawPlane(Types\Vector3 $center, Types\Vector2 $size, Types\Color $color): void
     {
         $this->ffi->DrawPlane(
@@ -220,6 +243,20 @@ final class Raylib implements
     public function drawRectangleLinesEx(Types\Rectangle $rectangle, int $lineThick, Types\Color $color): void
     {
         $this->ffi->DrawRectangleLinesEx($rectangle->toCData($this->ffi), $lineThick, $color->toCData($this->ffi));
+    }
+
+    public function drawRectanglePro(
+        Types\Rectangle $rectangle,
+        Types\Vector2 $origin,
+        float $rotation,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawRectanglePro(
+            $rectangle->toCData($this->ffi),
+            $origin->toCData($this->ffi),
+            $rotation,
+            $color->toCData($this->ffi)
+        );
     }
 
     public function drawRectangleRec(Types\Rectangle $rec, Types\Color $color): void
@@ -558,6 +595,16 @@ final class Raylib implements
     public function getGestureDetected(): int
     {
         return $this->ffi->GetGestureDetected();
+    }
+
+    public function getKeyPressed(): int
+    {
+        return $this->ffi->GetKeyPressed();
+    }
+
+    public function getCharPressed(): int
+    {
+        return $this->ffi->GetCharPressed();
     }
 
     /**
@@ -908,6 +955,11 @@ final class Raylib implements
         return $this->ffi->IsMouseButtonPressed($button);
     }
 
+    public function isMouseButtonReleased(int $button): bool
+    {
+        return $this->ffi->IsMouseButtonReleased($button);
+    }
+
     public function isWindowState(int $flag): bool
     {
         return $this->ffi->IsWindowState($flag);
@@ -1126,6 +1178,11 @@ final class Raylib implements
     public function textFormat(string $format, ...$args): string
     {
         return sprintf($format, ...$args);
+    }
+
+    public function textSubtext(string $text, int $position, int $length): string
+    {
+        return $this->ffi->TextSubtext($text, $position, $length);
     }
 
     public function unloadFont(Types\Font $font): void
