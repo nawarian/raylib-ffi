@@ -946,6 +946,7 @@ final class Raylib implements
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedPropertyFetch
      */
     public function loadFont(string $filename): Types\Font
     {
@@ -970,6 +971,7 @@ final class Raylib implements
 
     /**
      * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress InvalidArgument
      * @psalm-suppress InvalidPassByReference
      * @psalm-suppress MixedArrayAssignment
      * @psalm-suppress MixedArgument

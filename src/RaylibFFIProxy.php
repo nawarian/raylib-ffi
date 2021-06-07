@@ -98,7 +98,7 @@ use FFI\CData;
  * @method bool IsMouseButtonDown(int $button)
  * @method bool IsMouseButtonPressed(int $button)
  * @method CData LoadFont(string $fileName)
- * @method CData LoadFontEx(string $fileName, int $fontSize, float $fontChars, int $charsCount)
+ * @method CData LoadFontEx(string $fileName, int $fontSize, int $fontChars, int $charsCount)
  * @method bool IsWindowState(int $flag)
  * @method CData LoadImage(string $filename)
  * @method CData LoadSound(string $filename)
