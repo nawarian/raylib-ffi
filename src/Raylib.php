@@ -950,12 +950,19 @@ final class Raylib implements
     public function loadFont(string $filename): Types\Font
     {
         $font = $this->ffi->LoadFont($filename);
+        $texture = new Types\Texture2D(
+            $font->texture->id,
+            $font->texture->width,
+            $font->texture->height,
+            $font->texture->mipmaps,
+            $font->texture->format
+        );
 
         return new Types\Font(
             $font->baseSize,
             $font->charsCount,
             $font->charsPadding,
-            $font->texture,
+            $texture,
             $font->recs,
             $font->chars
         );
@@ -972,10 +979,9 @@ final class Raylib implements
      */
     public function loadFontEx(string $fileName, int $fontSize, int $fontChars, int $charsCount): Types\Font
     {
-        $chars = FFI::addr($this->ffi->new('int32_t'));
-        $chars[0] = $fontChars;
+        $fontCharsPointer = $this->ffi->new('int*');
 
-        $font = $this->ffi->LoadFontEx($fileName, $fontSize, $chars, $charsCount);
+        $font = $this->ffi->LoadFontEx($fileName, $fontSize, $fontCharsPointer, $charsCount);
 
         $texture = new Types\Texture2D(
             $font->texture->id,
