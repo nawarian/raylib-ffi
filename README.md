@@ -743,7 +743,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [textures/textures_image_loading.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_loading.php)
 - [x] [textures/textures_image_processing.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_processing.php)
 - [ ] textures/textures_image_text.php
-- [ ] textures/textures_logo_raylib.php
+- [x] [textures/textures_logo_raylib.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_logo_raylib.php)
 - [ ] textures/textures_mouse_painting.php
 - [ ] textures/textures_npatch_drawing.php
 - [x] [textures/textures_particles_blending.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_particles_blending.php)
