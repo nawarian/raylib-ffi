@@ -30,11 +30,16 @@ $camera = new Camera3D(
 $model = $raylib->loadModel(__DIR__ . '/resources/guy/guy.iqm'); // Load the animated model mesh and basic data
 $texture = $raylib->loadTexture(__DIR__ . '/resources/guy/guytex.png'); // Load model texture and set material
 
+/**
+ * @psalm-suppress UndefinedMethod
+ * @psalm-suppress MixedArgument
+ */
 $raylib->setMaterialTexture($model->materials[0], Raylib::MAP_DIFFUSE, $texture);  // Set model material map texture
 $position = new Vector3(0, 0, 0);            // Set model position
 
 // Load animation data
 $animsCount = 0;
+/** @var \FFI\CData[] $anims */
 $anims = $raylib->loadModelAnimations(__DIR__ . '/resources/guy/guyanim.iqm', $animsCount);
 $animFrameCounter = 0;
 
@@ -53,6 +58,7 @@ while (!$raylib->windowShouldClose()) {      // Detect window close button or ES
     if ($raylib->isKeyDown(Raylib::KEY_SPACE)) {
         $animFrameCounter++;
         $raylib->updateModelAnimation($model, $anims[0], $animFrameCounter);
+        /** @psalm-suppress UndefinedPropertyFetch */
         if ($animFrameCounter >= $anims[0]->frameCount) {
             $animFrameCounter = 0;
         }
@@ -77,9 +83,15 @@ while (!$raylib->windowShouldClose()) {      // Detect window close button or ES
             );
 
             for ($i = 0; $i < $model->boneCount; $i++) {
+                /**
+                 * @var stdClass $ffiPosition
+                 * @psalm-suppress UndefinedPropertyFetch
+                 * @psalm-suppress MixedArrayAccess
+                 * @psalm-suppress MixedPropertyFetch
+                 */
                 $ffiPosition = $anims[0]->framePoses[$animFrameCounter][$i]->translation;
                 $raylib->drawCube(
-                    new Vector3($ffiPosition->x, $ffiPosition->y, $ffiPosition->z),
+                    new Vector3((float) $ffiPosition->x, (float) $ffiPosition->y, (float) $ffiPosition->z),
                     0.2,
                     0.2,
                     0.2,

@@ -1170,6 +1170,11 @@ final class Raylib implements
         return new Types\Image($image->data, $image->width, $image->height, $image->mipmaps, $image->format);
     }
 
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedPropertyFetch
+     */
     public function loadModel(string $filename): Types\Model
     {
         $model = $this->ffi->LoadModel($filename);
@@ -1187,11 +1192,16 @@ final class Raylib implements
         );
     }
 
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedPropertyFetch
+     */
     public function loadModelAnimations(string $filename, int &$animationsCount): CData
     {
         $count = $this->ffi->new('int');
         $animations = $this->ffi->LoadModelAnimations($filename, FFI::addr($count));
-        $animationsCount = $count->cdata;
+        $animationsCount = (int) $count->cdata;
 
         return $animations;
     }
@@ -1343,6 +1353,10 @@ final class Raylib implements
         $this->ffi->SetExitKey($key);
     }
 
+    /**
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedArgument
+     */
     public function setMaterialTexture(CData $material, int $mapType, Types\Texture2D $texture): void
     {
         $materialAddr = FFI::addr($material);
