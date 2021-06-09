@@ -271,6 +271,24 @@ final class Raylib implements
         $this->ffi->DrawText($text, $x, $y, $fontSize, $color->toCData($this->ffi));
     }
 
+    public function drawTextEx(
+        Types\Font $font,
+        string $text,
+        Types\Vector2 $position,
+        float $fontSize,
+        float $spacing,
+        Types\Color $tint
+    ): void {
+        $this->ffi->DrawTextEx(
+            $font->toCData($this->ffi),
+            $text,
+            $position->toCData($this->ffi),
+            $fontSize,
+            $spacing,
+            $tint->toCData($this->ffi)
+        );
+    }
+
     public function drawTexture(Types\Texture2D $texture, int $posX, int $posY, Types\Color $tint): void
     {
         $this->ffi->DrawTexture($texture->toCData($this->ffi), $posX, $posY, $tint->toCData($this->ffi));
@@ -327,6 +345,18 @@ final class Raylib implements
             $rotation,
             $scale,
             $tint->toCData($this->ffi),
+        );
+    }
+
+    public function drawTextureV(
+        Types\Texture2D $texture,
+        Types\Vector2 $position,
+        Types\Color $tint
+    ): void {
+        $this->ffi->DrawTextureV(
+            $texture->toCData($this->ffi),
+            $position->toCData($this->ffi),
+            $tint->toCData($this->ffi)
         );
     }
 
@@ -1048,16 +1078,58 @@ final class Raylib implements
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedPropertyFetch
      */
     public function loadFont(string $filename): Types\Font
     {
         $font = $this->ffi->LoadFont($filename);
+        $texture = new Types\Texture2D(
+            $font->texture->id,
+            $font->texture->width,
+            $font->texture->height,
+            $font->texture->mipmaps,
+            $font->texture->format
+        );
 
         return new Types\Font(
             $font->baseSize,
             $font->charsCount,
             $font->charsPadding,
-            $font->texture,
+            $texture,
+            $font->recs,
+            $font->chars
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress InvalidArgument
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArrayAssignment
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedPropertyFetch
+     */
+    public function loadFontEx(string $fileName, int $fontSize, int $fontChars, int $charsCount): Types\Font
+    {
+        $fontCharsPointer = $this->ffi->new('int*');
+
+        $font = $this->ffi->LoadFontEx($fileName, $fontSize, $fontCharsPointer, $charsCount);
+
+        $texture = new Types\Texture2D(
+            $font->texture->id,
+            $font->texture->width,
+            $font->texture->height,
+            $font->texture->mipmaps,
+            $font->texture->format,
+        );
+
+        return new Types\Font(
+            $font->baseSize,
+            $font->charsCount,
+            $font->charsPadding,
+            $texture,
             $font->recs,
             $font->chars
         );
