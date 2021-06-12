@@ -1293,6 +1293,11 @@ final class Raylib implements
         $this->ffi->SetConfigFlags($flags);
     }
 
+    public function setExitKey(int $key): void
+    {
+        $this->ffi->SetExitKey($key);
+    }
+
     public function setMusicPitch(Types\Music $music, float $pitch): void
     {
         $this->ffi->SetMusicPitch($music->toCData($this->ffi), $pitch);

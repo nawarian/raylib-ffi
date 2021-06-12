@@ -168,7 +168,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] `bool IsKeyDown(int key)`
 - [ ] `bool IsKeyReleased(int key)`
 - [ ] `bool IsKeyUp(int key)`
-- [ ] `void SetExitKey(int key)`
+- [x] `void SetExitKey(int key)`
 - [x] `int GetKeyPressed(void)`
 - [x] `int GetCharPressed(void)`
 - [ ] `bool IsGamepadAvailable(int gamepad)`

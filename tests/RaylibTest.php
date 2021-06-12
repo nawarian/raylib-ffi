@@ -2103,6 +2103,14 @@ class RaylibTest extends TestCase
         $this->raylib->setConfigFlags(10);
     }
 
+    public function test_setExitKey(): void
+    {
+        $this->ffiProxy->SetExitKey(0)
+            ->shouldBeCalledOnce();
+
+        $this->raylib->setExitKey(0);
+    }
+
     public function test_setSoundVolume_respectsParameterOrder(): void
     {
         $buffer = FFI::addr($this->ffi->new('struct rAudioBuffer { void* ptr; }'));

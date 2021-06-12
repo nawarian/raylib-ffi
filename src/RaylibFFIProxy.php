@@ -132,6 +132,7 @@ use FFI\CData;
  * @method bool SaveStorageValue(int $position, int $value)
  * @method void SetCameraMode(CData $camera, int $mode)
  * @method void SetConfigFlags(int $flags)
+ * @method void SetExitKey(int $key)
  * @method void SetMusicPitch(CData $music, float $pitch)
  * @method void SetSoundVolume(CData $sound, float $volume)
  * @method void SetTargetFPS(int $fps)
