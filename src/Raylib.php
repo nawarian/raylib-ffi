@@ -11,8 +11,10 @@ final class Raylib implements
     HasRaylibBlendModeConstants,
     HasRaylibFilterModeConstants,
     HasRaylibGestureConstants,
+    HasRaylibImageProcessConstants,
     HasRaylibKeysConstants,
     HasRaylibMouseConstants,
+    HasRaylibPixelFormatConstants,
     HasRaylibWindowFlagConstants
 {
     private RaylibFFIProxy $ffi;
@@ -269,6 +271,24 @@ final class Raylib implements
         $this->ffi->DrawText($text, $x, $y, $fontSize, $color->toCData($this->ffi));
     }
 
+    public function drawTextEx(
+        Types\Font $font,
+        string $text,
+        Types\Vector2 $position,
+        float $fontSize,
+        float $spacing,
+        Types\Color $tint
+    ): void {
+        $this->ffi->DrawTextEx(
+            $font->toCData($this->ffi),
+            $text,
+            $position->toCData($this->ffi),
+            $fontSize,
+            $spacing,
+            $tint->toCData($this->ffi)
+        );
+    }
+
     public function drawTexture(Types\Texture2D $texture, int $posX, int $posY, Types\Color $tint): void
     {
         $this->ffi->DrawTexture($texture->toCData($this->ffi), $posX, $posY, $tint->toCData($this->ffi));
@@ -325,6 +345,18 @@ final class Raylib implements
             $rotation,
             $scale,
             $tint->toCData($this->ffi),
+        );
+    }
+
+    public function drawTextureV(
+        Types\Texture2D $texture,
+        Types\Vector2 $position,
+        Types\Color $tint
+    ): void {
+        $this->ffi->DrawTextureV(
+            $texture->toCData($this->ffi),
+            $position->toCData($this->ffi),
+            $tint->toCData($this->ffi)
         );
     }
 
@@ -592,6 +624,14 @@ final class Raylib implements
         return $this->ffi->GetFrameTime();
     }
 
+    /**
+     * @deprecated Please, use method loadImageColors()
+     */
+    public function getImageData(Types\Image $image): CData
+    {
+        return $this->loadImageColors($image);
+    }
+
     public function getGestureDetected(): int
     {
         return $this->ffi->GetGestureDetected();
@@ -734,16 +774,82 @@ final class Raylib implements
      * @psalm-suppress MixedAssignment
      * @psalm-suppress UndefinedPropertyFetch
      */
+    public function imageColorBrightness(Types\Image $image, int $brightness): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageColorBrightness(FFI::addr($imageStruct), $brightness);
+
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageColorContrast(Types\Image $image, float $contrast): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageColorContrast(FFI::addr($imageStruct), $contrast);
+
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageColorGrayscale(Types\Image $image): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageColorGrayscale(FFI::addr($imageStruct));
+
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageColorInvert(Types\Image $image): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageColorInvert(FFI::addr($imageStruct));
+
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageColorTint(Types\Image $image, Types\Color $color): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageColorTint(FFI::addr($imageStruct), $color->toCData($this->ffi));
+
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
     public function imageCrop(Types\Image $image, Types\Rectangle $crop): void
     {
         $imageStruct = $image->toCData($this->ffi);
-        $this->ffi->ImageCrop($image->updateFromStruct($imageStruct), $crop->toCData($this->ffi));
+        $this->ffi->ImageCrop(FFI::addr($imageStruct), $crop->toCData($this->ffi));
 
-        $image->data = $imageStruct->data;
-        $image->width = $imageStruct->width;
-        $image->height = $imageStruct->height;
-        $image->format = $imageStruct->format;
-        $image->mipmaps = $imageStruct->mipmaps;
+        $image->updateImageObject($image, $imageStruct);
     }
 
     /**
@@ -761,18 +867,14 @@ final class Raylib implements
     ): void {
         $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDraw(
-            $dst->updateFromStruct($imageStruct),
+            FFI::addr($imageStruct),
             $src->toCData($this->ffi),
             $srcRec->toCData($this->ffi),
             $dstRec->toCData($this->ffi),
             $tint->toCData($this->ffi)
         );
 
-        $dst->data = $imageStruct->data;
-        $dst->width = $imageStruct->width;
-        $dst->height = $imageStruct->height;
-        $dst->format = $imageStruct->format;
-        $dst->mipmaps = $imageStruct->mipmaps;
+        $dst->updateImageObject($dst, $imageStruct);
     }
 
     /**
@@ -790,18 +892,14 @@ final class Raylib implements
     ): void {
         $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDrawCircle(
-            $dst->updateFromStruct($imageStruct),
+            FFI::addr($imageStruct),
             $centerX,
             $centerY,
             $radius,
             $color->toCData($this->ffi)
         );
 
-        $dst->data = $imageStruct->data;
-        $dst->width = $imageStruct->width;
-        $dst->height = $imageStruct->height;
-        $dst->format = $imageStruct->format;
-        $dst->mipmaps = $imageStruct->mipmaps;
+        $dst->updateImageObject($dst, $imageStruct);
     }
 
     /**
@@ -818,17 +916,13 @@ final class Raylib implements
     ): void {
         $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDrawPixel(
-            $dst->updateFromStruct($imageStruct),
+            FFI::addr($imageStruct),
             $posX,
             $posY,
             $tint->toCData($this->ffi)
         );
 
-        $dst->data = $imageStruct->data;
-        $dst->width = $imageStruct->width;
-        $dst->height = $imageStruct->height;
-        $dst->format = $imageStruct->format;
-        $dst->mipmaps = $imageStruct->mipmaps;
+        $dst->updateImageObject($dst, $imageStruct);
     }
 
     /**
@@ -847,7 +941,7 @@ final class Raylib implements
     ): void {
         $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDrawRectangle(
-            $dst->updateFromStruct($imageStruct),
+            FFI::addr($imageStruct),
             $posX,
             $posY,
             $width,
@@ -855,11 +949,7 @@ final class Raylib implements
             $color->toCData($this->ffi)
         );
 
-        $dst->data = $imageStruct->data;
-        $dst->width = $imageStruct->width;
-        $dst->height = $imageStruct->height;
-        $dst->format = $imageStruct->format;
-        $dst->mipmaps = $imageStruct->mipmaps;
+        $dst->updateImageObject($dst, $imageStruct);
     }
 
     /**
@@ -879,7 +969,7 @@ final class Raylib implements
     ): void {
         $imageStruct = $dst->toCData($this->ffi);
         $this->ffi->ImageDrawTextEx(
-            $dst->updateFromStruct($imageStruct),
+            FFI::addr($imageStruct),
             $font->toCData($this->ffi),
             $text,
             $position->toCData($this->ffi),
@@ -898,13 +988,37 @@ final class Raylib implements
     public function imageFlipHorizontal(Types\Image $image): void
     {
         $imageStruct = $image->toCData($this->ffi);
-        $this->ffi->ImageFlipHorizontal($image->updateFromStruct($imageStruct));
+        $this->ffi->ImageFlipHorizontal(FFI::addr($imageStruct));
 
-        $image->data = $imageStruct->data;
-        $image->width = $imageStruct->width;
-        $image->height = $imageStruct->height;
-        $image->format = $imageStruct->format;
-        $image->mipmaps = $imageStruct->mipmaps;
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageFlipVertical(Types\Image $image): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageFlipVertical(FFI::addr($imageStruct));
+
+        $image->updateImageObject($image, $imageStruct);
+    }
+
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function imageFormat(Types\Image $image, int $newFormat): void
+    {
+        $imageStruct = $image->toCData($this->ffi);
+        $this->ffi->ImageFormat(FFI::addr($imageStruct), $newFormat);
+
+        $image->updateImageObject($image, $imageStruct);
     }
 
     /**
@@ -916,13 +1030,9 @@ final class Raylib implements
     public function imageResize(Types\Image $image, int $newWidth, int $newHeight): void
     {
         $imageStruct = $image->toCData($this->ffi);
-        $this->ffi->ImageResize($image->updateFromStruct($imageStruct), $newWidth, $newHeight);
+        $this->ffi->ImageResize(FFI::addr($imageStruct), $newWidth, $newHeight);
 
-        $image->data = $imageStruct->data;
-        $image->width = $imageStruct->width;
-        $image->height = $imageStruct->height;
-        $image->format = $imageStruct->format;
-        $image->mipmaps = $imageStruct->mipmaps;
+        $image->updateImageObject($image, $imageStruct);
     }
 
     public function initAudioDevice(): void
@@ -968,19 +1078,66 @@ final class Raylib implements
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedPropertyFetch
      */
     public function loadFont(string $filename): Types\Font
     {
         $font = $this->ffi->LoadFont($filename);
+        $texture = new Types\Texture2D(
+            $font->texture->id,
+            $font->texture->width,
+            $font->texture->height,
+            $font->texture->mipmaps,
+            $font->texture->format
+        );
 
         return new Types\Font(
             $font->baseSize,
             $font->charsCount,
             $font->charsPadding,
-            $font->texture,
+            $texture,
             $font->recs,
             $font->chars
         );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress InvalidArgument
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArrayAssignment
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedPropertyFetch
+     */
+    public function loadFontEx(string $fileName, int $fontSize, int $fontChars, int $charsCount): Types\Font
+    {
+        $fontCharsPointer = $this->ffi->new('int*');
+
+        $font = $this->ffi->LoadFontEx($fileName, $fontSize, $fontCharsPointer, $charsCount);
+
+        $texture = new Types\Texture2D(
+            $font->texture->id,
+            $font->texture->width,
+            $font->texture->height,
+            $font->texture->mipmaps,
+            $font->texture->format,
+        );
+
+        return new Types\Font(
+            $font->baseSize,
+            $font->charsCount,
+            $font->charsPadding,
+            $texture,
+            $font->recs,
+            $font->chars
+        );
+    }
+
+    public function loadImageColors(Types\Image $image): CData
+    {
+        return $this->ffi->LoadImageColors($image->toCData($this->ffi));
     }
 
     /**
@@ -1136,6 +1293,11 @@ final class Raylib implements
         $this->ffi->SetConfigFlags($flags);
     }
 
+    public function setExitKey(int $key): void
+    {
+        $this->ffi->SetExitKey($key);
+    }
+
     public function setMusicPitch(Types\Music $music, float $pitch): void
     {
         $this->ffi->SetMusicPitch($music->toCData($this->ffi), $pitch);
@@ -1178,6 +1340,17 @@ final class Raylib implements
     public function textFormat(string $format, ...$args): string
     {
         return sprintf($format, ...$args);
+    }
+
+    /**
+     * @psalm-suppress MissingParamType
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedPropertyFetch
+     */
+    public function updateTexture(Types\Texture2D $texture, CDATA $pixels): void
+    {
+        $this->ffi->UpdateTexture($texture->toCData($this->ffi), $pixels);
     }
 
     public function textSubtext(string $text, int $position, int $length): string

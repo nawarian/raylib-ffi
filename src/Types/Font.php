@@ -14,7 +14,7 @@ class Font
     public int $baseSize;
     public int $charsCount;
     public int $charsPadding;
-    public CData $texture;
+    public Texture2D $texture;
     public CData $recs;
     public CData $chars;
 
@@ -22,7 +22,7 @@ class Font
         int $baseSize,
         int $charsCount,
         int $charsPadding,
-        CData $texture,
+        Texture2D $texture,
         CData $recs,
         CData $chars
     ) {
@@ -51,7 +51,7 @@ class Font
         $font->baseSize = $this->baseSize;
         $font->charsCount = $this->charsCount;
         $font->charsPadding = $this->charsPadding;
-        $font->texture = $this->texture;
+        $font->texture = $this->texture->toCData($ffi);
         $font->recs = $this->recs;
         $font->chars = $this->chars;
 
