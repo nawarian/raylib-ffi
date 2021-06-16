@@ -15,14 +15,14 @@ class CharInfo
     public int $offsetX;
     public int $offsetY;
     public int $advanceX;
-    public CData $image;
+    public Image $image;
 
     public function __construct(
         int $value,
         int $offsetX,
         int $offsetY,
         int $advanceX,
-        CData $image
+        Image $image
     ) {
         $this->value = $value;
         $this->offsetX = $offsetX;
@@ -49,7 +49,7 @@ class CharInfo
         $charInfo->offsetX = $this->offsetX;
         $charInfo->offsetY = $this->offsetY;
         $charInfo->advanceX = $this->advanceX;
-        $charInfo->image = $this->image;
+        $charInfo->image = $this->image->toCData($ffi);
 
         return $charInfo;
     }
