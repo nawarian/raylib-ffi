@@ -111,6 +111,22 @@ final class Raylib implements
         return new Types\Color($c->r, $c->g, $c->b, $c->a);
     }
 
+    public function drawBillboard(
+        Types\Camera3D $camera,
+        Types\Texture2D $texture,
+        Types\Vector3 $center,
+        float $size,
+        Types\Color $tint
+    ): void {
+        $this->ffi->DrawBillboard(
+            $camera->toCData($this->ffi),
+            $texture->toCData($this->ffi),
+            $center->toCData($this->ffi),
+            $size,
+            $tint->toCData($this->ffi),
+        );
+    }
+
     public function drawCircle(int $centerX, int $centerY, float $radius, Types\Color $color): void
     {
         $this->ffi->DrawCircle($centerX, $centerY, $radius, $color->toCData($this->ffi));

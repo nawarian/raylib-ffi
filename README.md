@@ -440,7 +440,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void DrawModelWires(Model model, Vector3 position, float scale, Color tint)`
 - [ ] `void DrawModelWiresEx(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint)`
 - [ ] `void DrawBoundingBox(BoundingBox box, Color color)`
-- [ ] `void DrawBillboard(Camera camera, Texture2D texture, Vector3 center, float size, Color tint)`
+- [x] `void DrawBillboard(Camera camera, Texture2D texture, Vector3 center, float size, Color tint)`
 - [ ] `void DrawBillboardRec(Camera camera, Texture2D texture, Rectangle source, Vector3 center, float size, Color tint)`
 - [ ] `bool CheckCollisionSpheres(Vector3 center1, float radius1, Vector3 center2, float radius2)`
 - [ ] `bool CheckCollisionBoxes(BoundingBox box1, BoundingBox box2)`
@@ -670,7 +670,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] core/core_window_letterbox.php
 - [x] [core/core_world_screen.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_world_screen.php)
 - [x] [models/models_animation.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/models/models_animation.php)
-- [ ] models/models_billboard.php
+- [x] [models/models_billboard.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/models/models_billboard.php)
 - [ ] models/models_box_collisions.php
 - [ ] models/models_cubicmap.php
 - [ ] models/models_first_person_maze.php

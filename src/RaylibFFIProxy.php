@@ -25,6 +25,7 @@ use FFI\CData;
  * @method void CloseAudioDevice()
  * @method void CloseWindow()
  * @method CData ColorAlpha(CData $color, float $alpha)
+ * @method void DrawBillboard(CData $camera, CData $texture, CData $center, float $size, CData $tint)
  * @method void DrawCircle(int $centerX, int $centerY, float $radius, CData $color)
  * @method void DrawCircleGradient(int $centerX, int $centerY, float $radius, CData $color1, CData $color2)
  * @method void DrawCircleLines(int $centerX, int $centerY, float $radius, CData $color)

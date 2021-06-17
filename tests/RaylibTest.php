@@ -265,6 +265,45 @@ class RaylibTest extends TestCase
         );
     }
 
+    public function test_drawBillboard_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $camera = new Camera3D(
+            new Vector3(0, 0, 0),
+            new Vector3(0, 0, 0),
+            new Vector3(0, 0, 0),
+            45,
+            Camera3D::PROJECTION_PERSPECTIVE,
+        );
+        $texture = new Texture2D(0, 0, 0, 0, 0);
+
+        $expectedCameraStruct = $this->ffi->new('Camera3D');
+        $expectedCameraStruct->fovy = 45;
+
+        $expectedTextureStruct = $this->ffi->new('Texture2D');
+        $expectedVector3Struct = $this->ffi->new('Vector3');
+        $expectedColorStruct = $this->ffi->new('Color');
+        $expectedColorStruct->r = 255;
+        $expectedColorStruct->g = 255;
+        $expectedColorStruct->b = 255;
+        $expectedColorStruct->a = 255;
+
+        $this->ffiProxy->DrawBillboard(
+            $this->sameCDataCamera3DArgument($expectedCameraStruct),
+            $this->sameCDataTexture2DArgument($expectedTextureStruct),
+            $this->sameCDataVector3Argument($expectedVector3Struct),
+            1,
+            $this->sameCDataColorArgument($expectedColorStruct),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawBillboard(
+            $camera,
+            $texture,
+            new Vector3(0, 0, 0),
+            1,
+            Color::white()
+        );
+    }
+
     public function test_drawCircle_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $expectedColor = $this->ffi->new('Color');
