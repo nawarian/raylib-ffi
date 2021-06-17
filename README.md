@@ -392,13 +392,13 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void DrawTriangle3D(Vector3 v1, Vector3 v2, Vector3 v3, Color color)`
 - [ ] `void DrawTriangleStrip3D(Vector3 *points, int pointsCount, Color color)`
 - [x] `void DrawCube(Vector3 position, float width, float height, float length, Color color)`
-- [ ] `void DrawCubeV(Vector3 position, Vector3 size, Color color)`
+- [x] `void DrawCubeV(Vector3 position, Vector3 size, Color color)`
 - [x] `void DrawCubeWires(Vector3 position, float width, float height, float length, Color color)`
 - [ ] `void DrawCubeWiresV(Vector3 position, Vector3 size, Color color)`
 - [ ] `void DrawCubeTexture(Texture2D texture, Vector3 position, float width, float height, float length, Color color)`
-- [ ] `void DrawSphere(Vector3 centerPos, float radius, Color color)`
+- [x] `void DrawSphere(Vector3 centerPos, float radius, Color color)`
 - [ ] `void DrawSphereEx(Vector3 centerPos, float radius, int rings, int slices, Color color)`
-- [ ] `void DrawSphereWires(Vector3 centerPos, float radius, int rings, int slices, Color color)`
+- [x] `void DrawSphereWires(Vector3 centerPos, float radius, int rings, int slices, Color color)`
 - [ ] `void DrawCylinder(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color)`
 - [ ] `void DrawCylinderWires(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color)`
 - [x] `void DrawPlane(Vector3 centerPos, Vector2 size, Color color)`
@@ -443,8 +443,8 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void DrawBillboard(Camera camera, Texture2D texture, Vector3 center, float size, Color tint)`
 - [ ] `void DrawBillboardRec(Camera camera, Texture2D texture, Rectangle source, Vector3 center, float size, Color tint)`
 - [ ] `bool CheckCollisionSpheres(Vector3 center1, float radius1, Vector3 center2, float radius2)`
-- [ ] `bool CheckCollisionBoxes(BoundingBox box1, BoundingBox box2)`
-- [ ] `bool CheckCollisionBoxSphere(BoundingBox box, Vector3 center, float radius)`
+- [x] `bool CheckCollisionBoxes(BoundingBox box1, BoundingBox box2)`
+- [x] `bool CheckCollisionBoxSphere(BoundingBox box, Vector3 center, float radius)`
 - [ ] `bool CheckCollisionRaySphere(Ray ray, Vector3 center, float radius)`
 - [ ] `bool CheckCollisionRaySphereEx(Ray ray, Vector3 center, float radius, Vector3 *collisionPoint)`
 - [x] `bool CheckCollisionRayBox(Ray ray, BoundingBox box)`
@@ -671,7 +671,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [core/core_world_screen.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_world_screen.php)
 - [x] [models/models_animation.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/models/models_animation.php)
 - [x] [models/models_billboard.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/models/models_billboard.php)
-- [ ] models/models_box_collisions.php
+- [x] [models/models_box_collisions.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/models/models_box_collisions.php)
 - [ ] models/models_cubicmap.php
 - [ ] models/models_first_person_maze.php
 - [ ] models/models_geometric_shapes.php

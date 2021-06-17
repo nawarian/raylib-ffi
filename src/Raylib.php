@@ -56,6 +56,23 @@ final class Raylib implements
         $this->ffi->BeginTextureMode($target->toCData($this->ffi));
     }
 
+    public function checkCollisionBoxes(Types\BoundingBox $box1, Types\BoundingBox $box2): bool
+    {
+        return $this->ffi->CheckCollisionBoxes(
+            $box1->toCData($this->ffi),
+            $box2->toCData($this->ffi),
+        );
+    }
+
+    public function checkCollisionBoxSphere(Types\BoundingBox $box, Types\Vector3 $center, float $radius): bool
+    {
+        return $this->ffi->CheckCollisionBoxSphere(
+            $box->toCData($this->ffi),
+            $center->toCData($this->ffi),
+            $radius,
+        );
+    }
+
     public function checkCollisionPointCircle(Types\Vector2 $point, Types\Vector2 $center, float $radius): bool
     {
         return $this->ffi->CheckCollisionPointCircle(
@@ -166,6 +183,15 @@ final class Raylib implements
         Types\Color $color
     ): void {
         $this->ffi->DrawCube($position->toCData($this->ffi), $width, $height, $length, $color->toCData($this->ffi));
+    }
+
+    public function drawCubeV(Types\Vector3 $position, Types\Vector3 $size, Types\Color $color): void
+    {
+        $this->ffi->DrawCubeV(
+            $position->toCData($this->ffi),
+            $size->toCData($this->ffi),
+            $color->toCData($this->ffi),
+        );
     }
 
     public function drawCubeWires(
@@ -305,6 +331,31 @@ final class Raylib implements
     public function drawRectangleRec(Types\Rectangle $rec, Types\Color $color): void
     {
         $this->ffi->DrawRectangleRec($rec->toCData($this->ffi), $color->toCData($this->ffi));
+    }
+
+    public function drawSphere(Types\Vector3 $centerPos, float $radius, Types\Color $color): void
+    {
+        $this->ffi->DrawSphere(
+            $centerPos->toCData($this->ffi),
+            $radius,
+            $color->toCData($this->ffi),
+        );
+    }
+
+    public function drawSphereWires(
+        Types\Vector3 $centerPos,
+        float $radius,
+        int $rings,
+        int $slices,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawSphereWires(
+            $centerPos->toCData($this->ffi),
+            $radius,
+            $rings,
+            $slices,
+            $color->toCData($this->ffi),
+        );
     }
 
     public function drawText(string $text, int $x, int $y, int $fontSize, Types\Color $color): void

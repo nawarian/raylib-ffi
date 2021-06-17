@@ -134,6 +134,48 @@ class RaylibTest extends TestCase
         $this->raylib->beginScissorMode(10, 20, 30,40);
     }
 
+    public function test_checkCollisionBoxes_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $expectedBbox1Struct = $this->ffi->new('BoundingBox');
+        $expectedBbox2Struct = $this->ffi->new('BoundingBox');
+
+        $this->ffiProxy->CheckCollisionBoxes(
+            $this->sameCDataBoundingBoxArgument($expectedBbox1Struct),
+            $this->sameCDataBoundingBoxArgument($expectedBbox2Struct),
+        )->shouldBeCalledOnce()->willReturn(true);
+
+        $box1 = new BoundingBox(
+            new Vector3(0, 0, 0),
+            new Vector3(0, 0, 0),
+        );
+        $box2 = new BoundingBox(
+            new Vector3(0, 0, 0),
+            new Vector3(0, 0, 0),
+        );
+
+        self::assertTrue($this->raylib->checkCollisionBoxes($box1, $box2));
+    }
+
+    public function test_checkCollisionBoxSphere_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $expectedBboxStruct = $this->ffi->new('BoundingBox');
+        $expectedVector3Struct = $this->ffi->new('Vector3');
+
+        $this->ffiProxy->CheckCollisionBoxSphere(
+            $this->sameCDataBoundingBoxArgument($expectedBboxStruct),
+            $this->sameCDataVector3Argument($expectedVector3Struct),
+            10,
+        )->shouldBeCalledOnce()->willReturn(true);
+
+        $box = new BoundingBox(
+            new Vector3(0, 0, 0),
+            new Vector3(0, 0, 0),
+        );
+        $center = new Vector3(0, 0, 0);
+
+        self::assertTrue($this->raylib->checkCollisionBoxSphere($box, $center, 10));
+    }
+
     public function test_checkCollisionRayBox_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $ray = new Ray(new Vector3(0, 0, 0), new Vector3(0, 0, 0));
@@ -337,6 +379,29 @@ class RaylibTest extends TestCase
         $this->raylib->drawCircleLines(10, 20, 30, Color::black(0));
     }
 
+    public function test_drawCubeV_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $position = new Vector3(0, 0, 0);
+        $size = new Vector3(0, 0, 0);
+        $color = Color::white();
+
+        $expectedPositionStruct = $this->ffi->new('Vector3');
+        $expectedSizeStruct = $this->ffi->new('Vector3');
+        $expectedColorStruct = $this->ffi->new('Color');
+        $expectedColorStruct->r = 255;
+        $expectedColorStruct->g = 255;
+        $expectedColorStruct->b = 255;
+        $expectedColorStruct->a = 255;
+
+        $this->ffiProxy->DrawCubeV(
+            $this->sameCDataVector3Argument($expectedPositionStruct),
+            $this->sameCDataVector3Argument($expectedSizeStruct),
+            $this->sameCDataColorArgument($expectedColorStruct),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawCubeV($position, $size, $color);
+    }
+
     public function test_drawCube_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $position = new Vector3(5, 10, 15);
@@ -354,7 +419,7 @@ class RaylibTest extends TestCase
             20,
             30,
             $this->sameCDataColorArgument($expectedColorStruct),
-            )->shouldBeCalledOnce();
+        )->shouldBeCalledOnce();
 
         $this->raylib->drawCube($position, 10, 20, 30, $color);
     }
@@ -634,6 +699,46 @@ class RaylibTest extends TestCase
         )->shouldBeCalledOnce();
 
         $this->raylib->drawRectangleRec($rectangle, $color);
+    }
+
+    public function test_drawSphere_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $expectedVector3Struct = $this->ffi->new('Vector3');
+        $expectedColorStruct = $this->ffi->new('Color');
+        $expectedColorStruct->r = 255;
+        $expectedColorStruct->g = 255;
+        $expectedColorStruct->b = 255;
+        $expectedColorStruct->a = 255;
+
+        $this->ffiProxy->DrawSphere(
+            $this->sameCDataVector3Argument($expectedVector3Struct),
+            10,
+            $this->sameCDataColorArgument($expectedColorStruct),
+        )->shouldBeCalledOnce();
+
+        $center = new Vector3(0, 0, 0);
+        $this->raylib->drawSphere($center, 10, Color::white());
+    }
+
+    public function test_drawSphereWires_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $expectedVector3Struct = $this->ffi->new('Vector3');
+        $expectedColorStruct = $this->ffi->new('Color');
+        $expectedColorStruct->r = 255;
+        $expectedColorStruct->g = 255;
+        $expectedColorStruct->b = 255;
+        $expectedColorStruct->a = 255;
+
+        $this->ffiProxy->DrawSphereWires(
+            $this->sameCDataVector3Argument($expectedVector3Struct),
+            10.0,
+            5,
+            1,
+            $this->sameCDataColorArgument($expectedColorStruct),
+        )->shouldBeCalledOnce();
+
+        $center = new Vector3(0, 0, 0);
+        $this->raylib->drawSphereWires($center, 10, 5, 1, Color::white());
     }
 
     public function test_drawText_respectsParameterOrderAndConvertsObjectsToCData(): void
