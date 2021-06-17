@@ -17,6 +17,7 @@ use Nawarian\Raylib\Types\{AudioStream,
     Color,
     Font,
     Image,
+    Model,
     Ray,
     Rectangle,
     Sound,
@@ -370,6 +371,51 @@ class RaylibTest extends TestCase
         )->shouldBeCalledOnce();
 
         $this->raylib->drawLineBezier($start, $end, 10, Color::black());
+    }
+
+    public function test_drawModelEx_respectsParameterOrderAndConvertsColorToCData(): void
+    {
+        $transform = $this->ffi->new('Matrix');
+        $meshes = $this->ffi->new('Mesh*');
+        $materials = $this->ffi->new('Material*');
+        $meshMaterial = $this->ffi->new('int*');
+        $bones = $this->ffi->new('BoneInfo*');
+        $bindPose = $this->ffi->new('Transform*');
+        $model = new Model(
+            $transform,
+            0,
+            0,
+            $meshes,
+            $materials,
+            $meshMaterial,
+            0,
+            $bones,
+            $bindPose,
+        );
+
+        $expectedModel = $this->ffi->new('Model');
+        $expectedPosition = $this->ffi->new('Vector3');
+        $expectedRotationAxis = $this->ffi->new('Vector3');
+        $expectedScale = $this->ffi->new('Vector3');
+        $expectedColor = $this->ffi->new('Color');
+
+        $this->ffiProxy->DrawModelEx(
+            $expectedModel,
+            $this->sameCDataVector3Argument($expectedPosition),
+            $this->sameCDataVector3Argument($expectedRotationAxis),
+            0,
+            $this->sameCDataVector3Argument($expectedScale),
+            $this->sameCDataColorArgument($expectedColor),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->drawModelEx(
+            $model,
+            new Vector3(0, 0, 0),
+            new Vector3(0, 0, 0),
+            0,
+            new Vector3(0, 0, 0),
+            Color::blank(0),
+        );
     }
 
     public function test_drawPlane_respectsParameterOrderAndConvertsColorToCData(): void
@@ -1933,6 +1979,44 @@ class RaylibTest extends TestCase
         self::assertEquals($colorStruct, $this->raylib->loadImageColors($image));
     }
 
+    public function test_loadModel(): void
+    {
+        $cdataModel = $this->ffi->new('Model');
+        $cdataModel->transform = $this->ffi->new('Matrix');
+        $cdataModel->meshCount = 0;
+        $cdataModel->materialCount = 0;
+        $cdataModel->meshes = FFI::addr($this->ffi->new('Mesh'));
+        $cdataModel->materials = FFI::addr($this->ffi->new('Material'));
+        $cdataModel->meshMaterial = FFI::addr($this->ffi->new('int'));
+        $cdataModel->boneCount = 0;
+        $cdataModel->bones = FFI::addr($this->ffi->new('BoneInfo'));
+        $cdataModel->bindPose = FFI::addr($this->ffi->new('Transform'));
+
+        $this->ffiProxy->LoadModel('anymodel')
+            ->shouldBeCalledOnce()
+            ->willReturn($cdataModel);
+
+        $this->raylib->loadModel('anymodel');
+    }
+
+    public function test_loadModelAnimation(): void
+    {
+        $animationsCount = 0;
+
+        $expectedModelAnimation = $this->ffi->new('ModelAnimation*');
+        $this->ffiProxy->LoadModelAnimations('anymodel', FFI::addr($this->ffi->new('int')))
+            ->shouldBeCalledOnce()
+            ->will(function (array $args) use ($expectedModelAnimation) {
+                [, $countPointer] = $args;
+                $countPointer[0] = 10;
+
+                return $expectedModelAnimation;
+            });
+
+        $this->raylib->loadModelAnimations('anymodel', $animationsCount);
+        self::assertEquals(10, $animationsCount);
+    }
+
     public function test_loadMusicStream(): void
     {
         $expectedMusicStruct = $this->ffi->new('Music');
@@ -2111,6 +2195,20 @@ class RaylibTest extends TestCase
         $this->raylib->setExitKey(0);
     }
 
+    public function test_setMaterialTexture_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $material = $this->ffi->new('Material');
+        $texture = new Texture2D(0, 0, 0, 0, 0);
+
+        $this->ffiProxy->SetMaterialTexture(
+            FFI::addr($material),
+            Raylib::MAP_ALBEDO,
+            $this->sameCDataTexture2DArgument($this->ffi->new('Texture')),
+        )->shouldBeCalledOnce();
+
+        $this->raylib->setMaterialTexture($material, Raylib::MAP_ALBEDO, $texture);
+    }
+
     public function test_setSoundVolume_respectsParameterOrder(): void
     {
         $buffer = FFI::addr($this->ffi->new('struct rAudioBuffer { void* ptr; }'));
@@ -2191,6 +2289,43 @@ class RaylibTest extends TestCase
         )->shouldBeCalledOnce();
 
         $this->raylib->unloadImage($image);
+    }
+
+    public function test_unloadModel(): void
+    {
+        $transform = $this->ffi->new('Matrix');
+        $meshes = $this->ffi->new('Mesh*');
+        $materials = $this->ffi->new('Material*');
+        $meshMaterial = $this->ffi->new('int*');
+        $bones = $this->ffi->new('BoneInfo*');
+        $bindPose = $this->ffi->new('Transform*');
+        $model = new Model(
+            $transform,
+            0,
+            0,
+            $meshes,
+            $materials,
+            $meshMaterial,
+            0,
+            $bones,
+            $bindPose,
+        );
+
+        $expectedModel = $this->ffi->new('Model');
+
+        $this->ffiProxy->UnloadModel($expectedModel)->shouldBeCalledOnce();
+
+        $this->raylib->unloadModel($model);
+    }
+
+    public function test_unloadModelAnimation(): void
+    {
+        $animation = $this->ffi->new('ModelAnimation');
+
+        $this->ffiProxy->UnloadModelAnimation($animation)
+            ->shouldBeCalledOnce();
+
+        $this->raylib->unloadModelAnimation($animation);
     }
 
     public function test_unloadSound_respectsParameterOrder(): void
@@ -2278,6 +2413,37 @@ class RaylibTest extends TestCase
         );
 
         $this->raylib->updateTexture($texture, $colorStruct);
+    }
+
+    public function test_updateModelAnimation_respectsParameterOrderAndConvertsObjectsToCDataAndUpdatesOriginalObject(
+    ): void {
+        $transform = $this->ffi->new('Matrix');
+        $meshes = $this->ffi->new('Mesh*');
+        $materials = $this->ffi->new('Material*');
+        $meshMaterial = $this->ffi->new('int*');
+        $bones = $this->ffi->new('BoneInfo*');
+        $bindPose = $this->ffi->new('Transform*');
+        $model = new Model(
+            $transform,
+            0,
+            0,
+            $meshes,
+            $materials,
+            $meshMaterial,
+            0,
+            $bones,
+            $bindPose,
+        );
+        $animation = $this->ffi->new('ModelAnimation');
+
+        $expectedModel = $this->ffi->new('Model');
+        $this->ffiProxy->UpdateModelAnimation(
+            $expectedModel,
+            $animation,
+            0,
+        )->shouldBeCalledOnce();
+
+        $this->raylib->updateModelAnimation($model, $animation, 0);
     }
 
     public function test_windowShouldClose(): void
