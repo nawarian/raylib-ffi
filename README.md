@@ -113,8 +113,8 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void EndMode2D(void)`
 - [x] `void BeginMode3D(Camera3D camera)`
 - [x] `void EndMode3D(void)`
-- [ ] `void BeginTextureMode(RenderTexture2D target)`
-- [ ] `void EndTextureMode(void)`
+- [x] `void BeginTextureMode(RenderTexture2D target)`
+- [x] `void EndTextureMode(void)`
 - [x] `void BeginScissorMode(int x, int y, int width, int height)`
 - [x] `void EndScissorMode(void)`
 - [x] `Ray GetMouseRay(Vector2 mousePosition, Camera camera)`
@@ -259,7 +259,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `Image LoadImageAnim(const char *fileName, int *frames)`
 - [ ] `Image LoadImageFromMemory(const char *fileType, const unsigned char *fileData, int dataSize)`
 - [x] `void UnloadImage(Image image)`
-- [ ] `bool ExportImage(Image image, const char *fileName)`
+- [x] `bool ExportImage(Image image, const char *fileName)`
 - [ ] `bool ExportImageAsCode(Image image, const char *fileName)`
 - [ ] `Image GenImageColor(int width, int height, Color color)`
 - [x] `Image GenImageGradientV(int width, int height, Color top, Color bottom)`
@@ -317,12 +317,12 @@ Below you'll find the list of things to be developed in this project.
 - [x] `Texture2D LoadTexture(const char *fileName)`
 - [x] `Texture2D LoadTextureFromImage(Image image)`
 - [ ] `TextureCubemap LoadTextureCubemap(Image image, int layoutType)`
-- [ ] `RenderTexture2D LoadRenderTexture(int width, int height)`
+- [x] `RenderTexture2D LoadRenderTexture(int width, int height)`
 - [x] `void UnloadTexture(Texture2D texture)`
-- [ ] `void UnloadRenderTexture(RenderTexture2D target)`
+- [x] `void UnloadRenderTexture(RenderTexture2D target)`
 - [ ] `void UpdateTexture(Texture2D texture, const void *pixels)`
 - [ ] `void UpdateTextureRec(Texture2D texture, Rectangle rec, const void *pixels)`
-- [ ] `Image GetTextureData(Texture2D texture)`
+- [x] `Image GetTextureData(Texture2D texture)`
 - [ ] `Image GetScreenData(void)`
 - [ ] `void GenTextureMipmaps(Texture2D *texture)`
 - [x] `void SetTextureFilter(Texture2D texture, int filterMode)`
@@ -330,7 +330,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void DrawTexture(Texture2D texture, int posX, int posY, Color tint)`
 - [x] `void DrawTextureV(Texture2D texture, Vector2 position, Color tint)`
 - [x] `void DrawTextureEx(Texture2D texture, Vector2 position, float rotation, float scale, Color tint)`
-- [ ] `void DrawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint)`
+- [x] `void DrawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint)`
 - [ ] `void DrawTextureQuad(Texture2D texture, Vector2 tiling, Vector2 offset, Rectangle quad, Color tint)`
 - [x] `void DrawTextureTiled(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float rotation, float scale, Color tint)`
 - [x] `void DrawTexturePro(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float rotation, Color tint)`
@@ -740,11 +740,11 @@ Below you'll find the list of things to be developed in this project.
 - [x] [textures/textures_draw_tiled.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_draw_tiled.php)
 - [x] [textures/textures_image_drawing.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_drawing.php)
 - [x] [textures/textures_image_generation.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_generation.php)
+- [x] [textures/textures_mouse_painting.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_mouse_painting.php)
 - [x] [textures/textures_image_text.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_text.php)
 - [x] [textures/textures_image_loading.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_loading.php)
 - [x] [textures/textures_logo_raylib.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_logo_raylib.php)
 - [x] [textures/textures_image_processing.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_image_processing.php)
-- [ ] textures/textures_mouse_painting.php
 - [ ] textures/textures_npatch_drawing.php
 - [x] [textures/textures_particles_blending.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/textures/textures_particles_blending.php)
 - [ ] textures/textures_poly.php

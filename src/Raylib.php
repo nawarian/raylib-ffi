@@ -6,6 +6,7 @@ namespace Nawarian\Raylib;
 
 use FFI;
 use FFI\CDATA;
+use Psalm\Type;
 
 final class Raylib implements
     HasRaylibBlendModeConstants,
@@ -48,6 +49,11 @@ final class Raylib implements
     public function beginScissorMode(int $x, int $y, int $width, int $height): void
     {
         $this->ffi->BeginScissorMode($x, $y, $width, $height);
+    }
+
+    public function beginTextureMode(Types\RenderTexture2D $target): void
+    {
+        $this->ffi->BeginTextureMode($target->toCData($this->ffi));
     }
 
     public function checkCollisionPointCircle(Types\Vector2 $point, Types\Vector2 $center, float $radius): bool
@@ -329,6 +335,20 @@ final class Raylib implements
         );
     }
 
+    public function drawTextureRec(
+        Types\Texture2D $texture,
+        Types\Rectangle $source,
+        Types\Vector2 $position,
+        Types\Color $tint
+    ): void {
+        $this->ffi->DrawTextureRec(
+            $texture->toCData($this->ffi),
+            $source->toCData($this->ffi),
+            $position->toCData($this->ffi),
+            $tint->toCData($this->ffi)
+        );
+    }
+
     public function drawTexturePro(
         Types\Texture2D $texture,
         Types\Rectangle $source,
@@ -422,6 +442,16 @@ final class Raylib implements
     public function endScissorMode(): void
     {
         $this->ffi->EndScissorMode();
+    }
+
+    public function endTextureMode(): void
+    {
+        $this->ffi->EndTextureMode();
+    }
+
+    public function exportImage(Types\Image $image, string $fileName): bool
+    {
+        return $this->ffi->ExportImage($image->toCData($this->ffi), $fileName);
     }
 
     /**
@@ -747,6 +777,23 @@ final class Raylib implements
     public function getSoundsPlaying(): int
     {
         return $this->ffi->GetSoundsPlaying();
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     */
+    public function getTextureData(Types\Texture2D $texture): Types\Image
+    {
+        $texture = $this->ffi->GetTextureData($texture->toCData($this->ffi));
+
+        return new Types\Image(
+            $texture->data,
+            $texture->width,
+            $texture->height,
+            $texture->mipmaps,
+            $texture->format,
+        );
     }
 
     public function getTime(): float
@@ -1288,6 +1335,39 @@ final class Raylib implements
         );
     }
 
+    /**
+     * @psalm-suppress InvalidPassByReference
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedPropertyFetch
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function loadRenderTexture(int $width, int $height): Types\RenderTexture2D
+    {
+        $renderTexture = $this->ffi->LoadRenderTexture($width, $height);
+        $texture = new Types\Texture2D(
+            $renderTexture->texture->id,
+            $renderTexture->texture->width,
+            $renderTexture->texture->height,
+            $renderTexture->texture->mipmaps,
+            $renderTexture->texture->format,
+        );
+
+        $depth = new Types\Texture2D(
+            $renderTexture->depth->id,
+            $renderTexture->depth->width,
+            $renderTexture->depth->height,
+            $renderTexture->depth->mipmaps,
+            $renderTexture->depth->format,
+        );
+
+        return new Types\RenderTexture2D(
+            $renderTexture->id,
+            $texture,
+            $depth
+        );
+    }
+
     public function maximizeWindow(): void
     {
         $this->ffi->MaximizeWindow();
@@ -1451,6 +1531,11 @@ final class Raylib implements
     public function unloadMusicStream(Types\Music $music): void
     {
         $this->ffi->UnloadMusicStream($music->toCData($this->ffi));
+    }
+
+    public function unloadRenderTexture(Types\RenderTexture2D $target): void
+    {
+        $this->ffi->UnloadRenderTexture($target->toCData($this->ffi));
     }
 
     public function unloadSound(Types\Sound $sound): void
