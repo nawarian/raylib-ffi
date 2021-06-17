@@ -405,9 +405,9 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void DrawRay(Ray ray, Color color)`
 - [x] `void DrawGrid(int slices, float spacing)`
 - [ ] `void DrawGizmo(Vector3 position)`
-- [ ] `Model LoadModel(const char *fileName)`
+- [x] `Model LoadModel(const char *fileName)`
 - [ ] `Model LoadModelFromMesh(Mesh mesh)`
-- [ ] `void UnloadModel(Model model)`
+- [x] `void UnloadModel(Model model)`
 - [ ] `void UnloadModelKeepMeshes(Model model)`
 - [ ] `Mesh *LoadMeshes(const char *fileName, int *meshCount)`
 - [ ] `void UnloadMesh(Mesh mesh)`
@@ -415,11 +415,11 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `Material *LoadMaterials(const char *fileName, int *materialCount)`
 - [ ] `Material LoadMaterialDefault(void)`
 - [ ] `void UnloadMaterial(Material material)`
-- [ ] `void SetMaterialTexture(Material *material, int mapType, Texture2D texture)`
+- [x] `void SetMaterialTexture(Material *material, int mapType, Texture2D texture)`
 - [ ] `void SetModelMeshMaterial(Model *model, int meshId, int materialId)`
-- [ ] `ModelAnimation *LoadModelAnimations(const char *fileName, int *animsCount)`
-- [ ] `void UpdateModelAnimation(Model model, ModelAnimation anim, int frame)`
-- [ ] `void UnloadModelAnimation(ModelAnimation anim)`
+- [x] `ModelAnimation *LoadModelAnimations(const char *fileName, int *animsCount)`
+- [x] `void UpdateModelAnimation(Model model, ModelAnimation anim, int frame)`
+- [x] `void UnloadModelAnimation(ModelAnimation anim)`
 - [ ] `bool IsModelAnimationValid(Model model, ModelAnimation anim)`
 - [ ] `Mesh GenMeshPoly(int sides, float radius)`
 - [ ] `Mesh GenMeshPlane(float width, float length, int resX, int resZ)`
@@ -436,7 +436,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void MeshBinormals(Mesh *mesh)`
 - [ ] `void MeshNormalsSmooth(Mesh *mesh)`
 - [ ] `void DrawModel(Model model, Vector3 position, float scale, Color tint)`
-- [ ] `void DrawModelEx(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint)`
+- [x] `void DrawModelEx(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint)`
 - [ ] `void DrawModelWires(Model model, Vector3 position, float scale, Color tint)`
 - [ ] `void DrawModelWiresEx(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint)`
 - [ ] `void DrawBoundingBox(BoundingBox box, Color color)`
@@ -669,7 +669,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] [core/core_window_flags.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_window_flags.php)
 - [ ] core/core_window_letterbox.php
 - [x] [core/core_world_screen.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/core/core_world_screen.php)
-- [ ] models/models_animation.php
+- [x] [models/models_animation.php](https://github.com/nawarian/raylib-ffi/blob/main/examples/models/models_animation.php)
 - [ ] models/models_billboard.php
 - [ ] models/models_box_collisions.php
 - [ ] models/models_cubicmap.php

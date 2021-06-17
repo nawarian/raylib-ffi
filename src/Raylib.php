@@ -14,6 +14,7 @@ final class Raylib implements
     HasRaylibGestureConstants,
     HasRaylibImageProcessConstants,
     HasRaylibKeysConstants,
+    HasRaylibMaterialMapTypeConstants,
     HasRaylibMouseConstants,
     HasRaylibPixelFormatConstants,
     HasRaylibWindowFlagConstants
@@ -193,6 +194,24 @@ final class Raylib implements
             $endPos->toCData($this->ffi),
             $thick,
             $color->toCData($this->ffi),
+        );
+    }
+
+    public function drawModelEx(
+        Types\Model $model,
+        Types\Vector3 $position,
+        Types\Vector3 $rotationAxis,
+        float $rotationAngle,
+        Types\Vector3 $scale,
+        Types\Color $tint
+    ): void {
+        $this->ffi->DrawModelEx(
+            $model->toCData($this->ffi),
+            $position->toCData($this->ffi),
+            $rotationAxis->toCData($this->ffi),
+            $rotationAngle,
+            $scale->toCData($this->ffi),
+            $tint->toCData($this->ffi),
         );
     }
 
@@ -1203,6 +1222,42 @@ final class Raylib implements
      * @psalm-suppress MixedArgument
      * @psalm-suppress MixedPropertyFetch
      */
+    public function loadModel(string $filename): Types\Model
+    {
+        $model = $this->ffi->LoadModel($filename);
+
+        return new Types\Model(
+            $model->transform,
+            $model->meshCount,
+            $model->materialCount,
+            $model->meshes,
+            $model->materials,
+            $model->meshMaterial,
+            $model->boneCount,
+            $model->bones,
+            $model->bindPose,
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedPropertyFetch
+     */
+    public function loadModelAnimations(string $filename, int &$animationsCount): CData
+    {
+        $count = $this->ffi->new('int');
+        $animations = $this->ffi->LoadModelAnimations($filename, FFI::addr($count));
+        $animationsCount = (int) $count->cdata;
+
+        return $animations;
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedPropertyFetch
+     */
     public function loadMusicStream(string $filename): Types\Music
     {
         $music = $this->ffi->LoadMusicStream($filename);
@@ -1378,6 +1433,16 @@ final class Raylib implements
         $this->ffi->SetExitKey($key);
     }
 
+    /**
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedArgument
+     */
+    public function setMaterialTexture(CData $material, int $mapType, Types\Texture2D $texture): void
+    {
+        $materialAddr = FFI::addr($material);
+        $this->ffi->SetMaterialTexture($materialAddr, $mapType, $texture->toCData($this->ffi));
+    }
+
     public function setMusicPitch(Types\Music $music, float $pitch): void
     {
         $this->ffi->SetMusicPitch($music->toCData($this->ffi), $pitch);
@@ -1453,6 +1518,16 @@ final class Raylib implements
         $this->ffi->UnloadImage($image->toCData($this->ffi));
     }
 
+    public function unloadModel(Types\Model $model): void
+    {
+        $this->ffi->UnloadModel($model->toCData($this->ffi));
+    }
+
+    public function unloadModelAnimation(CData $animation): void
+    {
+        $this->ffi->UnloadModelAnimation($animation);
+    }
+
     public function unloadMusicStream(Types\Music $music): void
     {
         $this->ffi->UnloadMusicStream($music->toCData($this->ffi));
@@ -1501,6 +1576,15 @@ final class Raylib implements
 
         $camera->fovy = $cdata->fovy;
         $camera->projection = $cdata->type;
+    }
+
+    public function updateModelAnimation(Types\Model $model, CData $animation, int $frame): void
+    {
+        $this->ffi->UpdateModelAnimation(
+            $model->toCData($this->ffi),
+            $animation,
+            $frame,
+        );
     }
 
     public function updateMusicStream(Types\Music $music): void
