@@ -43,6 +43,9 @@ final class Model
         $this->bindPose = $bindPose;
     }
 
+    /**
+     * @psalm-suppress UndefinedPropertyAssignment
+     */
     public function toCData(RaylibFFIProxy $ffi): CData
     {
         try {
