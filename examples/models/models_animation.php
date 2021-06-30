@@ -39,7 +39,7 @@ $position = new Vector3(0, 0, 0);            // Set model position
 
 // Load animation data
 $animsCount = 0;
-/** @var \FFI\CData[] $anims */
+/** @var \FFI\CData&\ArrayAccess<int, \FFI\CData> $anims */
 $anims = $raylib->loadModelAnimations(__DIR__ . '/resources/guy/guyanim.iqm', $animsCount);
 $animFrameCounter = 0;
 

@@ -1642,7 +1642,7 @@ final class Raylib implements
         $camera->up->z = $cdata->up->z;
 
         $camera->fovy = $cdata->fovy;
-        $camera->projection = $cdata->type;
+        $camera->projection = $cdata->projection;
     }
 
     public function updateModelAnimation(Types\Model $model, CData $animation, int $frame): void

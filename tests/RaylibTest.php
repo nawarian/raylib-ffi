@@ -100,7 +100,7 @@ class RaylibTest extends TestCase
         $expectedStruct->up->y = 2;
         $expectedStruct->up->z = 2;
         $expectedStruct->fovy = 10.0;
-        $expectedStruct->type = 5;
+        $expectedStruct->projection = 5;
 
         $this->ffiProxy->BeginMode3D(
             $this->sameCDataCamera3DArgument($expectedStruct)
@@ -2451,7 +2451,7 @@ class RaylibTest extends TestCase
 
         $expectedStruct = $this->ffi->new('Camera3D');
         $expectedStruct->fovy = 15.0;
-        $expectedStruct->type = 5;
+        $expectedStruct->projection = 5;
 
         $this->ffiProxy->SetCameraMode(
             $this->sameCDataCamera3DArgument($expectedStruct),
@@ -2658,7 +2658,7 @@ class RaylibTest extends TestCase
 
         $expectedStruct = $this->ffi->new('Camera3D');
         $expectedStruct->fovy = 15.0;
-        $expectedStruct->type = 5;
+        $expectedStruct->projection = 5;
 
         $this->ffiProxy->UpdateCamera(
             $this->sameCDataCamera3DArgument($expectedStruct)
@@ -2793,7 +2793,7 @@ class RaylibTest extends TestCase
             self::assertEquals($expectedStruct->up->y, $camera->up->y);
             self::assertEquals($expectedStruct->up->z, $camera->up->z);
             self::assertEquals($expectedStruct->fovy, $camera->fovy);
-            self::assertEquals($expectedStruct->type, $camera->type);
+            self::assertEquals($expectedStruct->projection, $camera->projection);
 
             return true;
         });

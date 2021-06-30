@@ -53,7 +53,7 @@ final class Camera3D
         $camera->target = $this->target->toCData($ffi);
         $camera->up = $this->up->toCData($ffi);
         $camera->fovy = $this->fovy;
-        $camera->type = $this->projection;
+        $camera->projection = $this->projection;
 
         return $camera;
     }
