@@ -247,12 +247,12 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void DrawPoly(Vector2 center, int sides, float radius, float rotation, Color color)`
 - [ ] `void DrawPolyLines(Vector2 center, int sides, float radius, float rotation, Color color)`
 - [x] `bool CheckCollisionRecs(Rectangle rec1, Rectangle rec2)`
-- [ ] `bool CheckCollisionCircles(Vector2 center1, float radius1, Vector2 center2, float radius2)`
-- [ ] `bool CheckCollisionCircleRec(Vector2 center, float radius, Rectangle rec)`
+- [x] `bool CheckCollisionCircles(Vector2 center1, float radius1, Vector2 center2, float radius2)`
+- [x] `bool CheckCollisionCircleRec(Vector2 center, float radius, Rectangle rec)`
 - [x] `bool CheckCollisionPointRec(Vector2 point, Rectangle rec)`
 - [x] `bool CheckCollisionPointCircle(Vector2 point, Vector2 center, float radius)`
-- [ ] `bool CheckCollisionPointTriangle(Vector2 point, Vector2 p1, Vector2 p2, Vector2 p3)`
-- [ ] `bool CheckCollisionLines(Vector2 startPos1, Vector2 endPos1, Vector2 startPos2, Vector2 endPos2, Vector2 *collisionPoint)`
+- [x] `bool CheckCollisionPointTriangle(Vector2 point, Vector2 p1, Vector2 p2, Vector2 p3)`
+- [x] `bool CheckCollisionLines(Vector2 startPos1, Vector2 endPos1, Vector2 startPos2, Vector2 endPos2, Vector2 *collisionPoint)`
 - [x] `Rectangle GetCollisionRec(Rectangle rec1, Rectangle rec2)`
 - [x] `Image LoadImage(const char *fileName)`
 - [ ] `Image LoadImageRaw(const char *fileName, int width, int height, int format, int headerSize)`

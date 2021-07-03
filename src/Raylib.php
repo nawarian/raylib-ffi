@@ -97,6 +97,74 @@ final class Raylib implements
         return $this->ffi->CheckCollisionRecs($rec1->toCData($this->ffi), $rec2->toCData($this->ffi));
     }
 
+    public function checkCollisionCircles(
+        Types\Vector2 $center1,
+        float $radius1,
+        Types\Vector2 $center2,
+        float $radius2
+    ): bool {
+        return $this->ffi->CheckCollisionCircles(
+            $center1->toCData($this->ffi),
+            $radius1,
+            $center2->toCData($this->ffi),
+            $radius2,
+        );
+    }
+
+    public function checkCollisionCircleRec(Types\Vector2 $center, float $radius, Types\Rectangle $rec): bool
+    {
+        return $this->ffi->CheckCollisionCircleRec(
+            $center->toCData($this->ffi),
+            $radius,
+            $rec->toCData($this->ffi),
+        );
+    }
+
+    public function checkCollisionPointTriangle(
+        Types\Vector2 $point,
+        Types\Vector2 $p1,
+        Types\Vector2 $p2,
+        Types\Vector2 $p3,
+    ): bool {
+        return $this->ffi->CheckCollisionPointTriangle(
+            $point->toCData($this->ffi),
+            $p1->toCData($this->ffi),
+            $p2->toCData($this->ffi),
+            $p3->toCData($this->ffi),
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     */
+    public function checkCollisionLines(
+        Types\Vector2 $startPos1,
+        Types\Vector2 $endPos1,
+        Types\Vector2 $startPos2,
+        Types\Vector2 $endPos2,
+        Types\Vector2 $mutCollisionPoint,
+    ): bool {
+        $vec = $this->ffi->new('Vector2');
+        $vecPointer = FFI::addr($vec);
+
+        $collides = $this->ffi->CheckCollisionLines(
+            $startPos1->toCData($this->ffi),
+            $endPos1->toCData($this->ffi),
+            $startPos2->toCData($this->ffi),
+            $endPos2->toCData($this->ffi),
+            $vecPointer,
+        );
+
+        if ($collides) {
+            $mutCollisionPoint->x = $vec->x;
+            $mutCollisionPoint->y = $vec->y;
+        }
+
+        return $collides;
+    }
+
     public function clearBackground(Types\Color $color): void
     {
         $this->ffi->ClearBackground($color->toCData($this->ffi));

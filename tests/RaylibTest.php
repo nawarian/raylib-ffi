@@ -254,6 +254,97 @@ class RaylibTest extends TestCase
         );
     }
 
+    public function test_checkCollisionCircles_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $center1 = $this->ffi->new('Vector2');
+        $center2 = $this->ffi->new('Vector2');
+
+        $this->ffiProxy->CheckCollisionCircles(
+            $this->sameCDataVector2Argument($center1),
+            10,
+            $this->sameCDataVector2Argument($center2),
+            20,
+        )->shouldBeCalledOnce()->willReturn(true);
+
+        self::assertTrue(
+            $this->raylib->checkCollisionCircles(
+                new Vector2(0, 0),
+                10,
+                new Vector2(0, 0),
+                20,
+            )
+        );
+    }
+
+    public function test_checkCollisionCircleRec_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $rec = $this->ffi->new('Rectangle');
+        $rec->width = 10;
+        $rec->height = 10;
+
+        $this->ffiProxy->CheckCollisionCircleRec(
+            $this->sameCDataVector2Argument($this->ffi->new('Vector2')),
+            10,
+            $this->sameCDataRectangleArgument($rec),
+        )->shouldBeCalledOnce()->willReturn(true);
+
+        self::assertTrue(
+            $this->raylib->checkCollisionCircleRec(
+                new Vector2(0, 0),
+                10,
+                new Rectangle(0, 0, 10, 10)
+            )
+        );
+    }
+
+    public function test_checkCollisionPointTriangle_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $this->ffiProxy->CheckCollisionPointTriangle(
+            $this->sameCDataVector2Argument($this->ffi->new('Vector2')),
+            $this->sameCDataVector2Argument($this->ffi->new('Vector2')),
+            $this->sameCDataVector2Argument($this->ffi->new('Vector2')),
+            $this->sameCDataVector2Argument($this->ffi->new('Vector2')),
+        )->shouldBeCalledOnce()->willReturn(true);
+
+        self::assertTrue(
+            $this->raylib->checkCollisionPointTriangle(
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+            )
+        );
+    }
+
+    public function test_checkCollisionLines_respectsParameterOrderAndConvertsObjectsToCData(): void
+    {
+        $this->ffiProxy->CheckCollisionLines(
+            $this->sameCDataVector2Argument($this->ffi->new('Vector2')),
+            $this->sameCDataVector2Argument($this->ffi->new('Vector2')),
+            $this->sameCDataVector2Argument($this->ffi->new('Vector2')),
+            $this->sameCDataVector2Argument($this->ffi->new('Vector2')),
+            FFI::addr($this->ffi->new('Vector2')),
+        )->shouldBeCalledOnce()->will(function ($args) {
+            [,,,, $mutCollisionPointVec] = $args;
+            $mutCollisionPointVec->x = 10;
+            $mutCollisionPointVec->y = 20;
+
+            return true;
+        });
+
+        $mutCollisionPoint = new Vector2(0, 0);
+        self::assertTrue(
+            $this->raylib->checkCollisionLines(
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                new Vector2(0, 0),
+                $mutCollisionPoint
+            )
+        );
+        self::assertEquals($mutCollisionPoint, new Vector2(10, 20));
+    }
+
     public function test_clearBackground_convertsColorToCData(): void
     {
         $color = new Color(0, 0, 0, 0);
