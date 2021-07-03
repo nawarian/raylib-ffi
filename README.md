@@ -357,12 +357,11 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void UnloadFontData(CharInfo *chars, int charsCount)`
 - [x] `void UnloadFont(Font font)`
 - [x] `void DrawFPS(int posX, int posY)`
-- [ ] `void DrawText(const char *text, int posX, int posY, int fontSize, Color color)`
+- [x] `void DrawText(const char *text, int posX, int posY, int fontSize, Color color)`
 - [x] `void DrawTextEx(Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint)`
-- [ ] `void DrawTextRec(Font font, const char *text, Rectangle rec, float fontSize, float spacing, bool wordWrap, Color tint)`
-- [ ] `void DrawTextRecEx(Font font, const char *text, Rectangle rec, float fontSize, float spacing, bool wordWrap, Color tint,`
-- [ ] `int selectStart, int selectLength, Color selectTint, Color selectBackTint)`
-- [ ] `void DrawTextCodepoint(Font font, int codepoint, Vector2 position, float fontSize, Color tint)`
+- [x] `void DrawTextRec(Font font, const char *text, Rectangle rec, float fontSize, float spacing, bool wordWrap, Color tint)`
+- [x] `void DrawTextRecEx(Font font, const char *text, Rectangle rec, float fontSize, float spacing, bool wordWrap, Color tint, int selectStart, int selectLength, Color selectTint, Color selectBackTint)`
+- [x] `void DrawTextCodepoint(Font font, int codepoint, Vector2 position, float fontSize, Color tint)`
 - [x] `int MeasureText(const char *text, int fontSize)`
 - [ ] `Vector2 MeasureTextEx(Font font, const char *text, float fontSize, float spacing)`
 - [ ] `int GetGlyphIndex(Font font, int codepoint)`

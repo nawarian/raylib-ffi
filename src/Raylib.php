@@ -449,6 +449,70 @@ final class Raylib implements
         );
     }
 
+    public function drawTextRec(
+        Types\Font $font,
+        string $text,
+        Types\Rectangle $rec,
+        float $fontSize,
+        float $spacing,
+        bool $wordWrap,
+        Types\Color $tint
+    ): void {
+        $this->ffi->DrawTextRec(
+            $font->toCData($this->ffi),
+            $text,
+            $rec->toCData($this->ffi),
+            $fontSize,
+            $spacing,
+            $wordWrap,
+            $tint->toCData($this->ffi),
+        );
+    }
+
+    public function drawTextRecEx(
+        Types\Font $font,
+        string $text,
+        Types\Rectangle $rec,
+        float $fontSize,
+        float $spacing,
+        bool $wordWrap,
+        Types\Color $tint,
+        int $selectStart,
+        int $selectLength,
+        Types\Color $selectTint,
+        Types\Color $selectBackTint
+    ): void {
+        $this->ffi->DrawTextRecEx(
+            $font->toCData($this->ffi),
+            $text,
+            $rec->toCData($this->ffi),
+            $fontSize,
+            $spacing,
+            $wordWrap,
+            $tint->toCData($this->ffi),
+            $selectStart,
+            $selectLength,
+            $selectTint->toCData($this->ffi),
+            $selectBackTint->toCData($this->ffi),
+        );
+    }
+
+    public function drawTextCodepoint(
+        Types\Font $font,
+        int $codepoint,
+        Types\Vector2 $position,
+        float $fontSize,
+        Types\Color $tint
+    ): void {
+        $this->ffi->DrawTextCodepoint(
+            $font->toCData($this->ffi),
+            $codepoint,
+            $position->toCData($this->ffi),
+            $fontSize,
+            $tint->toCData($this->ffi),
+        );
+    }
+
     public function drawTexture(Types\Texture2D $texture, int $posX, int $posY, Types\Color $tint): void
     {
         $this->ffi->DrawTexture($texture->toCData($this->ffi), $posX, $posY, $tint->toCData($this->ffi));
