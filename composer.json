@@ -2,7 +2,7 @@
     "name": "nawarian/raylib-ffi",
     "description": "Raylib bindings for PHP using FFI",
     "type": "library",
-    "license": "GPL-3-or-later",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Nawarian",
