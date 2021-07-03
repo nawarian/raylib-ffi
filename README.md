@@ -65,13 +65,13 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void InitWindow(int width, int height, const char *title)`
 - [x] `bool WindowShouldClose(void)`
 - [x] `void CloseWindow(void)`
-- [ ] `bool IsWindowReady(void)`
-- [ ] `bool IsWindowFullscreen(void)`
-- [ ] `bool IsWindowHidden(void)`
-- [ ] `bool IsWindowMinimized(void)`
-- [ ] `bool IsWindowMaximized(void)`
-- [ ] `bool IsWindowFocused(void)`
-- [ ] `bool IsWindowResized(void)`
+- [x] `bool IsWindowReady(void)`
+- [x] `bool IsWindowFullscreen(void)`
+- [x] `bool IsWindowHidden(void)`
+- [x] `bool IsWindowMinimized(void)`
+- [x] `bool IsWindowMaximized(void)`
+- [x] `bool IsWindowFocused(void)`
+- [x] `bool IsWindowResized(void)`
 - [x] `bool IsWindowState(unsigned int flag)`
 - [x] `void SetWindowState(unsigned int flags)`
 - [x] `void ClearWindowState(unsigned int flags)`

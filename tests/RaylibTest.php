@@ -2185,6 +2185,69 @@ class RaylibTest extends TestCase
         self::assertTrue($this->raylib->isMouseButtonReleased(10));
     }
 
+    public function test_isWindowFocused(): void
+    {
+        $this->ffiProxy->IsWindowFocused()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isWindowFocused());
+    }
+
+    public function test_isWindowFullscreen(): void
+    {
+        $this->ffiProxy->IsWindowFullscreen()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isWindowFullscreen());
+    }
+
+    public function test_isWindowHidden(): void
+    {
+        $this->ffiProxy->IsWindowHidden()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isWindowHidden());
+    }
+
+    public function test_isWindowMaximized(): void
+    {
+        $this->ffiProxy->IsWindowMaximized()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isWindowMaximized());
+    }
+
+    public function test_isWindowMinimized(): void
+    {
+        $this->ffiProxy->IsWindowMinimized()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isWindowMinimized());
+    }
+
+    public function test_isWindowReady(): void
+    {
+        $this->ffiProxy->IsWindowReady()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isWindowReady());
+    }
+
+    public function test_isWindowResized(): void
+    {
+        $this->ffiProxy->IsWindowResized()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+
+        self::assertTrue($this->raylib->isWindowResized());
+    }
+
     public function test_isWindowState(): void
     {
         $this->ffiProxy->IsWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN)

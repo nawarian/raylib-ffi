@@ -1203,6 +1203,41 @@ final class Raylib implements
         return $this->ffi->IsMouseButtonReleased($button);
     }
 
+    public function isWindowFocused(): bool
+    {
+        return $this->ffi->IsWindowFocused();
+    }
+
+    public function isWindowFullscreen(): bool
+    {
+        return $this->ffi->IsWindowFullscreen();
+    }
+
+    public function isWindowHidden(): bool
+    {
+        return $this->ffi->IsWindowHidden();
+    }
+
+    public function isWindowMaximized(): bool
+    {
+        return $this->ffi->IsWindowMaximized();
+    }
+
+    public function isWindowMinimized(): bool
+    {
+        return $this->ffi->IsWindowMinimized();
+    }
+
+    public function isWindowReady(): bool
+    {
+        return $this->ffi->IsWindowReady();
+    }
+
+    public function isWindowResized(): bool
+    {
+        return $this->ffi->IsWindowResized();
+    }
+
     public function isWindowState(int $flag): bool
     {
         return $this->ffi->IsWindowState($flag);
