@@ -88,15 +88,15 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void *GetWindowHandle(void)`
 - [x] `int GetScreenWidth(void)`
 - [x] `int GetScreenHeight(void)`
-- [ ] `int GetMonitorCount(void)`
-- [ ] `Vector2 GetMonitorPosition(int monitor)`
-- [ ] `int GetMonitorWidth(int monitor)`
-- [ ] `int GetMonitorHeight(int monitor)`
-- [ ] `int GetMonitorPhysicalWidth(int monitor)`
-- [ ] `int GetMonitorPhysicalHeight(int monitor)`
-- [ ] `int GetMonitorRefreshRate(int monitor)`
-- [ ] `Vector2 GetWindowPosition(void)`
-- [ ] `Vector2 GetWindowScaleDPI(void)`
+- [x] `int GetMonitorCount(void)`
+- [x] `Vector2 GetMonitorPosition(int monitor)`
+- [x] `int GetMonitorWidth(int monitor)`
+- [x] `int GetMonitorHeight(int monitor)`
+- [x] `int GetMonitorPhysicalWidth(int monitor)`
+- [x] `int GetMonitorPhysicalHeight(int monitor)`
+- [x] `int GetMonitorRefreshRate(int monitor)`
+- [x] `Vector2 GetWindowPosition(void)`
+- [x] `Vector2 GetWindowScaleDPI(void)`
 - [ ] `const char *GetMonitorName(int monitor)`
 - [ ] `void SetClipboardText(const char *text)`
 - [ ] `const char *GetClipboardText(void)`

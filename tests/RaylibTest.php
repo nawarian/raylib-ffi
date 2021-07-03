@@ -1448,6 +1448,96 @@ class RaylibTest extends TestCase
         self::assertEquals(15, $this->raylib->getRandomValue(10, 20));
     }
 
+    public function test_getMonitorCount(): void
+    {
+        $this->ffiProxy->GetMonitorCount()
+            ->shouldBeCalledOnce()
+            ->willReturn(2);
+
+        self::assertEquals(2, $this->raylib->getMonitorCount());
+    }
+
+    public function test_getMonitorPosition(): void
+    {
+        $vec = $this->ffi->new('Vector2');
+        $vec->x = 10;
+        $vec->y = 20;
+        $this->ffiProxy->GetMonitorPosition(0)
+            ->shouldBeCalledOnce()
+            ->willReturn($vec);
+
+        self::assertEquals(new Vector2(10, 20), $this->raylib->getMonitorPosition(0));
+    }
+
+    public function test_getMonitorWidth(): void
+    {
+        $this->ffiProxy->GetMonitorWidth(0)
+            ->shouldBeCalledOnce()
+            ->willReturn(200);
+
+        self::assertEquals(200, $this->raylib->getMonitorWidth(0));
+    }
+
+    public function test_getMonitorHeight(): void
+    {
+        $this->ffiProxy->GetMonitorHeight(0)
+            ->shouldBeCalledOnce()
+            ->willReturn(200);
+
+        self::assertEquals(200, $this->raylib->getMonitorHeight(0));
+    }
+
+    public function test_getMonitorPhysicalWidth(): void
+    {
+        $this->ffiProxy->GetMonitorPhysicalWidth(0)
+            ->shouldBeCalledOnce()
+            ->willReturn(200);
+
+        self::assertEquals(200, $this->raylib->getMonitorPhysicalWidth(0));
+    }
+
+    public function test_getMonitorPhysicalHeight(): void
+    {
+        $this->ffiProxy->GetMonitorPhysicalHeight(0)
+            ->shouldBeCalledOnce()
+            ->willReturn(200);
+
+        self::assertEquals(200, $this->raylib->getMonitorPhysicalHeight(0));
+    }
+
+    public function test_getMonitorRefreshRate(): void
+    {
+        $this->ffiProxy->GetMonitorRefreshRate(0)
+            ->shouldBeCalledOnce()
+            ->willReturn(200);
+
+        self::assertEquals(200, $this->raylib->getMonitorRefreshRate(0));
+    }
+
+    public function test_getWindowPosition(): void
+    {
+        $vec = $this->ffi->new('Vector2');
+        $vec->x = 10;
+        $vec->y = 20;
+        $this->ffiProxy->GetWindowPosition()
+            ->shouldBeCalledOnce()
+            ->willReturn($vec);
+
+        self::assertEquals(new Vector2(10, 20), $this->raylib->getWindowPosition());
+    }
+
+    public function test_getWindowScaleDPI(): void
+    {
+        $vec = $this->ffi->new('Vector2');
+        $vec->x = 10;
+        $vec->y = 20;
+        $this->ffiProxy->GetWindowScaleDPI()
+            ->shouldBeCalledOnce()
+            ->willReturn($vec);
+
+        self::assertEquals(new Vector2(10, 20), $this->raylib->getWindowScaleDPI());
+    }
+
     public function test_getScreenToWorld2D_respectsParameterOrderAndConvertsObjectsToCData(): void
     {
         $expectedPosition = $this->ffi->new('Vector2');

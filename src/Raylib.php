@@ -820,6 +820,72 @@ final class Raylib implements
         return $this->ffi->GetRandomValue($min, $max);
     }
 
+    public function getMonitorCount(): int
+    {
+        return $this->ffi->GetMonitorCount();
+    }
+
+    /**
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedPropertyFetch
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function getMonitorPosition(int $monitor): Types\Vector2
+    {
+        $vec = $this->ffi->GetMonitorPosition($monitor);
+
+        return new Types\Vector2($vec->x, $vec->y);
+    }
+
+    public function getMonitorWidth(int $monitor): int
+    {
+        return $this->ffi->GetMonitorWidth($monitor);
+    }
+
+    public function getMonitorHeight(int $monitor): int
+    {
+        return $this->ffi->GetMonitorHeight($monitor);
+    }
+
+    public function getMonitorPhysicalWidth(int $monitor): int
+    {
+        return $this->ffi->GetMonitorPhysicalWidth($monitor);
+    }
+
+    public function getMonitorPhysicalHeight(int $monitor): int
+    {
+        return $this->ffi->GetMonitorPhysicalHeight($monitor);
+    }
+
+    public function getMonitorRefreshRate(int $monitor): int
+    {
+        return $this->ffi->GetMonitorRefreshRate($monitor);
+    }
+
+    /**
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedPropertyFetch
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function getWindowPosition(): Types\Vector2
+    {
+        $vec = $this->ffi->GetWindowPosition();
+
+        return new Types\Vector2($vec->x, $vec->y);
+    }
+
+    /**
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedPropertyFetch
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function getWindowScaleDPI(): Types\Vector2
+    {
+        $vec = $this->ffi->GetWindowScaleDPI();
+
+        return new Types\Vector2($vec->x, $vec->y);
+    }
+
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
