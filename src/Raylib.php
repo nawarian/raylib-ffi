@@ -1264,6 +1264,16 @@ final class Raylib implements
         return $this->ffi->IsKeyPressed($key);
     }
 
+    public function isKeyReleased(int $key): bool
+    {
+        return $this->ffi->IsKeyReleased($key);
+    }
+
+    public function isKeyUp(int $key): bool
+    {
+        return $this->ffi->IsKeyUp($key);
+    }
+
     public function isMouseButtonDown(int $button): bool
     {
         return $this->ffi->IsMouseButtonDown($button);
@@ -1272,6 +1282,11 @@ final class Raylib implements
     public function isMouseButtonPressed(int $button): bool
     {
         return $this->ffi->IsMouseButtonPressed($button);
+    }
+
+    public function isMouseButtonUp(int $button): bool
+    {
+        return $this->ffi->IsMouseButtonUp($button);
     }
 
     public function isMouseButtonReleased(int $button): bool

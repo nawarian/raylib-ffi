@@ -166,8 +166,8 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void OpenURL(const char *url)`
 - [x] `bool IsKeyPressed(int key)`
 - [x] `bool IsKeyDown(int key)`
-- [ ] `bool IsKeyReleased(int key)`
-- [ ] `bool IsKeyUp(int key)`
+- [x] `bool IsKeyReleased(int key)`
+- [x] `bool IsKeyUp(int key)`
 - [x] `void SetExitKey(int key)`
 - [x] `int GetKeyPressed(void)`
 - [x] `int GetCharPressed(void)`
@@ -182,9 +182,9 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `int GetGamepadAxisCount(int gamepad)`
 - [ ] `float GetGamepadAxisMovement(int gamepad, int axis)`
 - [x] `bool IsMouseButtonPressed(int button)`
-- [ ] `bool IsMouseButtonDown(int button)`
+- [x] `bool IsMouseButtonDown(int button)`
 - [x] `bool IsMouseButtonReleased(int button)`
-- [ ] `bool IsMouseButtonUp(int button)`
+- [x] `bool IsMouseButtonUp(int button)`
 - [x] `int GetMouseX(void)`
 - [x] `int GetMouseY(void)`
 - [x] `Vector2 GetMousePosition(void)`
