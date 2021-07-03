@@ -325,6 +325,16 @@ final class Raylib implements
         );
     }
 
+    public function drawPixel(int $posX, int $posY, Types\Color $color): void
+    {
+        $this->ffi->DrawPixel($posX, $posY, $color->toCData($this->ffi));
+    }
+
+    public function drawPixelV(Types\Vector2 $position, Types\Color $color): void
+    {
+        $this->ffi->DrawPixelV($position->toCData($this->ffi), $color->toCData($this->ffi));
+    }
+
     public function drawPlane(Types\Vector3 $center, Types\Vector2 $size, Types\Color $color): void
     {
         $this->ffi->DrawPlane(

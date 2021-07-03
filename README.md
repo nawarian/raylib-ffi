@@ -212,8 +212,8 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void SetCameraAltControl(int keyAlt)`
 - [ ] `void SetCameraSmoothZoomControl(int keySmoothZoom)`
 - [ ] `void SetCameraMoveControls(int keyFront, int keyBack, int keyRight, int keyLeft, int keyUp, int keyDown)`
-- [ ] `void DrawPixel(int posX, int posY, Color color)`
-- [ ] `void DrawPixelV(Vector2 position, Color color)`
+- [x] `void DrawPixel(int posX, int posY, Color color)`
+- [x] `void DrawPixelV(Vector2 position, Color color)`
 - [x] `void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color)`
 - [ ] `void DrawLineV(Vector2 startPos, Vector2 endPos, Color color)`
 - [ ] `void DrawLineEx(Vector2 startPos, Vector2 endPos, float thick, Color color)`

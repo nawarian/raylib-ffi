@@ -44,6 +44,8 @@ use FFI\CData;
  * @method void DrawLine(int $x0, int $y0, int $x1, int $y1, CData $color)
  * @method void DrawLineBezier(CData $startPos, CData $endPos, float $lineThick, CData $color)
  * @method void DrawModelEx(CData $model, CData $position, CData $rotationAxis, float $rotationAngle, CData $scale, CData $tint)
+ * @method void DrawPixel(int $posX, int $posY, CData $color)
+ * @method void DrawPixelV(CData $position, CData $color)
  * @method void DrawPlane(CData $center, CData $size, CData $color)
  * @method void DrawPoly(CData $center, int $sides, float $radius, float $rotation, CData $color)
  * @method void DrawRay(CData $ray, CData $color)
