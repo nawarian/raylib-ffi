@@ -708,6 +708,11 @@ final class Raylib implements
         );
     }
 
+    public function getClipboardText(): string
+    {
+        return $this->ffi->GetClipboardText();
+    }
+
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
@@ -823,6 +828,11 @@ final class Raylib implements
     public function getMonitorCount(): int
     {
         return $this->ffi->GetMonitorCount();
+    }
+
+    public function getMonitorName(int $monitor): string
+    {
+        return $this->ffi->GetMonitorName($monitor);
     }
 
     /**
@@ -1591,6 +1601,11 @@ final class Raylib implements
         $this->ffi->SetCameraMode($camera->toCData($this->ffi), $mode);
     }
 
+    public function setClipboardText(string $text): void
+    {
+        $this->ffi->SetClipboardText($text);
+    }
+
     public function setConfigFlags(int $flags): void
     {
         $this->ffi->SetConfigFlags($flags);
@@ -1664,6 +1679,36 @@ final class Raylib implements
     public function setWindowTitle(string $title): void
     {
         $this->ffi->SetWindowTitle($title);
+    }
+
+    public function showCursor(): void
+    {
+        $this->ffi->ShowCursor();
+    }
+
+    public function hideCursor(): void
+    {
+        $this->ffi->HideCursor();
+    }
+
+    public function isCursorHidden(): bool
+    {
+        return $this->ffi->IsCursorHidden();
+    }
+
+    public function enableCursor(): void
+    {
+        $this->ffi->EnableCursor();
+    }
+
+    public function disableCursor(): void
+    {
+        $this->ffi->DisableCursor();
+    }
+
+    public function isCursorOnScreen(): bool
+    {
+        return $this->ffi->IsCursorOnScreen();
     }
 
     public function stopMusicStream(Types\Music $music): void

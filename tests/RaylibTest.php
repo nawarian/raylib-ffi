@@ -1268,6 +1268,15 @@ class RaylibTest extends TestCase
         self::assertEquals($expectedImage->format, $image->format);
     }
 
+    public function test_getClipboardText(): void
+    {
+        $this->ffiProxy->GetClipboardText()
+            ->shouldBeCalledOnce()
+            ->willReturn('Clipboard text');
+
+        self::assertEquals('Clipboard text', $this->raylib->getClipboardText());
+    }
+
     public function test_getColor(): void
     {
         $expectedColor = $this->ffi->new('Color');
@@ -1455,6 +1464,15 @@ class RaylibTest extends TestCase
             ->willReturn(2);
 
         self::assertEquals(2, $this->raylib->getMonitorCount());
+    }
+
+    public function test_getMonitorName(): void
+    {
+        $this->ffiProxy->GetMonitorName(0)
+            ->shouldBeCalledOnce()
+            ->willReturn('Color LCD');
+
+        self::assertEquals('Color LCD', $this->raylib->getMonitorName(0));
     }
 
     public function test_getMonitorPosition(): void
@@ -2612,6 +2630,14 @@ class RaylibTest extends TestCase
         )->shouldBeCalledOnce();
 
         $this->raylib->setCameraMode($camera, Camera3D::MODE_FIRST_PERSON);
+    }
+
+    public function test_setClipboardText(): void
+    {
+        $this->ffiProxy->SetClipboardText('MyClipboardText')
+            ->shouldBeCalledOnce();
+
+        $this->raylib->setClipboardText('MyClipboardText');
     }
 
     public function test_setConfigFlags(): void

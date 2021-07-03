@@ -97,15 +97,15 @@ Below you'll find the list of things to be developed in this project.
 - [x] `int GetMonitorRefreshRate(int monitor)`
 - [x] `Vector2 GetWindowPosition(void)`
 - [x] `Vector2 GetWindowScaleDPI(void)`
-- [ ] `const char *GetMonitorName(int monitor)`
-- [ ] `void SetClipboardText(const char *text)`
-- [ ] `const char *GetClipboardText(void)`
-- [ ] `void ShowCursor(void)`
-- [ ] `void HideCursor(void)`
-- [ ] `bool IsCursorHidden(void)`
-- [ ] `void EnableCursor(void)`
-- [ ] `void DisableCursor(void)`
-- [ ] `bool IsCursorOnScreen(void)`
+- [x] `const char *GetMonitorName(int monitor)`
+- [x] `void SetClipboardText(const char *text)`
+- [x] `const char *GetClipboardText(void)`
+- [x] `void ShowCursor(void)`
+- [x] `void HideCursor(void)`
+- [x] `bool IsCursorHidden(void)`
+- [x] `void EnableCursor(void)`
+- [x] `void DisableCursor(void)`
+- [x] `bool IsCursorOnScreen(void)`
 - [x] `void ClearBackground(Color color)`
 - [x] `void BeginDrawing(void)`
 - [x] `void EndDrawing(void)`
