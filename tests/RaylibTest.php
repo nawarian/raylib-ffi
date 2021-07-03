@@ -2588,10 +2588,56 @@ class RaylibTest extends TestCase
 
     public function test_setWindowState(): void
     {
-        $this->ffiProxy->SetWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN)
+        $data = $this->ffi->new('void *');
+        $expectedImage = $this->ffi->new('Image');
+        $expectedImage->data = $data;
+
+        $this->ffiProxy->setWindowIcon(
+            $this->sameCDataImageArgument($expectedImage)
+        )->shouldBeCalledOnce();
+
+        $image = new Image($data, 0, 0, 0, 0);
+        $this->raylib->setWindowIcon($image);
+    }
+
+    public function test_setWindowMinSize(): void
+    {
+        $this->ffiProxy->SetWindowMinSize(100, 200)
             ->shouldBeCalledOnce();
 
-        $this->raylib->setWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN);
+        $this->raylib->setWindowMinSize(100, 200);
+    }
+
+    public function test_setWindowMonitor(): void
+    {
+        $this->ffiProxy->SetWindowMonitor(200)
+            ->shouldBeCalledOnce();
+
+        $this->raylib->setWindowMonitor(200);
+    }
+
+    public function test_setWindowPosition(): void
+    {
+        $this->ffiProxy->SetWindowPosition(100, 200)
+            ->shouldBeCalledOnce();
+
+        $this->raylib->setWindowPosition(100, 200);
+    }
+
+    public function test_setWindowSize(): void
+    {
+        $this->ffiProxy->SetWindowSize(100, 200)
+            ->shouldBeCalledOnce();
+
+        $this->raylib->setWindowSize(100, 200);
+    }
+
+    public function test_setWindowTitle(): void
+    {
+        $this->ffiProxy->SetWindowTitle('title')
+            ->shouldBeCalledOnce();
+
+        $this->raylib->setWindowTitle('title');
     }
 
     public function test_stopSoundMulti(): void

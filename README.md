@@ -79,12 +79,12 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void MaximizeWindow(void)`
 - [x] `void MinimizeWindow(void)`
 - [x] `void RestoreWindow(void)`
-- [ ] `void SetWindowIcon(Image image)`
-- [ ] `void SetWindowTitle(const char *title)`
-- [ ] `void SetWindowPosition(int x, int y)`
-- [ ] `void SetWindowMonitor(int monitor)`
-- [ ] `void SetWindowMinSize(int width, int height)`
-- [ ] `void SetWindowSize(int width, int height)`
+- [x] `void SetWindowIcon(Image image)`
+- [x] `void SetWindowTitle(const char *title)`
+- [x] `void SetWindowPosition(int x, int y)`
+- [x] `void SetWindowMonitor(int monitor)`
+- [x] `void SetWindowMinSize(int width, int height)`
+- [x] `void SetWindowSize(int width, int height)`
 - [ ] `void *GetWindowHandle(void)`
 - [x] `int GetScreenWidth(void)`
 - [x] `int GetScreenHeight(void)`

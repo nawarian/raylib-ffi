@@ -1565,9 +1565,39 @@ final class Raylib implements
         $this->ffi->SetTextureFilter($texture->toCData($this->ffi), $filterMode);
     }
 
+    public function setWindowIcon(Types\Image $image): void
+    {
+        $this->ffi->SetWindowIcon($image->toCData($this->ffi));
+    }
+
+    public function setWindowMinSize(int $width, int $height): void
+    {
+        $this->ffi->SetWindowMinSize($width, $height);
+    }
+
+    public function setWindowMonitor(int $monitor): void
+    {
+        $this->ffi->SetWindowMonitor($monitor);
+    }
+
+    public function setWindowPosition(int $x, int $y): void
+    {
+        $this->ffi->SetWindowPosition($x, $y);
+    }
+
+    public function setWindowSize(int $width, int $height): void
+    {
+        $this->ffi->SetWindowSize($width, $height);
+    }
+
     public function setWindowState(int $flags): void
     {
         $this->ffi->SetWindowState($flags);
+    }
+
+    public function setWindowTitle(string $title): void
+    {
+        $this->ffi->SetWindowTitle($title);
     }
 
     public function stopMusicStream(Types\Music $music): void
