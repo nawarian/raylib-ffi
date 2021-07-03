@@ -11,8 +11,8 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "ext-ffi": "^7.4|^8.0",
-        "php": "^7.4|^8.0",
+        "ext-ffi": "^8.0.7",
+        "php": "^8.0.7",
         "webmozart/assert": "^1.10"
     },
     "require-dev": {
