@@ -1808,6 +1808,21 @@ final class Raylib implements
         $this->ffi->SetMaterialTexture($materialAddr, $mapType, $texture->toCData($this->ffi));
     }
 
+    public function setMousePosition(int $x, int $y): void
+    {
+        $this->ffi->SetMousePosition($x, $y);
+    }
+
+    public function setMouseOffset(int $offsetX, int $offsetY): void
+    {
+        $this->SetMouseScale($offsetX, $offsetY);
+    }
+
+    public function setMouseScale(float $scaleX, float $scaleY): void
+    {
+        $this->SetMouseScale($scaleX, $scaleY);
+    }
+
     public function setMusicPitch(Types\Music $music, float $pitch): void
     {
         $this->ffi->SetMusicPitch($music->toCData($this->ffi), $pitch);

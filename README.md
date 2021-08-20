@@ -188,9 +188,9 @@ Below you'll find the list of things to be developed in this project.
 - [x] `int GetMouseX(void)`
 - [x] `int GetMouseY(void)`
 - [x] `Vector2 GetMousePosition(void)`
-- [ ] `void SetMousePosition(int x, int y)`
-- [ ] `void SetMouseOffset(int offsetX, int offsetY)`
-- [ ] `void SetMouseScale(float scaleX, float scaleY)`
+- [x] `void SetMousePosition(int x, int y)`
+- [x] `void SetMouseOffset(int offsetX, int offsetY)`
+- [x] `void SetMouseScale(float scaleX, float scaleY)`
 - [x] `float GetMouseWheelMove(void)`
 - [ ] `int GetMouseCursor(void)`
 - [ ] `void SetMouseCursor(int cursor)`
