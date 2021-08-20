@@ -88,6 +88,8 @@ use FFI\CData;
  * @method string GetClipboardText()
  * @method CData GetColor(int $hex)
  * @method CData GetCollisionRec(CData $rec1, CData $rec2)
+ * @method CData GetCameraMatrix(CData $camera)
+ * @method CData GetCameraMatrix2D(CData $camera2D)
  * @method int GetFPS()
  * @method float GetFrameTime()
  * @method int GetGestureDetected()

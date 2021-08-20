@@ -118,8 +118,8 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void BeginScissorMode(int x, int y, int width, int height)`
 - [x] `void EndScissorMode(void)`
 - [x] `Ray GetMouseRay(Vector2 mousePosition, Camera camera)`
-- [ ] `Matrix GetCameraMatrix(Camera camera)`
-- [ ] `Matrix GetCameraMatrix2D(Camera2D camera)`
+- [x] `Matrix GetCameraMatrix(Camera camera)`
+- [x] `Matrix GetCameraMatrix2D(Camera2D camera)`
 - [x] `Vector2 GetWorldToScreen(Vector3 position, Camera camera)`
 - [ ] `Vector2 GetWorldToScreenEx(Vector3 position, Camera camera, int width, int height)`
 - [x] `Vector2 GetWorldToScreen2D(Vector2 position, Camera2D camera)`

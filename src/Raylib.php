@@ -877,6 +877,30 @@ final class Raylib implements
         return new Types\Rectangle($rec->x, $rec->y, $rec->width, $rec->height);
     }
 
+    public function getCameraMatrix(Types\Camera3D $camera): Types\Matrix
+    {
+        $matrixCData = $this->ffi->GetCameraMatrix($camera->toCData($this->ffi));
+        $matrix = new Types\Matrix(...array_fill(0, 16, 0.0));
+
+        for ($i = 0; $i < 15; ++$i) {
+            $matrix->{"m{$i}"} = $matrixCData->{"m{$i}"};
+        }
+
+        return $matrix;
+    }
+
+    public function getCameraMatrix2D(Types\Camera2D $camera): Types\Matrix
+    {
+        $matrixCData = $this->ffi->GetCameraMatrix2D($camera->toCData($this->ffi));
+        $matrix = new Types\Matrix(...array_fill(0, 16, 0.0));
+
+        for ($i = 0; $i < 15; ++$i) {
+            $matrix->{"m{$i}"} = $matrixCData->{"m{$i}"};
+        }
+
+        return $matrix;
+    }
+
     public function getFPS(): int
     {
         return $this->ffi->GetFPS();
