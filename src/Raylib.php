@@ -17,6 +17,7 @@ final class Raylib implements
     HasRaylibMaterialMapTypeConstants,
     HasRaylibMouseConstants,
     HasRaylibPixelFormatConstants,
+    HasRaylibTraceLogConstants,
     HasRaylibWindowFlagConstants
 {
     private RaylibFFIProxy $ffi;
@@ -1935,6 +1936,14 @@ final class Raylib implements
     public function toggleFullscreen(): void
     {
         $this->ffi->ToggleFullscreen();
+    }
+
+    /**
+     * @param mixed[] $args
+     */
+    public function traceLog(int $type, string $format, ...$args): void
+    {
+        $this->ffi->TraceLog($type, $format, ...$args);
     }
 
     public function unloadImage(Types\Image $image): void

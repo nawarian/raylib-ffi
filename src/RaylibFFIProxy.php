@@ -204,6 +204,7 @@ use FFI\CData;
  * @method string TextSubtext(string $text, int $position, int $length)
  * @method void UnloadFont(CData $font)
  * @method void ToggleFullscreen()
+ * @method void TraceLog(int $type, string $format, ...$args)
  * @method void UpdateTexture(CData $texture, CData $pixels);
  * @method void UnloadImage(CData $image)
  * @method void UnloadModel(CData $model)

@@ -132,7 +132,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void SetTraceLogLevel(int logType)`
 - [ ] `void SetTraceLogExit(int logType)`
 - [ ] `void SetTraceLogCallback(TraceLogCallback callback)`
-- [ ] `void TraceLog(int logType, const char *text, ...)`
+- [x] `void TraceLog(int logType, const char *text, ...)`
 - [ ] `void *MemAlloc(int size)`
 - [ ] `void MemFree(void *ptr)`
 - [ ] `void TakeScreenshot(const char *fileName)`
