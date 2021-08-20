@@ -25,6 +25,24 @@ function easeElasticOut(float $t, float $b, float $c, float $d): float
     );
 }
 
+function easeElasticIn(float $t, float $b, float $c, float $d): float
+{
+    if ($t === 0.0) {
+        return $b;
+    }
+
+    if (($t /= $d) === 1.0) {
+        return ($b + $c);
+    }
+
+    $p = $d * 0.3;
+    $a = $c;
+    $s = $p / 4;
+    $postFix = $a * pow(2, 10 * ($t -= 1));
+
+    return (-($postFix * sin(($t * $d - $s) * (2 * pi()) / $p)) + $b);
+}
+
 function easeBounceOut(float $t, float $b, float $c, float $d): float
 {
     if (($t /= $d) < (1 / 2.75)) {
@@ -53,6 +71,13 @@ function easeCircOut(float $t, float $b, float $c, float $d): float
     $t = $t / $d - 1;
 
     return ($c * sqrt(1 - $t * $t) + $b);
+}
+
+function easeCubicOut(float $t, float $b, float $c, float $d): float
+{
+    $t = $t / $d - 1;
+
+    return ($c * ($t * $t * $t + 1) + $b);
 }
 
 function easeSineOut(float $t, float $b, float $c, float $d): float
