@@ -62,7 +62,7 @@ Below you'll find the list of things to be developed in this project.
 
 - [ ] Automatic checks on `main` and Pull Requests: compile raylib and test FFI against Linux, Windows and MacOS
 - [x] Rename methods in `Raylib` to follow No Camel Caps convention (PSR-1)
-- [ ] Make `RaylibFactory` detect current OS and load `raylib.h` accordingly
+- [x] Make `RaylibFactory` detect current OS and load `raylib.h` accordingly
 - [x] Create a `generated-functions.php` file that will mimic Raylib by registering global functions
 
 ### FFI Proxy
