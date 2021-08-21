@@ -259,6 +259,24 @@ function DrawCircleLines(int $centerX, int $centerY, float $radius, Color $color
 /**
  * @psalm-suppress MissingParamType
  */
+function DrawCircleSector(Vector2 $center, float $radius, int $startAngle, int $endAngle, int $segments, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawCircleSector($center, $radius, $startAngle, $endAngle, $segments, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
+function DrawCircleSectorLines(Vector2 $center, float $radius, int $startAngle, int $endAngle, int $segments, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawCircleSectorLines($center, $radius, $startAngle, $endAngle, $segments, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
 function DrawCircleV(Vector2 $center, float $radius, Color $color): void
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
@@ -317,6 +335,24 @@ function DrawLine(int $x0, int $y0, int $x1, int $y1, Color $color): void
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
     $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawLine($x0, $y0, $x1, $y1, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
+function DrawLineV(Vector2 $startPos, Vector2 $endPos, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawLineV($startPos, $endPos, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
+function DrawLineEx(Vector2 $startPos, Vector2 $endPos, float $thick, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawLineEx($startPos, $endPos, $thick, $color);
 }
 
 /**

@@ -14,6 +14,9 @@
                 "action": "php composer.phar generate-functions"
             },
             {
+                "action": "git add src/generated-functions.php"
+            },
+            {
                 "action": "php composer.phar checks"
             }
         ]

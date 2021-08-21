@@ -220,13 +220,13 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void DrawPixel(int posX, int posY, Color color)`
 - [x] `void DrawPixelV(Vector2 position, Color color)`
 - [x] `void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color)`
-- [ ] `void DrawLineV(Vector2 startPos, Vector2 endPos, Color color)`
-- [ ] `void DrawLineEx(Vector2 startPos, Vector2 endPos, float thick, Color color)`
+- [x] `void DrawLineV(Vector2 startPos, Vector2 endPos, Color color)`
+- [x] `void DrawLineEx(Vector2 startPos, Vector2 endPos, float thick, Color color)`
 - [x] `void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color)`
 - [ ] `void DrawLineStrip(Vector2 *points, int pointsCount, Color color)`
 - [x] `void DrawCircle(int centerX, int centerY, float radius, Color color)`
-- [ ] `void DrawCircleSector(Vector2 center, float radius, int startAngle, int endAngle, int segments, Color color)`
-- [ ] `void DrawCircleSectorLines(Vector2 center, float radius, int startAngle, int endAngle, int segments, Color color)`
+- [x] `void DrawCircleSector(Vector2 center, float radius, int startAngle, int endAngle, int segments, Color color)`
+- [x] `void DrawCircleSectorLines(Vector2 center, float radius, int startAngle, int endAngle, int segments, Color color)`
 - [x] `void DrawCircleGradient(int centerX, int centerY, float radius, Color color1, Color color2)`
 - [x] `void DrawCircleV(Vector2 center, float radius, Color color)`
 - [x] `void DrawCircleLines(int centerX, int centerY, float radius, Color color)`

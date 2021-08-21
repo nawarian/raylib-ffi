@@ -239,6 +239,42 @@ final class Raylib implements
         $this->ffi->DrawCircleLines($centerX, $centerY, $radius, $color->toCData($this->ffi));
     }
 
+    public function drawCircleSector(
+        Types\Vector2 $center,
+        float $radius,
+        int $startAngle,
+        int $endAngle,
+        int $segments,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawCircleSector(
+            $center->toCData($this->ffi),
+            $radius,
+            $startAngle,
+            $endAngle,
+            $segments,
+            $color->toCData($this->ffi)
+        );
+    }
+
+    public function drawCircleSectorLines(
+        Types\Vector2 $center,
+        float $radius,
+        int $startAngle,
+        int $endAngle,
+        int $segments,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawCircleSectorLines(
+            $center->toCData($this->ffi),
+            $radius,
+            $startAngle,
+            $endAngle,
+            $segments,
+            $color->toCData($this->ffi)
+        );
+    }
+
     public function drawCircleV(Types\Vector2 $center, float $radius, Types\Color $color): void
     {
         $this->ffi->DrawCircleV($center->toCData($this->ffi), $radius, $color->toCData($this->ffi));
@@ -292,6 +328,25 @@ final class Raylib implements
     public function drawLine(int $x0, int $y0, int $x1, int $y1, Types\Color $color): void
     {
         $this->ffi->DrawLine($x0, $y0, $x1, $y1, $color->toCData($this->ffi));
+    }
+
+    public function drawLineV(Types\Vector2 $startPos, Types\Vector2 $endPos, Types\Color $color): void
+    {
+        $this->ffi->DrawLineV(
+            $startPos->toCData($this->ffi),
+            $endPos->toCData($this->ffi),
+            $color->toCData($this->ffi)
+        );
+    }
+
+    public function drawLineEx(Types\Vector2 $startPos, Types\Vector2 $endPos, float $thick, Types\Color $color): void
+    {
+        $this->ffi->DrawLineEx(
+            $startPos->toCData($this->ffi),
+            $endPos->toCData($this->ffi),
+            $thick,
+            $color->toCData($this->ffi)
+        );
     }
 
     public function drawLineBezier(
