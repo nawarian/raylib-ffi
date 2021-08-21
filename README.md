@@ -22,7 +22,16 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-// use statements omitted
+use Nawarian\Raylib\Types\Color;
+use function Nawarian\Raylib\{
+    BeginDrawing,
+    ClearBackground,
+    CloseWindow,
+    DrawText,
+    EndDrawing,
+    InitWindow,
+    WindowShouldClose
+};
 
 InitWindow(800, 600, 'My raylib Window using FFI');
 
