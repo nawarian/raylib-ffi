@@ -8,35 +8,32 @@ use Nawarian\Raylib\Types\Color;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$raylibFactory = new RaylibFactory();
-$raylib = $raylibFactory->newInstance();
-
 // Initialization
 //--------------------------------------------------------------------------------------
 $screenWidth = 800;
 $screenHeight = 450;
 
-$raylib->initWindow($screenWidth, $screenHeight, 'raylib [textures] example - blend modes');
+\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, 'raylib [textures] example - blend modes');
 
 // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
-$bgImage = $raylib->loadImage(__DIR__ . '/resources/cyberpunk_street_background.png');     // Loaded in CPU memory (RAM)
-$bgTexture = $raylib->loadTextureFromImage($bgImage);          // Image converted to texture, GPU memory (VRAM)
+$bgImage = \Nawarian\Raylib\LoadImage(__DIR__ . '/resources/cyberpunk_street_background.png');     // Loaded in CPU memory (RAM)
+$bgTexture = \Nawarian\Raylib\LoadTextureFromImage($bgImage);          // Image converted to texture, GPU memory (VRAM)
 
-$fgImage = $raylib->loadImage(__DIR__ . '/resources/cyberpunk_street_foreground.png');     // Loaded in CPU memory (RAM)
-$fgTexture = $raylib->loadTextureFromImage($fgImage);          // Image converted to texture, GPU memory (VRAM)
+$fgImage = \Nawarian\Raylib\LoadImage(__DIR__ . '/resources/cyberpunk_street_foreground.png');     // Loaded in CPU memory (RAM)
+$fgTexture = \Nawarian\Raylib\LoadTextureFromImage($fgImage);          // Image converted to texture, GPU memory (VRAM)
 
 // Once image has been converted to texture and uploaded to VRAM, it can be unloaded from RAM
-$raylib->unloadImage($bgImage);
-$raylib->unloadImage($fgImage);
+\Nawarian\Raylib\UnloadImage($bgImage);
+\Nawarian\Raylib\UnloadImage($fgImage);
 
 $blendCountMax = 4;
 $blendMode = 0;
 
 // Main game loop
-while (!$raylib->windowShouldClose()) {  // Detect window close button or ESC key
+while (!\Nawarian\Raylib\WindowShouldClose()) {  // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
-    if ($raylib->isKeyPressed(Raylib::KEY_SPACE)) {
+    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_SPACE)) {
         if ($blendMode >= ($blendCountMax - 1)) {
             $blendMode = 0;
         } else {
@@ -47,87 +44,47 @@ while (!$raylib->windowShouldClose()) {  // Detect window close button or ESC ke
 
     // Draw
     //----------------------------------------------------------------------------------
-    $raylib->beginDrawing();
+    \Nawarian\Raylib\BeginDrawing();
 
-        $raylib->clearBackground(Color::rayWhite());
+        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
 
         // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
-        $raylib->drawTexture(
-            $bgTexture,
-            (int) ($screenWidth / 2 - $bgTexture->width / 2),
-            (int) ($screenHeight / 2 - $bgTexture->height / 2),
-            Color::white()
-        );
+        \Nawarian\Raylib\DrawTexture($bgTexture, (int) ($screenWidth / 2 - $bgTexture->width / 2), (int) ($screenHeight / 2 - $bgTexture->height / 2), Color::white());
 
         // Apply the blend mode and then draw the foreground texture
-        $raylib->beginBlendMode($blendMode);
-            $raylib->drawTexture(
-                $fgTexture,
-                (int) ($screenWidth / 2 - $fgTexture->width / 2),
-                (int) ($screenHeight / 2 - $fgTexture->height / 2),
-                Color::white()
-            );
-        $raylib->endBlendMode();
+        \Nawarian\Raylib\BeginBlendMode($blendMode);
+            \Nawarian\Raylib\DrawTexture($fgTexture, (int) ($screenWidth / 2 - $fgTexture->width / 2), (int) ($screenHeight / 2 - $fgTexture->height / 2), Color::white());
+        \Nawarian\Raylib\EndBlendMode();
 
         // Draw the texts
-        $raylib->drawText('Press SPACE to change blend modes.', 310, 350, 10, Color::gray());
+        \Nawarian\Raylib\DrawText('Press SPACE to change blend modes.', 310, 350, 10, Color::gray());
 
         switch ($blendMode) {
             case Raylib::BLEND_ALPHA:
-                $raylib->drawText(
-                    'Current: BLEND_ALPHA',
-                    (int) (($screenWidth / 2) - 60),
-                    370,
-                    10,
-                    Color::gray()
-                );
+                \Nawarian\Raylib\DrawText('Current: BLEND_ALPHA', (int) (($screenWidth / 2) - 60), 370, 10, Color::gray());
                 break;
             case Raylib::BLEND_ADDITIVE:
-                $raylib->drawText(
-                    'Current: BLEND_ADDITIVE',
-                    (int) (($screenWidth / 2) - 60),
-                    370,
-                    10,
-                    Color::gray()
-                );
+                \Nawarian\Raylib\DrawText('Current: BLEND_ADDITIVE', (int) (($screenWidth / 2) - 60), 370, 10, Color::gray());
                 break;
             case Raylib::BLEND_MULTIPLIED:
-                $raylib->drawText(
-                    'Current: BLEND_MULTIPLIED',
-                    (int) (($screenWidth / 2) - 60),
-                    370,
-                    10,
-                    Color::gray()
-                );
+                \Nawarian\Raylib\DrawText('Current: BLEND_MULTIPLIED', (int) (($screenWidth / 2) - 60), 370, 10, Color::gray());
                 break;
             case Raylib::BLEND_ADD_COLORS:
-                $raylib->drawText(
-                    'Current: BLEND_ADD_COLORS',
-                    (int) (($screenWidth / 2) - 60),
-                    370,
-                    10,
-                    Color::gray()
-                );
+                \Nawarian\Raylib\DrawText('Current: BLEND_ADD_COLORS', (int) (($screenWidth / 2) - 60), 370, 10, Color::gray());
                 break;
         }
 
-        $raylib->drawText(
-            '(c) Cyberpunk Street Environment by Luis Zuno (@ansimuz)',
-            $screenWidth - 330,
-            $screenHeight - 20,
-            10,
-            Color::gray()
-        );
+        \Nawarian\Raylib\DrawText('(c) Cyberpunk Street Environment by Luis Zuno (@ansimuz)', $screenWidth - 330, $screenHeight - 20, 10, Color::gray());
 
     // phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact
-    $raylib->endDrawing();
+    \Nawarian\Raylib\EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-$raylib->unloadTexture($fgTexture); // Unload foreground texture
-$raylib->unloadTexture($bgTexture); // Unload background texture
+\Nawarian\Raylib\UnloadTexture($fgTexture); // Unload foreground texture
+\Nawarian\Raylib\UnloadTexture($bgTexture); // Unload background texture
 
-$raylib->closeWindow();            // Close window and OpenGL context
+\Nawarian\Raylib\CloseWindow();            // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

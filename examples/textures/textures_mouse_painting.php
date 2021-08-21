@@ -11,9 +11,6 @@ use Nawarian\Raylib\Types\Vector2;
 
 require_once  __DIR__ . '/../../vendor/autoload.php';
 
-$raylibFactory = new RaylibFactory();
-$raylib = $raylibFactory->newInstance();
-
 const MAX_COLORS_COUNT = 23;    // Number of colors available
 
 // Initialization
@@ -21,7 +18,7 @@ const MAX_COLORS_COUNT = 23;    // Number of colors available
 $screenWidth = 800;
 $screenHeight = 450;
 
-$raylib->initWindow($screenWidth, $screenHeight, 'raylib [textures] example - mouse painting');
+\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, 'raylib [textures] example - mouse painting');
 
 // Colours to choose from
 $colors = [
@@ -58,30 +55,30 @@ $showSaveMessage = false;
 $saveMessageCounter = 0;
 
 // Create a RenderTexture2D to use as a canvas
-$target = $raylib->loadRenderTexture($screenWidth, $screenHeight);
+$target = \Nawarian\Raylib\LoadRenderTexture($screenWidth, $screenHeight);
 
 // Clear render texture before entering the game loop
-$raylib->beginTextureMode(new RenderTexture2D(
+\Nawarian\Raylib\BeginTextureMode(new RenderTexture2D(
     $target->id,
     $target->texture,
     $target->depth
 ));
-$raylib->clearBackground($colors[0]);
-$raylib->endTextureMode();
+\Nawarian\Raylib\ClearBackground($colors[0]);
+\Nawarian\Raylib\EndTextureMode();
 
-$raylib->setTargetFPS(120);     // Set our game to run at 120 frames-per-second
+\Nawarian\Raylib\SetTargetFPS(120);     // Set our game to run at 120 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!$raylib->windowShouldClose()) {      // Detect window close button or ESC key
+while (!\Nawarian\Raylib\WindowShouldClose()) {      // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
-    $mousePos = $raylib->getMousePosition();
+    $mousePos = \Nawarian\Raylib\GetMousePosition();
 
     // Move between colors with keys
-    if ($raylib->isKeyPressed(Raylib::KEY_RIGHT)) {
+    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_RIGHT)) {
         $colorSelected++;
-    } elseif ($raylib->isKeyPressed(Raylib::KEY_LEFT)) {
+    } elseif (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_LEFT)) {
         $colorSelected--;
     }
 
@@ -93,7 +90,7 @@ while (!$raylib->windowShouldClose()) {      // Detect window close button or ES
 
     // Choose color with mouse
     for ($i = 0; $i < MAX_COLORS_COUNT; $i++) {
-        if ($raylib->checkCollisionPointRec($mousePos, $colorsRecs[$i])) {
+        if (\Nawarian\Raylib\CheckCollisionPointRec($mousePos, $colorsRecs[$i])) {
             $colorMouseHover = $i;
             break;
         } else {
@@ -101,13 +98,13 @@ while (!$raylib->windowShouldClose()) {      // Detect window close button or ES
         }
     }
 
-    if (($colorMouseHover >= 0) && $raylib->isMouseButtonPressed(Raylib::MOUSE_LEFT_BUTTON)) {
+    if (($colorMouseHover >= 0) && \Nawarian\Raylib\IsMouseButtonPressed(Raylib::MOUSE_LEFT_BUTTON)) {
         $colorSelected = $colorMouseHover;
         $colorSelectedPrev = $colorSelected;
     }
 
     // Change brush size
-    $brushSize += $raylib->getMouseWheelMove() * 5;
+    $brushSize += \Nawarian\Raylib\GetMouseWheelMove() * 5;
 
     if ($brushSize < 2) {
         $brushSize = 2;
@@ -117,56 +114,46 @@ while (!$raylib->windowShouldClose()) {      // Detect window close button or ES
         $brushSize = 50;
     }
 
-    if ($raylib->isKeyPressed(Raylib::KEY_C)) {
+    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_C)) {
         // Clear render texture to clear color
-        $raylib->beginTextureMode($target);
-        $raylib->clearBackground($colors[0]);
-        $raylib->endTextureMode();
+        \Nawarian\Raylib\BeginTextureMode($target);
+        \Nawarian\Raylib\ClearBackground($colors[0]);
+        \Nawarian\Raylib\EndTextureMode();
     }
 
     if (
-        $raylib->isMouseButtonDown(Raylib::MOUSE_LEFT_BUTTON) ||
-        ($raylib->getGestureDetected() === Raylib::GESTURE_DRAG)
+        \Nawarian\Raylib\IsMouseButtonDown(Raylib::MOUSE_LEFT_BUTTON) ||
+        (\Nawarian\Raylib\GetGestureDetected() === Raylib::GESTURE_DRAG)
     ) {
         // Paint circle into render texture
         // NOTE: To avoid discontinuous circles, we could store
         // previous-next mouse points and just draw a line using brush size
-        $raylib->beginTextureMode($target);
+        \Nawarian\Raylib\BeginTextureMode($target);
 
         if ($mousePos->y > 50) {
-            $raylib->drawCircle(
-                (int) $mousePos->x,
-                (int) $mousePos->y,
-                $brushSize,
-                $colors[$colorSelected]
-            );
+            \Nawarian\Raylib\DrawCircle((int) $mousePos->x, (int) $mousePos->y, $brushSize, $colors[$colorSelected]);
         }
 
-        $raylib->endTextureMode();
+        \Nawarian\Raylib\EndTextureMode();
     }
 
-    if ($raylib->isMouseButtonDown(Raylib::MOUSE_RIGHT_BUTTON)) {
+    if (\Nawarian\Raylib\IsMouseButtonDown(Raylib::MOUSE_RIGHT_BUTTON)) {
         $colorSelected = 0;
 
         // Erase circle from render texture
-        $raylib->beginTextureMode($target);
+        \Nawarian\Raylib\BeginTextureMode($target);
 
         if ($mousePos->y > 50) {
-            $raylib->drawCircle(
-                (int) $mousePos->x,
-                (int) $mousePos->y,
-                $brushSize,
-                $colors[0]
-            );
+            \Nawarian\Raylib\DrawCircle((int) $mousePos->x, (int) $mousePos->y, $brushSize, $colors[0]);
         }
 
-        $raylib->endTextureMode();
+        \Nawarian\Raylib\EndTextureMode();
     } else {
         $colorSelected = $colorSelectedPrev;
     }
 
     // Check mouse hover save button
-    if ($raylib->checkCollisionPointRec($mousePos, $btnSaveRec)) {
+    if (\Nawarian\Raylib\CheckCollisionPointRec($mousePos, $btnSaveRec)) {
         $btnSaveMouseHover = true;
     } else {
         $btnSaveMouseHover = false;
@@ -175,13 +162,13 @@ while (!$raylib->windowShouldClose()) {      // Detect window close button or ES
     // Image saving logic
     // NOTE: Saving painted texture to a default named image
     if (
-        ($btnSaveMouseHover && $raylib->isMouseButtonReleased(Raylib::MOUSE_LEFT_BUTTON)) ||
-        $raylib->isKeyPressed(Raylib::KEY_S)
+        ($btnSaveMouseHover && \Nawarian\Raylib\IsMouseButtonReleased(Raylib::MOUSE_LEFT_BUTTON)) ||
+        \Nawarian\Raylib\IsKeyPressed(Raylib::KEY_S)
     ) {
-        $image = $raylib->getTextureData($target->texture);
-        $raylib->imageFlipVertical($image);
-        $raylib->exportImage($image, __DIR__ . '/resources/my_amazing_texture_painting.png');
-        $raylib->unloadImage($image);
+        $image = \Nawarian\Raylib\GetTextureData($target->texture);
+        \Nawarian\Raylib\ImageFlipVertical($image);
+        \Nawarian\Raylib\ExportImage($image, __DIR__ . '/resources/my_amazing_texture_painting.png');
+        \Nawarian\Raylib\UnloadImage($image);
         $showSaveMessage = true;
     }
 
@@ -199,95 +186,63 @@ while (!$raylib->windowShouldClose()) {      // Detect window close button or ES
     // Draw
     //----------------------------------------------------------------------------------
     //phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
-    $raylib->beginDrawing();
+    \Nawarian\Raylib\BeginDrawing();
 
-        $raylib->clearBackground(Color::rayWhite());
+        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
 
         // NOTE: Render texture must be y-flipped due to default OpenGL coordinates (left-bottom)
-        $raylib->drawTextureRec(
-            $target->texture,
-            new Rectangle(0.0, 0.0, (float) $target->texture->width, -$target->texture->height),
-            new Vector2(0.0, 0.0),
-            Color::white()
-        );
+        \Nawarian\Raylib\DrawTextureRec($target->texture, new Rectangle(0.0, 0.0, (float) $target->texture->width, -$target->texture->height), new Vector2(0.0, 0.0), Color::white());
 
         // Draw drawing circle for reference
         if ($mousePos->y > 50) {
-            if ($raylib->isMouseButtonDown(Raylib::MOUSE_RIGHT_BUTTON)) {
-                $raylib->drawCircleLines((int) $mousePos->x, (int) $mousePos->y, $brushSize, Color::gray());
+            if (\Nawarian\Raylib\IsMouseButtonDown(Raylib::MOUSE_RIGHT_BUTTON)) {
+                \Nawarian\Raylib\DrawCircleLines((int) $mousePos->x, (int) $mousePos->y, $brushSize, Color::gray());
             } else {
-                $raylib->drawCircle(
-                    $raylib->getMouseX(),
-                    $raylib->getMouseY(),
-                    $brushSize,
-                    $colors[$colorSelected]
-                );
+                \Nawarian\Raylib\DrawCircle(\Nawarian\Raylib\GetMouseX(), \Nawarian\Raylib\GetMouseY(), $brushSize, $colors[$colorSelected]);
             }
         }
 
         // Draw top panel
-        $raylib->drawRectangle(0.0, 0.0, $raylib->getScreenWidth(), 50.0, Color::rayWhite());
-        $raylib->drawLine(0, 50, $raylib->getScreenWidth(), 50, Color::lightGray());
+        \Nawarian\Raylib\DrawRectangle(0.0, 0.0, \Nawarian\Raylib\GetScreenWidth(), 50.0, Color::rayWhite());
+        \Nawarian\Raylib\DrawLine(0, 50, \Nawarian\Raylib\GetScreenWidth(), 50, Color::lightGray());
 
         // Draw color selection rectangles
         for ($i = 0; $i < MAX_COLORS_COUNT; $i++) {
-            $raylib->drawRectangleRec($colorsRecs[$i], $colors[$i]);
+            \Nawarian\Raylib\DrawRectangleRec($colorsRecs[$i], $colors[$i]);
         }
 
-        $raylib->drawRectangleLines(10.0, 10.0, 30.0, 30.0, Color::lightGray());
+        \Nawarian\Raylib\DrawRectangleLines(10.0, 10.0, 30.0, 30.0, Color::lightGray());
 
         if ($colorMouseHover >= 0) {
-            $raylib->drawRectangleRec($colorsRecs[$colorMouseHover], $raylib->fade(Color::white(), 0.6));
+            \Nawarian\Raylib\DrawRectangleRec($colorsRecs[$colorMouseHover], \Nawarian\Raylib\Fade(Color::white(), 0.6));
         }
 
-        $raylib->drawRectangleLinesEx(
-            new Rectangle(
-                $colorsRecs[$colorSelected]->x - 2,
-                $colorsRecs[$colorSelected]->y - 2,
-                $colorsRecs[$colorSelected]->width + 4,
-                $colorsRecs[$colorSelected]->height + 4
-            ),
-            2,
-            Color::black()
-        );
+        \Nawarian\Raylib\DrawRectangleLinesEx(new Rectangle(
+            $colorsRecs[$colorSelected]->x - 2,
+            $colorsRecs[$colorSelected]->y - 2,
+            $colorsRecs[$colorSelected]->width + 4,
+            $colorsRecs[$colorSelected]->height + 4
+        ), 2, Color::black());
 
         // Draw save image button
-        $raylib->drawRectangleLinesEx($btnSaveRec, 2, $btnSaveMouseHover ? Color::red() : Color::black());
-        $raylib->drawText('SAVE!', 755, 20, 10, $btnSaveMouseHover ? Color::red() : Color::black());
+        \Nawarian\Raylib\DrawRectangleLinesEx($btnSaveRec, 2, $btnSaveMouseHover ? Color::red() : Color::black());
+        \Nawarian\Raylib\DrawText('SAVE!', 755, 20, 10, $btnSaveMouseHover ? Color::red() : Color::black());
 
         // Draw save image message
         if ($showSaveMessage) {
-            $raylib->drawRectangle(
-                0.0,
-                0.0,
-                (float) $raylib->getScreenWidth(),
-                (float) $raylib->getScreenHeight(),
-                $raylib->fade(Color::rayWhite(), 0.8)
-            );
+            \Nawarian\Raylib\DrawRectangle(0.0, 0.0, (float) \Nawarian\Raylib\GetScreenWidth(), (float) \Nawarian\Raylib\GetScreenHeight(), \Nawarian\Raylib\Fade(Color::rayWhite(), 0.8));
 
-            $raylib->drawRectangle(
-                0.0,
-                150.0,
-                (float) $raylib->getScreenWidth(),
-                80.0,
-                Color::black()
-            );
+            \Nawarian\Raylib\DrawRectangle(0.0, 150.0, (float) \Nawarian\Raylib\GetScreenWidth(), 80.0, Color::black());
 
-            $raylib->drawText(
-                'IMAGE SAVED:  my_amazing_texture_painting.png',
-                150,
-                180,
-                20,
-                Color::rayWhite()
-            );
+            \Nawarian\Raylib\DrawText('IMAGE SAVED:  my_amazing_texture_painting.png', 150, 180, 20, Color::rayWhite());
         }
-    $raylib->endDrawing();
+    \Nawarian\Raylib\EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-$raylib->unloadRenderTexture($target);      // Unload render texture
+\Nawarian\Raylib\UnloadRenderTexture($target);      // Unload render texture
 
-$raylib->closeWindow();     // Close window and OpenGL context
+\Nawarian\Raylib\CloseWindow();     // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

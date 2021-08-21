@@ -9,9 +9,6 @@ use Nawarian\Raylib\Types\{Color, Rectangle, Vector2};
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/easings.php';
 
-$raylibFactory = new RaylibFactory();
-$raylib = $raylibFactory->newInstance();
-
 const RECS_WIDTH = 50;
 const RECS_HEIGHT = 50;
 
@@ -25,7 +22,7 @@ const PLAY_TIME_IN_FRAMES = 240; // At 60 fps = 4 seconds
 $screenWidth = 800;
 $screenHeight = 450;
 
-$raylib->initWindow($screenWidth, $screenHeight, 'raylib [shapes] example - easings rectangle array');
+\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, 'raylib [shapes] example - easings rectangle array');
 
 $recs = [];
 for ($y = 0; $y < MAX_RECS_Y; $y++) {
@@ -43,11 +40,11 @@ $rotation = 0.0;
 $framesCounter = 0;
 $state = 0;                  // Rectangles animation state: 0-Playing, 1-Finished
 
-$raylib->setTargetFPS(60);               // Set our game to run at 60 frames-per-second
+\Nawarian\Raylib\SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC key
+while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
     if ($state === 0) {
@@ -71,7 +68,7 @@ while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC k
 
             $rotation = EaseLinearIn($framesCounter, 0.0, 360.0, PLAY_TIME_IN_FRAMES);
         }
-    } elseif ($raylib->isKeyPressed(Raylib::KEY_SPACE)) {
+    } elseif (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_SPACE)) {
         // When animation has finished, press space to restart
         $framesCounter = 0;
 
@@ -86,29 +83,24 @@ while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC k
 
     // Draw
     //----------------------------------------------------------------------------------
-    $raylib->beginDrawing();
+    \Nawarian\Raylib\BeginDrawing();
         // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
-        $raylib->clearBackground(Color::rayWhite());
+        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
 
         if ($state === 0) {
             for ($i = 0; $i < MAX_RECS_X * MAX_RECS_Y; $i++) {
-                $raylib->drawRectanglePro(
-                    $recs[$i],
-                    new Vector2($recs[$i]->width / 2, $recs[$i]->height / 2),
-                    $rotation,
-                    Color::red(),
-                );
+                \Nawarian\Raylib\DrawRectanglePro($recs[$i], new Vector2($recs[$i]->width / 2, $recs[$i]->height / 2), $rotation, Color::red());
             }
         } else {
-            $raylib->drawText('PRESS [SPACE] TO PLAY AGAIN!', 240, 200, 20, Color::gray());
+            \Nawarian\Raylib\DrawText('PRESS [SPACE] TO PLAY AGAIN!', 240, 200, 20, Color::gray());
         }
 
     // phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact
-    $raylib->endDrawing();
+    \Nawarian\Raylib\EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-$raylib->closeWindow();        // Close window and OpenGL context
+\Nawarian\Raylib\CloseWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

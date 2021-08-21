@@ -15,9 +15,6 @@ use Nawarian\Raylib\Types\{
     Vector2,
 };
 
-$raylibFactory = new RaylibFactory();
-$raylib = $raylibFactory->newInstance();
-
 const MAX_BUILDINGS = 100;
 
 // Initialization
@@ -25,7 +22,7 @@ const MAX_BUILDINGS = 100;
 $screenWidth = 800;
 $screenHeight = 450;
 
-$raylib->initWindow($screenWidth, $screenHeight, "raylib [core] example - 2d camera");
+\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, "raylib [core] example - 2d camera");
 
 $player = new Rectangle(400, 280, 40, 40);
 $buildings = [];
@@ -37,8 +34,8 @@ for ($i = 0; $i < MAX_BUILDINGS; $i++) {
     $buildings[$i] = new Rectangle(
         0,
         0,
-        $raylib->getRandomValue(50, 200),
-        $raylib->getRandomValue(100, 800),
+        \Nawarian\Raylib\GetRandomValue(50, 200),
+        \Nawarian\Raylib\GetRandomValue(100, 800),
     );
     $buildings[$i]->y = $screenHeight - 130 - $buildings[$i]->height;
     $buildings[$i]->x = -6000 + $spacing;
@@ -46,9 +43,9 @@ for ($i = 0; $i < MAX_BUILDINGS; $i++) {
     $spacing += $buildings[$i]->width;
 
     $buildColors[$i] = new Color(
-        $raylib->getRandomValue(200, 240),
-        $raylib->getRandomValue(200, 240),
-        $raylib->getRandomValue(200, 250),
+        \Nawarian\Raylib\GetRandomValue(200, 240),
+        \Nawarian\Raylib\GetRandomValue(200, 240),
+        \Nawarian\Raylib\GetRandomValue(200, 250),
         255
     );
 }
@@ -60,18 +57,18 @@ $camera = new Camera2D(
     1.0,
 );
 
-$raylib->setTargetFPS(60);                   // Set our game to run at 60 frames-per-second
+\Nawarian\Raylib\SetTargetFPS(60);                   // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!$raylib->windowShouldClose()) {        // Detect window close button or ESC key
+while (!\Nawarian\Raylib\WindowShouldClose()) {        // Detect window close button or ESC key
 // Update
     //----------------------------------------------------------------------------------
 
     // Player movement
-    if ($raylib->isKeyDown(Raylib::KEY_RIGHT)) {
+    if (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_RIGHT)) {
         $player->x += 2;
-    } elseif ($raylib->isKeyDown(Raylib::KEY_LEFT)) {
+    } elseif (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_LEFT)) {
         $player->x -= 2;
     }
 
@@ -79,9 +76,9 @@ while (!$raylib->windowShouldClose()) {        // Detect window close button or 
     $camera->target = new Vector2($player->x + 20, $player->y + 20);
 
     // Camera rotation controls
-    if ($raylib->isKeyDown(Raylib::KEY_A)) {
+    if (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_A)) {
         $camera->rotation--;
-    } elseif ($raylib->isKeyDown(Raylib::KEY_S)) {
+    } elseif (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_S)) {
         $camera->rotation++;
     }
 
@@ -93,7 +90,7 @@ while (!$raylib->windowShouldClose()) {        // Detect window close button or 
     }
 
     // Camera zoom controls
-    $camera->zoom += $raylib->getMouseWheelMove() * 0.05;
+    $camera->zoom += \Nawarian\Raylib\GetMouseWheelMove() * 0.05;
 
     if ($camera->zoom > 3.0) {
         $camera->zoom = 3.0;
@@ -102,7 +99,7 @@ while (!$raylib->windowShouldClose()) {        // Detect window close button or 
     }
 
     // Camera reset (zoom and rotation)
-    if ($raylib->isKeyPressed(Raylib::KEY_R)) {
+    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_R)) {
         $camera->zoom = 1.0;
         $camera->rotation = 0.0;
     }
@@ -110,66 +107,46 @@ while (!$raylib->windowShouldClose()) {        // Detect window close button or 
 
     // Draw
     //----------------------------------------------------------------------------------
-    $raylib->beginDrawing();
+    \Nawarian\Raylib\BeginDrawing();
 
-        $raylib->clearBackground(
-            new Color(245, 245, 245, 255)
-        );
+        \Nawarian\Raylib\ClearBackground(new Color(245, 245, 245, 255));
 
-        $raylib->beginMode2D($camera);
+        \Nawarian\Raylib\BeginMode2D($camera);
 
-            $raylib->drawRectangle(
-                -6000,
-                320,
-                13000,
-                8000,
-                new Color(80, 80, 80, 255),
-            );
+            \Nawarian\Raylib\DrawRectangle(-6000, 320, 13000, 8000, new Color(80, 80, 80, 255));
 
     for ($i = 0; $i < MAX_BUILDINGS; $i++) {
-        $raylib->drawRectangleRec($buildings[$i], $buildColors[$i]);
+        \Nawarian\Raylib\DrawRectangleRec($buildings[$i], $buildColors[$i]);
     }
 
-            $raylib->drawRectangleRec($player, new Color(230, 41, 55, 255));
+            \Nawarian\Raylib\DrawRectangleRec($player, new Color(230, 41, 55, 255));
 
-            $raylib->drawLine(
-                (int) $camera->target->x,
-                (int) (-$screenHeight * 10),
-                (int) $camera->target->x,
-                (int) ($screenHeight * 10),
-                new Color(0, 228, 48, 255),
-            );
-            $raylib->drawLine(
-                (int) (-$screenWidth * 10),
-                (int) $camera->target->y,
-                (int) ($screenWidth * 10),
-                (int) $camera->target->y,
-                new Color(0, 228, 48, 255),
-            );
+            \Nawarian\Raylib\DrawLine((int) $camera->target->x, (int) (-$screenHeight * 10), (int) $camera->target->x, (int) ($screenHeight * 10), new Color(0, 228, 48, 255));
+            \Nawarian\Raylib\DrawLine((int) (-$screenWidth * 10), (int) $camera->target->y, (int) ($screenWidth * 10), (int) $camera->target->y, new Color(0, 228, 48, 255));
 
-        $raylib->endMode2D();
+        \Nawarian\Raylib\EndMode2D();
 
-        $raylib->drawText("SCREEN AREA", 640, 10, 20, new Color(230, 41, 55, 255));
+        \Nawarian\Raylib\DrawText("SCREEN AREA", 640, 10, 20, new Color(230, 41, 55, 255));
 
-        $raylib->drawRectangle(0, 0, $screenWidth, 5, new Color(230, 41, 55, 255));
-        $raylib->drawRectangle(0, 5, 5, $screenHeight - 10, new Color(230, 41, 55, 255));
-        $raylib->drawRectangle($screenWidth - 5, 5, 5, $screenHeight - 10, new Color(230, 41, 55, 255));
-        $raylib->drawRectangle(0, $screenHeight - 5, $screenWidth, 5, new Color(230, 41, 55, 255));
+        \Nawarian\Raylib\DrawRectangle(0, 0, $screenWidth, 5, new Color(230, 41, 55, 255));
+        \Nawarian\Raylib\DrawRectangle(0, 5, 5, $screenHeight - 10, new Color(230, 41, 55, 255));
+        \Nawarian\Raylib\DrawRectangle($screenWidth - 5, 5, 5, $screenHeight - 10, new Color(230, 41, 55, 255));
+        \Nawarian\Raylib\DrawRectangle(0, $screenHeight - 5, $screenWidth, 5, new Color(230, 41, 55, 255));
 
-        $raylib->drawRectangle(10, 10, 250, 113, $raylib->fade(new Color(102, 191, 255, 255), 0.5));
-        $raylib->drawRectangleLines(10, 10, 250, 113, new Color(0, 121, 241, 255));
+        \Nawarian\Raylib\DrawRectangle(10, 10, 250, 113, \Nawarian\Raylib\Fade(new Color(102, 191, 255, 255), 0.5));
+        \Nawarian\Raylib\DrawRectangleLines(10, 10, 250, 113, new Color(0, 121, 241, 255));
 
-        $raylib->drawText("Free 2d camera controls:", 20, 20, 10, new Color(0, 0, 0, 255));
-        $raylib->drawText("- Right/Left to move Offset", 40, 40, 10, new Color(80, 80, 80, 255));
-        $raylib->drawText("- Mouse Wheel to Zoom in-out", 40, 60, 10, new Color(80, 80, 80, 255));
-        $raylib->drawText("- A / S to Rotate", 40, 80, 10, new Color(80, 80, 80, 255));
-        $raylib->drawText("- R to reset Zoom and Rotation", 40, 100, 10, new Color(80, 80, 80, 255));
+        \Nawarian\Raylib\DrawText("Free 2d camera controls:", 20, 20, 10, new Color(0, 0, 0, 255));
+        \Nawarian\Raylib\DrawText("- Right/Left to move Offset", 40, 40, 10, new Color(80, 80, 80, 255));
+        \Nawarian\Raylib\DrawText("- Mouse Wheel to Zoom in-out", 40, 60, 10, new Color(80, 80, 80, 255));
+        \Nawarian\Raylib\DrawText("- A / S to Rotate", 40, 80, 10, new Color(80, 80, 80, 255));
+        \Nawarian\Raylib\DrawText("- R to reset Zoom and Rotation", 40, 100, 10, new Color(80, 80, 80, 255));
 
-    $raylib->endDrawing();
+    \Nawarian\Raylib\EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-$raylib->closeWindow();        // Close window and OpenGL context
+\Nawarian\Raylib\CloseWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

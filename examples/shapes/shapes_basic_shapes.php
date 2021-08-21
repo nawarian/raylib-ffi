@@ -7,21 +7,18 @@ use Nawarian\Raylib\Types\{Color, Vector2};
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$raylibFactory = new RaylibFactory();
-$raylib = $raylibFactory->newInstance();
-
 // Initialization
 //--------------------------------------------------------------------------------------
 $screenWidth = 800;
 $screenHeight = 450;
 
-$raylib->initWindow($screenWidth, $screenHeight, 'raylib [shapes] example - basic shapes drawing');
+\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, 'raylib [shapes] example - basic shapes drawing');
 
-$raylib->setTargetFPS(60);               // Set our game to run at 60 frames-per-second
+\Nawarian\Raylib\SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC key
+while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button or ESC key
 // Update
 //----------------------------------------------------------------------------------
 // TODO: Update your variables here
@@ -29,51 +26,34 @@ while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC k
 
 // Draw
 //----------------------------------------------------------------------------------
-    $raylib->beginDrawing();
-        $raylib->clearBackground(Color::rayWhite());
+    \Nawarian\Raylib\BeginDrawing();
+        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
 
-        $raylib->drawText('some basic shapes available on raylib', 20, 20, 20, Color::darkGray());
+        \Nawarian\Raylib\DrawText('some basic shapes available on raylib', 20, 20, 20, Color::darkGray());
 
-        $raylib->drawCircle((int) ($screenWidth / 4), 120, 35, Color::darkBlue());
+        \Nawarian\Raylib\DrawCircle((int) ($screenWidth / 4), 120, 35, Color::darkBlue());
 
-        $raylib->drawRectangle((int) ($screenWidth / 4 * 2 - 60), 100, 120, 60, Color::red());
+        \Nawarian\Raylib\DrawRectangle((int) ($screenWidth / 4 * 2 - 60), 100, 120, 60, Color::red());
         // NOTE: Uses QUADS internally, not lines
-        $raylib->drawRectangleLines((int) ($screenWidth / 4 * 2 - 40), 320, 80, 60, Color::orange());
-        $raylib->drawRectangleGradientH(
-            (int) ($screenWidth / 4 * 2 - 90),
-            170,
-            180,
-            130,
-            Color::maroon(),
-            Color::gold(),
-        );
+        \Nawarian\Raylib\DrawRectangleLines((int) ($screenWidth / 4 * 2 - 40), 320, 80, 60, Color::orange());
+        \Nawarian\Raylib\DrawRectangleGradientH((int) ($screenWidth / 4 * 2 - 90), 170, 180, 130, Color::maroon(), Color::gold());
 
-        $raylib->drawTriangle(
-            new Vector2($screenWidth / 4 * 3, 80),
-            new Vector2($screenWidth / 4 * 3 - 60, 150),
-            new Vector2($screenWidth / 4 * 3 + 60, 150),
-            Color::violet(),
-        );
+        \Nawarian\Raylib\DrawTriangle(new Vector2($screenWidth / 4 * 3, 80), new Vector2($screenWidth / 4 * 3 - 60, 150), new Vector2($screenWidth / 4 * 3 + 60, 150), Color::violet());
 
-        $raylib->drawPoly(new Vector2($screenWidth / 4 * 3, 320), 6, 80, 0, Color::brown());
+        \Nawarian\Raylib\DrawPoly(new Vector2($screenWidth / 4 * 3, 320), 6, 80, 0, Color::brown());
 
-        $raylib->drawCircleGradient((int) ($screenWidth / 4), 220, 60, Color::green(), Color::skyBlue());
+        \Nawarian\Raylib\DrawCircleGradient((int) ($screenWidth / 4), 220, 60, Color::green(), Color::skyBlue());
 
         // NOTE: We draw all LINES based shapes together to optimize internal drawing,
         // this way, all LINES are rendered in a single draw pass
-        $raylib->drawLine(18, 42, $screenWidth - 18, 42, Color::black());
-        $raylib->drawCircleLines((int) ($screenWidth / 4), 340, 80, Color::darkBlue());
-        $raylib->drawTriangleLines(
-            new Vector2((int) ($screenWidth / 4 * 3), 160),
-            new Vector2((int) ($screenWidth / 4 * 3 - 20), 230),
-            new Vector2((int) ($screenWidth / 4 * 3 + 20), 230),
-            Color::darkBlue(),
-        );
-    $raylib->endDrawing();
+        \Nawarian\Raylib\DrawLine(18, 42, $screenWidth - 18, 42, Color::black());
+        \Nawarian\Raylib\DrawCircleLines((int) ($screenWidth / 4), 340, 80, Color::darkBlue());
+        \Nawarian\Raylib\DrawTriangleLines(new Vector2((int) ($screenWidth / 4 * 3), 160), new Vector2((int) ($screenWidth / 4 * 3 - 20), 230), new Vector2((int) ($screenWidth / 4 * 3 + 20), 230), Color::darkBlue());
+    \Nawarian\Raylib\EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-$raylib->closeWindow();        // Close window and OpenGL context
+\Nawarian\Raylib\CloseWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

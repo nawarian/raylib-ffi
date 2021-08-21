@@ -8,9 +8,6 @@ use Nawarian\Raylib\Types\{Color, Rectangle};
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$raylibFactory = new RaylibFactory();
-$raylib = $raylibFactory->newInstance();
-
 const MAX_COLORS_COUNT = 21;
 
 // Initialization
@@ -18,7 +15,7 @@ const MAX_COLORS_COUNT = 21;
 $screenWidth = 800;
 $screenHeight = 450;
 
-$raylib->initWindow($screenWidth, $screenHeight, 'raylib [shapes] example - colors palette');
+\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, 'raylib [shapes] example - colors palette');
 
 $colors = [
     Color::darkGray(),
@@ -63,17 +60,17 @@ for ($i = 0; $i < MAX_COLORS_COUNT; $i++) {
 
 $colorState = array_fill(0, MAX_COLORS_COUNT, 0); // Color state: 0-DEFAULT, 1-MOUSE_HOVER
 
-$raylib->setTargetFPS(60);               // Set our game to run at 60 frames-per-second
+\Nawarian\Raylib\SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC key
+while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
-    $mousePoint = $raylib->getMousePosition();
+    $mousePoint = \Nawarian\Raylib\GetMousePosition();
 
     for ($i = 0; $i < MAX_COLORS_COUNT; $i++) {
-        if ($raylib->checkCollisionPointRec($mousePoint, $colorsRecs[$i])) {
+        if (\Nawarian\Raylib\CheckCollisionPointRec($mousePoint, $colorsRecs[$i])) {
             $colorState[$i] = 1;
         } else {
             $colorState[$i] = 0;
@@ -83,49 +80,31 @@ while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC k
 
     // Draw
     //----------------------------------------------------------------------------------
-    $raylib->beginDrawing();
+    \Nawarian\Raylib\BeginDrawing();
         // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
 
-        $raylib->clearBackground(Color::rayWhite());
+        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
 
-        $raylib->drawText('raylib colors palette', 28, 42, 20, Color::blue());
-        $raylib->drawText(
-            'press SPACE to see all colors',
-            $raylib->getScreenWidth() - 180,
-            $raylib->getScreenHeight() - 40,
-            10,
-            Color::gray()
-        );
+        \Nawarian\Raylib\DrawText('raylib colors palette', 28, 42, 20, Color::blue());
+        \Nawarian\Raylib\DrawText('press SPACE to see all colors', \Nawarian\Raylib\GetScreenWidth() - 180, \Nawarian\Raylib\GetScreenHeight() - 40, 10, Color::gray());
 
         for ($i = 0; $i < MAX_COLORS_COUNT; $i++) {   // Draw all rectangles
-            $raylib->drawRectangleRec($colorsRecs[$i], $raylib->fade($colors[$i], $colorState[$i] ? 0.6 : 1.0));
-            if ($raylib->isKeyDown(Raylib::KEY_SPACE) || $colorState[$i]) {
-                $raylib->drawRectangle(
-                    $colorsRecs[$i]->x,
-                    $colorsRecs[$i]->y + $colorsRecs[$i]->height - 26,
-                    $colorsRecs[$i]->width,
-                    20,
-                    Color::black(),
-                );
-                $raylib->drawRectangleLinesEx($colorsRecs[$i], 6, $raylib->fade(Color::black(), 0.3));
-                $raylib->drawText(
-                    $colorNames[$i],
-                    (int) (
-                        $colorsRecs[$i]->x + $colorsRecs[$i]->width - $raylib->measureText($colorNames[$i], 10) - 12
-                    ),
-                    (int) ($colorsRecs[$i]->y + $colorsRecs[$i]->height - 20),
-                    10,
-                    $colors[$i]
-                );
+            \Nawarian\Raylib\DrawRectangleRec($colorsRecs[$i], \Nawarian\Raylib\Fade($colors[$i], $colorState[$i] ? 0.6 : 1.0));
+            if (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_SPACE) || $colorState[$i]) {
+                \Nawarian\Raylib\DrawRectangle($colorsRecs[$i]->x, $colorsRecs[$i]->y + $colorsRecs[$i]->height - 26, $colorsRecs[$i]->width, 20, Color::black());
+                \Nawarian\Raylib\DrawRectangleLinesEx($colorsRecs[$i], 6, \Nawarian\Raylib\Fade(Color::black(), 0.3));
+                \Nawarian\Raylib\DrawText($colorNames[$i], (int) (
+                    $colorsRecs[$i]->x + $colorsRecs[$i]->width - \Nawarian\Raylib\MeasureText($colorNames[$i], 10) - 12
+                ), (int) ($colorsRecs[$i]->y + $colorsRecs[$i]->height - 20), 10, $colors[$i]);
             }
         }
 
         // phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact
-    $raylib->endDrawing();
+    \Nawarian\Raylib\EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-$raylib->closeWindow();                // Close window and OpenGL context
+\Nawarian\Raylib\CloseWindow();                // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

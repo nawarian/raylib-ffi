@@ -7,15 +7,12 @@ use Nawarian\Raylib\Types\{Camera3D, Color, Vector3};
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$raylibFactory = new RaylibFactory();
-$raylib = $raylibFactory->newInstance();
-
 // Initialization
 //--------------------------------------------------------------------------------------
 $screenWidth = 800;
 $screenHeight = 450;
 
-$raylib->initWindow($screenWidth, $screenHeight, 'raylib [models] example - drawing billboards');
+\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, 'raylib [models] example - drawing billboards');
 
 // Define the camera to look into our 3d world
 $camera = new Camera3D(
@@ -26,42 +23,42 @@ $camera = new Camera3D(
     Camera3D::PROJECTION_PERSPECTIVE,
 );
 
-$bill = $raylib->loadTexture(__DIR__ . '/resources/billboard.png');     // Our texture billboard
+$bill = \Nawarian\Raylib\LoadTexture(__DIR__ . '/resources/billboard.png');     // Our texture billboard
 $billPosition = new Vector3(0, 2, 0); // Position where draw billboard
-$raylib->setCameraMode($camera, Camera3D::MODE_ORBITAL);  // Set an orbital camera mode
+\Nawarian\Raylib\SetCameraMode($camera, Camera3D::MODE_ORBITAL);  // Set an orbital camera mode
 
-$raylib->setTargetFPS(60);                       // Set our game to run at 60 frames-per-second
+\Nawarian\Raylib\SetTargetFPS(60);                       // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!$raylib->windowShouldClose()) {           // Detect window close button or ESC key
+while (!\Nawarian\Raylib\WindowShouldClose()) {           // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
-    $raylib->updateCamera($camera);              // Update camera
+    \Nawarian\Raylib\UpdateCamera($camera);              // Update camera
     //----------------------------------------------------------------------------------
 
     // Draw
     //----------------------------------------------------------------------------------
-    $raylib->beginDrawing();
-        $raylib->clearBackground(Color::rayWhite());
+    \Nawarian\Raylib\BeginDrawing();
+        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
 
-        $raylib->beginMode3D($camera);
+        \Nawarian\Raylib\BeginMode3D($camera);
 
-            $raylib->drawGrid(10, 1);        // Draw a grid
+            \Nawarian\Raylib\DrawGrid(10, 1);        // Draw a grid
 
-            $raylib->drawBillboard($camera, $bill, $billPosition, 2.0, Color::white());
+            \Nawarian\Raylib\DrawBillboard($camera, $bill, $billPosition, 2.0, Color::white());
 
-        $raylib->endMode3D();
+        \Nawarian\Raylib\EndMode3D();
 
-        $raylib->drawFPS(10, 10);
+        \Nawarian\Raylib\DrawFPS(10, 10);
 
-    $raylib->endDrawing();
+    \Nawarian\Raylib\EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-$raylib->unloadTexture($bill);        // Unload texture
+\Nawarian\Raylib\UnloadTexture($bill);        // Unload texture
 
-$raylib->closeWindow();              // Close window and OpenGL context
+\Nawarian\Raylib\CloseWindow();              // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

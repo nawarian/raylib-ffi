@@ -8,9 +8,6 @@ use Nawarian\Raylib\Types\{Color, Rectangle, Vector2};
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$raylibFactory = new RaylibFactory();
-$raylib = $raylibFactory->newInstance();
-
 const MOUSE_SCALE_MARK_SIZE = 12;
 
 // Initialization
@@ -18,35 +15,32 @@ const MOUSE_SCALE_MARK_SIZE = 12;
 $screenWidth = 800;
 $screenHeight = 450;
 
-$raylib->initWindow($screenWidth, $screenHeight, 'raylib [shapes] example - rectangle scaling mouse');
+\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, 'raylib [shapes] example - rectangle scaling mouse');
 
 $rec = new Rectangle(100, 100, 200, 80);
 
 $mouseScaleMode = false;
 
-$raylib->setTargetFPS(60);               // Set our game to run at 60 frames-per-second
+\Nawarian\Raylib\SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC key
+while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
-    $mousePosition = $raylib->getMousePosition();
+    $mousePosition = \Nawarian\Raylib\GetMousePosition();
 
     if (
-        $raylib->checkCollisionPointRec($mousePosition, $rec)
-        && $raylib->checkCollisionPointRec(
-            $mousePosition,
-            new Rectangle(
-                $rec->x + $rec->width - MOUSE_SCALE_MARK_SIZE,
-                $rec->y + $rec->height - MOUSE_SCALE_MARK_SIZE,
-                MOUSE_SCALE_MARK_SIZE,
-                MOUSE_SCALE_MARK_SIZE,
-            )
-        )
+        \Nawarian\Raylib\CheckCollisionPointRec($mousePosition, $rec)
+        && \Nawarian\Raylib\CheckCollisionPointRec($mousePosition, new Rectangle(
+            $rec->x + $rec->width - MOUSE_SCALE_MARK_SIZE,
+            $rec->y + $rec->height - MOUSE_SCALE_MARK_SIZE,
+            MOUSE_SCALE_MARK_SIZE,
+            MOUSE_SCALE_MARK_SIZE,
+        ))
     ) {
         $mouseScaleReady = true;
-        if ($raylib->isMouseButtonPressed(Raylib::MOUSE_LEFT_BUTTON)) {
+        if (\Nawarian\Raylib\IsMouseButtonPressed(Raylib::MOUSE_LEFT_BUTTON)) {
             $mouseScaleMode = true;
         }
     } else {
@@ -66,7 +60,7 @@ while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC k
             $rec->height = MOUSE_SCALE_MARK_SIZE;
         }
 
-        if ($raylib->isMouseButtonReleased(Raylib::MOUSE_LEFT_BUTTON)) {
+        if (\Nawarian\Raylib\IsMouseButtonReleased(Raylib::MOUSE_LEFT_BUTTON)) {
             $mouseScaleMode = false;
         }
     }
@@ -74,30 +68,25 @@ while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC k
 
     // Draw
     //----------------------------------------------------------------------------------
-    $raylib->beginDrawing();
-        $raylib->clearBackground(Color::rayWhite());
+    \Nawarian\Raylib\BeginDrawing();
+        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
         // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
 
-        $raylib->drawText('Scale rectangle dragging from bottom-right corner!', 10, 10, 20, Color::gray());
+        \Nawarian\Raylib\DrawText('Scale rectangle dragging from bottom-right corner!', 10, 10, 20, Color::gray());
 
-        $raylib->DrawRectangleRec($rec, $raylib->fade(Color::green(), 0.5));
+        \Nawarian\Raylib\DrawRectangleRec($rec, \Nawarian\Raylib\Fade(Color::green(), 0.5));
 
         if ($mouseScaleReady) {
-            $raylib->drawRectangleLinesEx($rec, 1, Color::red());
-            $raylib->drawTriangle(
-                new Vector2($rec->x + $rec->width - MOUSE_SCALE_MARK_SIZE, $rec->y + $rec->height),
-                new Vector2($rec->x + $rec->width, $rec->y + $rec->height),
-                new Vector2($rec->x + $rec->width, $rec->y + $rec->height - MOUSE_SCALE_MARK_SIZE),
-                Color::red(),
-            );
+            \Nawarian\Raylib\DrawRectangleLinesEx($rec, 1, Color::red());
+            \Nawarian\Raylib\DrawTriangle(new Vector2($rec->x + $rec->width - MOUSE_SCALE_MARK_SIZE, $rec->y + $rec->height), new Vector2($rec->x + $rec->width, $rec->y + $rec->height), new Vector2($rec->x + $rec->width, $rec->y + $rec->height - MOUSE_SCALE_MARK_SIZE), Color::red());
         }
 
     // phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact
-    $raylib->endDrawing();
+    \Nawarian\Raylib\EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-$raylib->closeWindow();        // Close window and OpenGL context
+\Nawarian\Raylib\CloseWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

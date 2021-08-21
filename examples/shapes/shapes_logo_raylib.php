@@ -7,21 +7,18 @@ use Nawarian\Raylib\Types\Color;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$raylibFactory = new RaylibFactory();
-$raylib = $raylibFactory->newInstance();
-
 // Initialization
 //--------------------------------------------------------------------------------------
 $screenWidth = 800;
 $screenHeight = 450;
 
-$raylib->initWindow($screenWidth, $screenHeight, 'raylib [shapes] example - raylib logo using shapes');
+\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, 'raylib [shapes] example - raylib logo using shapes');
 
-$raylib->setTargetFPS(60);               // Set our game to run at 60 frames-per-second
+\Nawarian\Raylib\SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC key
+while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
     // TODO: Update your variables here
@@ -29,26 +26,20 @@ while (!$raylib->windowShouldClose()) {   // Detect window close button or ESC k
 
     // Draw
     //----------------------------------------------------------------------------------
-    $raylib->beginDrawing();
-        $raylib->clearBackground(Color::rayWhite());
+    \Nawarian\Raylib\BeginDrawing();
+        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
 
-        $raylib->drawRectangle($screenWidth / 2 - 128, $screenHeight / 2 - 128, 256, 256, Color::black());
-        $raylib->drawRectangle($screenWidth / 2 - 112, $screenHeight / 2 - 112, 224, 224, Color::rayWhite());
-        $raylib->drawText(
-            'raylib',
-            (int) ($screenWidth / 2 - 44),
-            (int) ($screenHeight / 2 + 48),
-            50,
-            Color::black()
-        );
+        \Nawarian\Raylib\DrawRectangle($screenWidth / 2 - 128, $screenHeight / 2 - 128, 256, 256, Color::black());
+        \Nawarian\Raylib\DrawRectangle($screenWidth / 2 - 112, $screenHeight / 2 - 112, 224, 224, Color::rayWhite());
+        \Nawarian\Raylib\DrawText('raylib', (int) ($screenWidth / 2 - 44), (int) ($screenHeight / 2 + 48), 50, Color::black());
 
-        $raylib->drawText('this is NOT a texture!', 350, 370, 10, Color::gray());
+        \Nawarian\Raylib\DrawText('this is NOT a texture!', 350, 370, 10, Color::gray());
 
-    $raylib->endDrawing();
+    \Nawarian\Raylib\EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-$raylib->closeWindow();        // Close window and OpenGL context
+\Nawarian\Raylib\CloseWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------
