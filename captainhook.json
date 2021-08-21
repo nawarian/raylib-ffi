@@ -11,6 +11,9 @@
         "enabled": true,
         "actions": [
             {
+                "action": "php composer.phar generate-functions"
+            },
+            {
                 "action": "php composer.phar checks"
             }
         ]
