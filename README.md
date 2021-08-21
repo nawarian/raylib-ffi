@@ -16,28 +16,24 @@ See [examples/](https://github.com/nawarian/raylib-ffi/tree/main/examples/) for 
 Every program will look like the following at first:
 
 ```php
-/**
- * The factory class will create an instance based on your
- * Operating System.
- */
-$factory = new \Nawarian\Raylib\RaylibFactory();
-$raylib = $factory->newInstance();
+<?php
 
-/**
- * You may normally call Raylib functions from the $raylib object now
- */
-$raylib->initWindow(800, 600, 'My raylib Window');
+declare(strict_types=1);
 
-$white = new \Nawarian\Raylib\Types\Color(255, 255, 255, 255);
-$red = new \Nawarian\Raylib\Types\Color(255, 0, 0, 255);
-while (!$raylib->windowShouldClose()) {
-    $raylib->beginDrawing();
-        $raylib->clearBackground($white);
-        $raylib->drawText('Hello from raylib-ffi!', 400, 300, 20, $red);
-    $raylib->endDrawing();
+require_once __DIR__ . '/vendor/autoload.php';
+
+// use statements omitted
+
+InitWindow(800, 600, 'My raylib Window using FFI');
+
+while (!WindowShouldClose()) {
+    BeginDrawing();
+        ClearBackground(Color::white());
+        DrawText('Hello from raylib-ffi!', 400, 300, 20, Color::red());
+    EndDrawing();
 }
 
-$raylib->closeWindow();
+CloseWindow();
 ```
 
 ### Recent Impressive Screenshot
