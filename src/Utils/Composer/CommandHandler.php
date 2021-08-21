@@ -8,7 +8,6 @@ use Laminas\Code\DeclareStatement;
 use Laminas\Code\Reflection\ClassReflection;
 use Laminas\Code\Reflection\MethodReflection;
 use Nawarian\Raylib\Raylib;
-use Composer\Script\Event;
 use Laminas\Code\Generator\FileGenerator;
 
 final class CommandHandler
