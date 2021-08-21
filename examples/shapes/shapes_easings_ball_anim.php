@@ -3,8 +3,22 @@
 declare(strict_types=1);
 
 use Nawarian\Raylib\Raylib;
-use Nawarian\Raylib\RaylibFactory;
 use Nawarian\Raylib\Types\Color;
+
+use function Nawarian\Raylib\{
+    BeginDrawing,
+    ClearBackground,
+    CloseWindow,
+    DrawCircle,
+    DrawRectangle,
+    DrawText,
+    EndDrawing,
+    Fade,
+    InitWindow,
+    IsKeyPressed,
+    SetTargetFPS,
+    WindowShouldClose
+};
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/easings.php';
@@ -14,7 +28,7 @@ require_once __DIR__ . '/easings.php';
 $screenWidth = 800;
 $screenHeight = 450;
 
-\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, "raylib [shapes] example - easings ball anim");
+InitWindow($screenWidth, $screenHeight, "raylib [shapes] example - easings ball anim");
 
 // Ball variable value to be animated with easings
 $ballPositionX = -100;
@@ -24,11 +38,11 @@ $ballAlpha = 0.0;
 $state = 0;
 $framesCounter = 0;
 
-\Nawarian\Raylib\SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!\Nawarian\Raylib\WindowShouldClose()) {     // Detect window close button or ESC key
+while (!WindowShouldClose()) {     // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
     switch ($state) {
@@ -60,7 +74,7 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {     // Detect window close butto
             }
             break;
         case 3:     // Reset state to play again
-            if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_ENTER)) {
+            if (IsKeyPressed(Raylib::KEY_ENTER)) {
                 // Reset required variables to play again
                 $ballPositionX = -100;
                 $ballRadius = 20;
@@ -70,33 +84,33 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {     // Detect window close butto
             break;
     }
 
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_R)) {
+    if (IsKeyPressed(Raylib::KEY_R)) {
         $framesCounter = 0;
     }
     //----------------------------------------------------------------------------------
 
     // Draw
     //----------------------------------------------------------------------------------
-    \Nawarian\Raylib\BeginDrawing();
-        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
+    BeginDrawing();
+        ClearBackground(Color::rayWhite());
 
         // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
         if ($state >= 2) {
-            \Nawarian\Raylib\DrawRectangle(0, 0, $screenWidth, $screenHeight, Color::green());
+            DrawRectangle(0, 0, $screenWidth, $screenHeight, Color::green());
         }
 
-        \Nawarian\Raylib\DrawCircle((int) $ballPositionX, 200, (int) $ballRadius, \Nawarian\Raylib\Fade(Color::red(), 1.0 - $ballAlpha));
+        DrawCircle((int) $ballPositionX, 200, (int) $ballRadius, Fade(Color::red(), 1.0 - $ballAlpha));
 
         if ($state === 3) {
-            \Nawarian\Raylib\DrawText("PRESS [ENTER] TO PLAY AGAIN!", 240, 200, 20, Color::black());
+            DrawText("PRESS [ENTER] TO PLAY AGAIN!", 240, 200, 20, Color::black());
         }
     // phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact
 
-    \Nawarian\Raylib\EndDrawing();
+    EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-\Nawarian\Raylib\CloseWindow();        // Close window and OpenGL context
+CloseWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

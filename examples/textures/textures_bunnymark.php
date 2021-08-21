@@ -3,9 +3,29 @@
 declare(strict_types=1);
 
 use Nawarian\Raylib\Raylib;
-use Nawarian\Raylib\RaylibFactory;
-use Nawarian\Raylib\Types\Color;
-use Nawarian\Raylib\Types\Vector2;
+use Nawarian\Raylib\Types\{Color, Vector2};
+
+use function Nawarian\Raylib\{
+    BeginDrawing,
+    ClearBackground,
+    CloseWindow,
+    DrawFPS,
+    DrawRectangle,
+    DrawText,
+    DrawTexture,
+    EndDrawing,
+    GetMousePosition,
+    GetRandomValue,
+    GetScreenHeight,
+    GetScreenWidth,
+    InitWindow,
+    IsMouseButtonDown,
+    LoadTexture,
+    SetTargetFPS,
+    TextFormat,
+    UnloadTexture,
+    WindowShouldClose
+};
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -17,10 +37,10 @@ const MAX_BATCH_ELEMENTS = 8192;
 $screenWidth = 800;
 $screenHeight = 450;
 
-\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, 'raylib [textures] example - bunnymark');
+InitWindow($screenWidth, $screenHeight, 'raylib [textures] example - bunnymark');
 
 // Load bunny texture
-$texBunny = \Nawarian\Raylib\LoadTexture(__DIR__ . '/resources/wabbit_alpha.png');
+$texBunny = LoadTexture(__DIR__ . '/resources/wabbit_alpha.png');
 
 $bunnies = [];    // Bunnies array
 foreach (range(0, MAX_BUNNIES) as $i) {
@@ -40,24 +60,24 @@ foreach (range(0, MAX_BUNNIES) as $i) {
 
 $bunniesCount = 0;           // Bunnies counter
 
-\Nawarian\Raylib\SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button or ESC key
+while (!WindowShouldClose()) {   // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
-    if (\Nawarian\Raylib\IsMouseButtonDown(Raylib::MOUSE_LEFT_BUTTON)) {
+    if (IsMouseButtonDown(Raylib::MOUSE_LEFT_BUTTON)) {
         // Create more bunnies
         for ($i = 0; $i < 100; $i++) {
             if ($bunniesCount < MAX_BUNNIES) {
-                $bunnies[$bunniesCount]->position = \Nawarian\Raylib\GetMousePosition();
-                $bunnies[$bunniesCount]->speed->x = (float) \Nawarian\Raylib\GetRandomValue(-250, 250) / 60.0;
-                $bunnies[$bunniesCount]->speed->y = (float) \Nawarian\Raylib\GetRandomValue(-250, 250) / 60.0;
+                $bunnies[$bunniesCount]->position = GetMousePosition();
+                $bunnies[$bunniesCount]->speed->x = (float) GetRandomValue(-250, 250) / 60.0;
+                $bunnies[$bunniesCount]->speed->y = (float) GetRandomValue(-250, 250) / 60.0;
                 $bunnies[$bunniesCount]->color = new Color(
-                    \Nawarian\Raylib\GetRandomValue(50, 240),
-                    \Nawarian\Raylib\GetRandomValue(80, 240),
-                    \Nawarian\Raylib\GetRandomValue(100, 240),
+                    GetRandomValue(50, 240),
+                    GetRandomValue(80, 240),
+                    GetRandomValue(100, 240),
                     255,
                 );
                 $bunniesCount++;
@@ -71,14 +91,14 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button 
         $bunnies[$i]->position->y += $bunnies[$i]->speed->y;
 
         if (
-            (($bunnies[$i]->position->x + $texBunny->width / 2) > \Nawarian\Raylib\GetScreenWidth())
+            (($bunnies[$i]->position->x + $texBunny->width / 2) > GetScreenWidth())
             || (($bunnies[$i]->position->x + $texBunny->width / 2) < 0)
         ) {
             $bunnies[$i]->speed->x *= -1;
         }
 
         if (
-            (($bunnies[$i]->position->y + $texBunny->height / 2) > \Nawarian\Raylib\GetScreenHeight())
+            (($bunnies[$i]->position->y + $texBunny->height / 2) > GetScreenHeight())
             || (($bunnies[$i]->position->y + $texBunny->height / 2 - 40) < 0)
         ) {
             $bunnies[$i]->speed->y *= -1;
@@ -88,9 +108,9 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button 
 
     // Draw
     //----------------------------------------------------------------------------------
-    \Nawarian\Raylib\BeginDrawing();
+    BeginDrawing();
 
-        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
+        ClearBackground(Color::rayWhite());
 
         // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
         for ($i = 0; $i < $bunniesCount; $i++) {
@@ -100,23 +120,34 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button 
             // Process of sending data is costly and it could happen that GPU data has not been completely
             // processed for drawing while new data is tried to be sent (updating current in-use buffers)
             // it could generates a stall and consequently a frame drop, limiting the number of drawn bunnies
-            \Nawarian\Raylib\DrawTexture($texBunny, (int) $bunnies[$i]->position->x, (int) $bunnies[$i]->position->y, $bunnies[$i]->color);
+            DrawTexture(
+                $texBunny,
+                (int) $bunnies[$i]->position->x,
+                (int) $bunnies[$i]->position->y,
+                $bunnies[$i]->color
+            );
         }
 
-        \Nawarian\Raylib\DrawRectangle(0, 0, $screenWidth, 40, Color::black());
-        \Nawarian\Raylib\DrawText(\Nawarian\Raylib\TextFormat('bunnies: %d', $bunniesCount), 120, 10, 20, Color::green());
-        \Nawarian\Raylib\DrawText(\Nawarian\Raylib\TextFormat('batched draw calls: %d', 1 + $bunniesCount / MAX_BATCH_ELEMENTS), 320, 10, 20, Color::maroon());
+        DrawRectangle(0, 0, $screenWidth, 40, Color::black());
+        DrawText(TextFormat('bunnies: %d', $bunniesCount), 120, 10, 20, Color::green());
+        DrawText(
+            TextFormat('batched draw calls: %d', 1 + $bunniesCount / MAX_BATCH_ELEMENTS),
+            320,
+            10,
+            20,
+            Color::maroon()
+        );
 
-        \Nawarian\Raylib\DrawFPS(10, 10);
+        DrawFPS(10, 10);
 
     // phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact
-    \Nawarian\Raylib\EndDrawing();
+    EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-\Nawarian\Raylib\UnloadTexture($texBunny);    // Unload bunny texture
+UnloadTexture($texBunny);    // Unload bunny texture
 
-\Nawarian\Raylib\CloseWindow();              // Close window and OpenGL context
+CloseWindow();              // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

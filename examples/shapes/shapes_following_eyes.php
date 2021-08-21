@@ -2,8 +2,23 @@
 
 declare(strict_types=1);
 
-use Nawarian\Raylib\RaylibFactory;
 use Nawarian\Raylib\Types\{Color, Vector2};
+
+use function Nawarian\Raylib\{
+    BeginDrawing,
+    CheckCollisionPointCircle,
+    ClearBackground,
+    CloseWindow,
+    DrawCircleV,
+    DrawFPS,
+    EndDrawing,
+    GetMousePosition,
+    GetScreenHeight,
+    GetScreenWidth,
+    InitWindow,
+    SetTargetFPS,
+    WindowShouldClose
+};
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -12,26 +27,26 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 $screenWidth = 800;
 $screenHeight = 450;
 
-\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, "raylib [shapes] example - following eyes");
+InitWindow($screenWidth, $screenHeight, "raylib [shapes] example - following eyes");
 
-$scleraLeftPosition = new Vector2(\Nawarian\Raylib\GetScreenWidth() / 2 - 100, \Nawarian\Raylib\GetScreenHeight() / 2);
-$scleraRightPosition = new Vector2(\Nawarian\Raylib\GetScreenWidth() / 2 + 100, \Nawarian\Raylib\GetScreenHeight() / 2);
+$scleraLeftPosition = new Vector2(GetScreenWidth() / 2 - 100, GetScreenHeight() / 2);
+$scleraRightPosition = new Vector2(GetScreenWidth() / 2 + 100, GetScreenHeight() / 2);
 $scleraRadius = 80;
 
 $irisRadius = 24;
 
-\Nawarian\Raylib\SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button or ESC key
+while (!WindowShouldClose()) {   // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
-    $irisLeftPosition = \Nawarian\Raylib\GetMousePosition();
-    $irisRightPosition = \Nawarian\Raylib\GetMousePosition();
+    $irisLeftPosition = GetMousePosition();
+    $irisRightPosition = GetMousePosition();
 
     // Check not inside the left eye sclera
-    if (!\Nawarian\Raylib\CheckCollisionPointCircle($irisLeftPosition, $scleraLeftPosition, $scleraRadius - 20)) {
+    if (!CheckCollisionPointCircle($irisLeftPosition, $scleraLeftPosition, $scleraRadius - 20)) {
         $dx = $irisLeftPosition->x - $scleraLeftPosition->x;
         $dy = $irisLeftPosition->y - $scleraLeftPosition->y;
 
@@ -45,7 +60,7 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button 
     }
 
     // Check not inside the right eye sclera
-    if (!\Nawarian\Raylib\CheckCollisionPointCircle($irisRightPosition, $scleraRightPosition, $scleraRadius - 20)) {
+    if (!CheckCollisionPointCircle($irisRightPosition, $scleraRightPosition, $scleraRadius - 20)) {
         $dx = $irisRightPosition->x - $scleraRightPosition->x;
         $dy = $irisRightPosition->y - $scleraRightPosition->y;
 
@@ -61,24 +76,24 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button 
 
     // Draw
     //----------------------------------------------------------------------------------
-    \Nawarian\Raylib\BeginDrawing();
-        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
+    BeginDrawing();
+        ClearBackground(Color::rayWhite());
 
-        \Nawarian\Raylib\DrawCircleV($scleraLeftPosition, $scleraRadius, Color::lightGray());
-        \Nawarian\Raylib\DrawCircleV($irisLeftPosition, $irisRadius, Color::brown());
-        \Nawarian\Raylib\DrawCircleV($irisLeftPosition, 10, Color::black());
+        DrawCircleV($scleraLeftPosition, $scleraRadius, Color::lightGray());
+        DrawCircleV($irisLeftPosition, $irisRadius, Color::brown());
+        DrawCircleV($irisLeftPosition, 10, Color::black());
 
-        \Nawarian\Raylib\DrawCircleV($scleraRightPosition, $scleraRadius, Color::lightGray());
-        \Nawarian\Raylib\DrawCircleV($irisRightPosition, $irisRadius, Color::darkGreen());
-        \Nawarian\Raylib\DrawCircleV($irisRightPosition, 10, Color::black());
+        DrawCircleV($scleraRightPosition, $scleraRadius, Color::lightGray());
+        DrawCircleV($irisRightPosition, $irisRadius, Color::darkGreen());
+        DrawCircleV($irisRightPosition, 10, Color::black());
 
-        \Nawarian\Raylib\DrawFPS(10, 10);
+        DrawFPS(10, 10);
 
-    \Nawarian\Raylib\EndDrawing();
+    EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-\Nawarian\Raylib\CloseWindow();        // Close window and OpenGL context
+CloseWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

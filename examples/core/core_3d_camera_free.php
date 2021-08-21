@@ -4,13 +4,33 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-use Nawarian\Raylib\{
-    Raylib,
-};
+use Nawarian\Raylib\Raylib;
 use Nawarian\Raylib\Types\{
     Camera3D,
     Color,
     Vector3,
+};
+
+use function Nawarian\Raylib\{
+    BeginDrawing,
+    BeginMode3D,
+    ClearBackground,
+    CloseWindow,
+    DrawCube,
+    DrawCubeWires,
+    DrawGrid,
+    DrawRectangle,
+    DrawRectangleLines,
+    DrawText,
+    EndDrawing,
+    EndMode3D,
+    Fade,
+    InitWindow,
+    IsKeyDown,
+    SetCameraMode,
+    SetTargetFPS,
+    UpdateCamera,
+    WindowShouldClose
 };
 
 const MAX_COLUMNS = 20;
@@ -20,7 +40,7 @@ const MAX_COLUMNS = 20;
 $screenWidth = 800;
 $screenHeight = 450;
 
-\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, "raylib [core] example - 3d camera free");
+InitWindow($screenWidth, $screenHeight, "raylib [core] example - 3d camera free");
 
 // Define the camera to look into our 3d world
 $camera = new Camera3D(
@@ -33,52 +53,52 @@ $camera = new Camera3D(
 
 $cubePosition = new Vector3(0, 0, 0);
 
-\Nawarian\Raylib\SetCameraMode($camera, Camera3D::MODE_FREE); // Set a free camera mode
+SetCameraMode($camera, Camera3D::MODE_FREE); // Set a free camera mode
 
-\Nawarian\Raylib\SetTargetFPS(60);                   // Set our game to run at 60 frames-per-second
+SetTargetFPS(60);                   // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!\Nawarian\Raylib\WindowShouldClose()) {       // Detect window close button or ESC key
+while (!WindowShouldClose()) {       // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
-    \Nawarian\Raylib\UpdateCamera($camera);          // Update camera
+    UpdateCamera($camera);          // Update camera
 
-    if (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_Z)) {
+    if (IsKeyDown(Raylib::KEY_Z)) {
         $camera->target = new Vector3(0, 0, 0);
     }
     //----------------------------------------------------------------------------------
 
     // Draw
     //----------------------------------------------------------------------------------
-    \Nawarian\Raylib\BeginDrawing();
+    BeginDrawing();
 
-        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
+        ClearBackground(Color::rayWhite());
 
-        \Nawarian\Raylib\BeginMode3D($camera);
+        BeginMode3D($camera);
 
-            \Nawarian\Raylib\DrawCube($cubePosition, 2.0, 2.0, 2.0, Color::red());
-            \Nawarian\Raylib\DrawCubeWires($cubePosition, 2.0, 2.0, 2.0, Color::maroon());
+            DrawCube($cubePosition, 2.0, 2.0, 2.0, Color::red());
+            DrawCubeWires($cubePosition, 2.0, 2.0, 2.0, Color::maroon());
 
-            \Nawarian\Raylib\DrawGrid(10, 1.0);
+            DrawGrid(10, 1.0);
 
-        \Nawarian\Raylib\EndMode3D();
+        EndMode3D();
 
-        \Nawarian\Raylib\DrawRectangle(10, 10, 320, 133, \Nawarian\Raylib\Fade(Color::skyBlue(), 0.5));
-        \Nawarian\Raylib\DrawRectangleLines(10, 10, 320, 133, Color::blue());
+        DrawRectangle(10, 10, 320, 133, Fade(Color::skyBlue(), 0.5));
+        DrawRectangleLines(10, 10, 320, 133, Color::blue());
 
-        \Nawarian\Raylib\DrawText("Free camera default controls:", 20, 20, 10, Color::black());
-        \Nawarian\Raylib\DrawText("- Mouse Wheel to Zoom in-out", 40, 40, 10, Color::darkGray());
-        \Nawarian\Raylib\DrawText("- Mouse Wheel Pressed to Pan", 40, 60, 10, Color::darkGray());
-        \Nawarian\Raylib\DrawText("- Alt + Mouse Wheel Pressed to Rotate", 40, 80, 10, Color::darkGray());
-        \Nawarian\Raylib\DrawText("- Alt + Ctrl + Mouse Wheel Pressed for Smooth Zoom", 40, 100, 10, Color::darkGray());
-        \Nawarian\Raylib\DrawText("- Z to zoom to (0, 0, 0)", 40, 120, 10, Color::darkGray());
+        DrawText("Free camera default controls:", 20, 20, 10, Color::black());
+        DrawText("- Mouse Wheel to Zoom in-out", 40, 40, 10, Color::darkGray());
+        DrawText("- Mouse Wheel Pressed to Pan", 40, 60, 10, Color::darkGray());
+        DrawText("- Alt + Mouse Wheel Pressed to Rotate", 40, 80, 10, Color::darkGray());
+        DrawText("- Alt + Ctrl + Mouse Wheel Pressed for Smooth Zoom", 40, 100, 10, Color::darkGray());
+        DrawText("- Z to zoom to (0, 0, 0)", 40, 120, 10, Color::darkGray());
 
-    \Nawarian\Raylib\EndDrawing();
+    EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-\Nawarian\Raylib\CloseWindow();        // Close window and OpenGL context
+CloseWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

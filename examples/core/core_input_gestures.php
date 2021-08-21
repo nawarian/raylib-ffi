@@ -10,6 +10,25 @@ use Nawarian\Raylib\Types\{
     Rectangle
 };
 
+use function Nawarian\Raylib\{
+    BeginDrawing,
+    CheckCollisionPointRec,
+    ClearBackground,
+    CloseWindow,
+    DrawCircleV,
+    DrawRectangle,
+    DrawRectangleLines,
+    DrawRectangleRec,
+    DrawText,
+    EndDrawing,
+    Fade,
+    GetGestureDetected,
+    GetTouchPosition,
+    InitWindow,
+    SetTargetFPS,
+    WindowShouldClose
+};
+
 const MAX_GESTURE_STRINGS = 20;
 
 // Initialization
@@ -17,7 +36,7 @@ const MAX_GESTURE_STRINGS = 20;
 $screenWidth = 800;
 $screenHeight = 450;
 
-\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, "raylib [core] example - input gestures");
+InitWindow($screenWidth, $screenHeight, "raylib [core] example - input gestures");
 
 $touchArea = new Rectangle(220, 10, $screenWidth - 230, $screenHeight - 20);
 
@@ -28,11 +47,11 @@ $currentGesture = Raylib::GESTURE_NONE;
 
 //SetGesturesEnabled(0b0000000000001001);   // Enable only some gestures to be detected
 
-\Nawarian\Raylib\SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!\Nawarian\Raylib\WindowShouldClose()) {    // Detect window close button or ESC key
+while (!WindowShouldClose()) {    // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
     // Reset gestures strings
@@ -42,10 +61,10 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {    // Detect window close button
     }
 
     $lastGesture = $currentGesture;
-    $currentGesture = \Nawarian\Raylib\GetGestureDetected();
-    $touchPosition = \Nawarian\Raylib\GetTouchPosition(0);
+    $currentGesture = GetGestureDetected();
+    $touchPosition = GetTouchPosition(0);
 
-    if (\Nawarian\Raylib\CheckCollisionPointRec($touchPosition, $touchArea) && ($currentGesture !== Raylib::GESTURE_NONE)) {
+    if (CheckCollisionPointRec($touchPosition, $touchArea) && ($currentGesture !== Raylib::GESTURE_NONE)) {
         if ($currentGesture !== $lastGesture) {
             // Store gesture string
             switch ($currentGesture) {
@@ -88,43 +107,43 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {    // Detect window close button
 
     // Draw
     //----------------------------------------------------------------------------------
-    \Nawarian\Raylib\BeginDrawing();
+    BeginDrawing();
 
-        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
+        ClearBackground(Color::rayWhite());
 
-        \Nawarian\Raylib\DrawRectangleRec($touchArea, Color::gray());
-        \Nawarian\Raylib\DrawRectangle(225, 15, $screenWidth - 240, $screenHeight - 30, Color::rayWhite());
+        DrawRectangleRec($touchArea, Color::gray());
+        DrawRectangle(225, 15, $screenWidth - 240, $screenHeight - 30, Color::rayWhite());
 
-        \Nawarian\Raylib\DrawText("GESTURES TEST AREA", $screenWidth - 270, $screenHeight - 40, 20, \Nawarian\Raylib\Fade(Color::gray(), 0.5));
+        DrawText("GESTURES TEST AREA", $screenWidth - 270, $screenHeight - 40, 20, Fade(Color::gray(), 0.5));
 
         // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
         for ($i = 0; $i < $gesturesCount; ++$i) {
             if ($i % 2 === 0) {
-                \Nawarian\Raylib\DrawRectangle(10, 30 + 20 * $i, 200, 20, \Nawarian\Raylib\Fade(Color::lightGray(), 0.5));
+                DrawRectangle(10, 30 + 20 * $i, 200, 20, Fade(Color::lightGray(), 0.5));
             } else {
-                \Nawarian\Raylib\DrawRectangle(10, 30 + 20 * $i, 200, 20, \Nawarian\Raylib\Fade(Color::lightGray(), 0.3));
+                DrawRectangle(10, 30 + 20 * $i, 200, 20, Fade(Color::lightGray(), 0.3));
             }
 
             if ($i < $gesturesCount - 1 && $gestureStrings[$i]) {
-                \Nawarian\Raylib\DrawText($gestureStrings[$i], 35, 36 + 20 * $i, 10, Color::darkGray());
+                DrawText($gestureStrings[$i], 35, 36 + 20 * $i, 10, Color::darkGray());
             } elseif ($gestureStrings[$i]) {
-                \Nawarian\Raylib\DrawText($gestureStrings[$i], 35, 36 + 20 * $i, 10, Color::maroon());
+                DrawText($gestureStrings[$i], 35, 36 + 20 * $i, 10, Color::maroon());
             }
         }
 
-        \Nawarian\Raylib\DrawRectangleLines(10, 29, 200, $screenHeight - 50, Color::gray());
-        \Nawarian\Raylib\DrawText("DETECTED GESTURES", 50, 15, 10, Color::gray());
+        DrawRectangleLines(10, 29, 200, $screenHeight - 50, Color::gray());
+        DrawText("DETECTED GESTURES", 50, 15, 10, Color::gray());
 
         if ($currentGesture !== Raylib::GESTURE_NONE) {
-            \Nawarian\Raylib\DrawCircleV($touchPosition, 30, Color::maroon());
+            DrawCircleV($touchPosition, 30, Color::maroon());
         }
         // phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact
 
-    \Nawarian\Raylib\EndDrawing();
+    EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-\Nawarian\Raylib\CloseWindow();        // Close window and OpenGL context
+CloseWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

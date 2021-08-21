@@ -10,53 +10,66 @@ use Nawarian\Raylib\Types\{
     Vector2,
 };
 
+use function Nawarian\Raylib\{
+    BeginDrawing,
+    ClearBackground,
+    CloseWindow,
+    DrawCircleV,
+    DrawText,
+    EndDrawing,
+    InitWindow,
+    IsKeyDown,
+    SetTargetFPS,
+    WindowShouldClose
+};
+
 // Initialization
 //--------------------------------------------------------------------------------------
 $screenWidth = 800;
 $screenHeight = 450;
 
-\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, "raylib [core] example - keyboard input");
+InitWindow($screenWidth, $screenHeight, "raylib [core] example - keyboard input");
 $ballPosition = new Vector2($screenWidth / 2, $screenHeight / 2);
 
-\Nawarian\Raylib\SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button or ESC key
+while (!WindowShouldClose()) {   // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
-    if (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_RIGHT)) {
+    if (IsKeyDown(Raylib::KEY_RIGHT)) {
         $ballPosition->x += 2.0;
     }
 
-    if (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_LEFT)) {
+    if (IsKeyDown(Raylib::KEY_LEFT)) {
         $ballPosition->x -= 2.0;
     }
 
-    if (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_UP)) {
+    if (IsKeyDown(Raylib::KEY_UP)) {
         $ballPosition->y -= 2.0;
     }
 
-    if (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_DOWN)) {
+    if (IsKeyDown(Raylib::KEY_DOWN)) {
         $ballPosition->y += 2.0;
     }
     //----------------------------------------------------------------------------------
 
     // Draw
     //----------------------------------------------------------------------------------
-    \Nawarian\Raylib\BeginDrawing();
+    BeginDrawing();
 
-        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
+        ClearBackground(Color::rayWhite());
 
-        \Nawarian\Raylib\DrawText("move the ball with arrow keys", 10, 10, 20, Color::darkGray());
+        DrawText("move the ball with arrow keys", 10, 10, 20, Color::darkGray());
 
-        \Nawarian\Raylib\DrawCircleV($ballPosition, 50, Color::maroon());
+        DrawCircleV($ballPosition, 50, Color::maroon());
 
-    \Nawarian\Raylib\EndDrawing();
+    EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-\Nawarian\Raylib\CloseWindow();        // Close window and OpenGL context
+CloseWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

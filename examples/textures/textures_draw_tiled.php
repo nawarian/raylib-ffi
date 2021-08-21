@@ -3,10 +3,36 @@
 declare(strict_types=1);
 
 use Nawarian\Raylib\Raylib;
-use Nawarian\Raylib\RaylibFactory;
-use Nawarian\Raylib\Types\Color;
-use Nawarian\Raylib\Types\Rectangle;
-use Nawarian\Raylib\Types\Vector2;
+use Nawarian\Raylib\Types\{Color, Rectangle, Vector2};
+
+use function Nawarian\Raylib\{
+    BeginDrawing,
+    CheckCollisionPointRec,
+    ClearBackground,
+    CloseWindow,
+    ColorAlpha,
+    DrawRectangle,
+    DrawRectangleLinesEx,
+    DrawRectangleRec,
+    DrawText,
+    DrawTexture,
+    DrawTextureTiled,
+    EndDrawing,
+    GetFPS,
+    GetMousePosition,
+    GetScreenHeight,
+    GetScreenWidth,
+    InitWindow,
+    IsKeyPressed,
+    IsMouseButtonPressed,
+    LoadTexture,
+    SetConfigFlags,
+    SetTargetFPS,
+    SetTextureFilter,
+    TextFormat,
+    UnloadTexture,
+    WindowShouldClose
+};
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -19,12 +45,12 @@ const COLOR_SIZE = 16;
 $screenWidth = 800;
 $screenHeight = 450;
 
-\Nawarian\Raylib\SetConfigFlags(Raylib::FLAG_WINDOW_RESIZABLE); // Make the window resizable
-\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, 'raylib [textures] example - Draw part of a texture tiled');
+SetConfigFlags(Raylib::FLAG_WINDOW_RESIZABLE); // Make the window resizable
+InitWindow($screenWidth, $screenHeight, 'raylib [textures] example - Draw part of a texture tiled');
 
 // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
-$texPattern = \Nawarian\Raylib\LoadTexture(__DIR__ . '/resources/patterns.png');
-\Nawarian\Raylib\SetTextureFilter($texPattern, Raylib::FILTER_TRILINEAR); // Makes the texture smoother when upscaled
+$texPattern = LoadTexture(__DIR__ . '/resources/patterns.png');
+SetTextureFilter($texPattern, Raylib::FILTER_TRILINEAR); // Makes the texture smoother when upscaled
 
 // Coordinates for all patterns inside the texture
 $recPattern = [
@@ -75,24 +101,24 @@ $activeCol = 0;
 $scale = 1.0;
 $rotation = 0.0;
 
-\Nawarian\Raylib\SetTargetFPS(60);
+SetTargetFPS(60);
 //---------------------------------------------------------------------------------------
 
 // Main game loop
-while (!\Nawarian\Raylib\WindowShouldClose()) {  // Detect window close button or ESC key
+while (!WindowShouldClose()) {  // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
-    $screenWidth = \Nawarian\Raylib\GetScreenWidth();
-    $screenHeight = \Nawarian\Raylib\GetScreenHeight();
+    $screenWidth = GetScreenWidth();
+    $screenHeight = GetScreenHeight();
 
     // Handle mouse
-    if (\Nawarian\Raylib\IsMouseButtonPressed(Raylib::MOUSE_LEFT_BUTTON)) {
-        $mouse = \Nawarian\Raylib\GetMousePosition();
+    if (IsMouseButtonPressed(Raylib::MOUSE_LEFT_BUTTON)) {
+        $mouse = GetMousePosition();
 
         // Check which pattern was clicked and set it as the active pattern
         for ($i = 0; $i < count($recPattern); $i++) {
             if (
-                \Nawarian\Raylib\CheckCollisionPointRec($mouse, new Rectangle(
+                CheckCollisionPointRec($mouse, new Rectangle(
                     2 + MARGIN_SIZE + $recPattern[$i]->x,
                     40 + MARGIN_SIZE + $recPattern[$i]->y,
                     $recPattern[$i]->width,
@@ -106,7 +132,7 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {  // Detect window close button o
 
         // Check to see which color was clicked and set it as the active color
         for ($i = 0; $i < count($colorRec); ++$i) {
-            if (\Nawarian\Raylib\CheckCollisionPointRec($mouse, $colorRec[$i])) {
+            if (CheckCollisionPointRec($mouse, $colorRec[$i])) {
                 $activeCol = $i;
                 break;
             }
@@ -116,11 +142,11 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {  // Detect window close button o
     // Handle keys
 
     // Change scale
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_UP)) {
+    if (IsKeyPressed(Raylib::KEY_UP)) {
         $scale += 0.25;
     }
 
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_DOWN)) {
+    if (IsKeyPressed(Raylib::KEY_DOWN)) {
         $scale -= 0.25;
     }
 
@@ -131,16 +157,16 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {  // Detect window close button o
     }
 
     // Change rotation
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_LEFT)) {
+    if (IsKeyPressed(Raylib::KEY_LEFT)) {
         $rotation -= 25.0;
     }
 
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_RIGHT)) {
+    if (IsKeyPressed(Raylib::KEY_RIGHT)) {
         $rotation += 25.0;
     }
 
     // Reset
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_SPACE)) {
+    if (IsKeyPressed(Raylib::KEY_SPACE)) {
         $rotation = 0.0;
         $scale = 1.0;
     }
@@ -148,12 +174,12 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {  // Detect window close button o
 
     // Draw
     //----------------------------------------------------------------------------------
-    \Nawarian\Raylib\BeginDrawing();
-        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
+    BeginDrawing();
+        ClearBackground(Color::rayWhite());
         // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
 
         // Draw the tiled area
-        \Nawarian\Raylib\DrawTextureTiled($texPattern, $recPattern[$activePattern], new Rectangle(
+        DrawTextureTiled($texPattern, $recPattern[$activePattern], new Rectangle(
             OPT_WIDTH + MARGIN_SIZE,
             MARGIN_SIZE,
             $screenWidth - OPT_WIDTH - 2 * MARGIN_SIZE,
@@ -161,39 +187,51 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {  // Detect window close button o
         ), new Vector2(0, 0), $rotation, $scale, $colors[$activeCol]);
 
         // Draw options
-        \Nawarian\Raylib\DrawRectangle(MARGIN_SIZE, MARGIN_SIZE, OPT_WIDTH - MARGIN_SIZE, $screenHeight - 2 * MARGIN_SIZE, \Nawarian\Raylib\ColorAlpha(Color::lightGray(), 0.5));
+        DrawRectangle(
+            MARGIN_SIZE,
+            MARGIN_SIZE,
+            OPT_WIDTH - MARGIN_SIZE,
+            $screenHeight - 2 * MARGIN_SIZE,
+            ColorAlpha(Color::lightGray(), 0.5)
+        );
 
-        \Nawarian\Raylib\DrawText('Select Pattern', 2 + MARGIN_SIZE, 30 + MARGIN_SIZE, 10, Color::black());
-        \Nawarian\Raylib\DrawTexture($texPattern, 2 + MARGIN_SIZE, 40 + MARGIN_SIZE, Color::black());
-        \Nawarian\Raylib\DrawRectangle(2 + MARGIN_SIZE + $recPattern[$activePattern]->x, 40 + MARGIN_SIZE + $recPattern[$activePattern]->y, $recPattern[$activePattern]->width, $recPattern[$activePattern]->height, \Nawarian\Raylib\ColorAlpha(Color::darkBlue(), 0.3));
+        DrawText('Select Pattern', 2 + MARGIN_SIZE, 30 + MARGIN_SIZE, 10, Color::black());
+        DrawTexture($texPattern, 2 + MARGIN_SIZE, 40 + MARGIN_SIZE, Color::black());
+        DrawRectangle(
+            2 + MARGIN_SIZE + $recPattern[$activePattern]->x,
+            40 + MARGIN_SIZE + $recPattern[$activePattern]->y,
+            $recPattern[$activePattern]->width,
+            $recPattern[$activePattern]->height,
+            ColorAlpha(Color::darkBlue(), 0.3)
+        );
 
-        \Nawarian\Raylib\DrawText('Select Color', 2 + MARGIN_SIZE, 10 + 256 + MARGIN_SIZE, 10, Color::black());
+        DrawText('Select Color', 2 + MARGIN_SIZE, 10 + 256 + MARGIN_SIZE, 10, Color::black());
         for ($i = 0; $i < count($colors); $i++) {
-            \Nawarian\Raylib\DrawRectangleRec($colorRec[$i], $colors[$i]);
+            DrawRectangleRec($colorRec[$i], $colors[$i]);
             if ($activeCol === $i) {
-                \Nawarian\Raylib\DrawRectangleLinesEx($colorRec[$i], 3, \Nawarian\Raylib\ColorAlpha(Color::white(), 0.5));
+                DrawRectangleLinesEx($colorRec[$i], 3, ColorAlpha(Color::white(), 0.5));
             }
         }
 
-        \Nawarian\Raylib\DrawText('Scale (UP/DOWN to change)', 2 + MARGIN_SIZE, 80 + 256 + MARGIN_SIZE, 10, Color::black());
-        \Nawarian\Raylib\DrawText(\Nawarian\Raylib\TextFormat('%.2fx', $scale), 2 + MARGIN_SIZE, 92 + 256 + MARGIN_SIZE, 20, Color::black());
+        DrawText('Scale (UP/DOWN to change)', 2 + MARGIN_SIZE, 80 + 256 + MARGIN_SIZE, 10, Color::black());
+        DrawText(TextFormat('%.2fx', $scale), 2 + MARGIN_SIZE, 92 + 256 + MARGIN_SIZE, 20, Color::black());
 
-        \Nawarian\Raylib\DrawText('Rotation (LEFT/RIGHT to change)', 2 + MARGIN_SIZE, 122 + 256 + MARGIN_SIZE, 10, Color::black());
-        \Nawarian\Raylib\DrawText(\Nawarian\Raylib\TextFormat('%.0f degrees', $rotation), 2 + MARGIN_SIZE, 134 + 256 + MARGIN_SIZE, 20, Color::black());
+        DrawText('Rotation (LEFT/RIGHT to change)', 2 + MARGIN_SIZE, 122 + 256 + MARGIN_SIZE, 10, Color::black());
+        DrawText(TextFormat('%.0f degrees', $rotation), 2 + MARGIN_SIZE, 134 + 256 + MARGIN_SIZE, 20, Color::black());
 
-        \Nawarian\Raylib\DrawText('Press [SPACE] to reset', 2 + MARGIN_SIZE, 164 + 256 + MARGIN_SIZE, 10, Color::darkBlue());
+        DrawText('Press [SPACE] to reset', 2 + MARGIN_SIZE, 164 + 256 + MARGIN_SIZE, 10, Color::darkBlue());
 
         // Draw FPS
-        \Nawarian\Raylib\DrawText(\Nawarian\Raylib\TextFormat('%d FPS', \Nawarian\Raylib\GetFPS()), 2 + MARGIN_SIZE, 2 + MARGIN_SIZE, 20, Color::black());
+        DrawText(TextFormat('%d FPS', GetFPS()), 2 + MARGIN_SIZE, 2 + MARGIN_SIZE, 20, Color::black());
 
     // phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact
-    \Nawarian\Raylib\EndDrawing();
+    EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-\Nawarian\Raylib\UnloadTexture($texPattern);        // Unload texture
+UnloadTexture($texPattern);        // Unload texture
 
-\Nawarian\Raylib\CloseWindow();              // Close window and OpenGL context
+CloseWindow();              // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

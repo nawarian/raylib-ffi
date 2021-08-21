@@ -7,6 +7,32 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 use Nawarian\Raylib\Raylib;
 use Nawarian\Raylib\Types\{Color, Rectangle, Vector2};
 
+use function Nawarian\Raylib\{
+    BeginDrawing,
+    ClearBackground,
+    ClearWindowState,
+    CloseWindow,
+    DrawCircleV,
+    DrawFPS,
+    DrawRectangleLinesEx,
+    DrawText,
+    EndDrawing,
+    GetMousePosition,
+    GetScreenHeight,
+    GetScreenWidth,
+    InitWindow,
+    IsKeyPressed,
+    IsWindowState,
+    MaximizeWindow,
+    MinimizeWindow,
+    RestoreWindow,
+    SetConfigFlags,
+    SetWindowState,
+    TextFormat,
+    ToggleFullscreen,
+    WindowShouldClose
+};
+
 // Initialization
 //---------------------------------------------------------
 $screenWidth = 800;
@@ -30,10 +56,10 @@ FLAG_MSAA_4X_HINT
 */
 
 // Set configuration flags for window creation
-\Nawarian\Raylib\SetConfigFlags(Raylib::FLAG_VSYNC_HINT | Raylib::FLAG_MSAA_4X_HINT | Raylib::FLAG_WINDOW_HIGHDPI);
-\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, 'raylib [core] example - window flags');
+SetConfigFlags(Raylib::FLAG_VSYNC_HINT | Raylib::FLAG_MSAA_4X_HINT | Raylib::FLAG_WINDOW_HIGHDPI);
+InitWindow($screenWidth, $screenHeight, 'raylib [core] example - window flags');
 
-$ballPosition = new Vector2((int) (\Nawarian\Raylib\GetScreenWidth() / 2), (int) (\Nawarian\Raylib\GetScreenHeight() / 2));
+$ballPosition = new Vector2((int) (GetScreenWidth() / 2), (int) (GetScreenHeight() / 2));
 $ballSpeed = new Vector2(5, 4);
 $ballRadius = 20;
 
@@ -41,222 +67,222 @@ $framesCounter = 0;
 
 //----------------------------------------------------------
 // Main game loop
-while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button or ESC key
+while (!WindowShouldClose()) {   // Detect window close button or ESC key
     // Update
     //-----------------------------------------------------
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_F)) {
+    if (IsKeyPressed(Raylib::KEY_F)) {
         // modifies window size when scaling!
-        \Nawarian\Raylib\ToggleFullscreen();
+        ToggleFullscreen();
     }
 
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_R)) {
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_RESIZABLE)) {
-            \Nawarian\Raylib\ClearWindowState(Raylib::FLAG_WINDOW_RESIZABLE);
+    if (IsKeyPressed(Raylib::KEY_R)) {
+        if (IsWindowState(Raylib::FLAG_WINDOW_RESIZABLE)) {
+            ClearWindowState(Raylib::FLAG_WINDOW_RESIZABLE);
         } else {
-            \Nawarian\Raylib\SetWindowState(Raylib::FLAG_WINDOW_RESIZABLE);
+            SetWindowState(Raylib::FLAG_WINDOW_RESIZABLE);
         }
     }
 
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_D)) {
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_UNDECORATED)) {
-            \Nawarian\Raylib\ClearWindowState(Raylib::FLAG_WINDOW_UNDECORATED);
+    if (IsKeyPressed(Raylib::KEY_D)) {
+        if (IsWindowState(Raylib::FLAG_WINDOW_UNDECORATED)) {
+            ClearWindowState(Raylib::FLAG_WINDOW_UNDECORATED);
         } else {
-            \Nawarian\Raylib\SetWindowState(Raylib::FLAG_WINDOW_UNDECORATED);
+            SetWindowState(Raylib::FLAG_WINDOW_UNDECORATED);
         }
     }
 
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_H)) {
-        if (!\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_HIDDEN)) {
-            \Nawarian\Raylib\SetWindowState(Raylib::FLAG_WINDOW_HIDDEN);
+    if (IsKeyPressed(Raylib::KEY_H)) {
+        if (!IsWindowState(Raylib::FLAG_WINDOW_HIDDEN)) {
+            SetWindowState(Raylib::FLAG_WINDOW_HIDDEN);
         }
 
         $framesCounter = 0;
     }
 
-    if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_HIDDEN)) {
+    if (IsWindowState(Raylib::FLAG_WINDOW_HIDDEN)) {
         $framesCounter++;
         if ($framesCounter >= 240) {
             // Show window after 3 seconds
-            \Nawarian\Raylib\ClearWindowState(Raylib::FLAG_WINDOW_HIDDEN);
+            ClearWindowState(Raylib::FLAG_WINDOW_HIDDEN);
         }
     }
 
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_N)) {
-        if (!\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_MINIMIZED)) {
-            \Nawarian\Raylib\MinimizeWindow();
+    if (IsKeyPressed(Raylib::KEY_N)) {
+        if (!IsWindowState(Raylib::FLAG_WINDOW_MINIMIZED)) {
+            MinimizeWindow();
         }
 
         $framesCounter = 0;
     }
 
-    if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_MINIMIZED)) {
+    if (IsWindowState(Raylib::FLAG_WINDOW_MINIMIZED)) {
         $framesCounter++;
         if ($framesCounter >= 240) {
-            \Nawarian\Raylib\RestoreWindow(); // Restore window after 3 seconds
+            RestoreWindow(); // Restore window after 3 seconds
         }
     }
 
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_M)) {
+    if (IsKeyPressed(Raylib::KEY_M)) {
         // NOTE: Requires FLAG_WINDOW_RESIZABLE enabled!
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_MAXIMIZED)) {
-            \Nawarian\Raylib\RestoreWindow();
+        if (IsWindowState(Raylib::FLAG_WINDOW_MAXIMIZED)) {
+            RestoreWindow();
         } else {
-            \Nawarian\Raylib\MaximizeWindow();
+            MaximizeWindow();
         }
     }
 
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_U)) {
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_UNFOCUSED)) {
-            \Nawarian\Raylib\ClearWindowState(Raylib::FLAG_WINDOW_UNFOCUSED);
+    if (IsKeyPressed(Raylib::KEY_U)) {
+        if (IsWindowState(Raylib::FLAG_WINDOW_UNFOCUSED)) {
+            ClearWindowState(Raylib::FLAG_WINDOW_UNFOCUSED);
         } else {
-            \Nawarian\Raylib\SetWindowState(Raylib::FLAG_WINDOW_UNFOCUSED);
+            SetWindowState(Raylib::FLAG_WINDOW_UNFOCUSED);
         }
     }
 
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_T)) {
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_TOPMOST)) {
-            \Nawarian\Raylib\ClearWindowState(Raylib::FLAG_WINDOW_TOPMOST);
+    if (IsKeyPressed(Raylib::KEY_T)) {
+        if (IsWindowState(Raylib::FLAG_WINDOW_TOPMOST)) {
+            ClearWindowState(Raylib::FLAG_WINDOW_TOPMOST);
         } else {
-            \Nawarian\Raylib\SetWindowState(Raylib::FLAG_WINDOW_TOPMOST);
+            SetWindowState(Raylib::FLAG_WINDOW_TOPMOST);
         }
     }
 
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_A)) {
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN)) {
-            \Nawarian\Raylib\ClearWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN);
+    if (IsKeyPressed(Raylib::KEY_A)) {
+        if (IsWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN)) {
+            ClearWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN);
         } else {
-            \Nawarian\Raylib\SetWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN);
+            SetWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN);
         }
     }
 
-    if (\Nawarian\Raylib\IsKeyPressed(Raylib::KEY_V)) {
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_VSYNC_HINT)) {
-            \Nawarian\Raylib\ClearWindowState(Raylib::FLAG_VSYNC_HINT);
+    if (IsKeyPressed(Raylib::KEY_V)) {
+        if (IsWindowState(Raylib::FLAG_VSYNC_HINT)) {
+            ClearWindowState(Raylib::FLAG_VSYNC_HINT);
         } else {
-            \Nawarian\Raylib\SetWindowState(Raylib::FLAG_VSYNC_HINT);
+            SetWindowState(Raylib::FLAG_VSYNC_HINT);
         }
     }
 
     // Bouncing ball logic
     $ballPosition->x += $ballSpeed->x;
     $ballPosition->y += $ballSpeed->y;
-    if (($ballPosition->x >= (\Nawarian\Raylib\GetScreenWidth() - $ballRadius)) || ($ballPosition->x <= $ballRadius)) {
+    if (($ballPosition->x >= (GetScreenWidth() - $ballRadius)) || ($ballPosition->x <= $ballRadius)) {
         $ballSpeed->x *= -1.0;
     }
 
-    if (($ballPosition->y >= (\Nawarian\Raylib\GetScreenHeight() - $ballRadius)) || ($ballPosition->y <= $ballRadius)) {
+    if (($ballPosition->y >= (GetScreenHeight() - $ballRadius)) || ($ballPosition->y <= $ballRadius)) {
         $ballSpeed->y *= -1.0;
     };
     //-----------------------------------------------------
 
     // Draw
     //-----------------------------------------------------
-    \Nawarian\Raylib\BeginDrawing();
+    BeginDrawing();
         // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
 
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_TRANSPARENT)) {
-            \Nawarian\Raylib\ClearBackground(Color::blank());
+        if (IsWindowState(Raylib::FLAG_WINDOW_TRANSPARENT)) {
+            ClearBackground(Color::blank());
         } else {
-            \Nawarian\Raylib\ClearBackground(Color::rayWhite());
+            ClearBackground(Color::rayWhite());
         }
 
-        \Nawarian\Raylib\DrawCircleV($ballPosition, $ballRadius, Color::maroon());
-        \Nawarian\Raylib\DrawRectangleLinesEx(new Rectangle(0, 0, \Nawarian\Raylib\GetScreenWidth(), \Nawarian\Raylib\GetScreenHeight()), 4, Color::rayWhite());
+        DrawCircleV($ballPosition, $ballRadius, Color::maroon());
+        DrawRectangleLinesEx(new Rectangle(0, 0, GetScreenWidth(), GetScreenHeight()), 4, Color::rayWhite());
 
-        \Nawarian\Raylib\DrawCircleV(\Nawarian\Raylib\GetMousePosition(), 10, Color::darkBlue());
+        DrawCircleV(GetMousePosition(), 10, Color::darkBlue());
 
-        \Nawarian\Raylib\DrawFPS(10, 10);
+        DrawFPS(10, 10);
 
-        \Nawarian\Raylib\DrawText(\Nawarian\Raylib\TextFormat('Screen Size: [%d, %d]', \Nawarian\Raylib\GetScreenWidth(), \Nawarian\Raylib\GetScreenHeight()), 10, 40, 10, Color::green());
+        DrawText(TextFormat('Screen Size: [%d, %d]', GetScreenWidth(), GetScreenHeight()), 10, 40, 10, Color::green());
 
         // Draw window state info
-        \Nawarian\Raylib\DrawText('Following flags can be set after window creation:', 10, 60, 10, Color::gray());
+        DrawText('Following flags can be set after window creation:', 10, 60, 10, Color::gray());
 
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_FULLSCREEN_MODE)) {
-            \Nawarian\Raylib\DrawText('[F] FLAG_FULLSCREEN_MODE: on', 10, 80, 10, Color::lime());
+        if (IsWindowState(Raylib::FLAG_FULLSCREEN_MODE)) {
+            DrawText('[F] FLAG_FULLSCREEN_MODE: on', 10, 80, 10, Color::lime());
         } else {
-            \Nawarian\Raylib\DrawText('[F] FLAG_FULLSCREEN_MODE: off', 10, 80, 10, Color::maroon());
+            DrawText('[F] FLAG_FULLSCREEN_MODE: off', 10, 80, 10, Color::maroon());
         }
 
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_RESIZABLE)) {
-            \Nawarian\Raylib\DrawText('[R] FLAG_WINDOW_RESIZABLE: on', 10, 100, 10, Color::lime());
+        if (IsWindowState(Raylib::FLAG_WINDOW_RESIZABLE)) {
+            DrawText('[R] FLAG_WINDOW_RESIZABLE: on', 10, 100, 10, Color::lime());
         } else {
-            \Nawarian\Raylib\DrawText('[R] FLAG_WINDOW_RESIZABLE: off', 10, 100, 10, Color::maroon());
+            DrawText('[R] FLAG_WINDOW_RESIZABLE: off', 10, 100, 10, Color::maroon());
         }
 
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_UNDECORATED)) {
-            \Nawarian\Raylib\DrawText('[D] FLAG_WINDOW_UNDECORATED: on', 10, 120, 10, Color::lime());
+        if (IsWindowState(Raylib::FLAG_WINDOW_UNDECORATED)) {
+            DrawText('[D] FLAG_WINDOW_UNDECORATED: on', 10, 120, 10, Color::lime());
         } else {
-            \Nawarian\Raylib\DrawText('[D] FLAG_WINDOW_UNDECORATED: off', 10, 120, 10, Color::maroon());
+            DrawText('[D] FLAG_WINDOW_UNDECORATED: off', 10, 120, 10, Color::maroon());
         }
 
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_HIDDEN)) {
-            \Nawarian\Raylib\DrawText('[H] FLAG_WINDOW_HIDDEN: on', 10, 140, 10, Color::lime());
+        if (IsWindowState(Raylib::FLAG_WINDOW_HIDDEN)) {
+            DrawText('[H] FLAG_WINDOW_HIDDEN: on', 10, 140, 10, Color::lime());
         } else {
-            \Nawarian\Raylib\DrawText('[H] FLAG_WINDOW_HIDDEN: off', 10, 140, 10, Color::maroon());
+            DrawText('[H] FLAG_WINDOW_HIDDEN: off', 10, 140, 10, Color::maroon());
         }
 
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_MINIMIZED)) {
-            \Nawarian\Raylib\DrawText('[N] FLAG_WINDOW_MINIMIZED: on', 10, 160, 10, Color::lime());
+        if (IsWindowState(Raylib::FLAG_WINDOW_MINIMIZED)) {
+            DrawText('[N] FLAG_WINDOW_MINIMIZED: on', 10, 160, 10, Color::lime());
         } else {
-            \Nawarian\Raylib\DrawText('[N] FLAG_WINDOW_MINIMIZED: off', 10, 160, 10, Color::maroon());
+            DrawText('[N] FLAG_WINDOW_MINIMIZED: off', 10, 160, 10, Color::maroon());
         }
 
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_MAXIMIZED)) {
-            \Nawarian\Raylib\DrawText('[M] FLAG_WINDOW_MAXIMIZED: on', 10, 180, 10, Color::lime());
+        if (IsWindowState(Raylib::FLAG_WINDOW_MAXIMIZED)) {
+            DrawText('[M] FLAG_WINDOW_MAXIMIZED: on', 10, 180, 10, Color::lime());
         } else {
-            \Nawarian\Raylib\DrawText('[M] FLAG_WINDOW_MAXIMIZED: off', 10, 180, 10, Color::maroon());
+            DrawText('[M] FLAG_WINDOW_MAXIMIZED: off', 10, 180, 10, Color::maroon());
         }
 
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_UNFOCUSED)) {
-            \Nawarian\Raylib\DrawText('[G] FLAG_WINDOW_UNFOCUSED: on', 10, 200, 10, Color::lime());
+        if (IsWindowState(Raylib::FLAG_WINDOW_UNFOCUSED)) {
+            DrawText('[G] FLAG_WINDOW_UNFOCUSED: on', 10, 200, 10, Color::lime());
         } else {
-            \Nawarian\Raylib\DrawText('[U] FLAG_WINDOW_UNFOCUSED: off', 10, 200, 10, Color::maroon());
+            DrawText('[U] FLAG_WINDOW_UNFOCUSED: off', 10, 200, 10, Color::maroon());
         }
 
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_TOPMOST)) {
-            \Nawarian\Raylib\DrawText('[T] FLAG_WINDOW_TOPMOST: on', 10, 220, 10, Color::lime());
+        if (IsWindowState(Raylib::FLAG_WINDOW_TOPMOST)) {
+            DrawText('[T] FLAG_WINDOW_TOPMOST: on', 10, 220, 10, Color::lime());
         } else {
-            \Nawarian\Raylib\DrawText('[T] FLAG_WINDOW_TOPMOST: off', 10, 220, 10, Color::maroon());
+            DrawText('[T] FLAG_WINDOW_TOPMOST: off', 10, 220, 10, Color::maroon());
         }
 
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN)) {
-            \Nawarian\Raylib\DrawText('[A] FLAG_WINDOW_ALWAYS_RUN: on', 10, 240, 10, Color::lime());
+        if (IsWindowState(Raylib::FLAG_WINDOW_ALWAYS_RUN)) {
+            DrawText('[A] FLAG_WINDOW_ALWAYS_RUN: on', 10, 240, 10, Color::lime());
         } else {
-            \Nawarian\Raylib\DrawText('[A] FLAG_WINDOW_ALWAYS_RUN: off', 10, 240, 10, Color::maroon());
+            DrawText('[A] FLAG_WINDOW_ALWAYS_RUN: off', 10, 240, 10, Color::maroon());
         }
 
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_VSYNC_HINT)) {
-            \Nawarian\Raylib\DrawText('[V] FLAG_VSYNC_HINT: on', 10, 260, 10, Color::lime());
+        if (IsWindowState(Raylib::FLAG_VSYNC_HINT)) {
+            DrawText('[V] FLAG_VSYNC_HINT: on', 10, 260, 10, Color::lime());
         } else {
-            \Nawarian\Raylib\DrawText('[V] FLAG_VSYNC_HINT: off', 10, 260, 10, Color::maroon());
+            DrawText('[V] FLAG_VSYNC_HINT: off', 10, 260, 10, Color::maroon());
         }
 
-        \Nawarian\Raylib\DrawText('Following flags can only be set before window creation:', 10, 300, 10, Color::gray());
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_HIGHDPI)) {
-            \Nawarian\Raylib\DrawText('FLAG_WINDOW_HIGHDPI: on', 10, 320, 10, Color::lime());
+        DrawText('Following flags can only be set before window creation:', 10, 300, 10, Color::gray());
+        if (IsWindowState(Raylib::FLAG_WINDOW_HIGHDPI)) {
+            DrawText('FLAG_WINDOW_HIGHDPI: on', 10, 320, 10, Color::lime());
         } else {
-            \Nawarian\Raylib\DrawText('FLAG_WINDOW_HIGHDPI: off', 10, 320, 10, Color::maroon());
+            DrawText('FLAG_WINDOW_HIGHDPI: off', 10, 320, 10, Color::maroon());
         }
 
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_WINDOW_TRANSPARENT)) {
-            \Nawarian\Raylib\DrawText('FLAG_WINDOW_TRANSPARENT: on', 10, 340, 10, Color::lime());
+        if (IsWindowState(Raylib::FLAG_WINDOW_TRANSPARENT)) {
+            DrawText('FLAG_WINDOW_TRANSPARENT: on', 10, 340, 10, Color::lime());
         } else {
-            \Nawarian\Raylib\DrawText('FLAG_WINDOW_TRANSPARENT: off', 10, 340, 10, Color::maroon());
+            DrawText('FLAG_WINDOW_TRANSPARENT: off', 10, 340, 10, Color::maroon());
         }
 
-        if (\Nawarian\Raylib\IsWindowState(Raylib::FLAG_MSAA_4X_HINT)) {
-            \Nawarian\Raylib\DrawText('FLAG_MSAA_4X_HINT: on', 10, 360, 10, Color::lime());
+        if (IsWindowState(Raylib::FLAG_MSAA_4X_HINT)) {
+            DrawText('FLAG_MSAA_4X_HINT: on', 10, 360, 10, Color::lime());
         } else {
-            \Nawarian\Raylib\DrawText('FLAG_MSAA_4X_HINT: off', 10, 360, 10, Color::maroon());
+            DrawText('FLAG_MSAA_4X_HINT: off', 10, 360, 10, Color::maroon());
         }
         // phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact
 
-    \Nawarian\Raylib\EndDrawing();
+    EndDrawing();
     //-----------------------------------------------------
 }
 
 // De-Initialization
 //---------------------------------------------------------
-\Nawarian\Raylib\CloseWindow();        // Close window and OpenGL context
+CloseWindow();        // Close window and OpenGL context
 //----------------------------------------------------------

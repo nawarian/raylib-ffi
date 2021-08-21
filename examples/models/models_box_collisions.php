@@ -3,8 +3,30 @@
 declare(strict_types=1);
 
 use Nawarian\Raylib\Raylib;
-use Nawarian\Raylib\RaylibFactory;
 use Nawarian\Raylib\Types\{BoundingBox, Camera3D, Color, Vector3};
+
+use function Nawarian\Raylib\{
+    BeginDrawing,
+    BeginMode3D,
+    CheckCollisionBoxes,
+    CheckCollisionBoxSphere,
+    ClearBackground,
+    CloseWindow,
+    DrawCube,
+    DrawCubeV,
+    DrawCubeWires,
+    DrawFPS,
+    DrawGrid,
+    DrawSphere,
+    DrawSphereWires,
+    DrawText,
+    EndDrawing,
+    EndMode3D,
+    InitWindow,
+    IsKeyDown,
+    SetTargetFPS,
+    WindowShouldClose
+};
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -13,7 +35,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 $screenWidth = 800;
 $screenHeight = 450;
 
-\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, 'raylib [models] example - box collisions');
+InitWindow($screenWidth, $screenHeight, 'raylib [models] example - box collisions');
 
 // Define the camera to look into our 3d world
 $camera = new Camera3D(
@@ -32,22 +54,22 @@ $enemyBoxSize = new Vector3(2, 2, 2);
 $enemySpherePos = new Vector3(4, 0, 0);
 $enemySphereSize = 1.5;
 
-\Nawarian\Raylib\SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button or ESC key
+while (!WindowShouldClose()) {   // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
 
     // Move player
-    if (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_RIGHT)) {
+    if (IsKeyDown(Raylib::KEY_RIGHT)) {
         $playerPosition->x += 0.2;
-    } elseif (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_LEFT)) {
+    } elseif (IsKeyDown(Raylib::KEY_LEFT)) {
         $playerPosition->x -= 0.2;
-    } elseif (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_DOWN)) {
+    } elseif (IsKeyDown(Raylib::KEY_DOWN)) {
         $playerPosition->z += 0.2;
-    } elseif (\Nawarian\Raylib\IsKeyDown(Raylib::KEY_UP)) {
+    } elseif (IsKeyDown(Raylib::KEY_UP)) {
         $playerPosition->z -= 0.2;
     }
 
@@ -55,7 +77,7 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button 
 
     // Check collisions player vs enemy-box
     if (
-        \Nawarian\Raylib\CheckCollisionBoxes(new BoundingBox(
+        CheckCollisionBoxes(new BoundingBox(
             new Vector3(
                 $playerPosition->x - $playerSize->x / 2,
                 $playerPosition->y - $playerSize->y / 2,
@@ -84,7 +106,7 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button 
 
     // Check collisions player vs enemy-sphere
     if (
-        \Nawarian\Raylib\CheckCollisionBoxSphere(new BoundingBox(
+        CheckCollisionBoxSphere(new BoundingBox(
             new Vector3(
                 $playerPosition->x - $playerSize->x / 2,
                 $playerPosition->y - $playerSize->y / 2,
@@ -109,30 +131,30 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {   // Detect window close button 
 
     // Draw
     //----------------------------------------------------------------------------------
-    \Nawarian\Raylib\BeginDrawing();
-        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
+    BeginDrawing();
+        ClearBackground(Color::rayWhite());
 
-        \Nawarian\Raylib\BeginMode3D($camera);
+        BeginMode3D($camera);
             // Draw enemy-box
-            \Nawarian\Raylib\DrawCube($enemyBoxPos, $enemyBoxSize->x, $enemyBoxSize->y, $enemyBoxSize->z, Color::gray());
-            \Nawarian\Raylib\DrawCubeWires($enemyBoxPos, $enemyBoxSize->x, $enemyBoxSize->y, $enemyBoxSize->z, Color::darkGray());
+            DrawCube($enemyBoxPos, $enemyBoxSize->x, $enemyBoxSize->y, $enemyBoxSize->z, Color::gray());
+            DrawCubeWires($enemyBoxPos, $enemyBoxSize->x, $enemyBoxSize->y, $enemyBoxSize->z, Color::darkGray());
 
             // Draw enemy-sphere
-            \Nawarian\Raylib\DrawSphere($enemySpherePos, $enemySphereSize, Color::gray());
-            \Nawarian\Raylib\DrawSphereWires($enemySpherePos, $enemySphereSize, 16, 16, Color::darkGray());
+            DrawSphere($enemySpherePos, $enemySphereSize, Color::gray());
+            DrawSphereWires($enemySpherePos, $enemySphereSize, 16, 16, Color::darkGray());
 
             // Draw player
-            \Nawarian\Raylib\DrawCubeV($playerPosition, $playerSize, $playerColor);
-            \Nawarian\Raylib\DrawGrid(10, 1.0);        // Draw a grid
-        \Nawarian\Raylib\EndMode3D();
+            DrawCubeV($playerPosition, $playerSize, $playerColor);
+            DrawGrid(10, 1.0);        // Draw a grid
+        EndMode3D();
 
-        \Nawarian\Raylib\DrawText('Move player with cursors to collide', 220, 40, 20, Color::gray());
-        \Nawarian\Raylib\DrawFPS(10, 10);
-    \Nawarian\Raylib\EndDrawing();
+        DrawText('Move player with cursors to collide', 220, 40, 20, Color::gray());
+        DrawFPS(10, 10);
+    EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-\Nawarian\Raylib\CloseWindow();        // Close window and OpenGL context
+CloseWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

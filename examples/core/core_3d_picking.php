@@ -13,12 +13,37 @@ use Nawarian\Raylib\Types\{
     Vector3,
 };
 
+use function Nawarian\Raylib\{
+    BeginDrawing,
+    BeginMode3D,
+    CheckCollisionRayBox,
+    ClearBackground,
+    CloseWindow,
+    DrawCube,
+    DrawCubeWires,
+    DrawFPS,
+    DrawGrid,
+    DrawRay,
+    DrawText,
+    EndDrawing,
+    EndMode3D,
+    GetMousePosition,
+    GetMouseRay,
+    InitWindow,
+    IsMouseButtonPressed,
+    MeasureText,
+    SetCameraMode,
+    SetTargetFPS,
+    UpdateCamera,
+    WindowShouldClose
+};
+
 // Initialization
 //--------------------------------------------------------------------------------------
 $screenWidth = 800;
 $screenHeight = 450;
 
-\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, "raylib [core] example - 3d picking");
+InitWindow($screenWidth, $screenHeight, "raylib [core] example - 3d picking");
 
 // Define the camera to look into our 3d world
 $camera = new Camera3D(
@@ -39,23 +64,23 @@ $ray = new Ray(
 
 $collision = false;
 
-\Nawarian\Raylib\SetCameraMode($camera, Camera3D::MODE_FREE); // Set a free camera mode
+SetCameraMode($camera, Camera3D::MODE_FREE); // Set a free camera mode
 
-\Nawarian\Raylib\SetTargetFPS(60);                   // Set our game to run at 60 frames-per-second
+SetTargetFPS(60);                   // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
-while (!\Nawarian\Raylib\WindowShouldClose()) {       // Detect window close button or ESC key
+while (!WindowShouldClose()) {       // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
-    \Nawarian\Raylib\UpdateCamera($camera);          // Update camera
+    UpdateCamera($camera);          // Update camera
 
-    if (\Nawarian\Raylib\IsMouseButtonPressed(Raylib::MOUSE_LEFT_BUTTON)) {
+    if (IsMouseButtonPressed(Raylib::MOUSE_LEFT_BUTTON)) {
         if (!$collision) {
-            $ray = \Nawarian\Raylib\GetMouseRay(\Nawarian\Raylib\GetMousePosition(), $camera);
+            $ray = GetMouseRay(GetMousePosition(), $camera);
 
             // Check collision between ray and box
-            $collision = \Nawarian\Raylib\CheckCollisionRayBox($ray, new BoundingBox(
+            $collision = CheckCollisionRayBox($ray, new BoundingBox(
                 new Vector3(
                     $cubePosition->x - $cubeSize->x / 2,
                     $cubePosition->y - $cubeSize->y / 2,
@@ -76,38 +101,50 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {       // Detect window close but
     // Draw
     //----------------------------------------------------------------------------------
     // phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
-    \Nawarian\Raylib\BeginDrawing();
-        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
+    BeginDrawing();
+        ClearBackground(Color::rayWhite());
 
-        \Nawarian\Raylib\BeginMode3D($camera);
+        BeginMode3D($camera);
             if ($collision) {
-                \Nawarian\Raylib\DrawCube($cubePosition, $cubeSize->x, $cubeSize->y, $cubeSize->z, Color::red());
-                \Nawarian\Raylib\DrawCubeWires($cubePosition, $cubeSize->x, $cubeSize->y, $cubeSize->z, Color::maroon());
+                DrawCube($cubePosition, $cubeSize->x, $cubeSize->y, $cubeSize->z, Color::red());
+                DrawCubeWires($cubePosition, $cubeSize->x, $cubeSize->y, $cubeSize->z, Color::maroon());
 
-                \Nawarian\Raylib\DrawCubeWires($cubePosition, $cubeSize->x + 0.2, $cubeSize->y + 0.2, $cubeSize->z + 0.2, Color::green());
+                DrawCubeWires(
+                    $cubePosition,
+                    $cubeSize->x + 0.2,
+                    $cubeSize->y + 0.2,
+                    $cubeSize->z + 0.2,
+                    Color::green()
+                );
             } else {
-                \Nawarian\Raylib\DrawCube($cubePosition, $cubeSize->x, $cubeSize->y, $cubeSize->z, Color::gray());
-                \Nawarian\Raylib\DrawCubeWires($cubePosition, $cubeSize->x, $cubeSize->y, $cubeSize->z, Color::darkGray());
+                DrawCube($cubePosition, $cubeSize->x, $cubeSize->y, $cubeSize->z, Color::gray());
+                DrawCubeWires($cubePosition, $cubeSize->x, $cubeSize->y, $cubeSize->z, Color::darkGray());
             }
 
-            \Nawarian\Raylib\DrawRay($ray, Color::maroon());
-            \Nawarian\Raylib\DrawGrid(10, 1.0);
-        \Nawarian\Raylib\EndMode3D();
+            DrawRay($ray, Color::maroon());
+            DrawGrid(10, 1.0);
+        EndMode3D();
 
-        \Nawarian\Raylib\DrawText("Try selecting the box with mouse!", 240, 10, 20, Color::darkGray());
+        DrawText("Try selecting the box with mouse!", 240, 10, 20, Color::darkGray());
 
         if ($collision) {
-            \Nawarian\Raylib\DrawText("BOX SELECTED", (int) (($screenWidth - \Nawarian\Raylib\MeasureText("BOX SELECTED", 30)) / 2), (int) ($screenHeight * 0.1), 30, Color::green());
+            DrawText(
+                "BOX SELECTED",
+                (int) (($screenWidth - MeasureText("BOX SELECTED", 30)) / 2),
+                (int) ($screenHeight * 0.1),
+                30,
+                Color::green()
+            );
         }
 
-        \Nawarian\Raylib\DrawFPS(10, 10);
+        DrawFPS(10, 10);
 
-    \Nawarian\Raylib\EndDrawing();
+    EndDrawing();
     // phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-\Nawarian\Raylib\CloseWindow();        // Close window and OpenGL context
+CloseWindow();        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

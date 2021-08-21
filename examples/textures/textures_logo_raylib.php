@@ -2,8 +2,20 @@
 
 declare(strict_types=1);
 
-use Nawarian\Raylib\RaylibFactory;
 use Nawarian\Raylib\Types\Color;
+
+use function Nawarian\Raylib\{
+    BeginDrawing,
+    ClearBackground,
+    CloseWindow,
+    DrawText,
+    DrawTexture,
+    EndDrawing,
+    InitWindow,
+    LoadTexture,
+    UnloadTexture,
+    WindowShouldClose
+};
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -12,14 +24,14 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 $screenWidth = 800;
 $screenHeight = 450;
 
-\Nawarian\Raylib\InitWindow($screenWidth, $screenHeight, 'raylib [textures] example - texture loading and drawing');
+InitWindow($screenWidth, $screenHeight, 'raylib [textures] example - texture loading and drawing');
 
 // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
-$texture = \Nawarian\Raylib\LoadTexture(__DIR__ . '/resources/raylib_logo.png');     // Texture loading
+$texture = LoadTexture(__DIR__ . '/resources/raylib_logo.png');     // Texture loading
 //---------------------------------------------------------------------------------------
 
 // Main game loop
-while (!\Nawarian\Raylib\WindowShouldClose()) {     // Detect window close button or ESC key
+while (!WindowShouldClose()) {     // Detect window close button or ESC key
     // Update
     //----------------------------------------------------------------------------------
     // TODO: Update your variables here
@@ -27,20 +39,25 @@ while (!\Nawarian\Raylib\WindowShouldClose()) {     // Detect window close butto
 
     // Draw
     //----------------------------------------------------------------------------------
-    \Nawarian\Raylib\BeginDrawing();
+    BeginDrawing();
 
-        \Nawarian\Raylib\ClearBackground(Color::rayWhite());
+        ClearBackground(Color::rayWhite());
 
-        \Nawarian\Raylib\DrawTexture($texture, (int) ($screenWidth / 2 - $texture->width / 2), (int) ($screenHeight / 2 - $texture->height / 2), Color::white());
+        DrawTexture(
+            $texture,
+            (int) ($screenWidth / 2 - $texture->width / 2),
+            (int) ($screenHeight / 2 - $texture->height / 2),
+            Color::white()
+        );
 
-        \Nawarian\Raylib\DrawText('this IS a texture!', 360, 370, 10, Color::gray());
+        DrawText('this IS a texture!', 360, 370, 10, Color::gray());
 
-    \Nawarian\Raylib\EndDrawing();
+    EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-\Nawarian\Raylib\UnloadTexture($texture);   // Texture unloading
-\Nawarian\Raylib\CloseWindow();     // Close window and OpenGL context
+UnloadTexture($texture);   // Texture unloading
+CloseWindow();     // Close window and OpenGL context
 //--------------------------------------------------------------------------------------
