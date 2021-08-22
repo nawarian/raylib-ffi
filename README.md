@@ -230,21 +230,21 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void DrawCircleGradient(int centerX, int centerY, float radius, Color color1, Color color2)`
 - [x] `void DrawCircleV(Vector2 center, float radius, Color color)`
 - [x] `void DrawCircleLines(int centerX, int centerY, float radius, Color color)`
-- [ ] `void DrawEllipse(int centerX, int centerY, float radiusH, float radiusV, Color color)`
-- [ ] `void DrawEllipseLines(int centerX, int centerY, float radiusH, float radiusV, Color color)`
-- [ ] `void DrawRing(Vector2 center, float innerRadius, float outerRadius, int startAngle, int endAngle, int segments, Color color)`
-- [ ] `void DrawRingLines(Vector2 center, float innerRadius, float outerRadius, int startAngle, int endAngle, int segments, Color color)`
+- [x] `void DrawEllipse(int centerX, int centerY, float radiusH, float radiusV, Color color)`
+- [x] `void DrawEllipseLines(int centerX, int centerY, float radiusH, float radiusV, Color color)`
+- [x] `void DrawRing(Vector2 center, float innerRadius, float outerRadius, int startAngle, int endAngle, int segments, Color color)`
+- [x] `void DrawRingLines(Vector2 center, float innerRadius, float outerRadius, int startAngle, int endAngle, int segments, Color color)`
 - [x] `void DrawRectangle(int posX, int posY, int width, int height, Color color)`
-- [ ] `void DrawRectangleV(Vector2 position, Vector2 size, Color color)`
-- [ ] `void DrawRectangleRec(Rectangle rec, Color color)`
-- [ ] `void DrawRectanglePro(Rectangle rec, Vector2 origin, float rotation, Color color)`
+- [x] `void DrawRectangleV(Vector2 position, Vector2 size, Color color)`
+- [x] `void DrawRectangleRec(Rectangle rec, Color color)`
+- [x] `void DrawRectanglePro(Rectangle rec, Vector2 origin, float rotation, Color color)`
 - [ ] `void DrawRectangleGradientV(int posX, int posY, int width, int height, Color color1, Color color2)`
 - [x] `void DrawRectangleGradientH(int posX, int posY, int width, int height, Color color1, Color color2)`
-- [ ] `void DrawRectangleGradientEx(Rectangle rec, Color col1, Color col2, Color col3, Color col4)`
+- [x] `void DrawRectangleGradientEx(Rectangle rec, Color col1, Color col2, Color col3, Color col4)`
 - [x] `void DrawRectangleLines(int posX, int posY, int width, int height, Color color)`
 - [x] `void DrawRectangleLinesEx(Rectangle rec, int lineThick, Color color)`
-- [ ] `void DrawRectangleRounded(Rectangle rec, float roundness, int segments, Color color)`
-- [ ] `void DrawRectangleRoundedLines(Rectangle rec, float roundness, int segments, int lineThick, Color color)`
+- [x] `void DrawRectangleRounded(Rectangle rec, float roundness, int segments, Color color)`
+- [x] `void DrawRectangleRoundedLines(Rectangle rec, float roundness, int segments, int lineThick, Color color)`
 - [x] `void DrawTriangle(Vector2 v1, Vector2 v2, Vector2 v3, Color color)`
 - [x] `void DrawTriangleLines(Vector2 v1, Vector2 v2, Vector2 v3, Color color)`
 - [ ] `void DrawTriangleFan(Vector2 *points, int pointsCount, Color color)`

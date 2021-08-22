@@ -313,6 +313,24 @@ function DrawCubeWires(Vector3 $position, float $width, float $height, float $le
 /**
  * @psalm-suppress MissingParamType
  */
+function DrawEllipse(int $centerX, int $centerY, float $radiusH, float $radiusV, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawEllipse($centerX, $centerY, $radiusH, $radiusV, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
+function DrawEllipseLines(int $centerX, int $centerY, float $radiusH, float $radiusV, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawEllipseLines($centerX, $centerY, $radiusH, $radiusV, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
 function DrawFPS(int $posX, int $posY): void
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
@@ -430,10 +448,28 @@ function DrawRectangle(float $x, float $y, float $width, float $height, Color $c
 /**
  * @psalm-suppress MissingParamType
  */
+function DrawRectangleV(Vector2 $position, Vector2 $size, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawRectangleV($position, $size, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
 function DrawRectangleGradientH(float $x, float $y, float $width, float $height, Color $color1, Color $color2): void
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
     $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawRectangleGradientH($x, $y, $width, $height, $color1, $color2);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
+function DrawRectangleGradientEx(Rectangle $rec, Color $col1, Color $col2, Color $col3, Color $col4): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawRectangleGradientEx($rec, $col1, $col2, $col3, $col4);
 }
 
 /**
@@ -457,6 +493,24 @@ function DrawRectangleLinesEx(Rectangle $rectangle, int $lineThick, Color $color
 /**
  * @psalm-suppress MissingParamType
  */
+function DrawRectangleRounded(Rectangle $rec, float $roundness, int $segments, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawRectangleRounded($rec, $roundness, $segments, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
+function DrawRectangleRoundedLines(Rectangle $rec, float $roundness, int $segments, int $lineThick, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawRectangleRoundedLines($rec, $roundness, $segments, $lineThick, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
 function DrawRectanglePro(Rectangle $rectangle, Vector2 $origin, float $rotation, Color $color): void
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
@@ -470,6 +524,24 @@ function DrawRectangleRec(Rectangle $rec, Color $color): void
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
     $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawRectangleRec($rec, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
+function DrawRing(Vector2 $center, float $innerRadius, float $outerRadius, int $startAngle, int $endAngle, int $segments, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawRing($center, $innerRadius, $outerRadius, $startAngle, $endAngle, $segments, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
+function DrawRingLines(Vector2 $center, float $innerRadius, float $outerRadius, int $startAngle, int $endAngle, int $segments, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawRingLines($center, $innerRadius, $outerRadius, $startAngle, $endAngle, $segments, $color);
 }
 
 /**

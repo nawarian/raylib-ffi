@@ -315,6 +315,21 @@ final class Raylib implements
         );
     }
 
+    public function drawEllipse(int $centerX, int $centerY, float $radiusH, float $radiusV, Types\Color $color): void
+    {
+        $this->ffi->DrawEllipse($centerX, $centerY, $radiusH, $radiusV, $color->toCData($this->ffi));
+    }
+
+    public function drawEllipseLines(
+        int $centerX,
+        int $centerY,
+        float $radiusH,
+        float $radiusV,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawEllipseLines($centerX, $centerY, $radiusH, $radiusV, $color->toCData($this->ffi));
+    }
+
     public function drawFPS(int $posX, int $posY): void
     {
         $this->ffi->DrawFPS($posX, $posY);
@@ -420,6 +435,15 @@ final class Raylib implements
         $this->ffi->DrawRectangle($x, $y, $width, $height, $color->toCData($this->ffi));
     }
 
+    public function drawRectangleV(Types\Vector2 $position, Types\Vector2 $size, Types\Color $color): void
+    {
+        $this->ffi->DrawRectangleV(
+            $position->toCData($this->ffi),
+            $size->toCData($this->ffi),
+            $color->toCData($this->ffi)
+        );
+    }
+
     public function drawRectangleGradientH(
         float $x,
         float $y,
@@ -438,6 +462,22 @@ final class Raylib implements
         );
     }
 
+    public function drawRectangleGradientEx(
+        Types\Rectangle $rec,
+        Types\Color $col1,
+        Types\Color $col2,
+        Types\Color $col3,
+        Types\Color $col4
+    ): void {
+        $this->ffi->DrawRectangleGradientEx(
+            $rec->toCData($this->ffi),
+            $col1->toCData($this->ffi),
+            $col2->toCData($this->ffi),
+            $col3->toCData($this->ffi),
+            $col4->toCData($this->ffi),
+        );
+    }
+
     public function drawRectangleLines(float $x, float $y, float $width, float $height, Types\Color $color): void
     {
         $this->ffi->DrawRectangleLines($x, $y, $width, $height, $color->toCData($this->ffi));
@@ -446,6 +486,36 @@ final class Raylib implements
     public function drawRectangleLinesEx(Types\Rectangle $rectangle, int $lineThick, Types\Color $color): void
     {
         $this->ffi->DrawRectangleLinesEx($rectangle->toCData($this->ffi), $lineThick, $color->toCData($this->ffi));
+    }
+
+    public function drawRectangleRounded(
+        Types\Rectangle $rec,
+        float $roundness,
+        int $segments,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawRectangleRounded(
+            $rec->toCData($this->ffi),
+            $roundness,
+            $segments,
+            $color->toCData($this->ffi),
+        );
+    }
+
+    public function drawRectangleRoundedLines(
+        Types\Rectangle $rec,
+        float $roundness,
+        int $segments,
+        int $lineThick,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawRectangleRoundedLines(
+            $rec->toCData($this->ffi),
+            $roundness,
+            $segments,
+            $lineThick,
+            $color->toCData($this->ffi),
+        );
     }
 
     public function drawRectanglePro(
@@ -465,6 +535,46 @@ final class Raylib implements
     public function drawRectangleRec(Types\Rectangle $rec, Types\Color $color): void
     {
         $this->ffi->DrawRectangleRec($rec->toCData($this->ffi), $color->toCData($this->ffi));
+    }
+
+    public function drawRing(
+        Types\Vector2 $center,
+        float $innerRadius,
+        float $outerRadius,
+        int $startAngle,
+        int $endAngle,
+        int $segments,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawRing(
+            $center->toCData($this->ffi),
+            $innerRadius,
+            $outerRadius,
+            $startAngle,
+            $endAngle,
+            $segments,
+            $color->toCData($this->ffi)
+        );
+    }
+
+    public function drawRingLines(
+        Types\Vector2 $center,
+        float $innerRadius,
+        float $outerRadius,
+        int $startAngle,
+        int $endAngle,
+        int $segments,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawRingLines(
+            $center->toCData($this->ffi),
+            $innerRadius,
+            $outerRadius,
+            $startAngle,
+            $endAngle,
+            $segments,
+            $color->toCData($this->ffi)
+        );
     }
 
     public function drawSphere(Types\Vector3 $centerPos, float $radius, Types\Color $color): void
