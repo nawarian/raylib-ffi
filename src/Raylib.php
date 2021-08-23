@@ -352,6 +352,10 @@ final class Raylib implements
     public function drawLineStrip(array $points, Types\Color $color): void
     {
         $pointsCount = count($points);
+        if ($pointsCount === 0) {
+            return;
+        }
+
         $cdataPointsArray = $this->ffi->new(FFI::arrayType($this->ffi->type('Vector2'), [$pointsCount]));
 
         foreach ($points as $i => $vector2) {
@@ -844,6 +848,54 @@ final class Raylib implements
             $v1->toCData($this->ffi),
             $v2->toCData($this->ffi),
             $v3->toCData($this->ffi),
+            $color->toCData($this->ffi),
+        );
+    }
+
+    /**
+     * @param array<Types\Vector2> $points
+     * @param Types\Color $color
+     */
+    public function drawTriangleFan(array $points, Types\Color $color): void
+    {
+        $pointsCount = count($points);
+        if ($pointsCount === 0) {
+            return;
+        }
+
+        $cdataPointsArray = $this->ffi->new(FFI::arrayType($this->ffi->type('Vector2'), [$pointsCount]));
+
+        foreach ($points as $i => $vector2) {
+            $cdataPointsArray[$i] = $vector2->toCData($this->ffi);
+        }
+
+        $this->ffi->DrawTriangleFan(
+            $cdataPointsArray,
+            $pointsCount,
+            $color->toCData($this->ffi),
+        );
+    }
+
+    /**
+     * @param array<Types\Vector2> $points
+     * @param Types\Color $color
+     */
+    public function drawTriangleStrip(array $points, Types\Color $color): void
+    {
+        $pointsCount = count($points);
+        if ($pointsCount === 0) {
+            return;
+        }
+
+        $cdataPointsArray = $this->ffi->new(FFI::arrayType($this->ffi->type('Vector2'), [$pointsCount]));
+
+        foreach ($points as $i => $vector2) {
+            $cdataPointsArray[$i] = $vector2->toCData($this->ffi);
+        }
+
+        $this->ffi->DrawTriangleStrip(
+            $cdataPointsArray,
+            $pointsCount,
             $color->toCData($this->ffi),
         );
     }

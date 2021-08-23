@@ -247,8 +247,8 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void DrawRectangleRoundedLines(Rectangle rec, float roundness, int segments, int lineThick, Color color)`
 - [x] `void DrawTriangle(Vector2 v1, Vector2 v2, Vector2 v3, Color color)`
 - [x] `void DrawTriangleLines(Vector2 v1, Vector2 v2, Vector2 v3, Color color)`
-- [ ] `void DrawTriangleFan(Vector2 *points, int pointsCount, Color color)`
-- [ ] `void DrawTriangleStrip(Vector2 *points, int pointsCount, Color color)`
+- [x] `void DrawTriangleFan(Vector2 *points, int pointsCount, Color color)`
+- [x] `void DrawTriangleStrip(Vector2 *points, int pointsCount, Color color)`
 - [x] `void DrawPoly(Vector2 center, int sides, float radius, float rotation, Color color)`
 - [x] `void DrawPolyLines(Vector2 center, int sides, float radius, float rotation, Color color)`
 - [x] `bool CheckCollisionRecs(Rectangle rec1, Rectangle rec2)`

@@ -86,6 +86,8 @@ use FFI\CType;
  * @method void DrawTextureV(CData $texture, CData $position, CData $tint)
  * @method void DrawTriangle(CData $vec1, CData $vec2, CData $vec3, CData $color)
  * @method void DrawTriangleLines(CData $vec1, CData $vec2, CData $vec3, CData $color)
+ * @method void DrawTriangleFan(CData $pointsArr, int $pointsCount, CData $color)
+ * @method void DrawTriangleStrip(CData $pointsArr, int $pointsCount, CData $color)
  * @method void EndBlendMode()
  * @method void EndDrawing()
  * @method void EndMode2D()

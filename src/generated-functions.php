@@ -709,6 +709,24 @@ function DrawTriangleLines(Vector2 $v1, Vector2 $v2, Vector2 $v3, Color $color):
 /**
  * @psalm-suppress MissingParamType
  */
+function DrawTriangleFan(array $points, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawTriangleFan($points, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
+function DrawTriangleStrip(array $points, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawTriangleStrip($points, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
 function EndBlendMode(): void
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
