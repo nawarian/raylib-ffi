@@ -344,10 +344,10 @@ Below you'll find the list of things to be developed in this project.
 - [x] `int ColorToInt(Color color)`
 - [x] `Vector4 ColorNormalize(Color color)`
 - [x] `Color ColorFromNormalized(Vector4 normalized)`
-- [ ] `Vector3 ColorToHSV(Color color)`
-- [ ] `Color ColorFromHSV(float hue, float saturation, float value)`
+- [x] `Vector3 ColorToHSV(Color color)`
+- [x] `Color ColorFromHSV(float hue, float saturation, float value)`
 - [x] `Color ColorAlpha(Color color, float alpha)`
-- [ ] `Color ColorAlphaBlend(Color dst, Color src, Color tint)`
+- [x] `Color ColorAlphaBlend(Color dst, Color src, Color tint)`
 - [x] `Color GetColor(int hexValue)`
 - [ ] `Color GetPixelColor(void *srcPtr, int format)`
 - [ ] `void SetPixelColor(void *dstPtr, Color color, int format)`

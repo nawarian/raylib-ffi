@@ -246,6 +246,16 @@ function ColorAlpha(Color $color, float $alpha): Color
  * @psalm-suppress MissingParamType
  * @psalm-suppress MixedArgumentTypeCoercion
  */
+function ColorAlphaBlend(Color $dst, Color $src, Color $tint): Color
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    return $raylib_4878fcd84df4c3690086cd1cbfbbfea2->colorAlphaBlend($dst, $src, $tint);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
+ */
 function DrawBillboard(Camera3D $camera, Texture2D $texture, Vector3 $center, float $size, Color $tint): void
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
@@ -910,6 +920,26 @@ function ColorFromNormalized(Vector4 $normalized): Color
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
     return $raylib_4878fcd84df4c3690086cd1cbfbbfea2->colorFromNormalized($normalized);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
+ */
+function ColorToHSV(Color $color): Vector3
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    return $raylib_4878fcd84df4c3690086cd1cbfbbfea2->colorToHSV($color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
+ */
+function ColorFromHSV(float $hue, float $saturation, float $value): Color
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    return $raylib_4878fcd84df4c3690086cd1cbfbbfea2->colorFromHSV($hue, $saturation, $value);
 }
 
 /**

@@ -197,6 +197,25 @@ final class Raylib implements
         return new Types\Color($c->r, $c->g, $c->b, $c->a);
     }
 
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function colorAlphaBlend(Types\Color $dst, Types\Color $src, Types\Color $tint): Types\Color
+    {
+        $color = $this->ffi->ColorAlphaBlend(
+            $dst->toCData($this->ffi),
+            $src->toCData($this->ffi),
+            $tint->toCData($this->ffi),
+        );
+
+        return new Types\Color(
+            $color->r,
+            $color->g,
+            $color->b,
+            $color->a,
+        );
+    }
+
     public function drawBillboard(
         Types\Camera3D $camera,
         Types\Texture2D $texture,
@@ -972,6 +991,35 @@ final class Raylib implements
     public function colorFromNormalized(Types\Vector4 $normalized): Types\Color
     {
         $color = $this->ffi->ColorFromNormalized($normalized->toCData($this->ffi));
+
+        return new Types\Color(
+            $color->r,
+            $color->g,
+            $color->b,
+            $color->a,
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function colorToHSV(Types\Color $color): Types\Vector3
+    {
+        $vec3 = $this->ffi->ColorToHSV($color->toCData($this->ffi));
+
+        return new Types\Vector3(
+            $vec3->x,
+            $vec3->y,
+            $vec3->z,
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function colorFromHSV(float $hue, float $saturation, float $value): Types\Color
+    {
+        $color = $this->ffi->ColorFromHSV($hue, $saturation, $value);
 
         return new Types\Color(
             $color->r,
