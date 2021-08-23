@@ -341,7 +341,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void DrawTexturePro(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float rotation, Color tint)`
 - [ ] `void DrawTextureNPatch(Texture2D texture, NPatchInfo nPatchInfo, Rectangle dest, Vector2 origin, float rotation, Color tint)`
 - [x] `Color Fade(Color color, float alpha)`
-- [ ] `int ColorToInt(Color color)`
+- [x] `int ColorToInt(Color color)`
 - [ ] `Vector4 ColorNormalize(Color color)`
 - [ ] `Color ColorFromNormalized(Vector4 normalized)`
 - [ ] `Vector3 ColorToHSV(Color color)`

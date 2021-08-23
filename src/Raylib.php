@@ -946,6 +946,11 @@ final class Raylib implements
         return new Types\Color($colorStruct->r, $colorStruct->g, $colorStruct->b, $colorStruct->a);
     }
 
+    public function colorToInt(Types\Color $color): int
+    {
+        return $this->ffi->ColorToInt($color->toCData($this->ffi));
+    }
+
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument

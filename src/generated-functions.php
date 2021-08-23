@@ -799,6 +799,15 @@ function Fade(Color $color, float $alpha): Color
 /**
  * @psalm-suppress MissingParamType
  */
+function ColorToInt(Color $color): int
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    return $raylib_4878fcd84df4c3690086cd1cbfbbfea2->colorToInt($color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
 function GenImageCellular(int $width, int $height, int $tileSize): Image
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;

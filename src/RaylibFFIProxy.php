@@ -96,6 +96,7 @@ use FFI\CType;
  * @method void EndTextureMode()
  * @method bool ExportImage(CData $image, string $fileName)
  * @method CData Fade(CData $color, float $alpha)
+ * @method int ColorToInt(CData $color)
  * @method CData GenImageCellular(int $width, int $height, int $tileSize)
  * @method CData GenImageChecked(int $width, int $height, int $checksX, int $checksY, CData $col1, CData $col2)
  * @method CData GenImageGradientH(int $width, int $height, CData $left, CData $right)
