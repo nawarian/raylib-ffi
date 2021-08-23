@@ -238,7 +238,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void DrawRectangleV(Vector2 position, Vector2 size, Color color)`
 - [x] `void DrawRectangleRec(Rectangle rec, Color color)`
 - [x] `void DrawRectanglePro(Rectangle rec, Vector2 origin, float rotation, Color color)`
-- [ ] `void DrawRectangleGradientV(int posX, int posY, int width, int height, Color color1, Color color2)`
+- [x] `void DrawRectangleGradientV(int posX, int posY, int width, int height, Color color1, Color color2)`
 - [x] `void DrawRectangleGradientH(int posX, int posY, int width, int height, Color color1, Color color2)`
 - [x] `void DrawRectangleGradientEx(Rectangle rec, Color col1, Color col2, Color col3, Color col4)`
 - [x] `void DrawRectangleLines(int posX, int posY, int width, int height, Color color)`
@@ -250,7 +250,7 @@ Below you'll find the list of things to be developed in this project.
 - [ ] `void DrawTriangleFan(Vector2 *points, int pointsCount, Color color)`
 - [ ] `void DrawTriangleStrip(Vector2 *points, int pointsCount, Color color)`
 - [x] `void DrawPoly(Vector2 center, int sides, float radius, float rotation, Color color)`
-- [ ] `void DrawPolyLines(Vector2 center, int sides, float radius, float rotation, Color color)`
+- [x] `void DrawPolyLines(Vector2 center, int sides, float radius, float rotation, Color color)`
 - [x] `bool CheckCollisionRecs(Rectangle rec1, Rectangle rec2)`
 - [x] `bool CheckCollisionCircles(Vector2 center1, float radius1, Vector2 center2, float radius2)`
 - [x] `bool CheckCollisionCircleRec(Vector2 center, float radius, Rectangle rec)`

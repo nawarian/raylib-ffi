@@ -430,6 +430,15 @@ function DrawPoly(Vector2 $center, int $sides, float $radius, float $rotation, C
 /**
  * @psalm-suppress MissingParamType
  */
+function DrawPolyLines(Vector2 $center, int $sides, float $radius, float $rotation, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawPolyLines($center, $sides, $radius, $rotation, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
 function DrawRay(Ray $ray, Color $color): void
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
@@ -452,6 +461,15 @@ function DrawRectangleV(Vector2 $position, Vector2 $size, Color $color): void
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
     $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawRectangleV($position, $size, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
+function DrawRectangleGradientV(int $posX, int $posY, int $width, int $height, Color $color1, Color $color2): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawRectangleGradientV($posX, $posY, $width, $height, $color1, $color2);
 }
 
 /**

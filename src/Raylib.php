@@ -425,6 +425,22 @@ final class Raylib implements
         $this->ffi->DrawPoly($center->toCData($this->ffi), $sides, $radius, $rotation, $color->toCData($this->ffi));
     }
 
+    public function drawPolyLines(
+        Types\Vector2 $center,
+        int $sides,
+        float $radius,
+        float $rotation,
+        Types\Color $color
+    ): void {
+        $this->ffi->DrawPolyLines(
+            $center->toCData($this->ffi),
+            $sides,
+            $radius,
+            $rotation,
+            $color->toCData($this->ffi),
+        );
+    }
+
     public function drawRay(Types\Ray $ray, Types\Color $color): void
     {
         $this->ffi->DrawRay($ray->toCData($this->ffi), $color->toCData($this->ffi));
@@ -441,6 +457,24 @@ final class Raylib implements
             $position->toCData($this->ffi),
             $size->toCData($this->ffi),
             $color->toCData($this->ffi)
+        );
+    }
+
+    public function drawRectangleGradientV(
+        int $posX,
+        int $posY,
+        int $width,
+        int $height,
+        Types\Color $color1,
+        Types\Color $color2,
+    ): void {
+        $this->ffi->DrawRectangleGradientV(
+            $posX,
+            $posY,
+            $width,
+            $height,
+            $color1->toCData($this->ffi),
+            $color2->toCData($this->ffi)
         );
     }
 
