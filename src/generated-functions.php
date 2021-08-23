@@ -358,6 +358,15 @@ function DrawLine(int $x0, int $y0, int $x1, int $y1, Color $color): void
 /**
  * @psalm-suppress MissingParamType
  */
+function DrawLineStrip(array $points, Color $color): void
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    $raylib_4878fcd84df4c3690086cd1cbfbbfea2->drawLineStrip($points, $color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ */
 function DrawLineV(Vector2 $startPos, Vector2 $endPos, Color $color): void
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;

@@ -345,6 +345,26 @@ final class Raylib implements
         $this->ffi->DrawLine($x0, $y0, $x1, $y1, $color->toCData($this->ffi));
     }
 
+    /**
+     * @param array<Types\Vector2> $points
+     * @param Types\Color $color
+     */
+    public function drawLineStrip(array $points, Types\Color $color): void
+    {
+        $pointsCount = count($points);
+        $cdataPointsArray = $this->ffi->new(FFI::arrayType($this->ffi->type('Vector2'), [$pointsCount]));
+
+        foreach ($points as $i => $vector2) {
+            $cdataPointsArray[$i] = $vector2->toCData($this->ffi);
+        }
+
+        $this->ffi->DrawLineStrip(
+            $cdataPointsArray,
+            $pointsCount,
+            $color->toCData($this->ffi),
+        );
+    }
+
     public function drawLineV(Types\Vector2 $startPos, Types\Vector2 $endPos, Types\Color $color): void
     {
         $this->ffi->DrawLineV(

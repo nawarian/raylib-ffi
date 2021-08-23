@@ -223,7 +223,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] `void DrawLineV(Vector2 startPos, Vector2 endPos, Color color)`
 - [x] `void DrawLineEx(Vector2 startPos, Vector2 endPos, float thick, Color color)`
 - [x] `void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color)`
-- [ ] `void DrawLineStrip(Vector2 *points, int pointsCount, Color color)`
+- [x] `void DrawLineStrip(Vector2 *points, int pointsCount, Color color)`
 - [x] `void DrawCircle(int centerX, int centerY, float radius, Color color)`
 - [x] `void DrawCircleSector(Vector2 center, float radius, int startAngle, int endAngle, int segments, Color color)`
 - [x] `void DrawCircleSectorLines(Vector2 center, float radius, int startAngle, int endAngle, int segments, Color color)`

@@ -6,10 +6,11 @@ namespace Nawarian\Raylib;
 
 use FFI;
 use FFI\CData;
+use FFI\CType;
 
 /**
  * @phpcs:disable Generic.Files.LineLength.TooLong
- * @method CData new(string $type)
+ * @method CData new(CType|string $type)
  * @method void BeginBlendMode(int $mode)
  * @method void BeginDrawing()
  * @method void BeginMode2D(CData $camera2D)
@@ -46,6 +47,7 @@ use FFI\CData;
  * @method void DrawFPS(int $posX, int $posY)
  * @method void DrawGrid(int $slices, float $spacing)
  * @method void DrawLine(int $x0, int $y0, int $x1, int $y1, CData $color)
+ * @method void DrawLineStrip(CData $pointsArr, int $pointsCount, CData $color)
  * @method void DrawLineV(CData $startPos, CData $endPos, CData $color)
  * @method void DrawLineEx(CData $startPos, CData $endPos, float $thick, CData $color)
  * @method void DrawLineBezier(CData $startPos, CData $endPos, float $lineThick, CData $color)
