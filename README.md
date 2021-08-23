@@ -343,7 +343,7 @@ Below you'll find the list of things to be developed in this project.
 - [x] `Color Fade(Color color, float alpha)`
 - [x] `int ColorToInt(Color color)`
 - [x] `Vector4 ColorNormalize(Color color)`
-- [ ] `Color ColorFromNormalized(Vector4 normalized)`
+- [x] `Color ColorFromNormalized(Vector4 normalized)`
 - [ ] `Vector3 ColorToHSV(Color color)`
 - [ ] `Color ColorFromHSV(float hue, float saturation, float value)`
 - [x] `Color ColorAlpha(Color color, float alpha)`

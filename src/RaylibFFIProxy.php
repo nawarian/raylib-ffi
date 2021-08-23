@@ -98,6 +98,7 @@ use FFI\CType;
  * @method CData Fade(CData $color, float $alpha)
  * @method int ColorToInt(CData $color)
  * @method CData ColorNormalize(CData $color)
+ * @method CData ColorFromNormalized(CData $normalized)
  * @method CData GenImageCellular(int $width, int $height, int $tileSize)
  * @method CData GenImageChecked(int $width, int $height, int $checksX, int $checksY, CData $col1, CData $col2)
  * @method CData GenImageGradientH(int $width, int $height, CData $left, CData $right)

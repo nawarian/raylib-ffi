@@ -906,6 +906,16 @@ function ColorNormalize(Color $color): Vector4
  * @psalm-suppress MissingParamType
  * @psalm-suppress MixedArgumentTypeCoercion
  */
+function ColorFromNormalized(Vector4 $normalized): Color
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    return $raylib_4878fcd84df4c3690086cd1cbfbbfea2->colorFromNormalized($normalized);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
+ */
 function GenImageCellular(int $width, int $height, int $tileSize): Image
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;

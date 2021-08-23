@@ -968,6 +968,21 @@ final class Raylib implements
 
     /**
      * @psalm-suppress UndefinedPropertyFetch
+     */
+    public function colorFromNormalized(Types\Vector4 $normalized): Types\Color
+    {
+        $color = $this->ffi->ColorFromNormalized($normalized->toCData($this->ffi));
+
+        return new Types\Color(
+            $color->r,
+            $color->g,
+            $color->b,
+            $color->a,
+        );
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedArgument
      */
     public function genImageCellular(int $width, int $height, int $tileSize): Types\Image
