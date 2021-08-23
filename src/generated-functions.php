@@ -33,6 +33,7 @@ unset($factory);
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function BeginBlendMode(int $mode): void
 {
@@ -42,6 +43,7 @@ function BeginBlendMode(int $mode): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function BeginDrawing(): void
 {
@@ -51,6 +53,7 @@ function BeginDrawing(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function BeginMode2D(Camera2D $camera): void
 {
@@ -60,6 +63,7 @@ function BeginMode2D(Camera2D $camera): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function BeginMode3D(Camera3D $camera): void
 {
@@ -69,6 +73,7 @@ function BeginMode3D(Camera3D $camera): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function BeginScissorMode(int $x, int $y, int $width, int $height): void
 {
@@ -78,6 +83,7 @@ function BeginScissorMode(int $x, int $y, int $width, int $height): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function BeginTextureMode(RenderTexture2D $target): void
 {
@@ -87,6 +93,7 @@ function BeginTextureMode(RenderTexture2D $target): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function CheckCollisionBoxes(BoundingBox $box1, BoundingBox $box2): bool
 {
@@ -96,6 +103,7 @@ function CheckCollisionBoxes(BoundingBox $box1, BoundingBox $box2): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function CheckCollisionBoxSphere(BoundingBox $box, Vector3 $center, float $radius): bool
 {
@@ -105,6 +113,7 @@ function CheckCollisionBoxSphere(BoundingBox $box, Vector3 $center, float $radiu
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function CheckCollisionPointCircle(Vector2 $point, Vector2 $center, float $radius): bool
 {
@@ -114,6 +123,7 @@ function CheckCollisionPointCircle(Vector2 $point, Vector2 $center, float $radiu
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function CheckCollisionPointRec(Vector2 $point, Rectangle $rec): bool
 {
@@ -123,6 +133,7 @@ function CheckCollisionPointRec(Vector2 $point, Rectangle $rec): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function CheckCollisionRayBox(Ray $ray, BoundingBox $box): bool
 {
@@ -132,6 +143,7 @@ function CheckCollisionRayBox(Ray $ray, BoundingBox $box): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function CheckCollisionRecs(Rectangle $rec1, Rectangle $rec2): bool
 {
@@ -141,6 +153,7 @@ function CheckCollisionRecs(Rectangle $rec1, Rectangle $rec2): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function CheckCollisionCircles(Vector2 $center1, float $radius1, Vector2 $center2, float $radius2): bool
 {
@@ -150,6 +163,7 @@ function CheckCollisionCircles(Vector2 $center1, float $radius1, Vector2 $center
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function CheckCollisionCircleRec(Vector2 $center, float $radius, Rectangle $rec): bool
 {
@@ -159,6 +173,7 @@ function CheckCollisionCircleRec(Vector2 $center, float $radius, Rectangle $rec)
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function CheckCollisionPointTriangle(Vector2 $point, Vector2 $p1, Vector2 $p2, Vector2 $p3): bool
 {
@@ -168,6 +183,7 @@ function CheckCollisionPointTriangle(Vector2 $point, Vector2 $p1, Vector2 $p2, V
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function CheckCollisionLines(Vector2 $startPos1, Vector2 $endPos1, Vector2 $startPos2, Vector2 $endPos2, Vector2 $mutCollisionPoint): bool
 {
@@ -177,6 +193,7 @@ function CheckCollisionLines(Vector2 $startPos1, Vector2 $endPos1, Vector2 $star
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ClearBackground(Color $color): void
 {
@@ -186,6 +203,7 @@ function ClearBackground(Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ClearWindowState(int $flags): void
 {
@@ -195,6 +213,7 @@ function ClearWindowState(int $flags): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function CloseAudioDevice(): void
 {
@@ -204,6 +223,7 @@ function CloseAudioDevice(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function CloseWindow(): void
 {
@@ -213,6 +233,7 @@ function CloseWindow(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ColorAlpha(Color $color, float $alpha): Color
 {
@@ -222,6 +243,7 @@ function ColorAlpha(Color $color, float $alpha): Color
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawBillboard(Camera3D $camera, Texture2D $texture, Vector3 $center, float $size, Color $tint): void
 {
@@ -231,6 +253,7 @@ function DrawBillboard(Camera3D $camera, Texture2D $texture, Vector3 $center, fl
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawCircle(int $centerX, int $centerY, float $radius, Color $color): void
 {
@@ -240,6 +263,7 @@ function DrawCircle(int $centerX, int $centerY, float $radius, Color $color): vo
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawCircleGradient(int $centerX, int $centerY, float $radius, Color $color1, Color $color2): void
 {
@@ -249,6 +273,7 @@ function DrawCircleGradient(int $centerX, int $centerY, float $radius, Color $co
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawCircleLines(int $centerX, int $centerY, float $radius, Color $color): void
 {
@@ -258,6 +283,7 @@ function DrawCircleLines(int $centerX, int $centerY, float $radius, Color $color
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawCircleSector(Vector2 $center, float $radius, int $startAngle, int $endAngle, int $segments, Color $color): void
 {
@@ -267,6 +293,7 @@ function DrawCircleSector(Vector2 $center, float $radius, int $startAngle, int $
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawCircleSectorLines(Vector2 $center, float $radius, int $startAngle, int $endAngle, int $segments, Color $color): void
 {
@@ -276,6 +303,7 @@ function DrawCircleSectorLines(Vector2 $center, float $radius, int $startAngle, 
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawCircleV(Vector2 $center, float $radius, Color $color): void
 {
@@ -285,6 +313,7 @@ function DrawCircleV(Vector2 $center, float $radius, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawCube(Vector3 $position, float $width, float $height, float $length, Color $color): void
 {
@@ -294,6 +323,7 @@ function DrawCube(Vector3 $position, float $width, float $height, float $length,
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawCubeV(Vector3 $position, Vector3 $size, Color $color): void
 {
@@ -303,6 +333,7 @@ function DrawCubeV(Vector3 $position, Vector3 $size, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawCubeWires(Vector3 $position, float $width, float $height, float $length, Color $color): void
 {
@@ -312,6 +343,7 @@ function DrawCubeWires(Vector3 $position, float $width, float $height, float $le
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawEllipse(int $centerX, int $centerY, float $radiusH, float $radiusV, Color $color): void
 {
@@ -321,6 +353,7 @@ function DrawEllipse(int $centerX, int $centerY, float $radiusH, float $radiusV,
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawEllipseLines(int $centerX, int $centerY, float $radiusH, float $radiusV, Color $color): void
 {
@@ -330,6 +363,7 @@ function DrawEllipseLines(int $centerX, int $centerY, float $radiusH, float $rad
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawFPS(int $posX, int $posY): void
 {
@@ -339,6 +373,7 @@ function DrawFPS(int $posX, int $posY): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawGrid(int $slices, float $spacing): void
 {
@@ -348,6 +383,7 @@ function DrawGrid(int $slices, float $spacing): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawLine(int $x0, int $y0, int $x1, int $y1, Color $color): void
 {
@@ -357,6 +393,7 @@ function DrawLine(int $x0, int $y0, int $x1, int $y1, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawLineStrip(array $points, Color $color): void
 {
@@ -366,6 +403,7 @@ function DrawLineStrip(array $points, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawLineV(Vector2 $startPos, Vector2 $endPos, Color $color): void
 {
@@ -375,6 +413,7 @@ function DrawLineV(Vector2 $startPos, Vector2 $endPos, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawLineEx(Vector2 $startPos, Vector2 $endPos, float $thick, Color $color): void
 {
@@ -384,6 +423,7 @@ function DrawLineEx(Vector2 $startPos, Vector2 $endPos, float $thick, Color $col
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawLineBezier(Vector2 $startPos, Vector2 $endPos, float $thick, Color $color): void
 {
@@ -393,6 +433,7 @@ function DrawLineBezier(Vector2 $startPos, Vector2 $endPos, float $thick, Color 
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawModelEx(Model $model, Vector3 $position, Vector3 $rotationAxis, float $rotationAngle, Vector3 $scale, Color $tint): void
 {
@@ -402,6 +443,7 @@ function DrawModelEx(Model $model, Vector3 $position, Vector3 $rotationAxis, flo
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawPixel(int $posX, int $posY, Color $color): void
 {
@@ -411,6 +453,7 @@ function DrawPixel(int $posX, int $posY, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawPixelV(Vector2 $position, Color $color): void
 {
@@ -420,6 +463,7 @@ function DrawPixelV(Vector2 $position, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawPlane(Vector3 $center, Vector2 $size, Color $color): void
 {
@@ -429,6 +473,7 @@ function DrawPlane(Vector3 $center, Vector2 $size, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawPoly(Vector2 $center, int $sides, float $radius, float $rotation, Color $color): void
 {
@@ -438,6 +483,7 @@ function DrawPoly(Vector2 $center, int $sides, float $radius, float $rotation, C
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawPolyLines(Vector2 $center, int $sides, float $radius, float $rotation, Color $color): void
 {
@@ -447,6 +493,7 @@ function DrawPolyLines(Vector2 $center, int $sides, float $radius, float $rotati
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRay(Ray $ray, Color $color): void
 {
@@ -456,6 +503,7 @@ function DrawRay(Ray $ray, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRectangle(float $x, float $y, float $width, float $height, Color $color): void
 {
@@ -465,6 +513,7 @@ function DrawRectangle(float $x, float $y, float $width, float $height, Color $c
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRectangleV(Vector2 $position, Vector2 $size, Color $color): void
 {
@@ -474,6 +523,7 @@ function DrawRectangleV(Vector2 $position, Vector2 $size, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRectangleGradientV(int $posX, int $posY, int $width, int $height, Color $color1, Color $color2): void
 {
@@ -483,6 +533,7 @@ function DrawRectangleGradientV(int $posX, int $posY, int $width, int $height, C
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRectangleGradientH(float $x, float $y, float $width, float $height, Color $color1, Color $color2): void
 {
@@ -492,6 +543,7 @@ function DrawRectangleGradientH(float $x, float $y, float $width, float $height,
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRectangleGradientEx(Rectangle $rec, Color $col1, Color $col2, Color $col3, Color $col4): void
 {
@@ -501,6 +553,7 @@ function DrawRectangleGradientEx(Rectangle $rec, Color $col1, Color $col2, Color
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRectangleLines(float $x, float $y, float $width, float $height, Color $color): void
 {
@@ -510,6 +563,7 @@ function DrawRectangleLines(float $x, float $y, float $width, float $height, Col
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRectangleLinesEx(Rectangle $rectangle, int $lineThick, Color $color): void
 {
@@ -519,6 +573,7 @@ function DrawRectangleLinesEx(Rectangle $rectangle, int $lineThick, Color $color
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRectangleRounded(Rectangle $rec, float $roundness, int $segments, Color $color): void
 {
@@ -528,6 +583,7 @@ function DrawRectangleRounded(Rectangle $rec, float $roundness, int $segments, C
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRectangleRoundedLines(Rectangle $rec, float $roundness, int $segments, int $lineThick, Color $color): void
 {
@@ -537,6 +593,7 @@ function DrawRectangleRoundedLines(Rectangle $rec, float $roundness, int $segmen
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRectanglePro(Rectangle $rectangle, Vector2 $origin, float $rotation, Color $color): void
 {
@@ -546,6 +603,7 @@ function DrawRectanglePro(Rectangle $rectangle, Vector2 $origin, float $rotation
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRectangleRec(Rectangle $rec, Color $color): void
 {
@@ -555,6 +613,7 @@ function DrawRectangleRec(Rectangle $rec, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRing(Vector2 $center, float $innerRadius, float $outerRadius, int $startAngle, int $endAngle, int $segments, Color $color): void
 {
@@ -564,6 +623,7 @@ function DrawRing(Vector2 $center, float $innerRadius, float $outerRadius, int $
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawRingLines(Vector2 $center, float $innerRadius, float $outerRadius, int $startAngle, int $endAngle, int $segments, Color $color): void
 {
@@ -573,6 +633,7 @@ function DrawRingLines(Vector2 $center, float $innerRadius, float $outerRadius, 
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawSphere(Vector3 $centerPos, float $radius, Color $color): void
 {
@@ -582,6 +643,7 @@ function DrawSphere(Vector3 $centerPos, float $radius, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawSphereWires(Vector3 $centerPos, float $radius, int $rings, int $slices, Color $color): void
 {
@@ -591,6 +653,7 @@ function DrawSphereWires(Vector3 $centerPos, float $radius, int $rings, int $sli
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawText(string $text, int $x, int $y, int $fontSize, Color $color): void
 {
@@ -600,6 +663,7 @@ function DrawText(string $text, int $x, int $y, int $fontSize, Color $color): vo
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTextEx(Font $font, string $text, Vector2 $position, float $fontSize, float $spacing, Color $tint): void
 {
@@ -609,6 +673,7 @@ function DrawTextEx(Font $font, string $text, Vector2 $position, float $fontSize
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTextRec(Font $font, string $text, Rectangle $rec, float $fontSize, float $spacing, bool $wordWrap, Color $tint): void
 {
@@ -618,6 +683,7 @@ function DrawTextRec(Font $font, string $text, Rectangle $rec, float $fontSize, 
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTextRecEx(Font $font, string $text, Rectangle $rec, float $fontSize, float $spacing, bool $wordWrap, Color $tint, int $selectStart, int $selectLength, Color $selectTint, Color $selectBackTint): void
 {
@@ -627,6 +693,7 @@ function DrawTextRecEx(Font $font, string $text, Rectangle $rec, float $fontSize
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTextCodepoint(Font $font, int $codepoint, Vector2 $position, float $fontSize, Color $tint): void
 {
@@ -636,6 +703,7 @@ function DrawTextCodepoint(Font $font, int $codepoint, Vector2 $position, float 
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTexture(Texture2D $texture, int $posX, int $posY, Color $tint): void
 {
@@ -645,6 +713,7 @@ function DrawTexture(Texture2D $texture, int $posX, int $posY, Color $tint): voi
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTextureEx(Texture2D $texture, Vector2 $position, float $rotation, float $scale, Color $tint): void
 {
@@ -654,6 +723,7 @@ function DrawTextureEx(Texture2D $texture, Vector2 $position, float $rotation, f
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTextureRec(Texture2D $texture, Rectangle $source, Vector2 $position, Color $tint): void
 {
@@ -663,6 +733,7 @@ function DrawTextureRec(Texture2D $texture, Rectangle $source, Vector2 $position
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTexturePro(Texture2D $texture, Rectangle $source, Rectangle $dest, Vector2 $origin, float $rotation, Color $tint): void
 {
@@ -672,6 +743,7 @@ function DrawTexturePro(Texture2D $texture, Rectangle $source, Rectangle $dest, 
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTextureTiled(Texture2D $texture, Rectangle $source, Rectangle $dest, Vector2 $origin, float $rotation, float $scale, Color $tint): void
 {
@@ -681,6 +753,7 @@ function DrawTextureTiled(Texture2D $texture, Rectangle $source, Rectangle $dest
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTextureV(Texture2D $texture, Vector2 $position, Color $tint): void
 {
@@ -690,6 +763,7 @@ function DrawTextureV(Texture2D $texture, Vector2 $position, Color $tint): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTriangle(Vector2 $v1, Vector2 $v2, Vector2 $v3, Color $color): void
 {
@@ -699,6 +773,7 @@ function DrawTriangle(Vector2 $v1, Vector2 $v2, Vector2 $v3, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTriangleLines(Vector2 $v1, Vector2 $v2, Vector2 $v3, Color $color): void
 {
@@ -708,6 +783,7 @@ function DrawTriangleLines(Vector2 $v1, Vector2 $v2, Vector2 $v3, Color $color):
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTriangleFan(array $points, Color $color): void
 {
@@ -717,6 +793,7 @@ function DrawTriangleFan(array $points, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DrawTriangleStrip(array $points, Color $color): void
 {
@@ -726,6 +803,7 @@ function DrawTriangleStrip(array $points, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function EndBlendMode(): void
 {
@@ -735,6 +813,7 @@ function EndBlendMode(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function EndDrawing(): void
 {
@@ -744,6 +823,7 @@ function EndDrawing(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function EndMode2D(): void
 {
@@ -753,6 +833,7 @@ function EndMode2D(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function EndMode3D(): void
 {
@@ -762,6 +843,7 @@ function EndMode3D(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function EndScissorMode(): void
 {
@@ -771,6 +853,7 @@ function EndScissorMode(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function EndTextureMode(): void
 {
@@ -780,6 +863,7 @@ function EndTextureMode(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ExportImage(Image $image, string $fileName): bool
 {
@@ -789,6 +873,7 @@ function ExportImage(Image $image, string $fileName): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function Fade(Color $color, float $alpha): Color
 {
@@ -798,6 +883,7 @@ function Fade(Color $color, float $alpha): Color
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ColorToInt(Color $color): int
 {
@@ -807,6 +893,7 @@ function ColorToInt(Color $color): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GenImageCellular(int $width, int $height, int $tileSize): Image
 {
@@ -816,6 +903,7 @@ function GenImageCellular(int $width, int $height, int $tileSize): Image
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GenImageChecked(int $width, int $height, int $checksX, int $checksY, Color $col1, Color $col2): Image
 {
@@ -825,6 +913,7 @@ function GenImageChecked(int $width, int $height, int $checksX, int $checksY, Co
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GenImageGradientH(int $width, int $height, Color $left, Color $right): Image
 {
@@ -834,6 +923,7 @@ function GenImageGradientH(int $width, int $height, Color $left, Color $right): 
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GenImageGradientRadial(int $width, int $height, float $density, Color $inner, Color $outer): Image
 {
@@ -843,6 +933,7 @@ function GenImageGradientRadial(int $width, int $height, float $density, Color $
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GenImageGradientV(int $width, int $height, Color $top, Color $bottom): Image
 {
@@ -852,6 +943,7 @@ function GenImageGradientV(int $width, int $height, Color $top, Color $bottom): 
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GenImagePerlinNoise(int $width, int $height, int $offsetX, int $offsetY, float $scale): Image
 {
@@ -861,6 +953,7 @@ function GenImagePerlinNoise(int $width, int $height, int $offsetX, int $offsetY
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GenImageWhiteNoise(int $width, int $height, float $factor): Image
 {
@@ -870,6 +963,7 @@ function GenImageWhiteNoise(int $width, int $height, float $factor): Image
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetClipboardText(): string
 {
@@ -879,6 +973,7 @@ function GetClipboardText(): string
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetColor(int $hex): Color
 {
@@ -888,6 +983,7 @@ function GetColor(int $hex): Color
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetCollisionRec(Rectangle $rec1, Rectangle $rec2): Rectangle
 {
@@ -897,6 +993,7 @@ function GetCollisionRec(Rectangle $rec1, Rectangle $rec2): Rectangle
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetCameraMatrix(Camera3D $camera): Matrix
 {
@@ -906,6 +1003,7 @@ function GetCameraMatrix(Camera3D $camera): Matrix
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetCameraMatrix2D(Camera2D $camera): Matrix
 {
@@ -915,6 +1013,7 @@ function GetCameraMatrix2D(Camera2D $camera): Matrix
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetFPS(): int
 {
@@ -924,6 +1023,7 @@ function GetFPS(): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetFrameTime(): float
 {
@@ -933,6 +1033,7 @@ function GetFrameTime(): float
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetGestureDetected(): int
 {
@@ -942,6 +1043,7 @@ function GetGestureDetected(): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetKeyPressed(): int
 {
@@ -951,6 +1053,7 @@ function GetKeyPressed(): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetCharPressed(): int
 {
@@ -960,6 +1063,7 @@ function GetCharPressed(): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMousePosition(): Vector2
 {
@@ -969,6 +1073,7 @@ function GetMousePosition(): Vector2
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMouseRay(Vector2 $mousePosition, Camera3D $camera): Ray
 {
@@ -978,6 +1083,7 @@ function GetMouseRay(Vector2 $mousePosition, Camera3D $camera): Ray
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMouseWheelMove(): float
 {
@@ -987,6 +1093,7 @@ function GetMouseWheelMove(): float
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMouseX(): int
 {
@@ -996,6 +1103,7 @@ function GetMouseX(): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMouseY(): int
 {
@@ -1005,6 +1113,7 @@ function GetMouseY(): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMusicTimeLength(Music $music): float
 {
@@ -1014,6 +1123,7 @@ function GetMusicTimeLength(Music $music): float
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMusicTimePlayed(Music $music): float
 {
@@ -1023,6 +1133,7 @@ function GetMusicTimePlayed(Music $music): float
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetRandomValue(int $min, int $max): int
 {
@@ -1032,6 +1143,7 @@ function GetRandomValue(int $min, int $max): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMonitorCount(): int
 {
@@ -1041,6 +1153,7 @@ function GetMonitorCount(): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMonitorName(int $monitor): string
 {
@@ -1050,6 +1163,7 @@ function GetMonitorName(int $monitor): string
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMonitorPosition(int $monitor): Vector2
 {
@@ -1059,6 +1173,7 @@ function GetMonitorPosition(int $monitor): Vector2
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMonitorWidth(int $monitor): int
 {
@@ -1068,6 +1183,7 @@ function GetMonitorWidth(int $monitor): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMonitorHeight(int $monitor): int
 {
@@ -1077,6 +1193,7 @@ function GetMonitorHeight(int $monitor): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMonitorPhysicalWidth(int $monitor): int
 {
@@ -1086,6 +1203,7 @@ function GetMonitorPhysicalWidth(int $monitor): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMonitorPhysicalHeight(int $monitor): int
 {
@@ -1095,6 +1213,7 @@ function GetMonitorPhysicalHeight(int $monitor): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetMonitorRefreshRate(int $monitor): int
 {
@@ -1104,6 +1223,7 @@ function GetMonitorRefreshRate(int $monitor): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetWindowPosition(): Vector2
 {
@@ -1113,6 +1233,7 @@ function GetWindowPosition(): Vector2
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetWindowScaleDPI(): Vector2
 {
@@ -1122,6 +1243,7 @@ function GetWindowScaleDPI(): Vector2
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetScreenToWorld2D(Vector2 $position, Camera2D $camera): Vector2
 {
@@ -1131,6 +1253,7 @@ function GetScreenToWorld2D(Vector2 $position, Camera2D $camera): Vector2
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetScreenWidth(): int
 {
@@ -1140,6 +1263,7 @@ function GetScreenWidth(): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetScreenHeight(): int
 {
@@ -1149,6 +1273,7 @@ function GetScreenHeight(): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetSoundsPlaying(): int
 {
@@ -1158,6 +1283,7 @@ function GetSoundsPlaying(): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetTextureData(Texture2D $texture): Image
 {
@@ -1167,6 +1293,7 @@ function GetTextureData(Texture2D $texture): Image
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetTime(): float
 {
@@ -1176,6 +1303,7 @@ function GetTime(): float
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetTouchPosition(int $index): Vector2
 {
@@ -1185,6 +1313,7 @@ function GetTouchPosition(int $index): Vector2
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetWorldToScreen(Vector3 $position, Camera3D $camera): Vector2
 {
@@ -1194,6 +1323,7 @@ function GetWorldToScreen(Vector3 $position, Camera3D $camera): Vector2
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function GetWorldToScreen2D(Vector2 $position, Camera2D $camera): Vector2
 {
@@ -1203,6 +1333,7 @@ function GetWorldToScreen2D(Vector2 $position, Camera2D $camera): Vector2
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageColorBrightness(Image $image, int $brightness): void
 {
@@ -1212,6 +1343,7 @@ function ImageColorBrightness(Image $image, int $brightness): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageColorContrast(Image $image, float $contrast): void
 {
@@ -1221,6 +1353,7 @@ function ImageColorContrast(Image $image, float $contrast): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageColorGrayscale(Image $image): void
 {
@@ -1230,6 +1363,7 @@ function ImageColorGrayscale(Image $image): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageColorInvert(Image $image): void
 {
@@ -1239,6 +1373,7 @@ function ImageColorInvert(Image $image): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageColorTint(Image $image, Color $color): void
 {
@@ -1248,6 +1383,7 @@ function ImageColorTint(Image $image, Color $color): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageCrop(Image $image, Rectangle $crop): void
 {
@@ -1257,6 +1393,7 @@ function ImageCrop(Image $image, Rectangle $crop): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageDraw(Image $dst, Image $src, Rectangle $srcRec, Rectangle $dstRec, Color $tint): void
 {
@@ -1266,6 +1403,7 @@ function ImageDraw(Image $dst, Image $src, Rectangle $srcRec, Rectangle $dstRec,
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageDrawCircle(Image $dst, int $centerX, int $centerY, int $radius, Color $color): void
 {
@@ -1275,6 +1413,7 @@ function ImageDrawCircle(Image $dst, int $centerX, int $centerY, int $radius, Co
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageDrawPixel(Image $dst, int $posX, int $posY, Color $tint): void
 {
@@ -1284,6 +1423,7 @@ function ImageDrawPixel(Image $dst, int $posX, int $posY, Color $tint): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageDrawRectangle(Image $dst, int $posX, int $posY, int $width, int $height, Color $color): void
 {
@@ -1293,6 +1433,7 @@ function ImageDrawRectangle(Image $dst, int $posX, int $posY, int $width, int $h
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageDrawTextEx(Image $dst, Font $font, string $text, Vector2 $position, float $fontSize, float $spacing, Color $tint): void
 {
@@ -1302,6 +1443,7 @@ function ImageDrawTextEx(Image $dst, Font $font, string $text, Vector2 $position
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageFlipHorizontal(Image $image): void
 {
@@ -1311,6 +1453,7 @@ function ImageFlipHorizontal(Image $image): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageFlipVertical(Image $image): void
 {
@@ -1320,6 +1463,7 @@ function ImageFlipVertical(Image $image): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageFormat(Image $image, int $newFormat): void
 {
@@ -1329,6 +1473,7 @@ function ImageFormat(Image $image, int $newFormat): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ImageResize(Image $image, int $newWidth, int $newHeight): void
 {
@@ -1338,6 +1483,7 @@ function ImageResize(Image $image, int $newWidth, int $newHeight): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function InitAudioDevice(): void
 {
@@ -1347,6 +1493,7 @@ function InitAudioDevice(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function InitWindow(int $width, int $height, string $title): void
 {
@@ -1356,6 +1503,7 @@ function InitWindow(int $width, int $height, string $title): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsKeyDown(int $key): bool
 {
@@ -1365,6 +1513,7 @@ function IsKeyDown(int $key): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsKeyPressed(int $key): bool
 {
@@ -1374,6 +1523,7 @@ function IsKeyPressed(int $key): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsKeyReleased(int $key): bool
 {
@@ -1383,6 +1533,7 @@ function IsKeyReleased(int $key): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsKeyUp(int $key): bool
 {
@@ -1392,6 +1543,7 @@ function IsKeyUp(int $key): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsMouseButtonDown(int $button): bool
 {
@@ -1401,6 +1553,7 @@ function IsMouseButtonDown(int $button): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsMouseButtonPressed(int $button): bool
 {
@@ -1410,6 +1563,7 @@ function IsMouseButtonPressed(int $button): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsMouseButtonUp(int $button): bool
 {
@@ -1419,6 +1573,7 @@ function IsMouseButtonUp(int $button): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsMouseButtonReleased(int $button): bool
 {
@@ -1428,6 +1583,7 @@ function IsMouseButtonReleased(int $button): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsWindowFocused(): bool
 {
@@ -1437,6 +1593,7 @@ function IsWindowFocused(): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsWindowFullscreen(): bool
 {
@@ -1446,6 +1603,7 @@ function IsWindowFullscreen(): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsWindowHidden(): bool
 {
@@ -1455,6 +1613,7 @@ function IsWindowHidden(): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsWindowMaximized(): bool
 {
@@ -1464,6 +1623,7 @@ function IsWindowMaximized(): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsWindowMinimized(): bool
 {
@@ -1473,6 +1633,7 @@ function IsWindowMinimized(): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsWindowReady(): bool
 {
@@ -1482,6 +1643,7 @@ function IsWindowReady(): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsWindowResized(): bool
 {
@@ -1491,6 +1653,7 @@ function IsWindowResized(): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsWindowState(int $flag): bool
 {
@@ -1500,6 +1663,7 @@ function IsWindowState(int $flag): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function LoadFont(string $filename): Font
 {
@@ -1509,6 +1673,7 @@ function LoadFont(string $filename): Font
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function LoadFontEx(string $fileName, int $fontSize, int $fontChars, int $charsCount): Font
 {
@@ -1518,6 +1683,7 @@ function LoadFontEx(string $fileName, int $fontSize, int $fontChars, int $charsC
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function LoadImageColors(Image $image): CData
 {
@@ -1527,6 +1693,7 @@ function LoadImageColors(Image $image): CData
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function LoadImage(string $filename): Image
 {
@@ -1536,6 +1703,7 @@ function LoadImage(string $filename): Image
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function LoadModel(string $filename): Model
 {
@@ -1545,6 +1713,7 @@ function LoadModel(string $filename): Model
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function LoadModelAnimations(string $filename, int $animationsCount): CData
 {
@@ -1554,6 +1723,7 @@ function LoadModelAnimations(string $filename, int $animationsCount): CData
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function LoadMusicStream(string $filename): Music
 {
@@ -1563,6 +1733,7 @@ function LoadMusicStream(string $filename): Music
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function LoadSound(string $filename): Sound
 {
@@ -1572,6 +1743,7 @@ function LoadSound(string $filename): Sound
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function LoadStorageValue(int $position): int
 {
@@ -1581,6 +1753,7 @@ function LoadStorageValue(int $position): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function LoadTexture(string $path): Texture2D
 {
@@ -1590,6 +1763,7 @@ function LoadTexture(string $path): Texture2D
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function LoadTextureFromImage(Image $image): Texture2D
 {
@@ -1599,6 +1773,7 @@ function LoadTextureFromImage(Image $image): Texture2D
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function LoadRenderTexture(int $width, int $height): RenderTexture2D
 {
@@ -1608,6 +1783,7 @@ function LoadRenderTexture(int $width, int $height): RenderTexture2D
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function MaximizeWindow(): void
 {
@@ -1617,6 +1793,7 @@ function MaximizeWindow(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function MeasureText(string $text, int $fontSize): int
 {
@@ -1626,6 +1803,7 @@ function MeasureText(string $text, int $fontSize): int
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function MinimizeWindow(): void
 {
@@ -1635,6 +1813,7 @@ function MinimizeWindow(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function PauseMusicStream(Music $music): void
 {
@@ -1644,6 +1823,7 @@ function PauseMusicStream(Music $music): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function PlayMusicStream(Music $music): void
 {
@@ -1653,6 +1833,7 @@ function PlayMusicStream(Music $music): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function PlaySound(Sound $sound): void
 {
@@ -1662,6 +1843,7 @@ function PlaySound(Sound $sound): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function PlaySoundMulti(Sound $sound): void
 {
@@ -1671,6 +1853,7 @@ function PlaySoundMulti(Sound $sound): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ResumeMusicStream(Music $music): void
 {
@@ -1680,6 +1863,7 @@ function ResumeMusicStream(Music $music): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function RestoreWindow(): void
 {
@@ -1689,6 +1873,7 @@ function RestoreWindow(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SaveStorageValue(int $position, int $value): bool
 {
@@ -1698,6 +1883,7 @@ function SaveStorageValue(int $position, int $value): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetCameraMode(Camera3D $camera, int $mode): void
 {
@@ -1707,6 +1893,7 @@ function SetCameraMode(Camera3D $camera, int $mode): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetClipboardText(string $text): void
 {
@@ -1716,6 +1903,7 @@ function SetClipboardText(string $text): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetConfigFlags(int $flags): void
 {
@@ -1725,6 +1913,7 @@ function SetConfigFlags(int $flags): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetExitKey(int $key): void
 {
@@ -1734,6 +1923,7 @@ function SetExitKey(int $key): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetMaterialTexture(CData $material, int $mapType, Texture2D $texture): void
 {
@@ -1743,6 +1933,7 @@ function SetMaterialTexture(CData $material, int $mapType, Texture2D $texture): 
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetMousePosition(int $x, int $y): void
 {
@@ -1752,6 +1943,7 @@ function SetMousePosition(int $x, int $y): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetMouseOffset(int $offsetX, int $offsetY): void
 {
@@ -1761,6 +1953,7 @@ function SetMouseOffset(int $offsetX, int $offsetY): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetMouseScale(float $scaleX, float $scaleY): void
 {
@@ -1770,6 +1963,7 @@ function SetMouseScale(float $scaleX, float $scaleY): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetMusicPitch(Music $music, float $pitch): void
 {
@@ -1779,6 +1973,7 @@ function SetMusicPitch(Music $music, float $pitch): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetSoundVolume(Sound $sound, float $volume): void
 {
@@ -1788,6 +1983,7 @@ function SetSoundVolume(Sound $sound, float $volume): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetTargetFPS(int $fps): void
 {
@@ -1797,6 +1993,7 @@ function SetTargetFPS(int $fps): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetTextureFilter(Texture2D $texture, int $filterMode): void
 {
@@ -1806,6 +2003,7 @@ function SetTextureFilter(Texture2D $texture, int $filterMode): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetWindowIcon(Image $image): void
 {
@@ -1815,6 +2013,7 @@ function SetWindowIcon(Image $image): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetWindowMinSize(int $width, int $height): void
 {
@@ -1824,6 +2023,7 @@ function SetWindowMinSize(int $width, int $height): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetWindowMonitor(int $monitor): void
 {
@@ -1833,6 +2033,7 @@ function SetWindowMonitor(int $monitor): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetWindowPosition(int $x, int $y): void
 {
@@ -1842,6 +2043,7 @@ function SetWindowPosition(int $x, int $y): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetWindowSize(int $width, int $height): void
 {
@@ -1851,6 +2053,7 @@ function SetWindowSize(int $width, int $height): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetWindowState(int $flags): void
 {
@@ -1860,6 +2063,7 @@ function SetWindowState(int $flags): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function SetWindowTitle(string $title): void
 {
@@ -1869,6 +2073,7 @@ function SetWindowTitle(string $title): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ShowCursor(): void
 {
@@ -1878,6 +2083,7 @@ function ShowCursor(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function HideCursor(): void
 {
@@ -1887,6 +2093,7 @@ function HideCursor(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsCursorHidden(): bool
 {
@@ -1896,6 +2103,7 @@ function IsCursorHidden(): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function EnableCursor(): void
 {
@@ -1905,6 +2113,7 @@ function EnableCursor(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function DisableCursor(): void
 {
@@ -1914,6 +2123,7 @@ function DisableCursor(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function IsCursorOnScreen(): bool
 {
@@ -1923,6 +2133,7 @@ function IsCursorOnScreen(): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function StopMusicStream(Music $music): void
 {
@@ -1932,6 +2143,7 @@ function StopMusicStream(Music $music): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function StopSoundMulti(): void
 {
@@ -1941,6 +2153,7 @@ function StopSoundMulti(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function TextFormat(string $format,  ...$args): string
 {
@@ -1950,6 +2163,7 @@ function TextFormat(string $format,  ...$args): string
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function UpdateTexture(Texture2D $texture, CData $pixels): void
 {
@@ -1959,6 +2173,7 @@ function UpdateTexture(Texture2D $texture, CData $pixels): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function TextSubtext(string $text, int $position, int $length): string
 {
@@ -1968,6 +2183,7 @@ function TextSubtext(string $text, int $position, int $length): string
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function UnloadFont(Font $font): void
 {
@@ -1977,6 +2193,7 @@ function UnloadFont(Font $font): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function ToggleFullscreen(): void
 {
@@ -1986,6 +2203,7 @@ function ToggleFullscreen(): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function TraceLog(int $type, string $format,  ...$args): void
 {
@@ -1995,6 +2213,7 @@ function TraceLog(int $type, string $format,  ...$args): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function UnloadImage(Image $image): void
 {
@@ -2004,6 +2223,7 @@ function UnloadImage(Image $image): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function UnloadModel(Model $model): void
 {
@@ -2013,6 +2233,7 @@ function UnloadModel(Model $model): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function UnloadModelAnimation(CData $animation): void
 {
@@ -2022,6 +2243,7 @@ function UnloadModelAnimation(CData $animation): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function UnloadMusicStream(Music $music): void
 {
@@ -2031,6 +2253,7 @@ function UnloadMusicStream(Music $music): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function UnloadRenderTexture(RenderTexture2D $target): void
 {
@@ -2040,6 +2263,7 @@ function UnloadRenderTexture(RenderTexture2D $target): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function UnloadSound(Sound $sound): void
 {
@@ -2049,6 +2273,7 @@ function UnloadSound(Sound $sound): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function UnloadTexture(Texture2D $texture): void
 {
@@ -2058,6 +2283,7 @@ function UnloadTexture(Texture2D $texture): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function UpdateCamera(Camera3D $camera): void
 {
@@ -2067,6 +2293,7 @@ function UpdateCamera(Camera3D $camera): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function UpdateModelAnimation(Model $model, CData $animation, int $frame): void
 {
@@ -2076,6 +2303,7 @@ function UpdateModelAnimation(Model $model, CData $animation, int $frame): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function UpdateMusicStream(Music $music): void
 {
@@ -2085,6 +2313,7 @@ function UpdateMusicStream(Music $music): void
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function WindowShouldClose(): bool
 {
@@ -2094,6 +2323,7 @@ function WindowShouldClose(): bool
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function Vector2Add(Vector2 $v1, Vector2 $v2): Vector2
 {
@@ -2103,6 +2333,7 @@ function Vector2Add(Vector2 $v1, Vector2 $v2): Vector2
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function Vector2Length(Vector2 $vec): float
 {
@@ -2112,6 +2343,7 @@ function Vector2Length(Vector2 $vec): float
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function Vector2Scale(Vector2 $vec, float $scale): Vector2
 {
@@ -2121,6 +2353,7 @@ function Vector2Scale(Vector2 $vec, float $scale): Vector2
 
 /**
  * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
  */
 function Vector2Subtract(Vector2 $v1, Vector2 $v2): Vector2
 {

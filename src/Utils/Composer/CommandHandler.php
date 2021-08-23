@@ -40,6 +40,7 @@ final class CommandHandler
         $methods = self::fetchRaylibMethods();
         foreach ($methods as $method) {
             $name = ucfirst($method->getName());
+
             $params = [];
             $paramsCall = [];
             foreach ($method->getParameters() as $param) {
@@ -99,6 +100,7 @@ final class CommandHandler
             $body .= <<<PHPFUNCTION
             /**
              * @psalm-suppress MissingParamType
+             * @psalm-suppress MixedArgumentTypeCoercion
              */
             function {$name}({$paramsStr}){$returnTypeStr}
             {
