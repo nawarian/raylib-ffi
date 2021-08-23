@@ -11,13 +11,8 @@ use Nawarian\Raylib\RaylibFFIProxy;
 
 final class Vector2
 {
-    public float $x;
-    public float $y;
-
-    public function __construct(float $x, float $y)
+    public function __construct(public float $x, public float $y)
     {
-        $this->x = $x;
-        $this->y = $y;
     }
 
     public function add(Vector2 $vec): Vector2

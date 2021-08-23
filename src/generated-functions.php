@@ -17,6 +17,7 @@ use Nawarian\Raylib\Types\Texture2D;
 use Nawarian\Raylib\Types\Model;
 use Nawarian\Raylib\Types\Font;
 use Nawarian\Raylib\Types\Image;
+use Nawarian\Raylib\Types\Vector4;
 use Nawarian\Raylib\Types\Matrix;
 use Nawarian\Raylib\Types\Music;
 use FFI\CData;
@@ -889,6 +890,16 @@ function ColorToInt(Color $color): int
 {
     global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
     return $raylib_4878fcd84df4c3690086cd1cbfbbfea2->colorToInt($color);
+}
+
+/**
+ * @psalm-suppress MissingParamType
+ * @psalm-suppress MixedArgumentTypeCoercion
+ */
+function ColorNormalize(Color $color): Vector4
+{
+    global $raylib_4878fcd84df4c3690086cd1cbfbbfea2;
+    return $raylib_4878fcd84df4c3690086cd1cbfbbfea2->colorNormalize($color);
 }
 
 /**
