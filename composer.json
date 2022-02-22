@@ -26,20 +26,20 @@
     },
     "autoload": {
         "psr-4": {
-            "Nawarian\\Raylib\\": "src/"
+            "Nawarian\\Raylib\\": "src/",
+            "Nawarian\\Raylib\\Generated\\": "generated/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Nawarian\\Tests\\Raylib\\": "tests/"
-        },
-        "files": ["src/generated-functions.php"]
+        }
     },
     "scripts": {
         "phpunit": "phpunit",
         "phpcs": "phpcs --standard=PSR12 -s src/ examples/",
         "psalm": "psalm",
         "checks": ["@psalm", "@phpcs", "@phpunit"],
-        "generate-functions": "Nawarian\\Raylib\\Utils\\Composer\\CommandHandler::generateFunctionsFile"
+        "build": "Nawarian\\Raylib\\Command\\GenerateRaylibWrappers::generate"
     }
 }
