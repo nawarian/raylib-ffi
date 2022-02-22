@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class RenderTexture
 {
     /**
@@ -30,7 +28,7 @@ class RenderTexture
         $this->depth = $depth;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('RenderTexture');
@@ -40,9 +38,8 @@ class RenderTexture
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\RenderTexture
     {
         return new self($cdata->id, \Nawarian\Raylib\Generated\Texture::fromCData($cdata->texture), \Nawarian\Raylib\Generated\Texture::fromCData($cdata->depth));
     }
 }
-

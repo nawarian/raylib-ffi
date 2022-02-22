@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class BoundingBox
 {
     /**
@@ -24,7 +22,7 @@ class BoundingBox
         $this->max = $max;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('BoundingBox');
@@ -33,9 +31,8 @@ class BoundingBox
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\BoundingBox
     {
         return new self(\Nawarian\Raylib\Generated\Vector3::fromCData($cdata->min), \Nawarian\Raylib\Generated\Vector3::fromCData($cdata->max));
     }
 }
-

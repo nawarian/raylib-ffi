@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class Camera3D
 {
     /**
@@ -43,7 +41,7 @@ class Camera3D
         $this->projection = $projection;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('Camera3D');
@@ -55,9 +53,8 @@ class Camera3D
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\Camera3D
     {
         return new self(\Nawarian\Raylib\Generated\Vector3::fromCData($cdata->position), \Nawarian\Raylib\Generated\Vector3::fromCData($cdata->target), \Nawarian\Raylib\Generated\Vector3::fromCData($cdata->up), $cdata->fovy, $cdata->projection);
     }
 }
-

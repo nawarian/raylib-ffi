@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class Vector4
 {
     /**
@@ -36,7 +34,7 @@ class Vector4
         $this->w = $w;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('Vector4');
@@ -47,9 +45,8 @@ class Vector4
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\Vector4
     {
         return new self($cdata->x, $cdata->y, $cdata->z, $cdata->w);
     }
 }
-

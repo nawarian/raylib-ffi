@@ -4,80 +4,77 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class VrStereoConfig
 {
     /**
      * VR projection matrices (per eye)
      */
-    public array $projection;
+    public array $projection[2];
 
     /**
      * VR view offset matrices (per eye)
      */
-    public array $viewOffset;
+    public array $viewOffset[2];
 
     /**
      * VR left lens center
      */
-    public array $leftLensCenter;
+    public array $leftLensCenter[2];
 
     /**
      * VR right lens center
      */
-    public array $rightLensCenter;
+    public array $rightLensCenter[2];
 
     /**
      * VR left screen center
      */
-    public array $leftScreenCenter;
+    public array $leftScreenCenter[2];
 
     /**
      * VR right screen center
      */
-    public array $rightScreenCenter;
+    public array $rightScreenCenter[2];
 
     /**
      * VR distortion scale
      */
-    public array $scale;
+    public array $scale[2];
 
     /**
      * VR distortion scale in
      */
-    public array $scaleIn;
+    public array $scaleIn[2];
 
-    public function __construct(array $projection, array $viewOffset, array $leftLensCenter, array $rightLensCenter, array $leftScreenCenter, array $rightScreenCenter, array $scale, array $scaleIn)
+    public function __construct(array $projection[2], array $viewOffset[2], array $leftLensCenter[2], array $rightLensCenter[2], array $leftScreenCenter[2], array $rightScreenCenter[2], array $scale[2], array $scaleIn[2])
     {
-        $this->projection = $projection;
-        $this->viewOffset = $viewOffset;
-        $this->leftLensCenter = $leftLensCenter;
-        $this->rightLensCenter = $rightLensCenter;
-        $this->leftScreenCenter = $leftScreenCenter;
-        $this->rightScreenCenter = $rightScreenCenter;
-        $this->scale = $scale;
-        $this->scaleIn = $scaleIn;
+        $this->projection[2] = $projection[2];
+        $this->viewOffset[2] = $viewOffset[2];
+        $this->leftLensCenter[2] = $leftLensCenter[2];
+        $this->rightLensCenter[2] = $rightLensCenter[2];
+        $this->leftScreenCenter[2] = $leftScreenCenter[2];
+        $this->rightScreenCenter[2] = $rightScreenCenter[2];
+        $this->scale[2] = $scale[2];
+        $this->scaleIn[2] = $scaleIn[2];
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('VrStereoConfig');
-        $type->projection = $this->projection;
-        $type->viewOffset = $this->viewOffset;
-        $type->leftLensCenter = $this->leftLensCenter;
-        $type->rightLensCenter = $this->rightLensCenter;
-        $type->leftScreenCenter = $this->leftScreenCenter;
-        $type->rightScreenCenter = $this->rightScreenCenter;
-        $type->scale = $this->scale;
-        $type->scaleIn = $this->scaleIn;
+        $type->projection[2] = $this->projection[2];
+        $type->viewOffset[2] = $this->viewOffset[2];
+        $type->leftLensCenter[2] = $this->leftLensCenter[2];
+        $type->rightLensCenter[2] = $this->rightLensCenter[2];
+        $type->leftScreenCenter[2] = $this->leftScreenCenter[2];
+        $type->rightScreenCenter[2] = $this->rightScreenCenter[2];
+        $type->scale[2] = $this->scale[2];
+        $type->scaleIn[2] = $this->scaleIn[2];
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\VrStereoConfig
     {
-        return new self($cdata->projection, $cdata->viewOffset, $cdata->leftLensCenter, $cdata->rightLensCenter, $cdata->leftScreenCenter, $cdata->rightScreenCenter, $cdata->scale, $cdata->scaleIn);
+        return new self($cdata->projection[2], $cdata->viewOffset[2], $cdata->leftLensCenter[2], $cdata->rightLensCenter[2], $cdata->leftScreenCenter[2], $cdata->rightScreenCenter[2], $cdata->scale[2], $cdata->scaleIn[2]);
     }
 }
-

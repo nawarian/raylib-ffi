@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class Font
 {
     /**
@@ -48,7 +46,7 @@ class Font
         $this->chars = $chars;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('Font');
@@ -61,9 +59,8 @@ class Font
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\Font
     {
         return new self($cdata->baseSize, $cdata->charsCount, $cdata->charsPadding, \Nawarian\Raylib\Generated\Texture::fromCData($cdata->texture), $cdata->recs, \Nawarian\Raylib\Generated\CharInfo::fromCData($cdata->chars));
     }
 }
-

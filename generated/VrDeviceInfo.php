@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class VrDeviceInfo
 {
     /**
@@ -51,14 +49,14 @@ class VrDeviceInfo
     /**
      * Lens distortion constant parameters
      */
-    public array $lensDistortionValues;
+    public array $lensDistortionValues[4];
 
     /**
      * Chromatic aberration correction parameters
      */
-    public array $chromaAbCorrection;
+    public array $chromaAbCorrection[4];
 
-    public function __construct(int $hResolution, int $vResolution, float $hScreenSize, float $vScreenSize, float $vScreenCenter, float $eyeToScreenDistance, float $lensSeparationDistance, float $interpupillaryDistance, array $lensDistortionValues, array $chromaAbCorrection)
+    public function __construct(int $hResolution, int $vResolution, float $hScreenSize, float $vScreenSize, float $vScreenCenter, float $eyeToScreenDistance, float $lensSeparationDistance, float $interpupillaryDistance, array $lensDistortionValues[4], array $chromaAbCorrection[4])
     {
         $this->hResolution = $hResolution;
         $this->vResolution = $vResolution;
@@ -68,11 +66,11 @@ class VrDeviceInfo
         $this->eyeToScreenDistance = $eyeToScreenDistance;
         $this->lensSeparationDistance = $lensSeparationDistance;
         $this->interpupillaryDistance = $interpupillaryDistance;
-        $this->lensDistortionValues = $lensDistortionValues;
-        $this->chromaAbCorrection = $chromaAbCorrection;
+        $this->lensDistortionValues[4] = $lensDistortionValues[4];
+        $this->chromaAbCorrection[4] = $chromaAbCorrection[4];
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('VrDeviceInfo');
@@ -84,14 +82,13 @@ class VrDeviceInfo
         $type->eyeToScreenDistance = $this->eyeToScreenDistance;
         $type->lensSeparationDistance = $this->lensSeparationDistance;
         $type->interpupillaryDistance = $this->interpupillaryDistance;
-        $type->lensDistortionValues = $this->lensDistortionValues;
-        $type->chromaAbCorrection = $this->chromaAbCorrection;
+        $type->lensDistortionValues[4] = $this->lensDistortionValues[4];
+        $type->chromaAbCorrection[4] = $this->chromaAbCorrection[4];
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\VrDeviceInfo
     {
-        return new self($cdata->hResolution, $cdata->vResolution, $cdata->hScreenSize, $cdata->vScreenSize, $cdata->vScreenCenter, $cdata->eyeToScreenDistance, $cdata->lensSeparationDistance, $cdata->interpupillaryDistance, $cdata->lensDistortionValues, $cdata->chromaAbCorrection);
+        return new self($cdata->hResolution, $cdata->vResolution, $cdata->hScreenSize, $cdata->vScreenSize, $cdata->vScreenCenter, $cdata->eyeToScreenDistance, $cdata->lensSeparationDistance, $cdata->interpupillaryDistance, $cdata->lensDistortionValues[4], $cdata->chromaAbCorrection[4]);
     }
 }
-

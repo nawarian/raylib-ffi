@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class Model
 {
     /**
@@ -66,7 +64,7 @@ class Model
         $this->bindPose = $bindPose;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('Model');
@@ -82,13 +80,8 @@ class Model
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\Model
     {
-        return new self(
-            \Nawarian\Raylib\Generated\Matrix::fromCData($cdata->transform),
-            $cdata->meshCount,
-            $cdata->materialCount,
-            $cdata->meshes, $cdata->materials, $cdata->meshMaterial, $cdata->boneCount, $cdata->bones, $cdata->bindPose);
+        return new self(\Nawarian\Raylib\Generated\Matrix::fromCData($cdata->transform), $cdata->meshCount, $cdata->materialCount, $cdata->meshes, $cdata->materials, $cdata->meshMaterial, $cdata->boneCount, $cdata->bones, $cdata->bindPose);
     }
 }
-

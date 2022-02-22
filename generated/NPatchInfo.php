@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class NPatchInfo
 {
     /**
@@ -48,7 +46,7 @@ class NPatchInfo
         $this->layout = $layout;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('NPatchInfo');
@@ -61,9 +59,8 @@ class NPatchInfo
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\NPatchInfo
     {
         return new self(\Nawarian\Raylib\Generated\Rectangle::fromCData($cdata->source), $cdata->left, $cdata->top, $cdata->right, $cdata->bottom, $cdata->layout);
     }
 }
-

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class Mesh
 {
     /**
@@ -102,7 +100,7 @@ class Mesh
         $this->vboId = $vboId;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('Mesh');
@@ -124,9 +122,8 @@ class Mesh
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\Mesh
     {
         return new self($cdata->vertexCount, $cdata->triangleCount, $cdata->vertices, $cdata->texcoords, $cdata->texcoords2, $cdata->normals, $cdata->tangents, $cdata->colors, $cdata->indices, $cdata->animVertices, $cdata->animNormals, $cdata->boneIds, $cdata->boneWeights, $cdata->vaoId, $cdata->vboId);
     }
 }
-

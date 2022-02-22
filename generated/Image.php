@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class Image
 {
     /**
@@ -42,7 +40,7 @@ class Image
         $this->format = $format;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('Image');
@@ -54,9 +52,8 @@ class Image
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\Image
     {
         return new self($cdata->data, $cdata->width, $cdata->height, $cdata->mipmaps, $cdata->format);
     }
 }
-

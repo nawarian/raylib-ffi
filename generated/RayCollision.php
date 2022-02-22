@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class RayCollision
 {
     /**
@@ -36,7 +34,7 @@ class RayCollision
         $this->normal = $normal;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('RayCollision');
@@ -47,9 +45,8 @@ class RayCollision
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\RayCollision
     {
         return new self(bool::fromCData($cdata->hit), $cdata->distance, \Nawarian\Raylib\Generated\Vector3::fromCData($cdata->point), \Nawarian\Raylib\Generated\Vector3::fromCData($cdata->normal));
     }
 }
-

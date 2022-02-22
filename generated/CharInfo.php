@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class CharInfo
 {
     /**
@@ -42,7 +40,7 @@ class CharInfo
         $this->image = $image;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('CharInfo');
@@ -54,9 +52,8 @@ class CharInfo
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\CharInfo
     {
         return new self($cdata->value, $cdata->offsetX, $cdata->offsetY, $cdata->advanceX, \Nawarian\Raylib\Generated\Image::fromCData($cdata->image));
     }
 }
-

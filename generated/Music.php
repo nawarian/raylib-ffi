@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class Music
 {
     /**
@@ -42,7 +40,7 @@ class Music
         $this->ctxData = $ctxData;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('Music');
@@ -54,9 +52,8 @@ class Music
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\Music
     {
         return new self(\Nawarian\Raylib\Generated\AudioStream::fromCData($cdata->stream), $cdata->sampleCount, bool::fromCData($cdata->looping), $cdata->ctxType, $cdata->ctxData);
     }
 }
-

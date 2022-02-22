@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class Texture
 {
     /**
@@ -42,7 +40,7 @@ class Texture
         $this->format = $format;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('Texture');
@@ -54,9 +52,8 @@ class Texture
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\Texture
     {
         return new self($cdata->id, $cdata->width, $cdata->height, $cdata->mipmaps, $cdata->format);
     }
 }
-

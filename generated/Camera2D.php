@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class Camera2D
 {
     /**
@@ -36,7 +34,7 @@ class Camera2D
         $this->zoom = $zoom;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('Camera2D');
@@ -47,9 +45,8 @@ class Camera2D
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\Camera2D
     {
         return new self(\Nawarian\Raylib\Generated\Vector2::fromCData($cdata->offset), \Nawarian\Raylib\Generated\Vector2::fromCData($cdata->target), $cdata->rotation, $cdata->zoom);
     }
 }
-

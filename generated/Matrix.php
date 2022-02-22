@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class Matrix
 {
     /**
@@ -108,7 +106,7 @@ class Matrix
         $this->m15 = $m15;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('Matrix');
@@ -131,9 +129,8 @@ class Matrix
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\Matrix
     {
         return new self($cdata->m0, $cdata->m4, $cdata->m8, $cdata->m12, $cdata->m1, $cdata->m5, $cdata->m9, $cdata->m13, $cdata->m2, $cdata->m6, $cdata->m10, $cdata->m14, $cdata->m3, $cdata->m7, $cdata->m11, $cdata->m15);
     }
 }
-

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Nawarian\Raylib\Generated;
 
-use FFI;
-
 class Rectangle
 {
     /**
@@ -36,7 +34,7 @@ class Rectangle
         $this->height = $height;
     }
 
-    public function toCData() : \FFI\CData
+    public function toCData(): \FFI\CData
     {
         global $raylib;
         $type = $raylib->new('Rectangle');
@@ -47,9 +45,8 @@ class Rectangle
         return $type;
     }
 
-    public static function fromCData(\FFI\CData $cdata)
+    public static function fromCData(\FFI\CData $cdata): \Nawarian\Raylib\Generated\Rectangle
     {
         return new self($cdata->x, $cdata->y, $cdata->width, $cdata->height);
     }
 }
-
